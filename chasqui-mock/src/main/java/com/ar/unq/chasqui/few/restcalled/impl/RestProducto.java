@@ -39,10 +39,9 @@ public class RestProducto {
 
 	@RequestMapping(value = "/destacados", method = RequestMethod.GET)
 	public @ResponseBody List<ProductoDto> findProductosDestacados(HttpServletRequest  request)  {
-		 //Try this:
+		// Ejemplo de como saber que Vendedor es
 	    System.out.println("local " + request.getRequestURL());
 	    System.out.println("local " + request.getRequestURI());
-	    // or this
 	    System.out.println(request.getLocalAddr());;
 
 		return service.findProductosDestacados();
