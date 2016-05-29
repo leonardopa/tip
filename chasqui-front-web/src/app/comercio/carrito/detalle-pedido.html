@@ -1,0 +1,60 @@
+ 
+<div ng-controller="DetallePedidoController as detallePedidoCtrl"
+	ng-cloak>
+
+	<md-card> 
+		<md-card-title> 
+			<md-card-title-text>
+				<span class="md-headline">{{detallePedidoCtrl.pedido.nombre}}</span> 
+				<md-divider></md-divider>
+				
+				<span class="md-subhead">Creado por : {{detallePedidoCtrl.pedido.creador}}  </span>
+				<span class="md-subhead">Creado el  : {{detallePedidoCtrl.pedido.fechaCreacion}}  </span>
+				<span class="md-subhead">Monto actual : ${{detallePedidoCtrl.pedido.montoActual}} / Monto minimo : ${{detallePedidoCtrl.pedido.montoMinimo}}</span>													
+				<span class="md-subhead">{{detallePedidoCtrl.pedido.estado}}  </span>
+			</md-card-title-text> 
+		</md-card-title> 
+		 
+		<md-card-actions layout="row" layout-align="end center">
+			 
+			<md-button ng-click="listaGruposCtrl.salir($event)">
+				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>				 
+					<md-tooltip md-direction="left">
+						puedes seguir comprando para el pedido {{detallePedidoCtrl.pedido.nombre}}
+					</md-tooltip>
+			</md-button>
+			
+		</md-card-actions> 
+		
+	</md-card>
+
+	<span ng-show="listaProductoCtr.variantes.length == 0">Sin productos.</span>
+
+	<ul class="list-group" ng-repeat="variante in detallePedidoCtrl.pedido.productos">
+	  <li class="list-group-item">
+	  		<div class="container-fluid">
+				<div class="row">			
+					<div class="col-md-2">
+						<img src="http://lorempixel.com/90/90/food/{{variante.idProducto}}" alt="{{variante.descripcionVariente}}">
+					</div>
+					<div class="col-md-6">
+						<strong> {{variante.nombreProducto}} </strong><br>
+						<a href="#">{{variante.descripcionVariente}}</a><br>
+					    Productor :<strong> {{variante.nombreFabricante}} </strong>			 
+					</div>
+					<div class="col-md-2">
+						<h4><strong>{{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong></h4> 
+						 5 X $ 20<sup>50</sup>
+					</div>
+					
+					<div class="col-md-2">
+						Cantidad : <strong>{{variante.cantidad}} </strong>
+						Subtotal : <strong> $ 30</strong>						 
+					</div>
+					
+					
+				</div>
+			</div>
+	</li>
+
+</div>

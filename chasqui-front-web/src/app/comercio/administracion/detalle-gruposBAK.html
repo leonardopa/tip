@@ -1,0 +1,67 @@
+<!-- 
+<section ng-include="'app/comercio/principal/menu.html'"></section>  
+ -->
+<p> DetalleGruposController </p>
+	
+<div ng-controller="DetalleGruposController as detalleGrupoCtrl"  layout="column" ng-cloak>
+ 
+   <md-content class="md-padding autocomplete" layout="column">
+   						<div ng-if="detalleGrupoCtrl.readonly">
+						    <md-contact-chips
+						        ng-model="detalleGrupoCtrl.contacts"
+						        md-contacts="detalleGrupoCtrl.querySearch($query)"
+						        md-contact-name="name"
+						        md-contact-image="image"
+						        md-contact-email="email"
+						        md-require-match="true"
+						        md-highlight-flags="i"
+						        filter-selected="detalleGrupoCtrl.filterSelected"
+						        placeholder="To"
+						        >
+						 </div>
+						    </md-contact-chips>
+						    <md-list class="fixedRows">
+						      <md-subheader class="md-no-sticky">Contacts</md-subheader>
+						      
+						      <div layout="row">
+								  <div flex>
+								  		 <md-list-item class="md-2-line contact-item" ng-repeat="(index, contact) in detalleGrupoCtrl.allContacts"
+									          ng-if="detalleGrupoCtrl.contacts.indexOf(contact) < 0">
+									        <img ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}" />
+									        <div class="md-list-item-text compact">
+									        <p> NO SELECTED  </p>
+									          <h3>{{contact.name}}</h3>
+									          <p>{{contact.email}}</p>
+									        </div>
+						      </md-list-item>		
+								  </div>
+								  <div flex>
+								  			<md-list-item class="md-2-line contact-item selected" ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
+										        <img ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}" />
+										        <div class="md-list-item-text compact">
+										          <p> SELECTED  </p>
+										          <h3>{{contact.name}}</h3>
+										          <p>{{contact.email}}</p>
+										        </div>
+										      </md-list-item>
+										    </md-list>
+								  
+								  </div>
+							  </div>
+						     
+						      
+						    <br>
+						    <h2 class="md-title">Searching asynchronously.</h2>
+						    <md-contact-chips
+						        ng-model="detalleGrupoCtrl.asyncContacts"
+						        md-contacts="detalleGrupoCtrl.delayedQuerySearch($query)"
+						        md-contact-name="name"
+						        md-contact-image="image"
+						        md-contact-email="email"
+						        md-require-match="true"
+						        md-highlight-flags="i"
+						        filter-selected="detalleGrupoCtrl.filterSelected"
+						        placeholder="To">
+						    </md-contact-chips>
+		 </md-content>
+	

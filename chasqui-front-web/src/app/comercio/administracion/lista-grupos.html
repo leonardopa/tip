@@ -1,0 +1,112 @@
+<section ng-include="'app/comercio/principal/menu.html'"></section>  
+<!-- Tabs de grupos con el panel de info y botones de acciones -->
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+			aqui pueden ir eventos del grupo
+			<ul>
+				<li>pepe agrego Yerba</li>
+				<li>pepa agrego otra Yerba</li>
+				<li>rosa se fue del grupo</li>
+			</ul>
+		</div>
+		<div class="col-md-8">
+			
+			<span class="md-headline">Mis grupos de compras</span>
+		
+			<div ng-cloak>
+				<md-content>
+				<div ng-controller="ListaGruposController as listaGruposCtrl"
+					class="sample" layout="column" ng-cloak>
+					<md-content class="md-padding"> 
+						<md-tabs md-selected="selectedIndex" 
+							 md-dynamic-height md-border-bottom>
+							<md-tab ng-repeat="tab in listaGruposCtrl.tabs"
+								ng-disabled="tab.disabled" label="{{tab.nombre}}">
+				
+								 <md-content class="md-padding">
+															
+									<md-card>
+								        <md-card-title>
+								          <md-card-title-text>								          	
+								          	
+								            <span class="md-headline">{{tab.nombre}}</span>
+								            
+								            <md-divider ></md-divider>
+								            <span class="md-subhead">{{tab.descripcion}}</span>
+								            <span class="md-subhead">{{tab.domicilio}}</span>
+								             
+								          </md-card-title-text>
+								          <md-card-title-media>
+								            <div class="md-media-sm card-media">
+								             	<img ng-src="{{tab.urlImagen}}" class="md-card-image" alt="Washed Out">								            	 
+								            </div>
+								          </md-card-title-media>
+								        </md-card-title>
+								        <md-card-actions layout="row" layout-align="end center">
+								        
+								        <md-button ng-click="listaGruposCtrl.crearGrupo($event)"> 
+											<md-icon> group  </md-icon>
+											<md-tooltip md-direction="left">
+												puedes crear un grupo nuevo
+											</md-tooltip>
+										 </md-button>
+										 
+								        <div ng-if="tab.admin">	
+								        <!-- 
+								          <md-button ng-click="tab.canAddIntegrante != tab.canAddIntegrante">
+								          -->
+								          <md-button ng-click="listaGruposCtrl.habilitar()"> 
+											<md-icon> group add </md-icon>
+											<md-tooltip md-direction="left">
+												puedes agregar miembros al grupo
+											</md-tooltip>
+										 </md-button>
+										  
+										  <md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> search </md-icon>
+								          	<md-tooltip md-direction="left">
+									          puedes buscar mas contactos
+									        </md-tooltip>
+								          </md-button>	
+								          
+								          								       
+								          <md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> edit </md-icon>
+								          	<md-tooltip md-direction="left">
+									          puedes editar los datos del grupo
+									        </md-tooltip>
+								          </md-button>		
+								          								          					
+								         </div>
+								          <div ng-if="!tab.admin">	
+									          <md-button ng-click="listaGruposCtrl.salir($event)">
+									          	 <md-icon style="color: #f00;"> remove_circle_outline</md-icon>
+									          	<md-tooltip md-direction="left">
+										          puedes SALIR del grupo
+										        </md-tooltip>
+									          </md-button>
+								          </div>
+								          	         
+								        </md-card-actions>
+								      </md-card>
+								 	
+									 <div ng-include="'app/comercio/administracion/detalle-grupos.html'" 
+									 ng-init="idGrupo = tab"/>							
+								 </md-content>
+						 
+							</md-tab> 						 
+						</md-tabs>
+						
+					</md-content>
+				</div>
+				</md-content>
+			</div>
+
+		</div>
+		
+		<div class="col-md-2">
+			<p> lista grupos / AMB de grupos</p>
+		</div>
+	</div>
+ </div>

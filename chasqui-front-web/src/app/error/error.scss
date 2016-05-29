@@ -1,0 +1,41 @@
+.error-outer-ctrl {
+  max-width: 400px;
+  margin: 50px auto 0 auto;
+}
+
+.error-inner-ctrl {
+  padding: 80px 20px 20px 20px;
+
+  margin: 0 5px;
+  text-align: center;
+  background: #f8f8f8;
+  background: -moz-linear-gradient(top, #f8f8f8 0%, #fafafa 100%);
+  background: -webkit-linear-gradient(top, #f8f8f8 0%,#fafafa 100%);
+  background: linear-gradient(to bottom, #f8f8f8 0%,#fafafa 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#fafafa',GradientType=0 );
+  border-radius: 25px;
+  border: 1px solid #cdcdcd;
+  box-shadow: 0px 0px 7px #ccc;
+  font-size: 1.4rem;
+  color: $color2;
+  position: relative;
+
+  @include breakpoint($tablet-breakpoint) {
+    padding: 90px 30px 30px 30px;
+  }
+
+  &:after {
+    content: '\e2d6';
+    font-family: 'streamline';
+    color: #ac1e36;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+  }
+
+  .error-message {
+    margin-bottom: 20px;
+  }
+}
