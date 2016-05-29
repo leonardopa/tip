@@ -1,0 +1,53 @@
+<web-app
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee"
+	version="2.4" id="WebApp_ID">
+
+
+	<display-name>Chasqui Mock web.xml</display-name>
+
+	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ServletEjemplo</display-name>
+		<servlet-name>ServletEjemplo</servlet-name>
+		<servlet-class>com.ar.unq.chasqui.few.Servlet.ServletEjemplo</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletEjemplo</servlet-name>
+		<url-pattern>/ServletEjemplo</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:application-context.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>CorsFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CorsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- <context-param> <param-name>contextConfigLocation</param-name> <param-value>classpath:application-context.xml</param-value> 
+		</context-param> <listener> <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+		</listener> <servlet> <servlet-name>rest</servlet-name> <servlet-class> org.springframework.web.servlet.DispatcherServlet 
+		</servlet-class> <load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> 
+		<servlet-name>rest</servlet-name> <url-pattern>/service/*</url-pattern> </servlet-mapping> -->
+</web-app>
