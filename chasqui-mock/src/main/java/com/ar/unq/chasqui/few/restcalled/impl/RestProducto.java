@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,25 +25,29 @@ import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
 @RequestMapping("/productos")
 public class RestProducto {
 
-	private ProductoServiceMock service= new ProductoServiceMock();
+	private ProductoServiceMock service = new ProductoServiceMock();
 
-	/** Devuelve una lista de producto para la pantalla principal
+	/**
+	 * Devuelve una lista de producto para la pantalla principal
+	 *
 	 * @author leo
-	 * */
+	 */
 	@RequestMapping(value = "/{pagina}/{cantItems}", method = RequestMethod.GET)
-	public @ResponseBody PaginaProductoDto findProductos(@PathVariable("pagina") Integer pagina,@PathVariable("cantItems") Integer cantItems) {
+	public @ResponseBody PaginaProductoDto findProductos(@PathVariable("pagina") Integer pagina,
+	        @PathVariable("cantItems") Integer cantItems) {
 		System.out.println(pagina);
 		System.out.println(cantItems);
 
-		return service.findProductos(pagina,cantItems);
+		return service.findProductos(pagina, cantItems);
 	}
 
 	@RequestMapping(value = "/destacados", method = RequestMethod.GET)
-	public @ResponseBody List<ProductoDto> findProductosDestacados(HttpServletRequest  request)  {
+	public @ResponseBody List<ProductoDto> findProductosDestacados(HttpServletRequest request) {
 		// Ejemplo de como saber que Vendedor es
-	    System.out.println("local " + request.getRequestURL());
-	    System.out.println("local " + request.getRequestURI());
-	    System.out.println(request.getLocalAddr());;
+		System.out.println("local " + request.getRequestURL());
+		System.out.println("local " + request.getRequestURI());
+		System.out.println(request.getLocalAddr());
+		;
 
 		return service.findProductosDestacados();
 	}
@@ -52,6 +57,25 @@ public class RestProducto {
 		return service.findPedidos(idUser);
 	}
 
+	@RequestMapping(value = "/pedido/{idPedido}/usuario/{idUser}/quitarProducto/{cantidad}", method = RequestMethod.POST)
+	public @ResponseBody void quitarProducto(@PathVariable("idUser") Integer idUser, @PathVariable("idPedido") Integer idPedido,
+			@PathVariable("cantidad") Integer cantidad, @RequestBody ProductoDto producto) {
+		System.out.println("quitar idUser " +idUser);
+		System.out.println("quitar  idPedido " +idPedido);
+		System.out.println("quitar  cantidad " +cantidad);
+		System.out.println("quitar " +producto);
+		// return service.findPedidos(idUser);
+	}
 
+	@RequestMapping(value = "/pedido/{idPedido}/usuario/{idUser}/agregarProducto/{cantidad}", method = RequestMethod.POST)
+	public @ResponseBody Integer agregarProducto(@PathVariable("idUser") Integer idUser, @PathVariable("idPedido") Integer idPedido,
+			@PathVariable("cantidad") Integer cantidad,@RequestBody ProductoDto producto) {
+		System.out.println("agregar idUser " +idUser);
+		System.out.println("agregar  idPedido " +idPedido);
+		System.out.println("agregar  cantidad " +cantidad);
+		System.out.println("agregar " +producto);
+		// return service.findPedidos(idUser);
+		return 0;
+	}
 
 }
