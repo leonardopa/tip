@@ -47,7 +47,7 @@
 
 		/** Salir del grupo. Manejo del popUP */
 		vm.salir = function(ev) {
-			$log.debug(event);
+			$log.debug(ev);
 			//TODO: externalizar
 			var confirm = $mdDialog.confirm().title(
 					'Seguro quieres salir del grupo '+vm.selected.nombre + ' ?').textContent(

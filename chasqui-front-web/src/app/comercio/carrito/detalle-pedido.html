@@ -8,26 +8,29 @@
 				<span class="md-headline">{{detallePedidoCtrl.pedido.nombre}}</span> 
 				<md-divider></md-divider>
 				
+			</md-card-title-text> 	
+		</md-card-title> 
+		  <md-card-content layout="column" layout-align="space-between">			  
 				<span class="md-subhead">Creado por : {{detallePedidoCtrl.pedido.creador}}  </span>
 				<span class="md-subhead">Creado el  : {{detallePedidoCtrl.pedido.fechaCreacion}}  </span>
 				<span class="md-subhead">Monto actual : ${{detallePedidoCtrl.pedido.montoActual}} / Monto minimo : ${{detallePedidoCtrl.pedido.montoMinimo}}</span>													
 				<span class="md-subhead">{{detallePedidoCtrl.pedido.estado}}  </span>
-			</md-card-title-text> 
-		</md-card-title> 
-		 
-		<md-card-actions layout="row" layout-align="end center">
-			 
-			<md-button ng-click="listaGruposCtrl.salir($event)">
+		</md-card-content>
+		<md-card-actions layout="row" layout-align="end center">			 
+			<md-button ng-click="detallePedidoCtrl.comprar($event)">
 				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>				 
 					<md-tooltip md-direction="left">
 						puedes seguir comprando para el pedido {{detallePedidoCtrl.pedido.nombre}}
 					</md-tooltip>
-			</md-button>
-			
-		</md-card-actions> 
-		
+			</md-button>			
+		</md-card-actions> 		
 	</md-card>
 
+	<section ng-include="'app/comercio/principal/lista-productos.html'"
+	ng-init="pedido = detallePedidoCtrl.pedido">
+		
+	</section>  
+<!-- 
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin productos.</span>
 
 	<ul class="list-group" ng-repeat="variante in detallePedidoCtrl.pedido.productos">
@@ -56,5 +59,5 @@
 				</div>
 			</div>
 	</li>
-
+ -->
 </div>

@@ -29,6 +29,14 @@
         		return URL_REST_BASE + "productos/pedidos/usuario/"+idUser;
         	},
         	
+        	productosQuitar : function(idUser,idPedido,cantidad){        								               
+        		return URL_REST_BASE + "productos/pedido/"+idPedido+"/usuario/" +idUser+"/quitarProducto/"+cantidad;
+        	},
+        	
+        	productosAgregar : function(idUser,idPedido,cantidad){        								               
+        		return URL_REST_BASE + "productos/pedido/"+idPedido+"/usuario/" +idUser+"/agregarProducto/"+cantidad;
+        	}, 
+        		        		
         	gruposByusuario: function (idUser) {
         		return URL_REST_BASE + "usuarios/" +idUser + "/grupos/";
         	},

@@ -1,7 +1,3 @@
-/**
- * Created by alejandrad on 07/04/16.
- * 
- */
 
 (function() {
   'use strict';
@@ -12,6 +8,10 @@
     vm.ls = $localStorage;
 
     vm.ls.token;
+    
+    vm.ls.usuario = {};
+    
+    
 
   }// function
 })();// anonimo

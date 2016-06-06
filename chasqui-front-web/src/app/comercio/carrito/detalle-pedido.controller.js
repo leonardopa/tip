@@ -11,6 +11,12 @@
 		var vm = this;
 		vm.pedido = $scope.pedido;
 		
+		
+		vm.comprar = function (event){
+			$log.debug('DetallePedidoController , modo comprar ', $scope.pedido);
+			$state.go('principal')
+		}
+		
 	}
 
 })();
