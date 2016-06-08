@@ -25,7 +25,13 @@
           templateUrl: 'app/comercio/principal/menu.html',
           controller: 'MenuController',
           controllerAs: 'menu'
-        })         
+        })
+      .state('login', {
+          url: '/',
+          templateUrl: 'app/comercio/principal/login.html',
+          controller: 'LogInController',
+          controllerAs: 'loginCtrl'
+        })  
       .state('emprendedores', {
           url: '/emprendedores',
           templateUrl: 'app/comercio/varios/emprendedores.html',

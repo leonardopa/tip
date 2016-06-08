@@ -19,6 +19,8 @@
         return {
         	url_rest: URL_REST_BASE ,
         	
+        	login: URL_REST_BASE+"/client/sso/singIn",
+        	
         	productosPaginado: function (pagina,items){
         		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 
         	},
