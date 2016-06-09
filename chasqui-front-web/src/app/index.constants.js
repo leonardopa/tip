@@ -19,7 +19,11 @@
         return {
         	url_rest: URL_REST_BASE ,
         	
-        	login: URL_REST_BASE+"/client/sso/singIn",
+        	login: URL_REST_BASE+"client/sso/singIn",
+        	
+        	resetPass: function (email){
+        		return URL_REST_BASE+"client/resetPass/"+email ;
+        	},
         	
         	productosPaginado: function (pagina,items){
         		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 

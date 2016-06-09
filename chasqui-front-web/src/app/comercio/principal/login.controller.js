@@ -4,21 +4,59 @@
 	angular.module('chasqui').controller('LogInController', LogInController);
 
 	/** @ngInject */
-	function LogInController($scope, $http, $log, CTE_REST, restProxy) {
-		$log.log('controler log in ..... ');
+	function LogInController($scope, $http, $log, CTE_REST, restProxy,$mdDialog) {
+		$log.debug('controler log in ..... ');
 
 		var vm = this
 		vm.user = {};
 
-		vm.login = function() {
-			$log.log('Log In ', vm.user);
-			// TODO NO OK
-			function doOk(response) {
-				vm.variantes = response.data;
-			}
+		
+		
+		vm.recuperar = function(ev) {
+		    // Appending dialog to document.body to cover sidenav in docs app
+		    var confirm = $mdDialog.prompt()
+		      .title('Recuperar contrasenia')
+		      .textContent('Enviaremos instrucciones a tu correo')
+		      .placeholder('correo')
+		      //.ariaLabel('Dog name')
+		      //.initialValue('Buddy')
+		      //.targetEvent(ev)
+		      .ok('Enviar')
+		      .cancel('Cancelar');
+		    $mdDialog.show(confirm).then(function(result) {
+		    	$log.debug('Ingreso Correo ' + result + '.');
+		    	vm.callReset(result);
+		      
+		    }, function() {
+		    	$log.debug('Cancelo correo');
+		    });
+		  };
+		  
+		  
+		  /////// REST
+		  
+		  vm.login = function() {
+				$log.debug('Log In ', vm.user);
+				// TODO NO OK
+				function doOk(response) {
+					vm.variantes = response.data;
+				}
 
-			restProxy.post(CTE_REST.login, vm.user, doOk);
+				restProxy.post(CTE_REST.login, vm.user, doOk);
 
-		}
+		 }
+		  
+		  vm.callReset = function(email) {
+				
+				// TODO NO OK
+				function doOk(response) {
+					vm.variantes = response.data;
+				}
+
+				restProxy.post(CTE_REST.resetPass(email),{} , doOk);
+
+		 }
+		  
+		  
 	}
 })();
