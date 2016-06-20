@@ -52,6 +52,15 @@ Luego http://localhost:8081/chasqui/# .
 
 Para el caso de GlassFish copiar el contenido de la carpeta en [GlassFish]\\domains\\domain1\\docroot\\chaqui
 
+### Entorno
+
+Este front end consume servicios REST de la aplicación de Back End. Se debe verificar que la url de los servicios sea correcta.
+
+Para installar en otros entornos 
+```sh
+$ index.constants.js
+--> URL_REST_BASE
+```
 
 ### Todos
 
