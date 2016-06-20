@@ -4,7 +4,7 @@
 	angular.module('chasqui').controller('LogInController', LogInController);
 
 	/** @ngInject */
-	function LogInController($scope, $http, $log, CTE_REST, restProxy,$mdDialog) {
+	function LogInController($scope, $http, $log, CTE_REST, restProxy,$mdDialog,$state) {
 		$log.debug('controler log in ..... ');
 
 		var vm = this
@@ -37,9 +37,9 @@
 		  
 		  vm.login = function() {
 				$log.debug('Log In ', vm.user);
-				// TODO NO OK
+				// TODO NO OK , que vuelva a donde vino
 				function doOk(response) {
-					vm.variantes = response.data;
+					$state.go("principal");
 				}
 
 				restProxy.post(CTE_REST.login, vm.user, doOk);

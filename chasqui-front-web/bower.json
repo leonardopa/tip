@@ -1,5 +1,5 @@
 {
-  "name": "ang",
+  "name": "chaqui",
   "version": "0.0.0",
   "dependencies": {
     "angular-animate": "~1.5.3",
@@ -20,7 +20,7 @@
     "angular": "~1.5.3",
     "susy": "^2.2.12",
     "breakpoint-sass": "^2.7.0",
-    "angular-material": "^1.0.7",
+    "angular-material": "^1.1.0",
     "ngstorage": "^0.3.10",
     "angular-slick": "^0.2.1"
   },

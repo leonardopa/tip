@@ -14,15 +14,17 @@
 						'ListaProductosController ..... Recibe productos desde otra pagina ',
 						$scope.pedido);
 
+		var CANT_ITEMS = 10; // TODO : pasar a constante
+		
 		var vm = this;
-
+		
 		vm.isPaginaPrincipal = ($scope.pedido == undefined);
 		vm.pedido = $scope.pedido;
 		vm.variantes = [];
 
 		vm.pageChanged = function() {
 			$log.log('Page changed to: ' + vm.bigCurrentPage);
-			findProductos(vm.bigCurrentPage, 5);
+			findProductos(vm.bigCurrentPage, CANT_ITEMS);
 		};
 
 		vm.quitar = function(variante) {
@@ -40,7 +42,7 @@
 			$mdDialog.show(confirm).then(function(result) {
 				$log.debug("quitar OK", result);
 
-				if (!isNaN(result) && result < 12 && result > 0) {
+				if (!isNaN(result) && result <= variante.cantidad && result > 0) {
 					$log.debug("Entrada valida", result);
 					callQuitarProducto(variante, result);
 				} else {
@@ -68,7 +70,7 @@
 			$mdDialog.show(confirm).then(function(result) {
 				$log.debug("Agregar OK", result);
 
-				if (!isNaN(result) && result < 12 && result > 0) {
+				if (!isNaN(result) &&  result > 0) {
 					$log.debug("Entrada valida", result);
 					callAgregarAlCarro(variante, result);
 				} else {
@@ -77,7 +79,7 @@
 
 			}, function() {
 
-				$log.debug("Cancelo Quitar");
+				$log.debug("Cancelo Agregar");
 			});
 		}
 
@@ -103,7 +105,8 @@
 			$log.debug('callAgregarAlCarro: ', variante);
 
 			function doOk(response) {
-				$log.log('callQuitarProducto Response ', response);
+				//TODO: mensaje OK
+				$log.log('Agregar producto Response ', response);
 
 			}
 			// / TODO : USUARIO HARDOC y pedido 
@@ -131,7 +134,7 @@
 
 		// Puede ser para listar los pedidos o para la pantalla principal
 		if (vm.isPaginaPrincipal) {
-			findProductos(1, 5);
+			findProductos(1, CANT_ITEMS);
 		} else {
 			vm.variantes = $scope.pedido.productos
 		}
