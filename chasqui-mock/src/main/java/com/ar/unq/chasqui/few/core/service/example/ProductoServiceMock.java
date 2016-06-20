@@ -113,7 +113,7 @@ public class ProductoServiceMock {
 
 			List<ProductoPedidoDto> productos=new ArrayList<>();
 			for (int j = 0; j < 5; j++) {
-				productos.add(crearteProductoPedido(1, 1, 1, 12));
+				productos.add(crearteProductoPedido(1, 1, 1, createRandom(11)+1));
 
 			}
 			pedido.setProductos(productos);
@@ -128,7 +128,7 @@ public class ProductoServiceMock {
 
 			List<ProductoPedidoDto> productos2=new ArrayList<>();
 			for (int j = 0; j < 2; j++) {
-				productos2.add(crearteProductoPedido(1, 1, 1, 12));
+				productos2.add(crearteProductoPedido(1, 1, 1, createRandom(11)+1));
 
 			}
 			pedido2.setProductos(productos2);
@@ -143,7 +143,7 @@ public class ProductoServiceMock {
 
 			List<ProductoPedidoDto> productos3=new ArrayList<>();
 			for (int j = 0; j < 5; j++) {
-				productos3.add(crearteProductoPedido(1, 1, 1, 12));
+				productos3.add(crearteProductoPedido(1, 1, 1, createRandom(11)+1));
 
 			}
 			pedido3.setProductos(productos3);
