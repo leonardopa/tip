@@ -69,4 +69,3 @@ $ index.constants.js
 License
 ----
 
-MIT
