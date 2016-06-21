@@ -10,6 +10,7 @@ import com.ar.unq.chasqui.few.core.dto.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.dto.PedidoDto;
 import com.ar.unq.chasqui.few.core.dto.ProductoDto;
 import com.ar.unq.chasqui.few.core.dto.ProductoPedidoDto;
+import com.ar.unq.chasqui.few.core.dto.TipoCompra;
 
 public class ProductoServiceMock {
 
@@ -104,6 +105,7 @@ public class ProductoServiceMock {
 
 
 			PedidoDto pedido = new PedidoDto();
+			pedido.setTipo(TipoCompra.INDIVIDUAL);
 			pedido.setNombre("Personal");
 			pedido.setCreador("Tu eres creador");
 			pedido.setFechaCreacion(dateFormatter.format(Calendar.getInstance().getTime()));
@@ -119,6 +121,7 @@ public class ProductoServiceMock {
 			pedido.setProductos(productos);
 
 			PedidoDto pedido2 = new PedidoDto();
+			pedido2.setTipo(TipoCompra.COLLECTIVA);
 			pedido2.setNombre("Grupo con mama");
 			pedido2.setCreador("Mama");
 			pedido2.setFechaCreacion(dateFormatter.format(Calendar.getInstance().getTime()));
@@ -134,6 +137,7 @@ public class ProductoServiceMock {
 			pedido2.setProductos(productos2);
 
 			PedidoDto pedido3 = new PedidoDto();
+			pedido3.setTipo(TipoCompra.COLLECTIVA);
 			pedido3.setNombre("Grupo em Trajo");
 			pedido3.setCreador("Bruce Dks");
 			pedido3.setFechaCreacion(dateFormatter.format(Calendar.getInstance().getTime()));
