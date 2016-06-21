@@ -1,8 +1,5 @@
  
 
-
-<div style="height:110vh; border:1px solid black; overflow:hidden">
-	
 	<section ng-include="'app/comercio/principal/menu.html'"></section>  
 	
      <!-- Content height does not need to be px any more: -->
@@ -50,36 +47,54 @@
   
   	
   	</md-content>
-
-  	<md-button style="top: 90% !important;" class="md-fab md-fab-bottom-right"  aria-label="upload photo" >
-              //
-    </md-button>
-<!--      
-<div ng-controller="PrincipalController as ctrl">
-     <md-fab-speed-dial style="top: 90% !important;" 
-     	|				 md-open="demo.isOpen" md-direction="{{demo.selectedDirection}}"
-                         ng-class="demo.selectedMode">
+ 
+ <div class="fixed" ng-cloak>
+     <md-fab-speed-dial md-open="principal.isOpen" md-direction="{{principal.selectedDirection}}" 
+     	ng-class="principal.selectedMode">
         <md-fab-trigger>
           <md-button aria-label="menu" class="md-fab md-warn">
-            <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+            <ng-md-icon icon="compare_arrows" style="fill: black" size="24"></ng-md-icon> 
+             <md-tooltip md-direction="left"> 
+	               Cambiar de Changuito </md-tooltip> 
           </md-button>
         </md-fab-trigger>
+
         <md-fab-actions>
-          <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/twitter.svg" aria-label="Twitter"></md-icon>
-          </md-button>
-          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/facebook.svg" aria-label="Facebook"></md-icon>
-          </md-button>
-          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
-          </md-button>
+          <div ng-repeat="pedido in principal.pedidos">
+      
+	          <md-button   class="md-fab md-raised md-mini"
+	          ng-click="principal.cambiarContexto(pedido)">
+	          	
+	            <ng-md-icon icon="{{pedido.icon}}" style="fill: black" size="24"></ng-md-icon> 	
+	            <md-tooltip md-direction="left"> 
+	               {{pedido.nombre}} </md-tooltip>              
+	          </md-button>
+          </div>         
         </md-fab-actions>
       </md-fab-speed-dial>
-</div>    
-    -->
-    
-</div>
+       
+       
+       <md-card>
+        	<ng-md-icon id="icon" icon="{{principal.icon}}" 
+        	style="fill: black" size="{{principal.size}}"
+        	options="{{principal.options}}">
+        	</ng-md-icon> 
+       	|	<md-subheader class="md-primary">{{principal.carrito.nombre}}</md-subheader> </md-card>
+  </div>
+ 
+ <style>
+<!--
+
+-->
+
+.fixed {
+top: auto;
+right: 20px;
+bottom: 20px;
+left: auto;
+position: fixed;
+}
+</style>
      
 
 

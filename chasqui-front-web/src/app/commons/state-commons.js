@@ -11,6 +11,8 @@
     
     vm.ls.usuario = {};
     
+    vm.ls.pedidoSeleccionado = null;
+    
     
 
   }// function

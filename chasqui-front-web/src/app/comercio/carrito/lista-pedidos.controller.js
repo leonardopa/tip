@@ -5,7 +5,7 @@
 			ListaPedidosController);
 
 	/** @ngInject */
-	function ListaPedidosController($http, $log,$state,$scope,restProxy, CTE_REST) {
+	function ListaPedidosController($http, $log,$state,$scope,restProxy, CTE_REST,StateCommons) {
 		$log.debug('ListaPedidosController ..... ');
 		
 		var vm = this;
@@ -19,6 +19,9 @@
 		$scope.$watch('selectedIndex', function(current, old) {
 			vm.previous = vm.selected;
 			vm.selected = vm.tabs[current];
+			
+			StateCommons.ls.pedidoSeleccionado = vm.selected;
+			
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
 					$log.debug('Goodbye ' + vm.previous.nombre + '!');

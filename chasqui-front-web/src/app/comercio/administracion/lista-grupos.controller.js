@@ -70,7 +70,7 @@
 		/////////////
 		/////// REST
 		
-		function callLoadContacts() {
+		function callLoadGrupos() {
 			$log.debug("--- find grupos--------");
 
 			function doOk(response) {
@@ -99,7 +99,7 @@
 			function doOk(response) {
 				$log.debug("--- call salir del grupo respuesta", response.data);
 				 				
-				callLoadContacts();
+				callLoadGrupos();
 			}
 
 			// TODO: hacer el ID de usuario dinamico
@@ -108,7 +108,7 @@
 		
 		
 		//// INIT
-		callLoadContacts();
+		callLoadGrupos();
 		
 		
 	}

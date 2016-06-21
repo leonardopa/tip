@@ -6,36 +6,81 @@
     .controller('PrincipalController',PrincipalController);
 
   /** @ngInject */
-  function PrincipalController( $scope) {
-  
+  function PrincipalController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons) {
+	  $log.debug("principal ",StateCommons.ls.pedidoSeleccionado);
 	  
 	  var vm = this;
-	  
-	  vm.isOpen=false;
-	  
+
 	  
 	  vm.topDirections = ['left', 'up'];
 	  vm.bottomDirections = ['down', 'right'];
 	  vm.isOpen = false;
 	  vm.availableModes = ['md-fling', 'md-scale'];
-	  vm.selectedMode = 'md-fling';
+	  vm.selectedMode = 'md-fling'; ///md-scale
 	  vm.availableDirections = ['up', 'down', 'left', 'right'];
 	  vm.selectedDirection = 'up';
 	  
-	  /*
-	  $scope.tabs = [
-	                 { title:'Dynamic Title 1', content:'Dynamic content 1' },
-	                 { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-	               ];
+	  
+	  vm.pedidos={};
+	  vm.carrito=StateCommons.ls.pedidoSeleccionado;
+	  vm.size=24;
+	  vm.icon='shopping_cart';
+	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
+	  	  
+	  
+	 // var svgMorpheus = new SVGMorpheus('#icon');
+	  
+	  vm.cambiarContexto = function (pedido){
+		  $log.debug("cambia contexo de carrito ",pedido);
+		  
+		  vm.carrito=pedido;
+		  StateCommons.ls.pedidoSeleccionado = vm.carrito;
+		  
+		  vm.icon=pedido.icon;
+			//  vm.icon='shopping_cart';
+			  
+			  $timeout(function() {
+				  vm.icon='shopping_cart';
+				  ///vm.icon=pedido.icon;
+			  }, 1500);
+			  
+			  
+		     
+		//  svgMorpheus.to('3D Rotation', {duration: 1000, easing: 'circ-in', rotation: 'Clockwise'},null);
+		      
+	  }
+	  /// CALL REST 
+	  
+	  //TODO: cache , para no sobrecargar con grupos
+	  function callLoadGrupos() {
+			$log.debug("--- find  pedidos abiertos ---");
 
-	               $scope.alertMe = function() {
-	                 setTimeout(function() {
-	                   $window.alert('You\'ve selected the alert tab!');
-	                 });
-	               };
+			function doOk(response) {
+				 
+				vm.pedidos = response.data;
+				
 
-	               $scope.model = {
-	                 name: 'Tabs'
-	               };*/
+				angular.forEach(vm.pedidos, function(pedido) {
+					$log.debug(pedido.tipo );
+					pedido.icon = 'people';
+					pedido.icon = pedido.tipo == 'INDIVIDUAL' ? 'person' : pedido.icon ;
+					pedido.icon = pedido.tipo == 'NODOS' ? 'people_outline' : pedido.icon ;
+					
+				});
+
+				if (vm.carrito !=null){
+					//vm.carrito = vm.pedidos[0];
+					vm.carrito = StateCommons.ls.pedidoSeleccionado;					
+				}else{
+					vm.carrito = vm.pedidos[0];
+				}
+			}
+			
+			// TODO: hacer el ID de usuario dinamico
+			restProxy.get(CTE_REST.productosPedidoByUser(6),{},doOk);		    
+	 }
+	 
+	  
+	 callLoadGrupos();
   }
 })();
