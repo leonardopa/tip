@@ -24,6 +24,8 @@ public class PedidoDto implements Serializable {
 
 	private Double montoActual;
 
+	private  TipoCompra tipo;
+
 	private List<ProductoPedidoDto> productos;
 
 	public Integer getId() {
@@ -89,6 +91,14 @@ public class PedidoDto implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public TipoCompra getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoCompra tipo) {
+		this.tipo = tipo;
 	}
 
 
