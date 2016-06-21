@@ -9,22 +9,7 @@
 				<md-subheader  class="md-accent">
 				<h3>Tu eres el administrador del Grupo !</h3>					
 				</md-subheader>
-				
-			<div ng-if="detalleGrupoCtrl.canAddIntegrante">         	
-				<md-content class="md-padding autocomplete" layout="column">
-					
-					<md-contact-chips ng-model="detalleGrupoCtrl.contacts"
-						md-contacts="detalleGrupoCtrl.querySearch($query)"
-						md-contact-name="nombre" md-contact-image="urlImagen"
-						md-contact-email="email" md-require-match="true"
-						md-highlight-flags="i"
-						filter-selected="detalleGrupoCtrl.filterSelected" placeholder="Buscar em contactos">
-					</md-contact-chips>
-					
-					 <md-button md-no-ink class="md-raised"
-						ng-click="detalleGrupoCtrl.guardar()">Guardar</md-button>
-				</md-content>
-			</div>
+		
 	</div>
 
 	
@@ -32,36 +17,31 @@
 	<md-list class="fixedRows"> 
  
 	<div layout="row">
-		
-		<div flex>
-			<md-subheader class="md-accent">Miembros del grupo</md-subheader>
-			
-			<md-list-item class="md-2-line contact-item selected"
-				ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
-			<img ng-src="{{contact.urlImagen}}" class="md-avatar"
-				alt="{{contact.nombre}}" />
-			<div class="md-list-item-text compact">			 
-				<h3>{{contact.nombre}}</h3>
-				<p>{{contact.email}}</p>
-			</div>
-			</md-list-item>
-		</div>
-		<div ng-if="detalleGrupoCtrl.isAdmin" >
+		 
+		<div ng-if="detalleGrupoCtrl.contacts.length !=0" > 
 			<div flex>
-				<md-subheader class="md-no-sticky"> Contactos </md-subheader>
+				<md-subheader class="md-accent">Miembros del grupo</md-subheader>
 				
-				<md-list-item class="md-2-line contact-item"
-					ng-repeat="(index, contact) in detalleGrupoCtrl.allContacts"
-					ng-if="detalleGrupoCtrl.contacts.indexOf(contact) < 0">
+				<md-list-item class="md-2-line contact-item selected"
+					ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
 				<img ng-src="{{contact.urlImagen}}" class="md-avatar"
 					alt="{{contact.nombre}}" />
-				<div class="md-list-item-text compact">				
+				<div class="md-list-item-text compact">			 
 					<h3>{{contact.nombre}}</h3>
 					<p>{{contact.email}}</p>
 				</div>
-				</md-list-item>
+				
+				<div ng-if="detalleGrupoCtrl.isAdmin">
+					<md-button ng-click="detalleGrupoCtrl.quitarMiembro(contact)">
+			            <ng-md-icon icon="remove_circle_outline" style="fill: red"  ></ng-md-icon> 
+			             <md-tooltip md-direction="right"> 
+				              Quitar del Grupo </md-tooltip> 
+			         </md-button>
+				</div>
+			
 			</div>
 		</div>
+		 
 	</div>
 	</md-list>
 </div>

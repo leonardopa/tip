@@ -42,7 +42,29 @@
 
 		/** habilita el panel para agregar integrantes. */
 		vm.habilitar = function() {
-			vm.selected.canAddIntegrante = !vm.selected.canAddIntegrante;			
+					
+			$log.debug("Agregar Miembro al grupo ");
+
+			var confirm = $mdDialog.prompt().title(
+					'Agregar Miembro al Grupo').textContent(
+					'ingrese una direccion de correo').placeholder(
+					'ejemplo@ejemplo.com')
+			// .ariaLabel('Dog name')
+			// .initialValue('Buddy')
+			// .targetEvent(ev)
+			.ok('Agregar').cancel('Cancelar');
+
+			$mdDialog.show(confirm).then(function(result) {
+				$log.debug("agregar OK", result);
+
+				//TODO: LLAMAR al servicio
+
+			}, function() {
+
+				$log.debug("Cancelo Agregar Grupo");
+			});
+
+			
 		}
 
 		/** Salir del grupo. Manejo del popUP */
@@ -52,7 +74,8 @@
 			var confirm = $mdDialog.confirm().title(
 					'Seguro quieres salir del grupo '+vm.selected.nombre + ' ?').textContent(
 					'Mala onda, tus amigos van a pagar todo mas caro !')
-					.ariaLabel('Lucky day').targetEvent(ev).ok('Si, me voy')
+					.ariaLabel('Lucky day').targetEvent(ev)
+					.ok('Si, me voy')
 					.cancel('bueno, me quedo');
 			$mdDialog.show(confirm).then(function() {
 				callSalirGrupo();

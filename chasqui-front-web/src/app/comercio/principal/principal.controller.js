@@ -26,9 +26,7 @@
 	  vm.size=24;
 	  vm.icon='shopping_cart';
 	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
-	  	  
-	  
-	 // var svgMorpheus = new SVGMorpheus('#icon');
+
 	  
 	  vm.cambiarContexto = function (pedido){
 		  $log.debug("cambia contexo de carrito ",pedido);
@@ -37,17 +35,12 @@
 		  StateCommons.ls.pedidoSeleccionado = vm.carrito;
 		  
 		  vm.icon=pedido.icon;
-			//  vm.icon='shopping_cart';
-			  
+			//  vm.icon='shopping_cart';			  
 			  $timeout(function() {
 				  vm.icon='shopping_cart';
 				  ///vm.icon=pedido.icon;
 			  }, 1500);
-			  
-			  
-		     
-		//  svgMorpheus.to('3D Rotation', {duration: 1000, easing: 'circ-in', rotation: 'Clockwise'},null);
-		      
+
 	  }
 	  /// CALL REST 
 	  
