@@ -6,8 +6,8 @@
     .controller('EmprenController',EmprenController);
 
   /** @ngInject */
-  function EmprenController( $scope, $http) {
-	  console.log("controler log in")
+  function EmprenController( $log) {
+	  $log.debug('EmprenController ..... ') 
 	   var vm = this
 	   vm.isCollapsed = true;
   }

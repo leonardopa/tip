@@ -11,6 +11,14 @@
 		vm.user = {};
 
 		
+		vm.nuevo = function() {
+			$log.debug('Log In nuevo user');
+	
+				
+			$state.go("form-domicilio");
+		
+		}
+		
 		
 		vm.recuperar = function(ev) {
 		    // Appending dialog to document.body to cover sidenav in docs app

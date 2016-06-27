@@ -6,16 +6,31 @@
 
 	/** @ngInject 
 	 *  Formulario para direccion */
-	function FormDireccionController($http, $log, $scope,$mdDialog, $mdMedia,$state,restProxy, CTE_REST) {
-		$log.debug("controler FormDireccionController");
+	function FormDireccionController( $log,$state,restProxy, CTE_REST) {
+		
 		var vm = this;
 		
-		vm.domicilio;
+		vm.domicilio =  {}
+	 
 		
 		//TODO: hacerlo flexible para grupo usuario vendedor ETC
 		// ahora esta para grupo
 		vm.guardar = function (){
-			$log.debug("guardar domicilio",vm.domicilio);
+			
+		//	guardarDireccionGrupo();
+			siguiente();
+		}
+		
+		/** El siguiente formulario es el de usuario*/
+		var siguiente = function (){
+		
+			$state.go("form-usuario",{ "domicilio" : vm.domicilio});
+			
+		}
+		
+		
+		var guardarDireccionGrupo = function (){
+			$log.debug("guardar domicilio al grupo",vm.domicilio);
 			
 			// TODO : SACAR USUARIO HARCODEADO
 //			$http.post("http://localhost:8081/chasqui-mock/direccion/usuario/"+"1/",vm.domicilio)
@@ -29,7 +44,6 @@
 			};
 			
 			restProxy.post(CTE_REST.direccionGrupo(1),vm.domicilio,doOk);
-			
 		}
 	}
 	
