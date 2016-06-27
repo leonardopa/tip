@@ -141,7 +141,7 @@ public class ProductoServiceMock {
 			pedido3.setNombre("Grupo em Trajo");
 			pedido3.setCreador("Bruce Dks");
 			pedido3.setFechaCreacion(dateFormatter.format(Calendar.getInstance().getTime()));
-			pedido3.setId(2);
+			pedido3.setId(3);
 			pedido3.setMontoActual(1.d);
 			pedido3.setMontoMinimo(50.d);
 

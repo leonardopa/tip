@@ -2,7 +2,7 @@ package com.ar.unq.chasqui.few.core.dto;
 
 import java.io.Serializable;
 
-public class UserDto implements Serializable{
+public class UsuarioDto implements Serializable{
 
 
 	/**
@@ -11,6 +11,17 @@ public class UserDto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String email;
 	private String password;
+
+
+	public UsuarioDto() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public UsuarioDto(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
 
 	@Override
 	public String toString() {
