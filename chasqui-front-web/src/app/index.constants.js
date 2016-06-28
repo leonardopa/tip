@@ -13,6 +13,7 @@
     .constant('CTE_REST',  function() {
         
         var URL_REST_BASE = "http://localhost:8081/chasqui-mock/";
+        //var URL_REST_BASE = "http://factory.epidata.com.ar:8413/chasqui-mock/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
