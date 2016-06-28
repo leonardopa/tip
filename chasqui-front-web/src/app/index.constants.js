@@ -26,6 +26,8 @@
         		return URL_REST_BASE+"client/resetPass/"+email ;
         	},
         	
+        	singUp: URL_REST_BASE+"client/sso/singUp",
+        	        
         	productosPaginado: function (pagina,items){
         		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 
         	},

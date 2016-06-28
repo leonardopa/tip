@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function PrincipalController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons) {
-	  $log.debug("principal ",StateCommons.ls.pedidoSeleccionado);
+	  $log.debug("PrincipalController ..... ",StateCommons.ls.pedidoSeleccionado);
 	  
 	  var vm = this;
 

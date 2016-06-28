@@ -5,8 +5,8 @@
 			ListaPedidosController);
 
 	/** @ngInject */
-	function ListaPedidosController($http, $log,$state,$scope,restProxy, CTE_REST,StateCommons) {
-		$log.debug('ListaPedidosController ..... ');
+	function ListaPedidosController($log,$state,$scope,restProxy, CTE_REST,StateCommons) {
+		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSeleccionado);
 		
 		var vm = this;
 		vm.habilita = false;
@@ -15,13 +15,17 @@
 		vm.selected = null, vm.previous = null;
 		vm.selectedIndex = 1;
 
-		//
-		$scope.$watch('selectedIndex', function(current, old) {
+		vm.pedidoDelContexto = StateCommons.ls.pedidoSeleccionado ; 
+		
+		$scope.$watch('listaPedidoCtrl.selectedIndex', function(current, old) {
+			
 			vm.previous = vm.selected;
 			vm.selected = vm.tabs[current];
 			
-			StateCommons.ls.pedidoSeleccionado = vm.selected;
+			$log.debug('cambio tab ..... ', vm.selected);
 			
+			StateCommons.ls.pedidoSeleccionado = vm.selected;
+						
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
 					$log.debug('Goodbye ' + vm.previous.nombre + '!');
@@ -37,15 +41,33 @@
 	
 		///////////////// REST
 		
-		function callLoadPedidos() {
+		var callLoadPedidos  = function () {
 			$log.debug("--- find pedidos --------");
 
 			function doOk(response) {
-				
+				$log.debug("--- find pedidos resultado --------",response.data);
 				vm.tabs = response.data;
 				 
-
-				vm.selected = vm.tabs[0];
+				var i = 0
+				var indexSelect=0;
+				
+				// me fijo en que tab estaba la ultima vez que vino , o si vino de la 
+				// pantalla principal
+				angular.forEach(vm.tabs, function(tab) {
+				 
+					$log.debug(tab.id + " " + tab.nombre );
+				// 	$log.debug(tab.id + "   " + vm.pedidoDelContexto.id);
+				 
+					if ((vm.pedidoDelContexto != undefined) && (tab.id == vm.pedidoDelContexto.id) ) {
+						$log.debug("****** " +  tab.id);
+						indexSelect = i ; 
+					}
+					
+					i++;
+				});
+			
+				vm.selected = vm.tabs[indexSelect];
+				vm.selectedIndex = indexSelect;
 			}
 
 			// TODO: hacer el ID de usuario dinamico			

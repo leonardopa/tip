@@ -48,6 +48,13 @@ public class DireccionDto implements Serializable {
 		this.longitud = longitud;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "DireccionDto [id=" + id + ", alias=" + alias + ", calle=" + calle + ", altura=" + altura + ", pisoDpto=" + pisoDpto
+		        + ", localidad=" + localidad + ", cp=" + cp + ", cpa=" + cpa + ", latitud=" + latitud + ", longitud=" + longitud + "]";
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -75,11 +75,18 @@
        
        
        <md-card>
-        	<ng-md-icon id="icon" icon="{{principal.icon}}" 
-        	style="fill: black" size="{{principal.size}}"
-        	options="{{principal.options}}">
-        	</ng-md-icon> 
-       	|	<md-subheader class="md-primary">{{principal.carrito.nombre}}</md-subheader> </md-card>
+       		
+       		<md-button>
+				<a ui-sref="lista-pedidos">
+					<ng-md-icon id="icon" icon="{{principal.icon}}" 
+			        	style="fill: black" size="{{principal.size}}"
+			        	options="{{principal.options}}"/>
+				</a>
+				
+			</md-button>
+	 		
+	 		<md-subheader class="md-primary">{{principal.carrito.nombre}}</md-subheader> </md-card>
+       	|	
   </div>
  
  <style>

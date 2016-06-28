@@ -26,12 +26,7 @@
           controller: 'MenuController',
           controllerAs: 'menu'
         })
-      .state('login', {
-          url: '/',
-          templateUrl: 'app/comercio/principal/login.html',
-          controller: 'LogInController',
-          controllerAs: 'loginCtrl'
-        })  
+     
       .state('emprendedores', {
           url: '/emprendedores',
           templateUrl: 'app/comercio/varios/emprendedores.html',
@@ -54,17 +49,33 @@
           url: '/form-domicilio',
           templateUrl: 'app/comercio/administracion/formularios/form-direccion.html',
           controller: 'FormDireccionController',
-          controllerAs: 'direccionCtrl'
+          controllerAs: 'direccionCtrl',
+          params:{test:null}
         })
         .state('form-grupo', {
           url: '/form-grupo',
           templateUrl: 'app/comercio/administracion/formularios/form-grupo.html',
           controller: 'FormGrupoController'        
         })
+         .state('login', {
+          url: '/',
+          templateUrl: 'app/comercio/administracion/formularios/login.html',
+          controller: 'LogInController',
+          controllerAs: 'loginCtrl'
+        })
+         .state('form-usuario', {
+          url: '/form-usuario',
+          templateUrl: 'app/comercio/administracion/formularios/form-usuario.html',
+          controller: 'FormUsuarioController',
+          controllerAs: 'usuarioCtrl',
+          params:{domicilio:null}
+        })  
+        
         .state('lista-pedidos', {
           url: '/lista-pedidos',
           templateUrl: 'app/comercio/carrito/lista-pedidos.html',
-          controller: 'ListaPedidosController'        
+          controller: 'ListaPedidosController',
+          controllerAs: 'listaPedidoCtrl'
         })
          .state('detalle-pedido', {
           url: '/detalle-pedido',
