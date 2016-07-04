@@ -18,7 +18,7 @@ public class DireccionDto implements Serializable {
 
 	private Integer altura;
 
-	private String pisoDpto;
+	private String departamento;
 
 	private String localidad;
 
@@ -52,7 +52,7 @@ public class DireccionDto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DireccionDto [id=" + id + ", alias=" + alias + ", calle=" + calle + ", altura=" + altura + ", pisoDpto=" + pisoDpto
+		return "DireccionDto [id=" + id + ", alias=" + alias + ", calle=" + calle + ", altura=" + altura + ", pisoDpto=" + departamento
 		        + ", localidad=" + localidad + ", cp=" + cp + ", cpa=" + cpa + ", latitud=" + latitud + ", longitud=" + longitud + "]";
 	}
 	public Integer getId() {
@@ -127,12 +127,13 @@ public class DireccionDto implements Serializable {
 		this.cp = cp;
 	}
 
-	public String getPisoDpto() {
-		return pisoDpto;
+	public String getDepartamento() {
+		return departamento;
 	}
 
-	public void setPisoDpto(String pisoDpto) {
-		this.pisoDpto = pisoDpto;
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
 	}
+
 
 }

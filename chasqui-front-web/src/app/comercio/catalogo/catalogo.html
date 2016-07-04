@@ -1,0 +1,119 @@
+ 
+
+	<section ng-include="'app/comercio/principal/menu.html'"></section>  
+	
+     <!-- Content height does not need to be px any more: -->
+  	<md-content style="height:100%">
+
+
+<!-- CODIGO ORIGINAL -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2">
+					
+					<br>
+					<br>
+					<br>
+					
+					<md-radio-group ng-model="catalogoCtrl.categoriaSelect">
+			          <md-radio-button ng-repeat="categoria in catalogoCtrl.categorias"
+			                           ng-value="categoria" class="text-capitalize">
+			            {{categoria.nombre}}
+			          </md-radio-button>
+			        </md-radio-group>
+        
+        			 <md-button class="md-raised">Filtrar</md-button>
+					
+				</div>
+				<div class="col-md-8">
+					
+					<section ng-include="'app/comercio/catalogo/filtros.html'"></section>
+					 
+					<h1>Catalogo</h1>			
+					<section ng-include="'app/comercio/catalogo/lista-productos.html'"></section>
+					
+					<br><!-- FIX CSSS , sino no se ve el paginador -->
+					<br>
+					<br>
+				</div>
+							<div class="col-md-2">
+									<div class="span8">
+						    <h3>Una noticia importante</h3>
+						    <p>...y queres formar parte de este catalogo virtual, acercate a las oficinas de </p>
+						    <div>
+						        <span class="badge"> 2012-08-02 20:47:04</span>				        
+						    </div> 
+						    <hr>
+						    <h3>Otra gran noticia</h3>
+						    <p> cerveza gratis </p>
+						    <div>
+						        <span class="badge"> 2012-08-02 20:47:04</span>
+						    </div>     
+						    <hr>
+						</div>
+				</div>
+			</div>
+		</div>
+				
+
+  
+  	
+  	</md-content>
+ 
+ <div class="fixed" ng-cloak>
+     <md-fab-speed-dial md-open="catalogoCtrl.isOpen" md-direction="{{catalogoCtrl.selectedDirection}}" 
+     	ng-class="catalogoCtrl.selectedMode">
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab md-warn">
+            <ng-md-icon icon="compare_arrows" style="fill: black" size="24"></ng-md-icon> 
+             <md-tooltip md-direction="left"> 
+	               Cambiar de Changuito </md-tooltip> 
+          </md-button>
+        </md-fab-trigger>
+
+        <md-fab-actions>
+          <div ng-repeat="pedido in catalogoCtrl.pedidos">
+      
+	          <md-button   class="md-fab md-raised md-mini"
+	          ng-click="catalogoCtrl.cambiarContexto(pedido)">
+	          	
+	            <ng-md-icon icon="{{pedido.icon}}" style="fill: black" size="24"></ng-md-icon> 	
+	            <md-tooltip md-direction="left"> 
+	               {{pedido.nombre}} </md-tooltip>              
+	          </md-button>
+          </div>         
+        </md-fab-actions>
+      </md-fab-speed-dial>
+       
+       
+       <md-card>
+       		
+       		<md-button>
+				<a ui-sref="lista-pedidos">
+					<ng-md-icon id="icon" icon="{{catalogoCtrl.icon}}" 
+			        	style="fill: black" size="{{catalogoCtrl.size}}"
+			        	options="{{catalogoCtrl.options}}"/>
+				</a>
+				
+			</md-button>
+	 		
+	 		<md-subheader class="md-primary">{{catalogoCtrl.carrito.nombre}}</md-subheader> </md-card>
+       	|	
+  </div>
+ 
+ <style>
+<!--
+
+-->
+
+.fixed {
+top: auto;
+right: 20px;
+bottom: 20px;
+left: auto;
+position: fixed;
+}
+</style>
+     
+
+
