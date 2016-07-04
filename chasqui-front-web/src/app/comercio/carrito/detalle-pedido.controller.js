@@ -14,7 +14,7 @@
 		
 		vm.comprar = function (event){
 			$log.debug('DetallePedidoController , modo comprar ', $scope.pedido);
-			$state.go('principal')
+			$state.go('catalogo')
 		}
 		
 	}

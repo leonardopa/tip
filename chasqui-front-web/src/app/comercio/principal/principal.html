@@ -1,107 +1,35 @@
- 
 
-	<section ng-include="'app/comercio/principal/menu.html'"></section>  
+
+<section ng-include="'app/comercio/principal/menu.html'"></section>
+
+
+<md-content>
+ 
+<div layout="column">
+    <div flex> <section ng-include="'app/comercio/catalogo/lista-productos-destacados.html'"></section> </div>
+   
+	<div layout="row">
+	  <div flex> Ver catalogo completo <br> donde va? que muestra? </div>
+	  
+	  
+	  <div flex>
+	  
+	    <p> ver como manejar este tipo de contenido web http://quilljs.com/</p>
+	  
+	  	<iframe width="560" height="315"
+			src="https://www.youtube.com/embed/H7WynjvsbLU" frameborder="0"
+			allowfullscreen></iframe> 
+	  
+	  </div>
+	</div>
+</div>
 	
-     <!-- Content height does not need to be px any more: -->
-  	<md-content style="height:100%">
-
-
-<!-- CODIGO ORIGINAL -->
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-2">
-					
-				</div>
-				<div class="col-md-8">
-					<h1>Productos destacados</h1>
-					 
-					<section ng-include="'app/comercio/principal/lista-productos-destacados.html'"></section>
-					 
-					<h1>Catalogo</h1>			
-					<section ng-include="'app/comercio/principal/lista-productos.html'"></section>
-					
-					<br><!-- FIX CSSS , sino no se ve el paginador -->
-					<br>
-					<br>
-				</div>
-							<div class="col-md-2">
-									<div class="span8">
-						    <h3>Una noticia importante</h3>
-						    <p>...y queres formar parte de este catalogo virtual, acercate a las oficinas de </p>
-						    <div>
-						        <span class="badge"> 2012-08-02 20:47:04</span>				        
-						    </div> 
-						    <hr>
-						    <h3>Otra gran noticia</h3>
-						    <p> cerveza gratis </p>
-						    <div>
-						        <span class="badge"> 2012-08-02 20:47:04</span>
-						    </div>     
-						    <hr>
-						</div>
-				</div>
-			</div>
-		</div>
-				
-
-  
-  	
-  	</md-content>
- 
- <div class="fixed" ng-cloak>
-     <md-fab-speed-dial md-open="principal.isOpen" md-direction="{{principal.selectedDirection}}" 
-     	ng-class="principal.selectedMode">
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-warn">
-            <ng-md-icon icon="compare_arrows" style="fill: black" size="24"></ng-md-icon> 
-             <md-tooltip md-direction="left"> 
-	               Cambiar de Changuito </md-tooltip> 
-          </md-button>
-        </md-fab-trigger>
-
-        <md-fab-actions>
-          <div ng-repeat="pedido in principal.pedidos">
-      
-	          <md-button   class="md-fab md-raised md-mini"
-	          ng-click="principal.cambiarContexto(pedido)">
-	          	
-	            <ng-md-icon icon="{{pedido.icon}}" style="fill: black" size="24"></ng-md-icon> 	
-	            <md-tooltip md-direction="left"> 
-	               {{pedido.nombre}} </md-tooltip>              
-	          </md-button>
-          </div>         
-        </md-fab-actions>
-      </md-fab-speed-dial>
-       
-       
-       <md-card>
-       		
-       		<md-button>
-				<a ui-sref="lista-pedidos">
-					<ng-md-icon id="icon" icon="{{principal.icon}}" 
-			        	style="fill: black" size="{{principal.size}}"
-			        	options="{{principal.options}}"/>
-				</a>
-				
-			</md-button>
-	 		
-	 		<md-subheader class="md-primary">{{principal.carrito.nombre}}</md-subheader> </md-card>
-       	|	
-  </div>
- 
- <style>
-<!--
-
--->
-
-.fixed {
-top: auto;
-right: 20px;
-bottom: 20px;
-left: auto;
-position: fixed;
-}
-</style>
-     
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+</md-content>

@@ -18,7 +18,7 @@
         url: '/',
         templateUrl: 'app/comercio/principal/principal.html',
         controller: 'PrincipalController',
-        controllerAs: 'principal'
+        controllerAs: 'principalCtrl'
       })
       .state('menu', {
           url: '/',
@@ -33,6 +33,12 @@
           controller: 'EmprenController',
           controllerAs: 'enpren'
         })
+        .state('como-comprar', {
+          url: '/comoComprar',
+          templateUrl: 'app/comercio/varios/como_comprar.html',
+          controller: 'ComoComprarController',
+          controllerAs: 'comoComprarCtrl'
+        })     
          .state('lista-grupos', {
           url: '/lista-grupos',
           templateUrl: 'app/comercio/administracion/lista-grupos.html',
@@ -81,6 +87,12 @@
           url: '/detalle-pedido',
           templateUrl: 'app/comercio/carrito/detalle-pedido.html',
           controller: 'DetallePedidoController'        
+        })
+        .state('catalogo', {
+          url: '/catalogo',
+          templateUrl: 'app/comercio/catalogo/catalogo.html',
+          controller: 'CatalogoController',        
+          controllerAs: 'catalogoCtrl'
         })
         .state('app.error', {
         url: '/error/:key',
