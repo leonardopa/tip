@@ -4,27 +4,30 @@
 
 <md-toolbar class="md-hue-2">
 <div class="md-toolbar-tools">
+
+<!-- -
 	<md-button class="md-icon-button" aria-label="Settings"
 		ng-disabled="true"> <md-icon
 		md-svg-icon="img/icons/menu.svg"></md-icon> </md-button>
+ -->
+	 
+	<a ui-sref="principal"><img alt="" src="app\components\image\logo_ch.png"> </a>
+	
+	<span flex></span>
+<!--  
+    <md-button> <a ui-sref="principal">Inicio</a></md-button>
+ -->
+	<md-button> <a ui-sref="como-comprar">C&oacutemo
+		comprar</a></md-button>
+		
+	<md-button> <a ui-sref="catalogo">catalogo</a></md-button>
+	<!-- 
+	<md-button>
+	<a ui-sref="emprendedores">Emprendedores</a></md-button> -->
 
-	<img alt="" src="app\components\image\logo_ch.png"> <span flex></span>
-
-
-
-
-	<md-button>
-	<a ui-sref="principal">Inicio</a></md-button>
-	<md-button>
-	<a ui-sref="emprendedores">Emprendedores</a></md-button>
-	<md-button>
-	<a>C&oacutemo comprar</a></md-button>
-	<md-button>
-	<a ui-sref="lista-pedidos">Mis pedidos</a></md-button>
-	<md-button>
-	<a ui-sref="lista-grupos">Compra colectiva</a></md-button>
-	<md-button>
-	<a ui-sref="login">Ingresa</a></md-button>
+	<md-button> <a ui-sref="lista-pedidos">Mis pedidos</a></md-button>
+	<md-button> <a ui-sref="lista-grupos">Compra colectiva</a></md-button>
+	<md-button> <a ui-sref="login">Ingresa</a></md-button>
 
 
 </div>

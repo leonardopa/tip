@@ -26,7 +26,17 @@
         	},
         	
         	singUp: URL_REST_BASE+"client/sso/singUp",
-        	        
+        	
+        	categorias: function (idVendedor){
+        		return URL_REST_BASE +"client/categoria/all/" + idVendedor;
+        	},
+        	
+        	productores: function (idVendedor){
+        		return URL_REST_BASE +"client/productor/all/" + idVendedor;
+        	},
+        	
+        	medallas: URL_REST_BASE+"client/medalla/all", 
+        	
         	productosPaginado: function (pagina,items){
         		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 
         	},
