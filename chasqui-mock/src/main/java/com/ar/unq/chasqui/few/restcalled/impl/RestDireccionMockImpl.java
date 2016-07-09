@@ -2,6 +2,7 @@ package com.ar.unq.chasqui.few.restcalled.impl;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import com.ar.unq.chasqui.few.restcalled.RestDireccion;
  * @author leo
  *
  */
-
+@CrossOrigin
 @RestController
 @RequestMapping("/direccion")
 public class RestDireccionMockImpl implements RestDireccion  {

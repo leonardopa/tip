@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
  *
  *
  * @author leo
- */
+ */@CrossOrigin
 @RestController
 @RequestMapping("/productos")
 public class RestProducto {
