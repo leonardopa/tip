@@ -3,8 +3,8 @@ package com.ar.unq.chasqui.few.api.example;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ar.unq.chasqui.few.core.dto.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.dto.ProductoDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
 
 public class Tmp {

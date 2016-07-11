@@ -13,6 +13,22 @@
 
 	  vm.hello = "PrincipalController ...  hello";
 	 
-  
+	  vm.categorias=[];
+		 
+	  function callCategorias() {
+			$log.debug("---callCategorias ---");
+
+			function doOk(response) {
+				 
+				vm.categorias = response.data;
+				vm.categoriaSelect =vm.categorias[0]; 
+			}
+			
+			// TODO: hacer el ID de VENDEDOR dinamico
+			restProxy.get(CTE_REST.categorias(1),{},doOk);		    
+	 }
+	  
+	  callCategorias()
+	    
   }
 })();

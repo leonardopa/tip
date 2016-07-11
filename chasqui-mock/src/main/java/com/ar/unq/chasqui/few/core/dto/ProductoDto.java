@@ -1,27 +1,48 @@
 package com.ar.unq.chasqui.few.core.dto;
 
 import java.io.Serializable;
-
+import java.util.List;
 
 public class ProductoDto implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private Integer idProducto;
+
 	private Integer idCategoria;
+
 	private Integer idFabricante;
+
 	private Integer idVariante;
+
 	private String nombreProducto;
+
 	private String nombreCategoria;
+
 	private String nombreFabricante;
-	private String nombreVariente;
-	private String descripcionVariente;
-	private String descripcionProducto;
-	private String descripcionCateoria;
+
+	private String nombreVariedad;
+
+	/*
+		private String descripcionVariente;
+		private String descripcionProducto;
+		private String descripcionCateoria;*/
+	private Integer stock;
+
 	private Integer precioParteEntera;
+
 	private Integer precioParteDecimal;
+
+	private Double precio;
+
+	private String imagenPrincipal;
+
+	private List<MedallasDto> medallasProducto;
+
+	private List<MedallasDto> medallasProductor;
 
 	public Integer getIdProducto() {
 		return idProducto;
@@ -29,14 +50,6 @@ public class ProductoDto implements Serializable {
 
 	public void setIdProducto(Integer idProducto) {
 		this.idProducto = idProducto;
-	}
-
-	public String getNombreProducto() {
-		return nombreProducto;
-	}
-
-	public void setNombreProducto(String nombreProducto) {
-		this.nombreProducto = nombreProducto;
 	}
 
 	public Integer getIdCategoria() {
@@ -47,28 +60,36 @@ public class ProductoDto implements Serializable {
 		this.idCategoria = idCategoria;
 	}
 
+	public Integer getIdFabricante() {
+		return idFabricante;
+	}
+
+	public void setIdFabricante(Integer idFabricante) {
+		this.idFabricante = idFabricante;
+	}
+
+	public Integer getIdVariante() {
+		return idVariante;
+	}
+
+	public void setIdVariante(Integer idVariante) {
+		this.idVariante = idVariante;
+	}
+
+	public String getNombreProducto() {
+		return nombreProducto;
+	}
+
+	public void setNombreProducto(String nombreProducto) {
+		this.nombreProducto = nombreProducto;
+	}
+
 	public String getNombreCategoria() {
 		return nombreCategoria;
 	}
 
 	public void setNombreCategoria(String nombreCategoria) {
 		this.nombreCategoria = nombreCategoria;
-	}
-
-	public String getDescripcionProducto() {
-		return descripcionProducto;
-	}
-
-	public void setDescripcionProducto(String descripcionProducto) {
-		this.descripcionProducto = descripcionProducto;
-	}
-
-	public String getDescripcionCateoria() {
-		return descripcionCateoria;
-	}
-
-	public void setDescripcionCateoria(String descripcionCateoria) {
-		this.descripcionCateoria = descripcionCateoria;
 	}
 
 	public String getNombreFabricante() {
@@ -79,28 +100,20 @@ public class ProductoDto implements Serializable {
 		this.nombreFabricante = nombreFabricante;
 	}
 
-	public Integer getIdFabricante() {
-		return idFabricante;
+	public String getNombreVariedad() {
+		return nombreVariedad;
 	}
 
-	public void setIdFabricante(Integer idFabricante) {
-		this.idFabricante = idFabricante;
+	public void setNombreVariedad(String nombreVariedad) {
+		this.nombreVariedad = nombreVariedad;
 	}
 
-	public String getNombreVariente() {
-		return nombreVariente;
+	public Integer getStock() {
+		return stock;
 	}
 
-	public void setNombreVariente(String nombreVariente) {
-		this.nombreVariente = nombreVariente;
-	}
-
-	public String getDescripcionVariente() {
-		return descripcionVariente;
-	}
-
-	public void setDescripcionVariente(String descripcionVariente) {
-		this.descripcionVariente = descripcionVariente;
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 
 	public Integer getPrecioParteEntera() {
@@ -119,12 +132,36 @@ public class ProductoDto implements Serializable {
 		this.precioParteDecimal = precioParteDecimal;
 	}
 
-	public Integer getIdVariante() {
-		return idVariante;
+	public Double getPrecio() {
+		return precio;
 	}
 
-	public void setIdVariante(Integer idVariante) {
-		this.idVariante = idVariante;
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+	public String getImagenPrincipal() {
+		return imagenPrincipal;
+	}
+
+	public void setImagenPrincipal(String imagenPrincipal) {
+		this.imagenPrincipal = imagenPrincipal;
+	}
+
+	public List<MedallasDto> getMedallasProducto() {
+		return medallasProducto;
+	}
+
+	public void setMedallasProducto(List<MedallasDto> medallasProducto) {
+		this.medallasProducto = medallasProducto;
+	}
+
+	public List<MedallasDto> getMedallasProductor() {
+		return medallasProductor;
+	}
+
+	public void setMedallasProductor(List<MedallasDto> medallasProductor) {
+		this.medallasProductor = medallasProductor;
 	}
 
 }

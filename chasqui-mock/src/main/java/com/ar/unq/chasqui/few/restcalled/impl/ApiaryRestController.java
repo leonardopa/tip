@@ -15,12 +15,16 @@ import com.ar.unq.chasqui.few.core.dto.MedallasDto;
 import com.ar.unq.chasqui.few.core.dto.ProductorDto;
 import com.ar.unq.chasqui.few.core.dto.UsuarioDto;
 import com.ar.unq.chasqui.few.core.dto.UsuarioFullDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.FiltoProductoDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.PaginaProductoDto;
+import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
 import com.ar.unq.chasqui.few.core.service.example.VariosServiceMock;
 @CrossOrigin
 @RestController
-public class Varios {
+public class ApiaryRestController {
 
 	VariosServiceMock serv = new VariosServiceMock();
+	ProductoServiceMock servProd = new ProductoServiceMock();
 	/*
 	 *
 	 * client/sso/singIn
@@ -83,4 +87,39 @@ public class Varios {
 
 		return serv.findMedallas();
 	}
+
+	/** /client/producto/byCategoria*/
+	@RequestMapping(value = "/client/producto/byCategoria", method = RequestMethod.POST)
+	public @ResponseBody PaginaProductoDto findProductosByCategoria(@RequestBody FiltoProductoDto filter) {
+		System.out.println("findProductosByCategoria " + filter);
+
+		return servProd.findProductos(filter.getPagina(), filter.getCantItems());
+	}
+
+
+	/** /client/producto/byProductor*/
+	@RequestMapping(value = "/client/producto/byProductor", method = RequestMethod.POST)
+	public @ResponseBody PaginaProductoDto findProductosByProductor(@RequestBody FiltoProductoDto filter) {
+		System.out.println("findProductosByProductor " + filter);
+
+		return servProd.findProductos(filter.getPagina(), filter.getCantItems());
+	}
+
+
+	/** /client/producto/byMedalla*/
+	@RequestMapping(value = "/client/producto/byMedalla", method = RequestMethod.POST)
+	public @ResponseBody PaginaProductoDto findProductosByMedalla(@RequestBody FiltoProductoDto filter) {
+		System.out.println("findProductosByMedalla " + filter);
+
+		return servProd.findProductos(filter.getPagina(), filter.getCantItems());
+	}
+
+	/** /client/producto/byQuery*/
+	@RequestMapping(value = "/client/producto/byQuery", method = RequestMethod.POST)
+	public @ResponseBody PaginaProductoDto findProductosByQuery(@RequestBody FiltoProductoDto filter) {
+		System.out.println("findProductosByQuery " + filter);
+
+		return servProd.findProductos(filter.getPagina(), filter.getCantItems());
+	}
+
 }

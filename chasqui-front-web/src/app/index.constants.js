@@ -36,6 +36,14 @@
         	},
         	
         	medallas: URL_REST_BASE+"client/medalla/all", 
+        	 
+        	productosByCategoria: URL_REST_BASE + "client/producto/byCategoria",
+        	
+        	productosByProductor: URL_REST_BASE + "client/producto/byProductor",
+        	
+        	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
+        	
+        	productosByQuery : URL_REST_BASE + "client/producto/byQuery",
         	
         	productosPaginado: function (pagina,items){
         		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 

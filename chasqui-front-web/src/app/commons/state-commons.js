@@ -5,6 +5,7 @@
 	function DialogCommons($mdToast) {
 		var vm = this;
 
+		
 		vm.mensaje = function(mensaje) {
 
 			$mdToast.show($mdToast.simple().textContent(mensaje)

@@ -10,8 +10,9 @@
 	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
 	  
 	  var vm = this;
-
 	  
+	  
+	  /////////// Para el selector de Grupos de compra
 	  vm.topDirections = ['left', 'up'];
 	  vm.bottomDirections = ['down', 'right'];
 	  vm.isOpen = false;
@@ -34,7 +35,36 @@
 	  vm.size=24;
 	  vm.icon='shopping_cart';
 	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
+	  
+	  vm.paginaProducto;
 
+	  vm.isFiltro1=true;
+	  vm.isFiltro2=false;
+	  vm.isFiltro3=false;
+	  
+	  vm.filtroPor = function(filtroPor){
+		  $log.debug("filtro por ",filtroPor);
+		  
+		  if (filtroPor == 1 ){
+			  $log.debug("filtro por categoria");			 
+			  vm.isFiltro2=false;
+			  vm.isFiltro3=false;  
+		  }
+		  if (filtroPor == 2 ){
+			  $log.debug("filtro por productor");
+			  vm.isFiltro1=false;			  
+			  vm.isFiltro3=false;  
+		  }
+		  if (filtroPor == 3 ){
+			  $log.debug("filtro por medalla");
+			  vm.isFiltro1=false;
+			  vm.isFiltro2=false;			    
+		  }
+		  $log.debug("filtro por ",vm.isFiltro1);
+		  $log.debug("filtro por ",vm.isFiltro2);
+		  $log.debug("filtro por ",vm.isFiltro3);
+		  
+	  }
 	  
 	  vm.cambiarContexto = function (pedido){
 		  $log.debug("cambia contexo de carrito ",pedido);
@@ -119,10 +149,13 @@
 			restProxy.get(CTE_REST.medallas,{},doOk);		    
 	 }
 	  
+	 
+	 
 	 callLoadGrupos();
 	 callCategorias();
 	 callProductores();
 	 callMedallas(); 
 	    
+	
   }
 })();

@@ -9,53 +9,21 @@
 	 */
 	function ListaProductosController($scope, $http, $log, restProxy, CTE_REST,
 			$mdDialog,$state) {
-		$log
-				.debug(
-						'ListaProductosController ..... Recibe productos desde otra pagina ',
-						$scope.pedido);
-
+	
+		$log.debug('ListaProductosController');
+		
 		var CANT_ITEMS = 10; // TODO : pasar a constante
 		
 		var vm = this;
 		
-		vm.isPaginaPrincipal = ($scope.pedido == undefined);
-		vm.pedido = $scope.pedido;
 		vm.variantes = [];
-
+	
 		vm.pageChanged = function() {
 			$log.log('Page changed to: ' + vm.bigCurrentPage);
 			findProductos(vm.bigCurrentPage, CANT_ITEMS);
 		};
 
-		vm.quitar = function(variante) {
-			$log.debug("quitar ", variante);
-
-			var confirm = $mdDialog.prompt().title(
-					'Quitar producto del Changuito').textContent(
-					'Cuanto producto queres quitar ?').placeholder(
-					'Cantidad entre 1 y ' + variante.cantidad)
-			// .ariaLabel('Dog name')
-			// .initialValue('Buddy')
-			// .targetEvent(ev)
-			.ok('Quitar').cancel('Cancelar');
-
-			$mdDialog.show(confirm).then(function(result) {
-				$log.debug("quitar OK", result);
-
-				if (!isNaN(result) && result <= variante.cantidad && result > 0) {
-					$log.debug("Entrada valida", result);
-					callQuitarProducto(variante, result);
-				} else {
-					$log.debug("Entrada invalida", result);
-				}
-
-			}, function() {
-
-				$log.debug("Cancelo Quitar");
-			});
-
-		}
-
+		 
 		vm.agregar = function(variante) {
 			$log.debug("agregar ", variante)
 			var confirm = $mdDialog.prompt().title(
@@ -85,22 +53,6 @@
 
 		// /////////// REST
 
-		var findProductos = function(pagina, items) {
-			$log.log('findProductos: ' + pagina + " " + items);
-
-			function doOk(response) {
-				$log.log('findProductos Response ', response);
-				vm.variantes = response.data.productos;
-
-				vm.maxSize = 10;
-				vm.bigTotalItems = response.data.itemsTotal;
-				vm.bigCurrentPage = response.data.paginaActual;
-			}
-
-			restProxy.get(CTE_REST.productosPaginado(pagina, items), {}, doOk);
-
-		}
-
 		var callAgregarAlCarro = function(variante, cantidad) {
 			$log.debug('callAgregarAlCarro: ', variante);
 
@@ -116,28 +68,34 @@
 
 		}
 
-		var callQuitarProducto = function(variante,cantidad) {
-			$log.log('callQuitarProducto: ');
+		var findProductos = function(pagina, items) {
+			$log.log('findProductos: ' + pagina + " " + items);
 
 			function doOk(response) {
-				$log.log('callQuitarProducto Response ', response);
+				$log.log('findProductos Response ', response);
+				vm.variantes = response.data.productos;
 
+				vm.maxSize = 10;
+				vm.bigTotalItems = response.data.itemsTotal;
+				vm.bigCurrentPage = response.data.paginaActual;
 			}
-			// / TODO : USUARIO HARDOC
-			restProxy.post(CTE_REST.productosQuitar(77, vm.pedido.id,cantidad), variante,
-					doOk);
+
+			var json= {
+					  "pagina": 1,
+					  "cantItems": 20,
+					  "precio": "Up",
+					  "idCategoria": "1",
+					  "idProductor" :"1" ,
+					   "idMedalla" : "1",
+					   "query": "1",
+					   "idVendedor":"1"
+					};
+			
+			restProxy.post(CTE_REST.productosByCategoria, json, doOk);
 
 		}
-
-		// productosQuitarProducto
-		// /pedidos/usuario/{idUser}/grupo/{idGrupo}/quitarProducto
-
-		// Puede ser para listar los pedidos o para la pantalla principal
-		if (vm.isPaginaPrincipal) {
-			findProductos(1, CANT_ITEMS);
-		} else {
-			vm.variantes = $scope.pedido.productos
-		}
+		
+		findProductos();
 
 	}
 })();

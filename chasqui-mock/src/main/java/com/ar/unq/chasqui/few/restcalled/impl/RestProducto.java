@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ar.unq.chasqui.few.core.dto.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.dto.PedidoDto;
 import com.ar.unq.chasqui.few.core.dto.ProductoDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
 
 /**
