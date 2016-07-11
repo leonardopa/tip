@@ -11,27 +11,27 @@
 			<div class="row">
 				<div class="col-md-2">
 					
-					<br>
-					<br>
-					<br>
-					
-					<md-radio-group ng-model="catalogoCtrl.categoriaSelect">
-			          <md-radio-button ng-repeat="categoria in catalogoCtrl.categorias"
-			                           ng-value="categoria" class="text-capitalize">
-			            {{categoria.nombre}}
-			          </md-radio-button>
-			        </md-radio-group>
-        
-        			 <md-button class="md-raised">Filtrar</md-button>
+					<section ng-include="'app/comercio/catalogo/filtros.html'"></section>
 					
 				</div>
 				<div class="col-md-8">
-					
-					<section ng-include="'app/comercio/catalogo/filtros.html'"></section>
-					 
+					 <div layout="row" layout-wrap>
+						  <div flex="25"></div>
+						  <div flex="50">
+						    	  <md-input-container md-no-float class="md-block"> 
+							      <input ng-model="catalogoCtrl.query" type="text" placeholder="Buscar" >
+							      
+							       <md-icon md-svg-src="app/components/image/ic_search_black_24px.svg" style="display:inline-block;"></md-icon>
+							    </md-input-container>
+						
+						  </div>
+						  <div flex="25"></div>
+					  </div>
+	
 					<h1>Catalogo</h1>			
-					<section ng-include="'app/comercio/catalogo/lista-productos.html'"></section>
-					
+					<section ng-include="'app/comercio/catalogo/lista-productos.html'"
+					ng-init="count = catalogoCtrl.count" ng-cloak></section>
+					<!-- ng-init="paginaProducto = catalogoCtrl.paginaProducto -->
 					<br><!-- FIX CSSS , sino no se ve el paginador -->
 					<br>
 					<br>
@@ -59,6 +59,8 @@
   
   	
   	</md-content>
+ 
+ <!--  Menu de contexto de COMPRA -->
  
  <div class="fixed" ng-cloak>
      <md-fab-speed-dial md-open="catalogoCtrl.isOpen" md-direction="{{catalogoCtrl.selectedDirection}}" 

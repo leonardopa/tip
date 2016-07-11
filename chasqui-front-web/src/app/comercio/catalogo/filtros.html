@@ -1,44 +1,47 @@
+<!-- incluido en catalogo.html -->
 
+<div layout="column">
+	</br>
+	<md-checkbox ng-model="catalogoCtrl.isFiltro1" ng-click="catalogoCtrl.filtroPor(1)">
+            Filtrar por catalogo
+    </md-checkbox>
+    
+	<div flex ng-show="catalogoCtrl.isFiltro1">
+		<md-radio-group ng-model="catalogoCtrl.categoriaSelect">
+		<md-radio-button ng-repeat="categoria in catalogoCtrl.categorias"
+			ng-value="categoria" class="text-capitalize">
+		{{categoria.nombre}} </md-radio-button> </md-radio-group>
+	</div>
+	
+	<md-checkbox ng-model="catalogoCtrl.isFiltro2" ng-click="catalogoCtrl.filtroPor(2)">
+            Filtrar por Productor
+    </md-checkbox>
+    
+	<div flex ng-show="catalogoCtrl.isFiltro2">
+		<md-input-container class="md-block" flex-gt-sm>
+		<label>Productor</label> <md-select
+			ng-model="catalogoCtrl.productorSelect"> <md-option
+			ng-repeat="productor in catalogoCtrl.productores"
+			value="{{productor.idVendedor}}">
+		{{productor.nombreProductor}} </md-option> </md-select> </md-input-container>
+	</div>
 
-<div layout="row">
-  <div flex>
-  
-  <div flex>
-    <md-input-container class="md-block" flex-gt-sm>
-    <label>Productor</label>
-  	<md-select ng-model="catalogoCtrl.productorSelect">
-	  <md-option ng-repeat="productor in catalogoCtrl.productores" value="{{productor.idVendedor}}">
-	                {{productor.nombreProductor}}
-	  </md-option>
-	</md-select>
-	</md-input-container>
-  </div>
- 
-  </div>
+	<md-checkbox  ng-model="catalogoCtrl.isFiltro3" ng-click="catalogoCtrl.filtroPor(3)">
+            Filtrar por Medallas
+    </md-checkbox>
+    
+	<div flex ng-show="catalogoCtrl.isFiltro3">
+		<md-input-container class="md-block" flex-gt-sm>
+		<label>Medalla</label> <md-select
+			ng-model="catalogoCtrl.medallaSelect"> <md-option
+			ng-repeat="medalla in catalogoCtrl.medallas"
+			value="{{medalla.idMedalla}}"> {{medalla.nombre}} </md-option> </md-select> </md-input-container>
+	</div>
 
-  
-  <div flex>
-    <md-input-container class="md-block" flex-gt-sm>
-    <label>Medalla</label>
-  	<md-select ng-model="catalogoCtrl.medallaSelect">
-	  <md-option ng-repeat="medalla in catalogoCtrl.medallas" value="{{medalla.idMedalla}}">
-	                {{medalla.nombre}}
-	  </md-option>
-	</md-select>
-	</md-input-container>
-  </div>
-  
-  <div flex>
-  
-  <md-input-container md-no-float class="md-block"> 
-      <input ng-model="catalogoCtrl.query" type="text" placeholder="Buscar" >
-      
-       <md-icon md-svg-src="app/components/image/ic_search_black_24px.svg" style="display:inline-block;"></md-icon>
-    </md-input-container>
-  
-  </div>
+	<md-button class="md-raised">Filtrar</md-button>
 </div>
 
-      
-     
-      
+
+
+
+

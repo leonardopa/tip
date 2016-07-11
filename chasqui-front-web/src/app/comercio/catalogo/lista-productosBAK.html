@@ -1,6 +1,5 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
  
-  {{listaProductoCtr.contador}}
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
 		productos.</span>
 
@@ -37,16 +36,31 @@
 							<br>
 						</section>
 
-						 
+						<div ng-show="listaProductoCtr.isPaginaPrincipal">
 							<section layout="row" layout-sm="column"
 								layout-align="center center" layout-wrap>
 								<md-button class="md-raised md-primary"
 								ng-click="listaProductoCtr.agregar(variante)">Agregar <md-tooltip
 									md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
 							</section>
-					 
+						</div>
 
-						 
+						<div ng-show="! listaProductoCtr.isPaginaPrincipal">
+							<div layout="row">
+								<div flex>
+									<br>
+									<h8>Cant.</h8>
+									<strong>{{variante.cantidad}}</strong>
+								</div>
+								<div flex>
+									<md-button ng-click="listaProductoCtr.quitar(variante)">
+									<i style="font-size: 32px; color: red" class="material-icons">remove_shopping_cart</i>
+									<md-tooltip md-direction="left"> Quitar del
+									Chanquito </md-tooltip> </md-button>
+								</div>
+							</div>
+
+						</div>
 					</div>
 				</div>
 			</div>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ar.unq.chasqui.few.core.dto.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.dto.PedidoDto;
 import com.ar.unq.chasqui.few.core.dto.ProductoDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
 
 /**
  *
  *
  * @author leo
- */
+ */@CrossOrigin
 @RestController
 @RequestMapping("/productos")
 public class RestProducto {
