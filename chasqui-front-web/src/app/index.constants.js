@@ -12,8 +12,7 @@
   
     .constant('CTE_REST',  function() {
         
-        var URL_REST_BASE = "http://localhost:8081/chasqui-mock/";
-        //var URL_REST_BASE = "http://factory.epidata.com.ar:8413/chasqui-mock/";
+        var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
@@ -37,6 +36,14 @@
         	},
         	
         	medallas: URL_REST_BASE+"client/medalla/all", 
+        	 
+        	productosByCategoria: URL_REST_BASE + "client/producto/byCategoria",
+        	
+        	productosByProductor: URL_REST_BASE + "client/producto/byProductor",
+        	
+        	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
+        	
+        	productosByQuery : URL_REST_BASE + "client/producto/byQuery",
         	
         	productosPaginado: function (pagina,items){
         		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 
