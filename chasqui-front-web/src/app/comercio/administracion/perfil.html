@@ -12,10 +12,84 @@
 			<div ng-cloak>
 				<md-content> <md-tabs md-dynamic-height md-border-bottom> <md-tab label="Datos Personales">
 				<md-content class="md-padding">
-				<h1 class="md-display-2">Datos Personales</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque
-					ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est,
-					sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+ 			
+				<div ng-include="'app/comercio/administracion/formularios/form-usuario.html'" 
+									 ng-init="idGrupo = tab"/>	
+									 
+							<md-subheader class="md-no-sticky"> Domicilio Principal</md-subheader>
+												
+							<md-list-item class="secondary-button-padding">						
+							<p>Domicilio de casa</p>
+							
+							<md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> edit </md-icon>
+								          	<md-tooltip md-direction="left">
+									          puedes editar los datos del domicilio
+									        </md-tooltip>
+							</md-button>
+							</md-list-item> 
+														         
+								          
+							<md-divider></md-divider>
+							
+							<md-subheader class="md-no-sticky">Otros Domicilios</md-subheader>
+							
+							<md-list-item class="secondary-button-padding">							
+							<p>Domicilio del trabajo</p>
+							
+							<md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> compare_arrows </md-icon>
+								          	<md-tooltip md-direction="left">
+									          marcar como domicilo principal
+									        </md-tooltip>
+							</md-button>		        
+							<md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> edit </md-icon>
+								          	<md-tooltip md-direction="left">
+									          puedes editar los datos del domicilio
+									        </md-tooltip>
+							 </md-button>
+							</md-list-item> 
+														 
+							<md-divider></md-divider>
+							
+							<md-list-item class="secondary-button-padding">							
+							<p>Domicilio de mi ex</p>
+							
+							<md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> compare_arrows </md-icon>
+								          	<md-tooltip md-direction="left">
+									          marcar como domicilo principal
+									        </md-tooltip>
+							</md-button>		        
+							<md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> edit </md-icon>
+								          	<md-tooltip md-direction="left">
+									          puedes editar los datos del domicilio
+									        </md-tooltip>
+							 </md-button>
+							</md-list-item> 
+														 
+							<md-divider></md-divider>
+							<md-list-item class="secondary-button-padding">		
+												
+							<p>Domicilio del perro</p>
+							
+							<md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> compare_arrows </md-icon>
+								          	<md-tooltip md-direction="left">
+									          marcar como domicilo principal
+									        </md-tooltip>
+							</md-button>		        
+							<md-button ng-click="listaGruposCtrl.edit()">
+								          	 <md-icon> edit </md-icon>
+								          	<md-tooltip md-direction="left">
+									          puedes editar los datos del domicilio
+									        </md-tooltip>
+							 </md-button>
+							</md-list-item> 
+														 
+							<md-divider></md-divider>
 					
 				</md-content> </md-tab> 
 				<md-tab label="Notificaciones"> 
@@ -66,7 +140,7 @@
 				<md-tab label="Acciones"> <md-content class="md-padding">
 				
 				<h1 class="md-display-2">Acciones</h1>
-				<p>Aca pueden ur acciones varias como crear un grupo</p>
+				<p>Aca pueden ur acciones varias como crear un grupo ,  cambiar contraseña</p>
 				</md-content> </md-tab> </md-tabs> </md-content>
 			</div>
 
