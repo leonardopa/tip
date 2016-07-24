@@ -33,9 +33,13 @@
 	<div flex ng-show="catalogoCtrl.isFiltro3">
 		<md-input-container class="md-block" flex-gt-sm>
 		<label>Medalla</label> <md-select
-			ng-model="catalogoCtrl.medallaSelect"> <md-option
-			ng-repeat="medalla in catalogoCtrl.medallas"
-			value="{{medalla.idMedalla}}"> {{medalla.nombre}} </md-option> </md-select> </md-input-container>
+			ng-model="catalogoCtrl.medallaSelect">
+			<md-option ng-repeat="medalla in catalogoCtrl.medallas" value="{{medalla.idMedalla}}">
+						
+				<md-icon> info_outline </md-icon> {{medalla.nombre}}  
+						
+			 </md-option> </md-select> 
+		</md-input-container>
 	</div>
 
 	<md-button class="md-raised">Filtrar</md-button>
