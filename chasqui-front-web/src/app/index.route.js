@@ -99,6 +99,7 @@
         controller: 'ErrorController as error',
         templateUrl: 'app/error/error.html'
       })
+
       ;
 
     $urlRouterProvider.otherwise('/');
