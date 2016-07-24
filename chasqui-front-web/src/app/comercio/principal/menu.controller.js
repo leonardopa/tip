@@ -34,6 +34,9 @@
           case 'lista-grupos':             
               $state.go('lista-grupos')
               break;
+          case 'perfil':             
+              $state.go('perfil')
+              break;
           case 'login':              
               $state.go('login')
               break;

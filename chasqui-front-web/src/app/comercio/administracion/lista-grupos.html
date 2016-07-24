@@ -11,8 +11,21 @@
 			</ul>
 		</div>
 		<div class="col-md-8">
+		
+			<div layout="row" layout-align="center center">
 			
-			<span class="md-headline">Mis grupos de compras</span>
+			  <div flex="90"><span class="md-headline">Mis grupos de compras</span></div>
+			  
+			  <div flex="10"><md-button ng-click="listaGruposCtrl.crearGrupo($event)"> 
+											<md-icon> group  </md-icon>
+											<md-tooltip md-direction="left">
+												puedes crear un grupo nuevo
+											</md-tooltip>
+										 </md-button>
+			  </div>
+			</div>
+			
+			
 		
 			<div ng-cloak>
 				<md-content>
@@ -45,12 +58,7 @@
 								        </md-card-title>
 								        <md-card-actions layout="row" layout-align="end center">
 								        
-								        <md-button ng-click="listaGruposCtrl.crearGrupo($event)"> 
-											<md-icon> group  </md-icon>
-											<md-tooltip md-direction="left">
-												puedes crear un grupo nuevo
-											</md-tooltip>
-										 </md-button>
+								        
 										 
 								        <div ng-if="tab.admin">	
 								        <!-- 

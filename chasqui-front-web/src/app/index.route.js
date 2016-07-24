@@ -94,6 +94,12 @@
           controller: 'CatalogoController',        
           controllerAs: 'catalogoCtrl'
         })
+        .state('perfil', {
+          url: '/perfil',
+          templateUrl: 'app/comercio/administracion/perfil.html',
+          controller: 'PerfilController',        
+          controllerAs: 'perfilCtrl'
+        })
         .state('app.error', {
         url: '/error/:key',
         controller: 'ErrorController as error',
