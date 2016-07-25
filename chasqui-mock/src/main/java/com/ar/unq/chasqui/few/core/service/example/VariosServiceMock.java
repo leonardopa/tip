@@ -7,6 +7,7 @@ import com.ar.unq.chasqui.few.core.dto.CategoriaDto;
 import com.ar.unq.chasqui.few.core.dto.DireccionDto;
 import com.ar.unq.chasqui.few.core.dto.MedallasDto;
 import com.ar.unq.chasqui.few.core.dto.ProductorDto;
+import com.ar.unq.chasqui.few.core.dto.UsuarioFullDto;
 
 public class VariosServiceMock {
 
@@ -54,6 +55,21 @@ public class VariosServiceMock {
 		list.add(new MedallasDto("4", "medalla4", "descripcion de la medalla 4", "http://lorempixel.com/50/50/abstract/"));
 
 		return list;
+	}
+
+
+	public UsuarioFullDto findUser() {
+		UsuarioFullDto usuario = new UsuarioFullDto();
+		usuario.setApellido("apellido DTO");
+		usuario.setEmail("email@aa.com");
+		usuario.setNickName("nickNameDTO");
+		usuario.setNombre("nombreDto");
+		usuario.setTelefonoFijo("123456");
+		usuario.setTelefonoMovil("789101112");
+
+		DireccionDto direccion = findDomicilios(1).get(0);
+		usuario.setDireccion(direccion );
+		return usuario;
 	}
 
 }

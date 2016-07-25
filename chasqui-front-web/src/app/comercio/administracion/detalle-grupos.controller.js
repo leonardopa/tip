@@ -9,7 +9,7 @@
 	 *           grupo
 	 */
 	function DetalleGruposController($http, $log, $scope, $q, $timeout,
-			restProxy, CTE_REST, $mdDialog, DialogCommons) {
+			restProxy, CTE_REST, $mdDialog, ToastCommons) {
 		$log.debug("controler DetalleGruposController inti grupo ",
 				$scope.idGrupo)
 		var vm = this;
@@ -72,7 +72,7 @@
 					.ok('Si, lo quito').cancel('Cancelo');
 			$mdDialog.show(confirm).then(function() {
 
-				DialogCommons.mensaje('TODO: llamar servicio')
+				ToastCommons.mensaje('TODO: llamar servicio')
 
 			}, function() {
 				$log.debug("se quedo");

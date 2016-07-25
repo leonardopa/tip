@@ -6,7 +6,7 @@
 
 	/** @ngInject 
 	 *  Formulario para direccion */
-	function FormDireccionController( $log,$state,restProxy, CTE_REST) {
+	function FormDireccionController( $log,$state,restProxy, CTE_REST,ToastCommons) {
 		
 		var vm = this;
 		
@@ -16,19 +16,31 @@
 		//TODO: hacerlo flexible para grupo usuario vendedor ETC
 		// ahora esta para grupo
 		vm.guardar = function (){
-			
-		//	guardarDireccionGrupo();
-			siguiente();
+			callNuevaDireccion();
 		}
 		
-		/** El siguiente formulario es el de usuario*/
-		var siguiente = function (){
+		 
 		
-			$state.go("form-usuario",{ "domicilio" : vm.domicilio});
+		//////////////////////
+		
+		var callNuevaDireccion = function (){
+			$log.debug("guardar domicilio",vm.domicilio);
 			
+	        function doOk(response) {	    			    		 
+	    		$log.debug("respuesta guardar domicilio ", response);
+
+	    		ToastCommons.mensaje('Se actualizo con exito');
+	    		
+	    		//TODO: en realidad la navegacion depende de donde vino 
+	    		$state.go("principal");
+			};
+			
+			restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
 		}
 		
 		
+		
+		/////// TODO: ver cuando este para asociar a una grupo
 		var guardarDireccionGrupo = function (){
 			$log.debug("guardar domicilio al grupo",vm.domicilio);
 			

@@ -14,7 +14,8 @@
 	  vm.hello = "PrincipalController ...  hello";
 	 
 	  vm.categorias=[];
-		 
+
+	  
 	  function callCategorias() {
 			$log.debug("---callCategorias ---");
 

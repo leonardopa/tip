@@ -1,19 +1,16 @@
-
 (function() {
-  'use strict';
-  
-  angular.module('chasqui').service('StateCommons', StateCommons);
-  function StateCommons($localStorage) {
-    var vm = this;
-    vm.ls = $localStorage;
+	'use strict';
 
-    vm.ls.token;
-    
-    vm.ls.usuario = {};
-    
-    vm.ls.pedidoSeleccionado = null;
-    
-    
+	angular.module('chasqui').service('ToastCommons', ToastCommons);
+	function ToastCommons($mdToast) {
+		var vm = this;
 
-  }// function
+		
+		vm.mensaje = function(mensaje) {
+			
+			$mdToast.show($mdToast.simple().textContent(mensaje)
+					.hideDelay(3000));
+		}
+
+	}// function
 })();// anonimo
