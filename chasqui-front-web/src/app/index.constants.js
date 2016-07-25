@@ -49,6 +49,16 @@
         		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 
         	},
         	
+        	verUsuario : URL_REST_BASE + "user/adm/read",
+        	
+        	editUsuario : URL_REST_BASE + "user/adm/edit",
+        	
+        	verDirecciones: URL_REST_BASE + "user/adm/dir",
+        	
+        	nuevaDireccion : URL_REST_BASE + "user/adm/dir",
+        	
+        	////////////////////////////////////////////////////////
+        	
         	productosDestacados : URL_REST_BASE +"productos/destacados",
         	
         	productosPedidoByUser : function(idUser){

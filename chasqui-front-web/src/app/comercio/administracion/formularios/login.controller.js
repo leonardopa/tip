@@ -14,8 +14,7 @@
 		vm.nuevo = function() {
 			$log.debug('Log In nuevo user');
 	
-				
-			$state.go("form-domicilio");
+			$state.go("registro");
 		
 		}
 		

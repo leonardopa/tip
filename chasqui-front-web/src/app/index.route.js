@@ -8,8 +8,8 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
-        url: '/home',
+      .state('main', {
+        url: '/main',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
@@ -21,7 +21,7 @@
         controllerAs: 'principalCtrl'
       })
       .state('menu', {
-          url: '/',
+          url: '/menu',
           templateUrl: 'app/comercio/principal/menu.html',
           controller: 'MenuController',
           controllerAs: 'menu'
@@ -64,7 +64,7 @@
           controller: 'FormGrupoController'        
         })
          .state('login', {
-          url: '/',
+          url: '/login',
           templateUrl: 'app/comercio/administracion/formularios/login.html',
           controller: 'LogInController',
           controllerAs: 'loginCtrl'
@@ -100,7 +100,13 @@
           controller: 'PerfilController',        
           controllerAs: 'perfilCtrl'
         })
-        .state('app.error', {
+        .state('registro', {
+            url: '/registro',
+            templateUrl: 'app/comercio/administracion/registro.html',
+            controller: 'RegistroController',        
+            controllerAs: 'registroCtrl'
+          })
+        .state('error', {
         url: '/error/:key',
         controller: 'ErrorController as error',
         templateUrl: 'app/error/error.html'

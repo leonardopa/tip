@@ -18,7 +18,7 @@
     var doNoOkDefault = function(response) {
       $log.error("error al llamar a un servicio", response);
  
-      $state.go('app.error', {
+      $state.go('error', {
         key: 'GENERIC_ERROR'
       });
     }
@@ -53,7 +53,8 @@
             url: url,
             data: params,
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization' :StateCommons.ls.token 
             }
           }).then(doOk, noOk);
         };
@@ -73,7 +74,8 @@
             method: 'DELETE',
             url: url,
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization' :StateCommons.ls.token
             }
           }).then(doOk, noOk);
         };
@@ -95,7 +97,8 @@
             url: url,
             data: params,
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization' :StateCommons.ls.token
             }
           }).then(doOk, noOk);
         };
@@ -116,7 +119,8 @@
             url: url,
             data: params,
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization' :StateCommons.ls.token
             }
           }).then(doOk, noOk);
         };

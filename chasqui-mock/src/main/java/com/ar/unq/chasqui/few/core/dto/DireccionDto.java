@@ -30,6 +30,7 @@ public class DireccionDto implements Serializable {
 
 	private Double longitud;
 
+	private Boolean predeterminada=false;
 
 	public DireccionDto() {
 		// TODO Auto-generated constructor stub
@@ -50,10 +51,12 @@ public class DireccionDto implements Serializable {
 
 
 
+
 	@Override
 	public String toString() {
-		return "DireccionDto [id=" + id + ", alias=" + alias + ", calle=" + calle + ", altura=" + altura + ", pisoDpto=" + departamento
-		        + ", localidad=" + localidad + ", cp=" + cp + ", cpa=" + cpa + ", latitud=" + latitud + ", longitud=" + longitud + "]";
+		return "DireccionDto [id=" + id + ", alias=" + alias + ", calle=" + calle + ", altura=" + altura + ", departamento=" + departamento
+		        + ", localidad=" + localidad + ", cp=" + cp + ", cpa=" + cpa + ", latitud=" + latitud + ", longitud=" + longitud
+		        + ", predeterminada=" + predeterminada + "]";
 	}
 	public Integer getId() {
 		return id;
@@ -133,6 +136,12 @@ public class DireccionDto implements Serializable {
 
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
+	}
+	public Boolean getPredeterminada() {
+		return predeterminada;
+	}
+	public void setPredeterminada(Boolean predeterminada) {
+		this.predeterminada = predeterminada;
 	}
 
 

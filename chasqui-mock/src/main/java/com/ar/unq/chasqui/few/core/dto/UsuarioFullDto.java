@@ -28,11 +28,14 @@ public class UsuarioFullDto implements Serializable{
 	}
 
 
+
+
 	@Override
 	public String toString() {
-		return "UserDto [email=" + email + ", password=" + password + ", nickName=" + nickName + ", nombre=" + nombre + ", apellido="
+		return "UsuarioFullDto [email=" + email + ", password=" + password + ", nickName=" + nickName + ", nombre=" + nombre + ", apellido="
 		        + apellido + ", telefonoFijo=" + telefonoFijo + ", telefonoMovil=" + telefonoMovil + ", direccion=" + direccion + "]";
 	}
+
 
 
 
@@ -117,8 +120,6 @@ public class UsuarioFullDto implements Serializable{
 	public void setTelefonoMovil(String telefonoMovil) {
 		this.telefonoMovil = telefonoMovil;
 	}
-
-
 
 	public DireccionDto getDireccion() {
 		return direccion;
