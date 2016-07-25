@@ -1,6 +1,10 @@
 package com.ar.unq.chasqui.few.restcalled.impl;
 
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,11 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ar.unq.chasqui.few.core.dto.CategoriaDto;
+import com.ar.unq.chasqui.few.core.dto.DireccionDto;
 import com.ar.unq.chasqui.few.core.dto.MedallasDto;
 import com.ar.unq.chasqui.few.core.dto.ProductorDto;
-import com.ar.unq.chasqui.few.core.dto.UsuarioDto;
 import com.ar.unq.chasqui.few.core.dto.UsuarioFullDto;
 import com.ar.unq.chasqui.few.core.dto.apiary.FiltoProductoDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.NuevoUsuarioDto;
 import com.ar.unq.chasqui.few.core.dto.apiary.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
 import com.ar.unq.chasqui.few.core.service.example.VariosServiceMock;
@@ -32,11 +37,12 @@ public class ApiaryRestController {
 
 	/** Log In - http://docs.chasqui.apiary.io/#reference/0/servicios-publicos/log-in?console=1 */
 	@RequestMapping(value = "/client/sso/singIn", method = RequestMethod.POST)
-	public @ResponseBody void login(@RequestBody UsuarioFullDto user) {
+	public @ResponseBody void login(@RequestBody UsuarioFullDto user,HttpServletRequest request,HttpServletResponse response) {
 		System.out.println("Log In " + user);
-
+		printHeader(request);
+		response.setHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==");
 		// TODO MANEJAR ERRORs
-
+	//	return new NuevoUsuarioDto(user.getEmail(),"123456Token");
 	}
 
 	@RequestMapping(value = "/client/resetPass/{email}", method = RequestMethod.POST)
@@ -44,7 +50,7 @@ public class ApiaryRestController {
 		System.out.println("Reset PASS " + email);
 
 		// TODO MANEJAR ERRORs
-
+		//new ResponseEntity<>(headers, statusCode)
 	}
 
 	/**
@@ -53,19 +59,19 @@ public class ApiaryRestController {
 	 * @return
 	 */
 	@RequestMapping(value = "/client/sso/singUp", method = RequestMethod.POST)
-	public @ResponseBody UsuarioDto singUp(@RequestBody UsuarioFullDto user) {
+	public @ResponseBody NuevoUsuarioDto singUp(@RequestBody UsuarioFullDto user) {
 		System.out.println("singUp " + user);
 
-		return new UsuarioDto(user.getEmail(), user.getPassword());
+		return new NuevoUsuarioDto(user.getEmail(), "token123456");
 	}
 
 	/**
 	 * /chasqui/rest/client/categoria/all/idVendedor
 	 */
 	@RequestMapping(value = "/client/categoria/all/{idVendedor}", method = RequestMethod.GET)
-	public @ResponseBody List<CategoriaDto> findCategorias(@PathVariable("idVendedor") String idVendedor) {
+	public @ResponseBody List<CategoriaDto> findCategorias(@PathVariable("idVendedor") String idVendedor,HttpServletRequest request) {
 		System.out.println("categoria " + idVendedor);
-
+		printHeader(request);
 		return serv.findCategorias();
 	}
 
@@ -73,9 +79,9 @@ public class ApiaryRestController {
 	 * /chasqui/rest/client/productor/all/idVendedor
 	 */
 	@RequestMapping(value = "/client/productor/all/{idVendedor}", method = RequestMethod.GET)
-	public @ResponseBody List<ProductorDto> findProductores(@PathVariable("idVendedor") String idVendedor) {
+	public @ResponseBody List<ProductorDto> findProductores(@PathVariable("idVendedor") String idVendedor,HttpServletRequest request) {
 		System.out.println("findProductores " + idVendedor);
-
+		printHeader(request);
 		return serv.findProductores();
 	}
 
@@ -122,4 +128,77 @@ public class ApiaryRestController {
 		return servProd.findProductos(filter.getPagina(), filter.getCantItems());
 	}
 
+	//////////////////////// USUARIO
+
+	/**
+	http://168.181.184.203:8080/chasqui/rest/user/adm/read
+	Ver perfil de usuario
+	*/
+	@RequestMapping(value = "/user/adm/read", method = RequestMethod.GET)
+	public @ResponseBody UsuarioFullDto readUser(HttpServletRequest request) {
+		System.out.println("readUser " + tieneToken(request));
+
+		return serv.findUser();
+	}
+
+	/*** /user/adm/edit
+	 *  Modificar usuario */
+	@RequestMapping(value = "/user/adm/edit", method = RequestMethod.PUT)
+	public @ResponseBody void editUser(@RequestBody UsuarioFullDto user,HttpServletRequest request) {
+		printHeader(request);
+		System.out.println("editUser " + user);
+
+	}
+
+	/*** user/adm/dir
+	 * Ver direcciones*/
+	@RequestMapping(value = "/user/adm/dir", method = RequestMethod.GET)
+	public @ResponseBody List<DireccionDto> verDirecciones(HttpServletRequest request) {
+		System.out.println("verDirecciones " + tieneToken(request));
+
+		List<DireccionDto> findDomicilios = serv.findDomicilios(1);
+		findDomicilios.get(0).setPredeterminada(true);
+
+		return findDomicilios;
+	}
+
+	/*** user/adm/dir
+	 * NUEVA DIRECCION*/
+	@RequestMapping(value = "/user/adm/dir", method = RequestMethod.POST)
+	public @ResponseBody void nuevaDireccion(@RequestBody DireccionDto direccion,HttpServletRequest request) {
+		printHeader(request);
+		System.out.println("nuevaDireccion " + direccion);
+
+	}
+
+
+
+	/////////////////// privados
+
+	private Boolean tieneToken(HttpServletRequest request){
+		Enumeration<String> headerNames = request.getHeaderNames();
+		Boolean tiene= false;
+		System.out.println("***** HEADERS");
+		while(headerNames.hasMoreElements()){
+			String nextElement = headerNames.nextElement();
+			//System.out.println(nextElement +" : " +request.getHeader(nextElement) );
+			tiene = tiene  ||  nextElement.equals("Authorization");
+		}
+		//Authorization:Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+		return tiene;
+	}
+
+	private void printHeader(HttpServletRequest request){
+		Enumeration<String> headerNames = request.getHeaderNames();
+
+		System.out.println("***** HEADERS");
+		while(headerNames.hasMoreElements()){
+			String nextElement = headerNames.nextElement();
+			if (nextElement.equals("Authorization")){
+				System.out.println("El token es " + request.getHeader(nextElement));
+			}
+		}
+
+	}
 }
