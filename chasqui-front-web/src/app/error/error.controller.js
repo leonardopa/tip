@@ -5,7 +5,7 @@
 
   /** @ngInject */
   function ErrorController($log, $filter, $stateParams) {
-    $log.debug('Error controller starting...');
+    $log.debug('Error controller starting...' , $stateParams.key);
     var vm = this;
     vm.errorMessage = $filter('translate')($stateParams.key);
   }

@@ -4,7 +4,8 @@
 	angular.module('chasqui').controller('LogInController', LogInController);
 
 	/** @ngInject */
-	function LogInController($scope, $http, $log, CTE_REST, restProxy,$mdDialog,$state) {
+	function LogInController($scope, $http, $log, CTE_REST, restProxy,$mdDialog,$state
+			,StateCommons,ToastCommons) {
 		$log.debug('controler log in ..... ');
 
 		var vm = this
@@ -45,8 +46,26 @@
 		  vm.login = function() {
 				$log.debug('Log In ', vm.user);
 				// TODO NO OK , que vuelva a donde vino
-				function doOk(response) {
-					$state.go("principal");
+				function doOk(response,headers) {
+					$log.debug('response login ', response);
+					
+					var token = response.headers('authorization');
+					
+					if(token){
+						StateCommons.ls.token = token;
+						
+						ToastCommons.mensaje("Bienvenido !");
+						
+						$state.go("principal");
+						
+					}else{
+						$log.error('No se recibe token de autorizacion , se habilito desde el Back End? VER: http://stackoverflow.com/questions/23000273/how-to-read-response-headers-with-resource/23726352#23726352 ');
+						$log.error('Log In ', response);
+						 $state.go('error', {
+						        key: 'GENERIC_ERROR'
+						      });
+					}
+					
 				}
 
 				restProxy.post(CTE_REST.login, vm.user, doOk);
