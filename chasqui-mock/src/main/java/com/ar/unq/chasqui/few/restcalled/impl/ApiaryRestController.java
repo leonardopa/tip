@@ -40,6 +40,8 @@ public class ApiaryRestController {
 	public @ResponseBody void login(@RequestBody UsuarioFullDto user,HttpServletRequest request,HttpServletResponse response) {
 		System.out.println("Log In " + user);
 		printHeader(request);
+		//Access-Control-Expose-Headers: X-Total-Pages, X-Page
+		response.setHeader("Access-Control-Expose-Headers", "Authorization");
 		response.setHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==");
 		// TODO MANEJAR ERRORs
 	//	return new NuevoUsuarioDto(user.getEmail(),"123456Token");
