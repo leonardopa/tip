@@ -11,26 +11,27 @@ import com.ar.unq.chasqui.few.core.dto.UsuarioFullDto;
 
 public class VariosServiceMock {
 
-	public List<DireccionDto> findDomicilios(Integer idUser){
+	String lorem = "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue ....";
+
+	public List<DireccionDto> findDomicilios(Integer idUser) {
 
 		List<DireccionDto> domicilios = new ArrayList<DireccionDto>();
 
 		for (int i = 0; i < 4; i++) {
-			domicilios.add(new DireccionDto(i, "alias"+i, "calle"+i, 1, "localidad"+i, "cp"+i, "cpa"+i,-25.123456+i, 30.123456+i));
+			domicilios.add(
+			        new DireccionDto(i, "alias" + i, "calle" + i, 1, "localidad" + i, "cp" + i, "cpa" + i, -25.123456 + i, 30.123456 + i));
 		}
 
 		return domicilios;
 	}
 
-
 	public List<CategoriaDto> findCategorias() {
-		List<CategoriaDto> cat=new ArrayList<CategoriaDto>();
-		cat.add(new CategoriaDto("1","aceites"));
-		cat.add(new CategoriaDto("2","bebidas"));
-		cat.add(new CategoriaDto("3","mermeladas"));
+		List<CategoriaDto> cat = new ArrayList<CategoriaDto>();
+		cat.add(new CategoriaDto("1", "aceites"));
+		cat.add(new CategoriaDto("2", "bebidas"));
+		cat.add(new CategoriaDto("3", "mermeladas"));
 		return cat;
 	}
-
 
 	public List<ProductorDto> findProductores() {
 		List<ProductorDto> list = new ArrayList<ProductorDto>();
@@ -41,22 +42,22 @@ public class VariosServiceMock {
 		list.add(new ProductorDto("5", "Cooperativa Río Paraná", "http://lorempixel.com/50/50/business/"));
 		list.add(new ProductorDto("6", "Grisinópoli", "http://lorempixel.com/50/50/business/"));
 
-
 		return list;
 	}
-
 
 	public List<MedallasDto> findMedallas() {
 		List<MedallasDto> list = new ArrayList<MedallasDto>();
 
-		list.add(new MedallasDto("1", "medalla1", "descripcion de la medalla 1", "http://lorempixel.com/50/50/abstract/"));
-		list.add(new MedallasDto("2", "medalla2", "descripcion de la medalla 2", "http://lorempixel.com/50/50/abstract/"));
-		list.add(new MedallasDto("3", "medalla3", "descripcion de la medalla 3", "http://lorempixel.com/50/50/abstract/"));
-		list.add(new MedallasDto("4", "medalla4", "descripcion de la medalla 4", "http://lorempixel.com/50/50/abstract/"));
+		list.add(new MedallasDto("1", "medalla1", "descripcion de la medalla 1 " + lorem, "http://lorempixel.com/50/50/abstract/"));
+		list.add(new MedallasDto("2", "medalla2", "descripcion de la medalla 2 " + lorem, "http://lorempixel.com/50/50/abstract/"));
+		list.add(new MedallasDto("3", "medalla3", "descripcion de la medalla 3 " + lorem, "http://lorempixel.com/50/50/abstract/"));
+		list.add(new MedallasDto("4", "medalla4", "descripcion de la medalla 4 "  + lorem, "http://lorempixel.com/50/50/abstract/"));
+		list.add(new MedallasDto("5", "medalla5", "descripcion de la medalla 5 "  + lorem, "http://lorempixel.com/50/50/abstract/"));
+		list.add(new MedallasDto("6", "medalla6", "descripcion de la medalla 6 "  + lorem, "http://lorempixel.com/50/50/abstract/"));
+		list.add(new MedallasDto("7", "medalla7", "descripcion de la medalla 7 "  + lorem, "http://lorempixel.com/50/50/abstract/"));
 
 		return list;
 	}
-
 
 	public UsuarioFullDto findUser() {
 		UsuarioFullDto usuario = new UsuarioFullDto();
@@ -68,7 +69,7 @@ public class VariosServiceMock {
 		usuario.setTelefonoMovil("789101112");
 
 		DireccionDto direccion = findDomicilios(1).get(0);
-		usuario.setDireccion(direccion );
+		usuario.setDireccion(direccion);
 		return usuario;
 	}
 

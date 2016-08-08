@@ -51,6 +51,12 @@
 			});
 		}
 
+		
+		vm.verMedalla=function (medalla){
+			$log.debug("ver medalla",medalla);
+			
+			$state.go('medalla',{'idMedalla':medalla});
+		}
 		// /////////// REST
 
 		var callAgregarAlCarro = function(variante, cantidad) {

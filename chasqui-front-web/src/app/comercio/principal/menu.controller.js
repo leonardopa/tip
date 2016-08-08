@@ -28,6 +28,9 @@
           case 'emprendedores':
               $state.go('emprendedores')
               break;
+          case 'medalla':
+              $state.go('medalla')
+              break;
           case 'lista-pedidos':
               $state.go('lista-pedidos')
               break;

@@ -38,7 +38,13 @@
           templateUrl: 'app/comercio/varios/como_comprar.html',
           controller: 'ComoComprarController',
           controllerAs: 'comoComprarCtrl'
-        })     
+        })
+        .state('medalla', {
+          url: '/medalla/:idMedalla',
+          templateUrl: 'app/comercio/varios/medalla.html',
+          controller: 'MedallaController',
+          controllerAs: 'medallaCtrl'         
+        })
          .state('lista-grupos', {
           url: '/lista-grupos',
           templateUrl: 'app/comercio/administracion/lista-grupos.html',
