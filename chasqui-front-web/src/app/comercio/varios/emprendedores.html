@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
 	
-	<div layout="row">
+	<div layout="row" ng-show="emprendedorCtrl.isVistaUnica">
 		  <div flex="30">
 		   
 		  </div>
@@ -33,7 +33,7 @@
 		  <div flex hide-sm hide-xs>
 		     
 		     <md-list flex>
-		        <md-subheader class="md-no-sticky">Medallas recibidas</md-subheader>
+		        <md-subheader class="md-no-sticky">Medallas del productor</md-subheader>
 		        <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.medallas" ng-click="null">
 		          <md-icon  class="md-avatar"> info_outline </md-icon> 	           
 		          <div class="md-list-item-text" layout="column">
@@ -45,6 +45,17 @@
 		  </div>
 	</div>
 
-	
+	<div layout="row" ng-show="! emprendedorCtrl.isVistaUnica">
+		<md-list flex>
+		        <md-subheader class="md-no-sticky">Productores</md-subheader>
+		        <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.emprendedores" 
+		        ng-click="emprendedorCtrl.verMas(item)">
+		                  
+		          <div class="md-list-item-text" layout="column">
+		            <h3>{{ item.nombreProductor }}</h3>
+		            <h4>TODO: falta descripcion corta en el serivicio</h4>		           
+		          </div>
+		</md-list-item>
+	</div>
 	
 </div>
