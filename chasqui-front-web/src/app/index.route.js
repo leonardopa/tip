@@ -28,10 +28,10 @@
         })
      
       .state('emprendedores', {
-          url: '/emprendedores',
+          url: '/emprendedores/:id',
           templateUrl: 'app/comercio/varios/emprendedores.html',
           controller: 'EmprenController',
-          controllerAs: 'enpren'
+          controllerAs: 'emprendedorCtrl'
         })
         .state('como-comprar', {
           url: '/comoComprar',

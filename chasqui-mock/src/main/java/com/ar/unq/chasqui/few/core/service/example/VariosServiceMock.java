@@ -34,7 +34,7 @@ public class VariosServiceMock {
 
 	public List<ProductorDto> findProductores() {
 		List<ProductorDto> list = new ArrayList<ProductorDto>();
-		list.add(new ProductorDto("1", "Mocase-Vía Campesina", "http://lorempixel.com/50/50/business/"));
+		list.add(new ProductorDto("1", "Mocase-Vía Campesina", "http://lorempixel.com/150/150/business/"));
 		list.add(new ProductorDto("2", "Unión de Trabajadores Rurales sin Tierra de Cuyo", "http://lorempixel.com/50/50/business/"));
 		list.add(new ProductorDto("3", "Burbuja Latina", "http://lorempixel.com/50/50/business/"));
 		list.add(new ProductorDto("4", "Pasta Sur cooperativa EFA Quilmes", "http://lorempixel.com/50/50/business/"));

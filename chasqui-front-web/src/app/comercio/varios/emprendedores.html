@@ -1,6 +1,50 @@
 <section ng-include="'app/comercio/principal/menu.html'"></section>  
 
 <div class="container-fluid">
-	<p>emprendedores</p>
+	
+	<div layout="row">
+		  <div flex="30">
+		   
+		  </div>
+		  <div flex="30">
+		     <md-card>
+		        <img ng-src="{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image" alt="Washed Out">
+		        <md-card-title>
+		          <md-card-title-text>
+		            <span class="md-headline">{{emprendedorCtrl.emprendedor.nombreProductor}}</span>
+		          </md-card-title-text>
+		        </md-card-title>
+		        <md-card-content>
+		          <p>TODO : falta la descripcion y medallas en el servicio</p>
+		          <p>
+		            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+		            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+		          </p>
+		          <p>
+		            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+		            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+		          </p>
+		          <p>
+		            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+		            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+		          </p>
+		      </md-card-content>
+		  </div>
+		  <div flex hide-sm hide-xs>
+		     
+		     <md-list flex>
+		        <md-subheader class="md-no-sticky">Medallas recibidas</md-subheader>
+		        <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.medallas" ng-click="null">
+		          <md-icon  class="md-avatar"> info_outline </md-icon> 	           
+		          <div class="md-list-item-text" layout="column">
+		            <h3>{{ item.nombre }}</h3>
+		            <h4>{{ item.descripcion }}</h4>		           
+		          </div>
+		        </md-list-item>
+        
+		  </div>
+	</div>
+
+	
 	
 </div>
