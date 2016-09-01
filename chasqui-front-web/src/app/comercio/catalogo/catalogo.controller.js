@@ -27,7 +27,7 @@
 	  vm.productores = [];
 	  vm.productorSelect = ''; 
 	  vm.medallas = [];
-	  vm.medallasSelect = '';
+	  vm.medallaSelect = '';
 	  vm.query='';
 	  
 	  vm.pedidos={};
@@ -46,24 +46,41 @@
 		  $log.debug("filtro por ",filtroPor);
 		  
 		  if (filtroPor == 1 ){
-			  $log.debug("filtro por categoria");			 
+			//  $log.debug("filtro por categoria");			 
 			  vm.isFiltro2=false;
 			  vm.isFiltro3=false;  
 		  }
 		  if (filtroPor == 2 ){
-			  $log.debug("filtro por productor");
+			 // $log.debug("filtro por productor");
 			  vm.isFiltro1=false;			  
 			  vm.isFiltro3=false;  
 		  }
 		  if (filtroPor == 3 ){
-			  $log.debug("filtro por medalla");
+			  //$log.debug("filtro por medalla");
 			  vm.isFiltro1=false;
 			  vm.isFiltro2=false;			    
 		  }
+		  if (filtroPor == 4 ){
+			  $log.debug("filtro por QUERY");
+		  }
+		  
 		  $log.debug("filtro por ",vm.isFiltro1);
 		  $log.debug("filtro por ",vm.isFiltro2);
 		  $log.debug("filtro por ",vm.isFiltro3);
 		  
+	  }
+	  
+	  vm.filtrar = function (){
+		  $log.debug("click filtrar");
+		  $log.debug(vm.isFiltro1);
+		  $log.debug(vm.categoriaSelect);
+		  $log.debug(vm.isFiltro2);
+		  $log.debug(vm.productorSelect);
+		  $log.debug(vm.isFiltro3);
+		  $log.debug(vm.medallaSelect);
+		  
+		  $log.debug(vm.query);
+		    
 	  }
 	  
 	  vm.cambiarContexto = function (pedido){

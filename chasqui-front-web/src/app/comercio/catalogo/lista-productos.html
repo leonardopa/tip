@@ -1,8 +1,17 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
  
-  {{listaProductoCtr.contador}}
+  {{listaProductoCtr.otherCtrl}}
+  
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
 		productos.</span>
+	{{listaProductoCtr.isPaginaPrincipal}}	
+	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
+		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
+			ng-model="listaProductoCtr.bigCurrentPage"
+			max-size="listaProductoCtr.maxSize" class="pagination-sm"
+			boundary-link-numbers="true" rotate="false"
+			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
+	</div>	
 
 	<div ng-repeat="variante in listaProductoCtr.variantes">
 		<div flex-xs flex-gt-xs="120" layout="column">
@@ -77,11 +86,5 @@
 	</div>
 
 
-	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
-		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
-			ng-model="listaProductoCtr.bigCurrentPage"
-			max-size="listaProductoCtr.maxSize" class="pagination-sm"
-			boundary-link-numbers="true" rotate="false"
-			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
-	</div>
+	
 </div>

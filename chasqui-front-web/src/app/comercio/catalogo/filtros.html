@@ -5,12 +5,22 @@
 	<md-checkbox ng-model="catalogoCtrl.isFiltro1" ng-click="catalogoCtrl.filtroPor(1)">
             Filtrar por catalogo
     </md-checkbox>
-    
+    <!-- 
 	<div flex ng-show="catalogoCtrl.isFiltro1">
 		<md-radio-group ng-model="catalogoCtrl.categoriaSelect">
 		<md-radio-button ng-repeat="categoria in catalogoCtrl.categorias"
 			ng-value="categoria" class="text-capitalize">
 		{{categoria.nombre}} </md-radio-button> </md-radio-group>
+	</div>
+	 -->
+	<div flex ng-show="catalogoCtrl.isFiltro1">
+		<md-input-container class="md-block" flex-gt-sm>
+		<label>Categoria</label> 
+		<md-select
+			ng-model="catalogoCtrl.categoriaSelect"> <md-option
+			ng-repeat="categoria in catalogoCtrl.categorias"
+			value="{{categoria.idCategoria}}">
+		{{categoria.nombre}}  </md-option> </md-select> </md-input-container>
 	</div>
 	
 	<md-checkbox ng-model="catalogoCtrl.isFiltro2" ng-click="catalogoCtrl.filtroPor(2)">
@@ -42,7 +52,7 @@
 		</md-input-container>
 	</div>
 
-	<md-button class="md-raised">Filtrar</md-button>
+	<md-button class="md-raised" ng-click="catalogoCtrl.filtrar()">Filtrar</md-button>
 </div>
 
 

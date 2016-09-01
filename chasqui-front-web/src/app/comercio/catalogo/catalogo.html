@@ -21,11 +21,15 @@
 						    	  <md-input-container md-no-float class="md-block"> 
 							      <input ng-model="catalogoCtrl.query" type="text" placeholder="Buscar" >
 							      
-							       <md-icon md-svg-src="app/components/image/ic_search_black_24px.svg" style="display:inline-block;"></md-icon>
 							    </md-input-container>
 						
 						  </div>
-						  <div flex="25"></div>
+						  <div flex="25">
+								  <md-button ng-click="catalogoCtrl.filtroPor(4)">
+							       <md-icon md-svg-src="app/components/image/ic_search_black_24px.svg" 
+							       style="display:inline-block;"></md-icon>
+							       </md-button>
+						  </div>
 					  </div>
 	
 					<h1>Catalogo</h1>			

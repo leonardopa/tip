@@ -10,11 +10,13 @@
 	function ListaProductosController($scope, $http, $log, restProxy, CTE_REST,
 			$mdDialog,$state) {
 	
-		$log.debug('ListaProductosController');
+		$log.debug('ListaProductosController',$scope.$parent.$parent.catalogoCtrl.isFiltro1);
 		
 		var CANT_ITEMS = 10; // TODO : pasar a constante
 		
 		var vm = this;
+		
+		vm.otherCtrl=$scope.$parent.$parent.catalogoCtrl.isFiltro1;
 		
 		vm.variantes = [];
 	
