@@ -1,10 +1,10 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
  
-  {{listaProductoCtr.otherCtrl}}
+  
   
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
 		productos.</span>
-	{{listaProductoCtr.isPaginaPrincipal}}	
+	es pagina principar {{listaProductoCtr.isPaginaPrincipal}}	
 	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
 		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
 			ng-model="listaProductoCtr.bigCurrentPage"
@@ -33,9 +33,9 @@
 					</div>
 					<div class="col-md-2">
 						<h4>
-							<strong>{{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
+							<strong>$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
 						</h4>
-						5 X $ 20<sup>50</sup>
+						 
 					</div>
 					<div class="col-md-3">
 						<section layout="row" layout-sm="column"

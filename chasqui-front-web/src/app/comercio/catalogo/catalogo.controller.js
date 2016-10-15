@@ -72,15 +72,17 @@
 	  
 	  vm.filtrar = function (){
 		  $log.debug("click filtrar");
-		  $log.debug(vm.isFiltro1);
+	/*	  $log.debug(vm.isFiltro1);
 		  $log.debug(vm.categoriaSelect);
 		  $log.debug(vm.isFiltro2);
 		  $log.debug(vm.productorSelect);
 		  $log.debug(vm.isFiltro3);
 		  $log.debug(vm.medallaSelect);
 		  
-		  $log.debug(vm.query);
-		    
+		  $log.debug(vm.query);*/
+		  
+		  $scope.$broadcast('filterEvent', vm.categoriaSelect);
+		 
 	  }
 	  
 	  vm.cambiarContexto = function (pedido){

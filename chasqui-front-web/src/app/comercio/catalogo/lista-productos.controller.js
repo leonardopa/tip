@@ -11,7 +11,7 @@
 			$mdDialog,$state) {
 	
 		$log.debug('ListaProductosController',$scope.$parent.$parent.catalogoCtrl.isFiltro1);
-		
+			
 		var CANT_ITEMS = 10; // TODO : pasar a constante
 		
 		var vm = this;
@@ -59,6 +59,13 @@
 			
 			$state.go('medalla',{'idMedalla':medalla});
 		}
+		
+		
+		/////////////////////////
+		/// Recive el evento de filtrado 
+		
+		$scope.$on('filterEvent', function(arg) {findProductos()});
+		
 		// /////////// REST
 
 		var callAgregarAlCarro = function(variante, cantidad) {
