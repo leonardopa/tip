@@ -48,6 +48,26 @@
         doGet();
       
     }
+    
+    var post = function(url,header, params, doOk, noOk) {
+        $log.debug('posting ' + url + ' url.');
+        $log.debug('data: ' + JSON.stringify(params));
+ 
+        if (noOk == undefined) {
+          noOk = doNoOkDefault;
+        }
+
+        var doPost = function() {
+          $http({
+            method: 'POST',
+            url: url,
+            data: params,
+            headers: header
+          }).then(doOk, noOk);
+        };
+
+        doPost();
+      }
     // todo como conservo el token aqui, para ponerlo en el header
     /**
      * REST (post, put, get , delete) . Parametros: url , params (json) , doOk
@@ -122,27 +142,18 @@
       },
       
       post: function(url, params, doOk, noOk) {
-        $log.debug('posting ' + url + ' url.');
-        $log.debug('data: ' + JSON.stringify(params));
- 
-        if (noOk == undefined) {
-          noOk = doNoOkDefault;
-        }
-
-        var doPost = function() {
-          $http({
-            method: 'POST',
-            url: url,
-            data: params,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': createHeader()
-              }
-          }).then(doOk, noOk);
-        };
-
-        doPost();
+    	 var header = {} ;
+ 	     header = { 'Content-Type': 'application/json',
+	                 'Authorization': createHeader()
+	              };
+ 	     
+        post(url, {} , params, doOk, noOk);
+      },
+      
+      postPublic: function(url, params, doOk, noOk) {
+          post(url, {} , params, doOk, noOk)
       }
+      
     };// return
 
   }// factory

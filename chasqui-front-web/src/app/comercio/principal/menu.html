@@ -53,6 +53,11 @@
          
      <md-button class="md-raised" ng-click="menuCtrl.ir('login')"
  	ng-show="! menuCtrl.isLogued" > Ingresa </md-button>   
+ 	
+ 	 <md-button class="md-secondary" ng-click="menuCtrl.logOut()"
+ 	 ng-show="menuCtrl.isLogued">
+	 	<md-icon> exit_to_app </md-icon>
+	</md-button>
     
 </div>
 </md-toolbar>
