@@ -8,37 +8,35 @@
 		  </div>
 		  <div flex="30">
 		     <md-card>
-		        <img ng-src="{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image" alt="Washed Out">
+		        <img ng-src="http://168.181.184.203:8080/chasqui/{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image" alt="Washed Out">
 		        <md-card-title>
 		          <md-card-title-text>
 		            <span class="md-headline">{{emprendedorCtrl.emprendedor.nombreProductor}}</span>
 		          </md-card-title-text>
 		        </md-card-title>
 		        <md-card-content>
-		          <p>TODO : falta la descripcion y medallas en el servicio</p>
-		          <p>
-		            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-		            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-		          </p>
-		          <p>
-		            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-		            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-		          </p>
-		          <p>
-		            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-		            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-		          </p>
-		      </md-card-content>
+		          {{emprendedorCtrl.emprendedor.descripcionCorta}}
+		          {{emprendedorCtrl.emprendedor.descripcionLarga}}
+		          {{emprendedorCtrl.emprendedor.direccion.pais}}
+		          {{emprendedorCtrl.emprendedor.direccion.provincia}}
+		          {{emprendedorCtrl.emprendedor.direccion.localidad}}
+		          {{emprendedorCtrl.emprendedor.direccion.calle}}
+		          {{emprendedorCtrl.emprendedor.direccion.altura}}
+		     	</md-card-content>
 		  </div>
 		  <div flex hide-sm hide-xs>
 		     
 		     <md-list flex>
 		        <md-subheader class="md-no-sticky">Medallas del productor</md-subheader>
 		        <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.medallas" ng-click="null">
-		          <md-icon  class="md-avatar"> info_outline </md-icon> 	           
+		         <!--  
+		          <md-icon  class="md-avatar"> info_outline </md-icon>
+		          -->
+		           <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" 
+		           class="md-card-image" alt="Washed Out"> 	           
 		          <div class="md-list-item-text" layout="column">
 		            <h3>{{ item.nombre }}</h3>
-		            <h4>{{ item.descripcion }}</h4>		           
+		            <div ng-bind-html="item.descripcion"></div>		            	           
 		          </div>
 		        </md-list-item>
         
@@ -55,7 +53,7 @@
 					<md-card-content>
 					 	<div class="md-list-item-text" layout="column">
 						            <h3>{{ item.nombreProductor }}</h3>
-						            <h4>TODO: falta descripcion corta en el serivicio</h4>		           
+						            <h3>{{ item.descripcionCorta }}</h3>						             	           
 						          </div>
 					</md-card-content>
 				 </md-card>

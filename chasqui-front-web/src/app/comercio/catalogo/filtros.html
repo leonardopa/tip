@@ -2,48 +2,43 @@
 
 <div layout="column">
 	</br>
-	<md-checkbox ng-model="catalogoCtrl.isFiltro1" ng-click="catalogoCtrl.filtroPor(1)">
-            Filtrar por catalogo
-    </md-checkbox>
-    <!-- 
-	<div flex ng-show="catalogoCtrl.isFiltro1">
-		<md-radio-group ng-model="catalogoCtrl.categoriaSelect">
-		<md-radio-button ng-repeat="categoria in catalogoCtrl.categorias"
-			ng-value="categoria" class="text-capitalize">
-		{{categoria.nombre}} </md-radio-button> </md-radio-group>
-	</div>
-	 -->
-	<div flex ng-show="catalogoCtrl.isFiltro1">
+	Filtrar por 
+	</br>
+	<md-button  ng-click="catalogoCtrl.filtroPor('CATEGORIA')">
+            Categoria
+   </md-button>
+
+	<div flex ng-show="catalogoCtrl.tipoFiltro == 'CATEGORIA'">
 		<md-input-container class="md-block" flex-gt-sm>
 		<label>Categoria</label> 
 		<md-select
-			ng-model="catalogoCtrl.categoriaSelect"> <md-option
+			ng-model="catalogoCtrl.query"> <md-option
 			ng-repeat="categoria in catalogoCtrl.categorias"
 			value="{{categoria.idCategoria}}">
 		{{categoria.nombre}}  </md-option> </md-select> </md-input-container>
 	</div>
 	
-	<md-checkbox ng-model="catalogoCtrl.isFiltro2" ng-click="catalogoCtrl.filtroPor(2)">
-            Filtrar por Productor
-    </md-checkbox>
+	<md-button ng-click="catalogoCtrl.filtroPor('PRODUCTOR')">
+          Productor
+    </md-button>
     
-	<div flex ng-show="catalogoCtrl.isFiltro2">
+	<div flex ng-show="catalogoCtrl.tipoFiltro == 'PRODUCTOR'">
 		<md-input-container class="md-block" flex-gt-sm>
 		<label>Productor</label> <md-select
-			ng-model="catalogoCtrl.productorSelect"> <md-option
+			ng-model="catalogoCtrl.query"> <md-option
 			ng-repeat="productor in catalogoCtrl.productores"
-			value="{{productor.idVendedor}}">
+			value="{{productor.idProductor}}">
 		{{productor.nombreProductor}} </md-option> </md-select> </md-input-container>
 	</div>
 
-	<md-checkbox  ng-model="catalogoCtrl.isFiltro3" ng-click="catalogoCtrl.filtroPor(3)">
-            Filtrar por Medallas
-    </md-checkbox>
+	<md-button ng-click="catalogoCtrl.filtroPor('MEDALLA')">
+            Medalla
+    </md-button>
     
-	<div flex ng-show="catalogoCtrl.isFiltro3">
+	<div flex ng-show="catalogoCtrl.tipoFiltro == 'MEDALLA'">
 		<md-input-container class="md-block" flex-gt-sm>
 		<label>Medalla</label> <md-select
-			ng-model="catalogoCtrl.medallaSelect">
+			ng-model="catalogoCtrl.query">
 			<md-option ng-repeat="medalla in catalogoCtrl.medallas" value="{{medalla.idMedalla}}">
 						
 				<md-icon> info_outline </md-icon> {{medalla.nombre}}  

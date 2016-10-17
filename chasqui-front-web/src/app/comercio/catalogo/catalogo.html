@@ -19,13 +19,13 @@
 						  <div flex="25"></div>
 						  <div flex="50">
 						    	  <md-input-container md-no-float class="md-block"> 
-							      <input ng-model="catalogoCtrl.query" type="text" placeholder="Buscar" >
+							      <input ng-model="catalogoCtrl.queryText" type="text" placeholder="Buscar" >
 							      
 							    </md-input-container>
 						
 						  </div>
 						  <div flex="25">
-								  <md-button ng-click="catalogoCtrl.filtroPor(4)">
+								  <md-button ng-click="catalogoCtrl.filtroQuery()">
 							       <md-icon md-svg-src="app/components/image/ic_search_black_24px.svg" 
 							       style="display:inline-block;"></md-icon>
 							       </md-button>

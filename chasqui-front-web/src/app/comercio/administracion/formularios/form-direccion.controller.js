@@ -6,20 +6,38 @@
 
 	/** @ngInject 
 	 *  Formulario para direccion */
-	function FormDireccionController( $log,$state,restProxy, CTE_REST,ToastCommons) {
+	function FormDireccionController( $log,$state,$scope,restProxy, CTE_REST,ToastCommons) {
+		
+		$log.debug("FormDireccionController",$scope.direccionParam);
 		
 		var vm = this;
-		
-		vm.domicilio =  {}
+		var isNew = $scope.direccionParam.alias =='nueva';
+		vm.domicilio =  $scope.direccionParam;
 	 
 		
 		//TODO: hacerlo flexible para grupo usuario vendedor ETC
 		// ahora esta para grupo
 		vm.guardar = function (){
-			callNuevaDireccion();
+			
+			if (isNew){
+				callNuevaDireccion();				
+			}else{
+				//callUpdateDireccion();
+				ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de direccion');
+			}
+			
+			
 		}
 		
-		 
+		vm.marcarPredeterminado = function(){
+			ToastCommons.mensaje('TODO : marcar como predeterminado cuando se tenga el id de direccion');
+			$log.debug("TODO : marcar como predeterminado cuando se tenga el id de direccion");
+		}
+		
+		vm.eliminar = function(){
+			ToastCommons.mensaje('TODO : eliminar cuando se tenga el id de direccion');
+			$log.debug("TODO : eliminar cuando se tenga el id de direccion");
+		}
 		
 		//////////////////////
 		
@@ -29,15 +47,29 @@
 	        function doOk(response) {	    			    		 
 	    		$log.debug("respuesta guardar domicilio ", response);
 
-	    		ToastCommons.mensaje('Se actualizo con exito');
+	    		ToastCommons.mensaje('Se agrego dirección !');
 	    		
 	    		//TODO: en realidad la navegacion depende de donde vino 
-	    		$state.go("principal");
+	    		$state.go("perfil");
 			};
-			
+			vm.domicilio.predeterminada =false;
 			restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
 		}
 		
+		var callUpdateDireccion = function (){
+			$log.debug("update domicilio",vm.domicilio);
+			
+	        function doOk(response) {	    			    		 
+	    		$log.debug("respuesta update domicilio ", response);
+
+	    		ToastCommons.mensaje('Se Actualizo dirección !');
+	    		
+	    		//TODO: en realidad la navegacion depende de donde vino 
+	    		$state.go("perfil");
+			};
+			vm.domicilio.predeterminada =false;
+			restProxy.put(CTE_REST.actualizarDireccion(vm.domicilio.id),vm.domicilio,doOk);
+		}
 		
 		
 		/////// TODO: ver cuando este para asociar a una grupo

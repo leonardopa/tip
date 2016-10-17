@@ -26,7 +26,7 @@
 			}
 			
 			// TODO: hacer el ID de VENDEDOR dinamico
-			restProxy.get(CTE_REST.categorias(1),{},doOk);		    
+			restProxy.get(CTE_REST.categorias(CTE_REST.vendedor),{},doOk);		    
 	 }
 	  
 	  callCategorias()

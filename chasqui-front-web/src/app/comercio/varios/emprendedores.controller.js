@@ -10,7 +10,7 @@
 	  $log.debug('EmprenController ..... ',$stateParams.id); 
 	   var vm = this
 	   
-	   
+	   vm.urlBase=CTE_REST.url_base;
 	   vm.idEmprendedor = $stateParams.id;
 	   vm.isCollapsed = true;
 	   
@@ -23,26 +23,14 @@
 	   vm.verMas=function (item){
 		   $log.debug("---ver mas ---",item);
 		   
-		   $state.go('emprendedores', {
-		        id: item.idVendedor
-		      });
+		   vm.emprendedor= item;
+		   vm.medallas=[item.medalla];
+		   vm.isVistaUnica=true;
 	   }
 	   
 	   /////////////////
 	   
-	    function callEmprendedor() {
-			$log.debug("---callEmprendedor ---");
-
-			function doOk(response) {
-				$log.debug("---callEmprendedor ---",response.data);
-				//vm.categorias = response.data;
-				
-				vm.emprendedor= response.data[0]; // TODO: falta productor por ID
-			}
-			// TODO: hacer el ID de VENDEDOR dinamico
-			// PASARLE el id del producto vm.idEmprendedor
-			restProxy.get(CTE_REST.productores(1),{},doOk);		    
-	   }
+	  
 	   
 	   function callEmprendedores() {
 			$log.debug("---callEmprendedor ---");
@@ -55,7 +43,7 @@
 			}
 			// TODO: hacer el ID de VENDEDOR dinamico
 			// PASARLE el id del producto vm.idEmprendedor
-			restProxy.get(CTE_REST.productores(1),{},doOk);		    
+			restProxy.get(CTE_REST.productores(CTE_REST.vendedor),{},doOk);		    
 	   }
 	   
 	   
@@ -73,21 +61,8 @@
 			restProxy.get(CTE_REST.medallas,{},doOk);		    
 	  }
 	   
-	   /////////////////
-	   
-	   
-	   if(vm.idEmprendedor){		   
-		   callEmprendedor();
-		   callMedallas();
-		   vm.isVistaUnica=true;
-	   }else{
-		   //$log.error("no llego el parametro id emprendedor");
-		   callEmprendedores();
-	   }
-	   
-	   
-	   
-	   
-	   
+
+	   callEmprendedores();
+  
   }
 })();

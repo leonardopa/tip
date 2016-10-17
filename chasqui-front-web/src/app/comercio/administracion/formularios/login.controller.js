@@ -49,6 +49,13 @@
 				function doOk(response,headers) {
 					$log.debug('response login ', response);
 					
+					StateCommons.ls.usuario = response.data;
+					
+					ToastCommons.mensaje("Bienvenido !");
+					
+					$state.go("principal");
+					
+					/*
 					var token = response.headers('authorization');
 					
 					if(token){
@@ -65,7 +72,7 @@
 						        key: 'GENERIC_ERROR'
 						      });
 					}
-					
+					*/
 				}
 
 				restProxy.post(CTE_REST.login, vm.user, doOk);

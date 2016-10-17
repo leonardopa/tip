@@ -13,51 +13,55 @@
     .constant('CTE_REST',  function() {
         
         var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
+        var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
         //var URL_REST_BASE = "http://factory.epidata.com.ar:9145/chasqui-mock/rest/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
         return {
+        	vendedor: 2,
+        	
+        	url_base: "http://168.181.184.203:8080/chasqui",
+        	
         	url_rest: URL_REST_BASE ,
         	
-        	login: URL_REST_BASE+"client/sso/singIn",
+        	login: URL_REST_BASE_2+"client/sso/singIn",
         	
         	resetPass: function (email){
         		return URL_REST_BASE+"client/resetPass/"+email ;
         	},
         	
-        	singUp: URL_REST_BASE+"client/sso/singUp",
+        	singUp: URL_REST_BASE_2+"client/sso/singUp",
         	
         	categorias: function (idVendedor){
-        		return URL_REST_BASE +"client/categoria/all/" + idVendedor;
+        		return URL_REST_BASE_2 +"client/categoria/all/" + idVendedor;
         	},
-        	
+        	 
         	productores: function (idVendedor){
-        		return URL_REST_BASE +"client/productor/all/" + idVendedor;
+        		return URL_REST_BASE_2 +"client/productor/all/" + idVendedor;
         	},
         	
         	medallas: URL_REST_BASE+"client/medalla/all", 
         	 
-        	productosByCategoria: URL_REST_BASE + "client/producto/byCategoria",
+        	productosByCategoria: URL_REST_BASE_2 + "client/producto/byCategoria",
         	
-        	productosByProductor: URL_REST_BASE + "client/producto/byProductor",
+        	productosByProductor: URL_REST_BASE_2 + "client/producto/byProductor",
         	
         	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
         	
-        	productosByQuery : URL_REST_BASE + "client/producto/byQuery",
-        	
-        	productosPaginado: function (pagina,items){
-        		return URL_REST_BASE + "productos/"+pagina+"/"+items ; 
-        	},
-        	
-        	verUsuario : URL_REST_BASE + "user/adm/read",
+        	productosByQuery : URL_REST_BASE_2 + "client/producto/byQuery",
+          	
+        	verUsuario : URL_REST_BASE_2 + "user/adm/read",
         	
         	editUsuario : URL_REST_BASE + "user/adm/edit",
         	
-        	verDirecciones: URL_REST_BASE + "user/adm/dir",
+        	verDirecciones: URL_REST_BASE_2 + "user/adm/dir",
         	
-        	nuevaDireccion : URL_REST_BASE + "user/adm/dir",
+        	nuevaDireccion : URL_REST_BASE_2 + "user/adm/dir",
         	
+        	actualizarDireccion : function (idDireccion){
+        		return URL_REST_BASE_2 +"user/adm/dir/" + idDireccion;
+        	},
         	////////////////////////////////////////////////////////
         	
         	productosDestacados : URL_REST_BASE +"productos/destacados",

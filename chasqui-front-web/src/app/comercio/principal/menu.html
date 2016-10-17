@@ -32,13 +32,27 @@
     -->  
     
      <md-button class="md-raised" ng-click="menuCtrl.ir('medalla')"  > medalla </md-button>
+     
      <md-button class="md-raised" ng-click="menuCtrl.ir('emprendedores')"  > emprendedores </md-button>
+     
      <md-button class="md-raised" ng-click="menuCtrl.ir('como-comprar')"  > C&oacutemo comprar </md-button>
+     
      <md-button class="md-raised" ng-click="menuCtrl.ir('catalogo')"  > catalogo </md-button>
-     <md-button class="md-raised" ng-click="menuCtrl.ir('lista-pedidos')"  > Mis pedidos </md-button>
-     <md-button class="md-raised" ng-click="menuCtrl.ir('lista-grupos')"  > Compra colectiva </md-button>
-     <md-button class="md-raised" ng-click="menuCtrl.ir('perfil')"  > Perfil </md-button>   
-     <md-button class="md-raised" ng-click="menuCtrl.ir('login')"  > Ingresa </md-button>   
+     
+     <md-button class="md-raised" ng-click="menuCtrl.ir('lista-pedidos')"  
+     ng-show="menuCtrl.isLogued"> Mis pedidos </md-button>
+     
+     <md-button class="md-raised" ng-click="menuCtrl.ir('lista-grupos')"  
+      ng-show="menuCtrl.isLogued"> Compra colectiva </md-button>
+      
+     <md-button class="md-raised" ng-click="menuCtrl.ir('perfil')" 
+      ng-show="menuCtrl.isLogued" > Perfil </md-button>
+      
+      <h2 class="md-title"
+      ng-show="menuCtrl.isLogued">{{menuCtrl.usuario.nickname}}</h2>
+         
+     <md-button class="md-raised" ng-click="menuCtrl.ir('login')"
+ 	ng-show="! menuCtrl.isLogued" > Ingresa </md-button>   
     
 </div>
 </md-toolbar>

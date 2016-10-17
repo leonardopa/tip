@@ -23,26 +23,15 @@
       });
     }
 
-    // todo como conservo el token aqui, para ponerlo en el header
-    /**
-     * REST (post, put, get , delete) . Parametros: url , params (json) , doOk
-     * (funcion para respuesta exitosa ) , doNOok (funcion para caso no exitoso.
-     * No es obligatoria , si no se pasa va a la pantalla de error generica por
-     * defecto)
-     */
-    return {
-
-      get: /*
-             * function (url, params) { $log.debug('getting ' + url + ' url.'); //
-             * params.callback = 'JSON_CALLBACK';
-             * 
-             * return $http.get(url, { params: params }).then(function
-             * (response) { return response; });
-             */
-      function(url, params, doOk, noOk) {
-        $log.debug('getting ' + url);
-        $log.debug('data: ' + JSON.stringify(params));
-
+    var createHeader = function (){
+    	$log.debug('crear header ' + StateCommons.ls.usuario.email );
+    	$log.debug( StateCommons.ls.usuario );
+    	return 'Basic ' + btoa(StateCommons.ls.usuario.email + ':' + StateCommons.ls.usuario.token); 
+    }
+    
+    var get = function(url,header, params, doOk, noOk){
+    	$log.debug('data: ' + JSON.stringify(params));
+            
         if (noOk == undefined) {
           noOk = doNoOkDefault;
         }
@@ -52,14 +41,41 @@
             method: 'GET',
             url: url,
             data: params,
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization' :StateCommons.ls.token 
-            }
+            headers: header
           }).then(doOk, noOk);
         };
 
         doGet();
+      
+    }
+    // todo como conservo el token aqui, para ponerlo en el header
+    /**
+     * REST (post, put, get , delete) . Parametros: url , params (json) , doOk
+     * (funcion para respuesta exitosa ) , doNOok (funcion para caso no exitoso.
+     * No es obligatoria , si no se pasa va a la pantalla de error generica por
+     * defecto)
+     */
+    return {
+
+      get: function(url, params, doOk, noOk) {
+	        $log.debug('getting Public' + url);
+	        
+	        get(url, {} , params, doOk, noOk);
+       
+      },
+      getPrivate: function(url, params, doOk, noOk) {
+	        $log.debug('getting Private' + url);
+	                
+	        var header = {} ;
+	     
+	        header = {
+	                  'Content-Type': 'application/json',
+	                  'Authorization': createHeader()
+	                  };
+	       
+			
+	        get(url,header, params, doOk, noOk);
+     
       },
       
       delete: function(url, doOk, noOk) {
@@ -75,7 +91,7 @@
             url: url,
             headers: {
               'Content-Type': 'application/json',
-              'Authorization' :StateCommons.ls.token
+              'Authorization': createHeader()
             }
           }).then(doOk, noOk);
         };
@@ -98,7 +114,7 @@
             data: params,
             headers: {
               'Content-Type': 'application/json',
-              'Authorization' :StateCommons.ls.token
+              'Authorization': createHeader()
             }
           }).then(doOk, noOk);
         };
@@ -108,7 +124,7 @@
       post: function(url, params, doOk, noOk) {
         $log.debug('posting ' + url + ' url.');
         $log.debug('data: ' + JSON.stringify(params));
-
+ 
         if (noOk == undefined) {
           noOk = doNoOkDefault;
         }
@@ -119,9 +135,9 @@
             url: url,
             data: params,
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization' :StateCommons.ls.token
-            }
+                'Content-Type': 'application/json',
+                'Authorization': createHeader()
+              }
           }).then(doOk, noOk);
         };
 

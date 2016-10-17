@@ -59,9 +59,10 @@
 				$log.debug("callVerUsuario");
 				vm.user = response.data;
 			}
-		
+		 
+			
 			// TODO : manejar error
-			restProxy.get(CTE_REST.verUsuario, {}, doOk);
+			restProxy.getPrivate(CTE_REST.verUsuario, {}, doOk);
 		}
 		
 		vm.callActualizarUsuario = function(){

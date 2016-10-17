@@ -22,13 +22,10 @@
 	  vm.selectedDirection = 'up';
 	  
 //	  vm.categorias = ['categorias 1', 'categorias 2 ', 'categorias 3', 'categorias 4'];
-	  vm.categorias =[];
-	  vm.categoriaSelect = '';
+	  vm.categorias =[];	 
 	  vm.productores = [];
-	  vm.productorSelect = ''; 
 	  vm.medallas = [];
-	  vm.medallaSelect = '';
-	  vm.query='';
+	  vm.query=''; 
 	  
 	  vm.pedidos={};
 	  vm.carrito=StateCommons.ls.pedidoSeleccionado;
@@ -36,53 +33,31 @@
 	  vm.icon='shopping_cart';
 	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
 	  
-	  vm.paginaProducto;
-
-	  vm.isFiltro1=true;
-	  vm.isFiltro2=false;
-	  vm.isFiltro3=false;
+	  vm.paginaProducto;	  
+	  vm.tipoFiltro='CATEGORIA';// PRODUCTOR / MEDALLA / QUERY
+	  vm.queryText;
 	  
 	  vm.filtroPor = function(filtroPor){
 		  $log.debug("filtro por ",filtroPor);
 		  
-		  if (filtroPor == 1 ){
-			//  $log.debug("filtro por categoria");			 
-			  vm.isFiltro2=false;
-			  vm.isFiltro3=false;  
-		  }
-		  if (filtroPor == 2 ){
-			 // $log.debug("filtro por productor");
-			  vm.isFiltro1=false;			  
-			  vm.isFiltro3=false;  
-		  }
-		  if (filtroPor == 3 ){
-			  //$log.debug("filtro por medalla");
-			  vm.isFiltro1=false;
-			  vm.isFiltro2=false;			    
-		  }
-		  if (filtroPor == 4 ){
-			  $log.debug("filtro por QUERY");
-		  }
-		  
-		  $log.debug("filtro por ",vm.isFiltro1);
-		  $log.debug("filtro por ",vm.isFiltro2);
-		  $log.debug("filtro por ",vm.isFiltro3);
-		  
+		  vm.tipoFiltro = filtroPor;
+		 	  
 	  }
 	  
-	  vm.filtrar = function (){
-		  $log.debug("click filtrar");
-	/*	  $log.debug(vm.isFiltro1);
-		  $log.debug(vm.categoriaSelect);
-		  $log.debug(vm.isFiltro2);
-		  $log.debug(vm.productorSelect);
-		  $log.debug(vm.isFiltro3);
-		  $log.debug(vm.medallaSelect);
-		  
-		  $log.debug(vm.query);*/
-		  
-		  $scope.$broadcast('filterEvent', vm.categoriaSelect);
-		 
+	  vm.filtroQuery = function(){
+		  vm.tipoFiltro = 'QUERY';
+		  vm.doFiltrar(vm.queryText);
+	  }
+	  
+	  vm.filtrar = function (){	  
+		  vm.doFiltrar(vm.query);
+	  }
+	  
+	  vm.doFiltrar = function (valor){
+		  var filtro = {};
+		  filtro.tipo = vm.tipoFiltro;
+		  filtro.valor = valor;			 
+		  $scope.$broadcast('filterEvent', filtro);		 
 	  }
 	  
 	  vm.cambiarContexto = function (pedido){
@@ -141,7 +116,7 @@
 			}
 			
 			// TODO: hacer el ID de VENDEDOR dinamico
-			restProxy.get(CTE_REST.categorias(1),{},doOk);		    
+			restProxy.get(CTE_REST.categorias(CTE_REST.vendedor),{},doOk);		    
 	 }
 	  
 	  function callProductores() {
@@ -153,7 +128,7 @@
 			}
 			
 			// TODO: hacer el ID de VENDEDOR dinamico
-			restProxy.get(CTE_REST.productores(1),{},doOk);		    
+			restProxy.get(CTE_REST.productores(CTE_REST.vendedor),{},doOk);		    
 	 }
 	  
 	  function callMedallas() {
@@ -161,10 +136,8 @@
 
 			function doOk(response) {				 
 				vm.medallas = response.data;
-		//		vm.productorSelect =vm.productores[0]; 
 			}
-			
-			// TODO: hacer el ID de VENDEDOR dinamico
+		
 			restProxy.get(CTE_REST.medallas,{},doOk);		    
 	 }
 	  

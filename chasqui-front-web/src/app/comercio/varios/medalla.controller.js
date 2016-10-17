@@ -10,8 +10,8 @@
 	  $log.debug('MedallaController ..... ',$stateParams.idMedalla); 
 	   var vm = this
 	   
-	   
-	   vm.idMedalla = $stateParams.idMedalla;
+	   vm.urlBase=CTE_REST.url_base;
+	   vm.idMedalla = $stateParams.idMedalla; // usar en caso de tener mas datos que mostrar . Vista indivudual
 	   vm.medalla;
 	   vm.medallas;
 	   vm.isVistaUnica=false;

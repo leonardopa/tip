@@ -64,7 +64,13 @@
 		/////////////////////////
 		/// Recive el evento de filtrado 
 		
-		$scope.$on('filterEvent', function(arg) {findProductos()});
+		$scope.$on('filterEvent', function(event,arg) 
+				{$log.debug("filterEvent",arg);
+				  actualizar(arg);});
+		
+		function actualizar(arg){
+			findProductos(1,1,arg);
+		}
 		
 		// /////////// REST
 
@@ -83,8 +89,8 @@
 
 		}
 
-		var findProductos = function(pagina, items) {
-			$log.log('findProductos: ' + pagina + " " + items);
+		var findProductos = function(pagina, items,filtro) {
+			$log.log('findProductos: ' + pagina + " " + items + " " + filtro.tipo + " " + filtro.valor);
 
 			function doOk(response) {
 				$log.log('findProductos Response ', response);
@@ -94,20 +100,36 @@
 				vm.bigTotalItems = response.data.itemsTotal;
 				vm.bigCurrentPage = response.data.paginaActual;
 			}
-
-			var json= {
-					  "pagina": 1,
-					  "cantItems": 20,
-					  "precio": "Up",
-					  "idCategoria": "1",
-					  "idProductor" :"1" ,
-					   "idMedalla" : "1",
-					   "query": "1",
-					   "idVendedor":"1"
-					};
 			
-			restProxy.post(CTE_REST.productosByCategoria, json, doOk);
+			var json = {
+                    pagina: 1,
+                    cantItems: 5,
+                    precio: 'Down'
+                    //,idVendedor  =CTE_REST.vendedor //TODO: que se dinamico
+            }
+			  
 
+			 switch (filtro.tipo) { 
+		          case 'CATEGORIA':
+		        	  json.idCategoria =filtro.valor ;
+		        	  restProxy.post(CTE_REST.productosByCategoria, json, doOk);
+		              break;
+		          case 'PRODUCTOR':
+		        	  json.idProductor = filtro.valor ;
+		        	  restProxy.post(CTE_REST.productosByProductor, json, doOk);
+		              break;   
+		          case 'MEDALLA':
+		        	  json.idMedalla = filtro.valor;
+		        	  restProxy.post(CTE_REST.productosByMedalla, json, doOk);
+		              break;
+		          case 'QUERY':
+					 json.query = filtro.valor;
+					 json.idVendedor = CTE_REST.vendedor;
+		        	  restProxy.post(CTE_REST.productosByQuery, json, doOk);		
+		              break;
+		          default:
+		        		$log.log('tipo de filtro desconocido');
+	          }
 		}
 		
 		findProductos();
