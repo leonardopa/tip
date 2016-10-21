@@ -74,8 +74,13 @@
 					}
 					*/
 				}
+				
+				function doNoOk(response,headers) {
+					ToastCommons.mensaje("Fallo la autenticación, <br>verifique los datos");
+				}
+				
 
-				restProxy.post(CTE_REST.login, vm.user, doOk);
+				restProxy.postPublic(CTE_REST.login, vm.user, doOk,doNoOk);
 
 		 }
 		  

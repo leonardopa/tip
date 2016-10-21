@@ -147,7 +147,7 @@
 	                 'Authorization': createHeader()
 	              };
  	     
-        post(url, {} , params, doOk, noOk);
+        post(url, header , params, doOk, noOk);
       },
       
       postPublic: function(url, params, doOk, noOk) {

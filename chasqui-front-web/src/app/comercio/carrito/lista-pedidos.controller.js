@@ -5,7 +5,7 @@
 			ListaPedidosController);
 
 	/** @ngInject */
-	function ListaPedidosController($log,$state,$scope,restProxy, CTE_REST,StateCommons) {
+	function ListaPedidosController($log,$state,$scope,restProxy, CTE_REST,StateCommons,ToastCommons) {
 		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSeleccionado);
 		
 		var vm = this;
@@ -37,7 +37,10 @@
 		});
 	
 
-		
+		vm.crearPedidoIndividual = function(){
+			$log.debug("--- Crear pedido individual----");
+			callCrearPedidoIndividual();
+		}
 	
 		///////////////// REST
 		
@@ -74,10 +77,36 @@
 			restProxy.get(CTE_REST.productosPedidoByUser(6),{},doOk);
 		}
 		
+		function callCrearPedidoIndividual(){
+			function doOk(response) {
+				$log.debug("--- crear pedido individual response ",response.data);
+			}
+			
+			restProxy.post(CTE_REST.crearPedidoIndividual,{},doOk);
+		}
 		
+		function callPedidoIndividual(){
+			function doOk(response) {
+				$log.debug("--- callPedidoIndividual ",response.data);
+				ToastCommons.mensaje("hay pedidos !");
+			}
+			
+			function doNoOk(response) {
+				$log.debug("--- callPedidoIndividual ",response.data);
+				
+				if (response.status==404){
+					ToastCommons.mensaje("Noy  hay pedidos !");
+				}else{
+					ToastCommons.mensaje("algo fallo !");
+				}
+			}
+			
+			restProxy.getPrivate(CTE_REST.verPedidoIndividual,{},doOk,doNoOk);
 		
-		 callLoadPedidos()
+		}
 		
+		callLoadPedidos()
+		callPedidoIndividual()
 	}
 
 })();

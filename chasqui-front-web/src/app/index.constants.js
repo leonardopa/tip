@@ -19,6 +19,7 @@
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
+        var idVendedor = 6;
         return {
         	//vendedor: 2,
         	vendedor: 6,
@@ -62,6 +63,10 @@
         	nuevaDireccion : URL_REST_BASE_2 + "user/adm/dir",
         	
         	actualizarDireccion : URL_REST_BASE_2 +"user/adm/dir/",
+        	
+        	crearPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual',
+        	
+        	verPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ,
         	////////////////////////////////////////////////////////
         	
         	productosDestacados : URL_REST_BASE +"productos/destacados",
