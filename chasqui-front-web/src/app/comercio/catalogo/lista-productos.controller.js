@@ -18,6 +18,7 @@
 		
 		vm.otherCtrl=$scope.$parent.$parent.catalogoCtrl.isFiltro1;
 		
+		vm.urlBase = CTE_REST.url_base;
 		vm.variantes = [];
 	
 		vm.pageChanged = function() {
@@ -132,7 +133,7 @@
 	          }
 		}
 		
-		findProductos();
+	//	findProductos();
 
 	}
 })();

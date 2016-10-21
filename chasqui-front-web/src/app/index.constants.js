@@ -13,13 +13,15 @@
     .constant('CTE_REST',  function() {
         
         var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
-        var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
+       // var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
+        var URL_REST_BASE_2 = "http://proyectochasqui.com:8080/chasqui/rest/";
         //var URL_REST_BASE = "http://factory.epidata.com.ar:9145/chasqui-mock/rest/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
         return {
-        	vendedor: 2,
+        	//vendedor: 2,
+        	vendedor: 6,
         	
         	url_base: "http://168.181.184.203:8080/chasqui",
         	
@@ -53,15 +55,13 @@
           	
         	verUsuario : URL_REST_BASE_2 + "user/adm/read",
         	
-        	editUsuario : URL_REST_BASE + "user/adm/edit",
+        	editUsuario : URL_REST_BASE_2 + "user/adm/edit",
         	
         	verDirecciones: URL_REST_BASE_2 + "user/adm/dir",
         	
         	nuevaDireccion : URL_REST_BASE_2 + "user/adm/dir",
         	
-        	actualizarDireccion : function (idDireccion){
-        		return URL_REST_BASE_2 +"user/adm/dir/" + idDireccion;
-        	},
+        	actualizarDireccion : URL_REST_BASE_2 +"user/adm/dir/",
         	////////////////////////////////////////////////////////
         	
         	productosDestacados : URL_REST_BASE +"productos/destacados",

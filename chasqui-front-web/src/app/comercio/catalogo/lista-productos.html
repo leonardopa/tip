@@ -4,7 +4,8 @@
   
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
 		productos.</span>
-	es pagina principar {{listaProductoCtr.isPaginaPrincipal}}	
+ 
+	<!-- 
 	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
 		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
 			ng-model="listaProductoCtr.bigCurrentPage"
@@ -12,7 +13,7 @@
 			boundary-link-numbers="true" rotate="false"
 			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
 	</div>	
-
+ -->
 	<div ng-repeat="variante in listaProductoCtr.variantes">
 		<div flex-xs flex-gt-xs="120" layout="column">
 			<md-card> 
@@ -20,8 +21,9 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-2">
+					
 						<img
-							src="http://lorempixel.com/90/90/food/{{variante.idProducto}}"
+							src="{{listaProductoCtr.urlBase}}/{{variante.imagenPrincipal}}"
 							alt="{{variante.descripcionVariente}}">
 					</div>
 					<div class="col-md-5">

@@ -56,7 +56,7 @@
 		vm.callVerUsuario = function(){
 			
 			function doOk(response) {
-				$log.debug("callVerUsuario");
+				$log.debug("callVerUsuario",response);
 				vm.user = response.data;
 			}
 		 
@@ -70,9 +70,24 @@
 			function doOk(response) {				 
 				ToastCommons.mensaje('Se actualizo con exito');
 			}
-		
+		//	delete vm.user['direccion'];
+		/*	
+			vm.user.direccion={};
+	
+			vm.user.direccion.calle= "Mitre";		    
+			vm.user.direccion.altura= "900";
+			vm.user.direccion.localidad= "Quilmes";
+			vm.user.direccion.codigoPostal= "1885";
+			vm.user.direccion.latitud= "1";
+			vm.user.direccion.longitud= "2";
+			vm.user.direccion.predeterminada= "true";
+			vm.user.direccion.departamento= "1";
+			vm.user.direccion.alias= "Casa";
+			vm.user.password=123;*/
+			$log.debug("***************",vm.user);
 			// TODO : manejar error
-			restProxy.put(CTE_REST.editUsuario, vm.user, doOk);
+			ToastCommons.mensaje('Falla actulizar. Ver Trello');
+			//restProxy.put(CTE_REST.editUsuario, vm.user, doOk);
 		}
 		
 		// usuaruo nuevo

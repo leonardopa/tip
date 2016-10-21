@@ -78,13 +78,13 @@
     return {
 
       get: function(url, params, doOk, noOk) {
-	        $log.debug('getting Public' + url);
+	        $log.debug('getting Public ' + url);
 	        
 	        get(url, {} , params, doOk, noOk);
        
       },
       getPrivate: function(url, params, doOk, noOk) {
-	        $log.debug('getting Private' + url);
+	        $log.debug('getting Private ' + url);
 	                
 	        var header = {} ;
 	     

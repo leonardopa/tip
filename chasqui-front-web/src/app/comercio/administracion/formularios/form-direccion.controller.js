@@ -13,7 +13,7 @@
 		var vm = this;
 		var isNew = $scope.direccionParam !=undefined && $scope.direccionParam.alias =='nueva';
 		vm.domicilio =  $scope.direccionParam;
-	 
+		vm.isEdit=false;
 		
 		//TODO: hacerlo flexible para grupo usuario vendedor ETC
 		// ahora esta para grupo
@@ -22,8 +22,8 @@
 			if (isNew){
 				callNuevaDireccion();				
 			}else{
-				//callUpdateDireccion();
-				ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de direccion');
+				callUpdateDireccion();
+			//	ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de direccion');
 			}
 			
 			
@@ -68,7 +68,7 @@
 	    		$state.go("perfil");
 			};
 			vm.domicilio.predeterminada =false;
-			restProxy.put(CTE_REST.actualizarDireccion(vm.domicilio.id),vm.domicilio,doOk);
+			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilio,doOk);
 		}
 		
 		
