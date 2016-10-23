@@ -17,7 +17,7 @@
     
     vm.ls.pedidoSeleccionado;
     
-    
+    vm.ls.itemMenuSelect;
 
   }// function
 })();// anonimo

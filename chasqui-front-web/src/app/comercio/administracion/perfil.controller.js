@@ -5,9 +5,9 @@
 			PerfilController);
 
 	/** @ngInject . Pantalla de perfil de usuario*/
-	function PerfilController($http, $log, $scope,CTE_REST, restProxy) {
+	function PerfilController($http, $log, $scope,CTE_REST, restProxy,StateCommons ) {
 		$log.debug("Init PerfilController ....");
-		
+		StateCommons.ls.itemMenuSelect = 'perfil'; 
 		var vm = this;
 		
 		vm.direcciones;

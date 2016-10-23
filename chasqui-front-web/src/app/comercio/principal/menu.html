@@ -1,65 +1,55 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-
 <div ng-controller="MenuController as menuCtrl">    
 
-<md-toolbar class="md-hue-2">
-<div class="md-toolbar-tools">
-
-	 
-	<a ui-sref="principal"><img alt="" src="app\components\image\logo_ch.png"> </a>
-
-	<span flex></span>
-<!--  
-    <md-button> <a ui-sref="principal">Inicio</a></md-button>
-
- 
-	<a ui-sref="como-comprar">C&oacutemo comprar  </a> |
-		
-    <a ui-sref="catalogo">catalogo </a> |
-  
-	<md-button>
-	<a ui-sref="emprendedores">Emprendedores</a></md-button> 
-
-	<a ui-sref="lista-pedidos">Mis pedidos  </a> |
-	<a ui-sref="lista-grupos">Compra colectiva</a> | 
-	<a ui-sref="login">Ingresa </a> |
+	<md-toolbar class="md-hue-2">
+		<div class="md-toolbar-tools">
+		 
+		<a ui-sref="principal"><img alt="" src="app\components\image\logo_ch.png"> </a>
 	
- 	<md-button class="md-raised" aria-label="Learn More">
-          Learn More
-        </md-button>
-    -->  
-    
-     <md-button class="md-raised" ng-click="menuCtrl.ir('medalla')"  > medalla </md-button>
-     
-     <md-button class="md-raised" ng-click="menuCtrl.ir('emprendedores')"  > emprendedores </md-button>
-     
-     <md-button class="md-raised" ng-click="menuCtrl.ir('como-comprar')"  > C&oacutemo comprar </md-button>
-     
-     <md-button class="md-raised" ng-click="menuCtrl.ir('catalogo')"  > catalogo </md-button>
-     
-     <md-button class="md-raised" ng-click="menuCtrl.ir('lista-pedidos')"  
-     ng-show="menuCtrl.isLogued"> Mis pedidos </md-button>
-     
-     <md-button class="md-raised" ng-click="menuCtrl.ir('lista-grupos')"  
-      ng-show="menuCtrl.isLogued"> Compra colectiva </md-button>
-      
-     <md-button class="md-raised" ng-click="menuCtrl.ir('perfil')" 
-      ng-show="menuCtrl.isLogued" > Perfil </md-button>
-      
-      <h2 class="md-title"
-      ng-show="menuCtrl.isLogued">{{menuCtrl.usuario.nickname}}</h2>
-         
-     <md-button class="md-raised" ng-click="menuCtrl.ir('login')"
- 	ng-show="! menuCtrl.isLogued" > Ingresa </md-button>   
- 	
- 	 <md-button class="md-secondary" ng-click="menuCtrl.logOut()"
- 	 ng-show="menuCtrl.isLogued">
-	 	<md-icon> exit_to_app </md-icon>
-	</md-button>
-    
-</div>
-</md-toolbar>
+		<span flex></span>
+	    
+		  
+	      <h2 class="md-title"
+	      ng-show="menuCtrl.isLogued">{{menuCtrl.usuario.nickname}}</h2>
+	         
+	     <md-button class="md-raised" ng-click="menuCtrl.ir('login')"
+	 	ng-show="! menuCtrl.isLogued" > Ingresa </md-button>   
+	 	
+	 	 <md-button class="md-secondary" ng-click="menuCtrl.logOut()"
+	 	 ng-show="menuCtrl.isLogued">
+		 	<md-icon> exit_to_app </md-icon>
+		</md-button>
+	    
+		</div>
+	</md-toolbar>
 
+
+
+	<md-button  class="{{menuCtrl.classFor('medalla')}}" ng-click="menuCtrl.ir('medalla')"  >
+		 medalla </md-button>
+	    <span>|</span>
+	<md-button  class="{{menuCtrl.classFor('emprendedores')}}" ng-click="menuCtrl.ir('emprendedores')"  >
+		emprendedores </md-button>
+	    <span>|</span> 
+    <md-button  class="{{menuCtrl.classFor('como-comprar')}}" ng-click="menuCtrl.ir('como-comprar')"  >
+	     C&oacutemo comprar </md-button>
+	    <span>|</span>
+    <md-button  class="{{menuCtrl.classFor('catalogo')}}" ng-click="menuCtrl.ir('catalogo')"  > 
+	    catalogo </md-button>
+	    <span  ng-show="menuCtrl.isLogued">|</span> 
+    <md-button  class="{{menuCtrl.classFor('lista-pedidos')}}" ng-click="menuCtrl.ir('lista-pedidos')"  
+     ng-show="menuCtrl.isLogued"> 
+	     Mis pedidos </md-button>
+	     <span  ng-show="menuCtrl.isLogued">|</span>
+    <md-button  class="{{menuCtrl.classFor('lista-grupos')}}" ng-click="menuCtrl.ir('lista-grupos')"  
+     ng-show="menuCtrl.isLogued">
+	      Compra colectiva </md-button>
+	     <span  ng-show="menuCtrl.isLogued">|</span>   
+    <md-button  class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')" 
+      ng-show="menuCtrl.isLogued" > 
+      	 Perfil </md-button>
+        
+     <md-divider ></md-divider>
 </div>

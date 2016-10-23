@@ -8,7 +8,7 @@
   /** @ngInject */
   function CatalogoController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons) {
 	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
-	  
+	  StateCommons.ls.itemMenuSelect = 'catalogo';
 	  var vm = this;
 	  
 	  

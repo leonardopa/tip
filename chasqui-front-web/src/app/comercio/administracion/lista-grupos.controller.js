@@ -5,9 +5,10 @@
 			ListaGruposController);
 
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones*/
-	function ListaGruposController($http, $log, $scope, $q, $timeout,$mdDialog, $mdMedia,$state,restProxy, CTE_REST) {
+	function ListaGruposController($http, $log, $scope, $q, $timeout,$mdDialog, $mdMedia,$state,restProxy, CTE_REST
+			,StateCommons) {
 		$log.debug("controler ListaGruposController");
-		
+		 StateCommons.ls.itemMenuSelect = 'lista-grupos'; 
 		var vm = this;
 		vm.habilita = false;
 		vm.count = 0;

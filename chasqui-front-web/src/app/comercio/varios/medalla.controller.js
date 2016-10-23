@@ -6,8 +6,9 @@
     .controller('MedallaController',MedallaController);
 
   /** @ngInject */
-  function MedallaController( $log,$stateParams,restProxy, CTE_REST,$state) {
+  function MedallaController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons) {
 	  $log.debug('MedallaController ..... ',$stateParams.idMedalla); 
+	  StateCommons.ls.itemMenuSelect = 'medalla'; 
 	   var vm = this
 	   
 	   vm.urlBase=CTE_REST.url_base;

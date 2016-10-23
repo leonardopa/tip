@@ -6,8 +6,9 @@
     .controller('EmprenController',EmprenController);
 
   /** @ngInject */
-  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state) {
+  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons) {
 	  $log.debug('EmprenController ..... ',$stateParams.id); 
+	  StateCommons.ls.itemMenuSelect = 'emprendedores'; 
 	   var vm = this
 	   
 	   vm.urlBase=CTE_REST.url_base;
