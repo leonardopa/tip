@@ -67,6 +67,8 @@
         	crearPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual',
         	
         	verPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ,
+        	
+        	agregarPedidoIndividual: URL_REST_BASE_2+  'user/pedido/individual',
         	////////////////////////////////////////////////////////
         	
         	productosDestacados : URL_REST_BASE +"productos/destacados",

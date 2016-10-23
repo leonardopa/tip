@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $http, $log, restProxy, CTE_REST,
-			$mdDialog,$state) {
+			$mdDialog,$state,StateCommons) {
 	
 		$log.debug('ListaProductosController',$scope.$parent.$parent.catalogoCtrl.isFiltro1);
 			
@@ -31,7 +31,7 @@
 			$log.debug("agregar ", variante)
 			var confirm = $mdDialog.prompt().title(
 					'Agregar producto del Changuito').textContent(
-					'Cuanto producto queres Agregar ?').placeholder(
+					'Cuantos productos queres Agregar ?').placeholder(
 					'Cantidad')
 			// .ariaLabel('Dog name')
 			// .initialValue(1)
@@ -76,17 +76,22 @@
 		// /////////// REST
 
 		var callAgregarAlCarro = function(variante, cantidad) {
-			$log.debug('callAgregarAlCarro: ', variante);
+			$log.debug('callAgregarAlCarro: ', StateCommons.ls.pedidoSeleccionado);
 
 			function doOk(response) {
 				//TODO: mensaje OK
 				$log.log('Agregar producto Response ', response);
 
 			}
+			
+			var params={};
+			params.idPedido=StateCommons.ls.pedidoSeleccionado.id;
+			params.idVariante=variante.idVariante;
+			params.cantidad=cantidad;
+			
 			// / TODO : USUARIO HARDOC y pedido 
 			restProxy.post(
-					CTE_REST.productosAgregar(11,99, cantidad),
-					variante, doOk);
+					CTE_REST.agregarPedidoIndividual,params, doOk);
 
 		}
 

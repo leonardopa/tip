@@ -80,6 +80,8 @@
 		function callCrearPedidoIndividual(){
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ",response.data);
+				response.data
+				
 			}
 			
 			restProxy.post(CTE_REST.crearPedidoIndividual,{},doOk);
@@ -87,8 +89,11 @@
 		
 		function callPedidoIndividual(){
 			function doOk(response) {
-				$log.debug("--- callPedidoIndividual ",response.data);
-				ToastCommons.mensaje("hay pedidos !");
+				//TODO: ver si lo puede traer el servicio
+				response.data.creador = 'INDIVUDUAL'
+				response.data.nombre = 'INDIVUDUAL'
+				vm.tabs.push(response.data);
+				
 			}
 			
 			function doNoOk(response) {

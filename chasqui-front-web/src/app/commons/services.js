@@ -144,7 +144,8 @@
       post: function(url, params, doOk, noOk) {
     	 var header = {} ;
  	     header = { 'Content-Type': 'application/json',
-	                 'Authorization': createHeader()
+	                 'Authorization': createHeader(),
+	                 'idVendedor':6
 	              };
  	     
         post(url, header , params, doOk, noOk);

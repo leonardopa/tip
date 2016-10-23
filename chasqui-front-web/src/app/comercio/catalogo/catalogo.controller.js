@@ -40,9 +40,7 @@
 	  vm.productorSelect;
 	  vm.medallaSelect;
 	  
-	  vm.filtroChange= function (){
-		  $log.debug("filtroChangefiltroChangefiltroChangefiltroChangefiltroChangefiltroChange");
-	  }
+	  
 	  
 	  vm.filtroPor = function(filtroPor){
 		  $log.debug("filtro por ",filtroPor);
@@ -67,6 +65,8 @@
 	              break;
 	          default:
 		  }
+		  
+		  vm.filtrar();
 	  }
 	  
 	  vm.filtroQuery = function(){
