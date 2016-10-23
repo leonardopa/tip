@@ -118,7 +118,7 @@
 		  var filtro = {};
 		  filtro.tipo = vm.tipoFiltro;
 		  filtro.valor = valor;			 
-		  $scope.$broadcast('filterEvent', filtro);		 
+		  $scope.$broadcast('filterEvent', filtro);	// llama al evento del list-producto-controller	 
 	  }
 	  
 	  /// CALL REST 

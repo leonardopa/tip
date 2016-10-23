@@ -58,7 +58,7 @@
 		  StateCommons.ls.usuario={};
 		  StateCommons.ls.token=null;
 		  StateCommons.ls.pedidoSeleccionado=null;
-		  $state.go('catalogo')
+		  $state.go('/')
 	  }
   }
 })();

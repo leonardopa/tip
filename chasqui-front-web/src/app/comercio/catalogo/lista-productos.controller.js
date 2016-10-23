@@ -118,23 +118,23 @@
 			 switch (filtro.tipo) { 
 		          case 'CATEGORIA':
 		        	  json.idCategoria =filtro.valor ;
-		        	  restProxy.post(CTE_REST.productosByCategoria, json, doOk);
+		        	  restProxy.postPublic(CTE_REST.productosByCategoria, json, doOk);
 		              break;
 		          case 'PRODUCTOR':
 		        	  json.idProductor = filtro.valor ;
-		        	  restProxy.post(CTE_REST.productosByProductor, json, doOk);
+		        	  restProxy.postPublic(CTE_REST.productosByProductor, json, doOk);
 		              break;   
 		          case 'MEDALLA':
 		        	  json.idMedalla = filtro.valor;
-		        	  restProxy.post(CTE_REST.productosByMedalla, json, doOk);
+		        	  restProxy.postPublic(CTE_REST.productosByMedalla, json, doOk);
 		              break;
 		          case 'QUERY':
-					 json.query = filtro.valor;
-					 json.idVendedor = CTE_REST.vendedor;
-		        	  restProxy.post(CTE_REST.productosByQuery, json, doOk);		
+		        	  json.query = filtro.valor;
+		        	  json.idVendedor = CTE_REST.vendedor;
+		        	  restProxy.postPublic(CTE_REST.productosByQuery, json, doOk);		
 		              break;
 		          default:
-		        		$log.log('tipo de filtro desconocido');
+		        	  $log.log('tipo de filtro desconocido');
 	          }
 		}
 		
