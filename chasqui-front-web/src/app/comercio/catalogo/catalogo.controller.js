@@ -36,29 +36,68 @@
 	  vm.paginaProducto;	  
 	  vm.tipoFiltro='CATEGORIA';// PRODUCTOR / MEDALLA / QUERY
 	  vm.queryText;
+	  vm.categoriaSelect;
+	  vm.productorSelect;
+	  vm.medallaSelect;
+	  
+	  vm.filtroChange= function (){
+		  $log.debug("filtroChangefiltroChangefiltroChangefiltroChangefiltroChangefiltroChange");
+	  }
 	  
 	  vm.filtroPor = function(filtroPor){
 		  $log.debug("filtro por ",filtroPor);
 		  
 		  vm.tipoFiltro = filtroPor;
-		 	  
+		 /// eliminar los otros selects
+		  switch (filtroPor) {
+	          case 'PRODUCTOR':
+	        	  vm.queryText=null;
+	        	  vm.categoriaSelect=null;        	  
+	        	  vm.medallaSelect=null;
+	              break;
+	          case 'MEDALLA':
+	        	  vm.queryText=null;
+	        	  vm.categoriaSelect=null;
+	        	  vm.productorSelect=null;
+	              break;
+	          case 'CATEGORIA':
+	        	  vm.queryText=null;
+	        	  vm.productorSelect=null;
+	        	  vm.medallaSelect=null;
+	              break;
+	          default:
+		  }
 	  }
 	  
 	  vm.filtroQuery = function(){
 		  vm.tipoFiltro = 'QUERY';
-		  vm.doFiltrar(vm.queryText);
+		  
+		  vm.categoriaSelect=null;
+		  vm.productorSelect=null;
+		  vm.medallaSelect=null;
+		  doFiltrar(vm.queryText);
 	  }
 	  
-	  vm.filtrar = function (){	  
-		  vm.doFiltrar(vm.query);
+	  vm.filtrar = function (){	  	  
+		  switch (vm.tipoFiltro) {
+	          case 'PRODUCTOR':
+	        	  doFiltrar(vm.productorSelect);
+	              break;
+	          case 'MEDALLA':
+	        	  doFiltrar(vm.medallaSelect);
+	              break;
+	          case 'CATEGORIA':
+	        	  doFiltrar(vm.categoriaSelect);
+	              break;
+	          case 'QUERY':
+	        	  doFiltrar(vm.queryText);
+	              break;
+	          default:
+		  }
+	 
 	  }
 	  
-	  vm.doFiltrar = function (valor){
-		  var filtro = {};
-		  filtro.tipo = vm.tipoFiltro;
-		  filtro.valor = valor;			 
-		  $scope.$broadcast('filterEvent', filtro);		 
-	  }
+
 	  
 	  vm.cambiarContexto = function (pedido){
 		  $log.debug("cambia contexo de carrito ",pedido);
@@ -74,6 +113,14 @@
 			  }, 1500);
 
 	  }
+	  
+	  var doFiltrar = function (valor){
+		  var filtro = {};
+		  filtro.tipo = vm.tipoFiltro;
+		  filtro.valor = valor;			 
+		  $scope.$broadcast('filterEvent', filtro);		 
+	  }
+	  
 	  /// CALL REST 
 	  
 	  //TODO: cache , para no sobrecargar con grupos
