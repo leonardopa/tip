@@ -26,7 +26,7 @@ public class PedidoDto implements Serializable {
 
 	private  TipoCompra tipo;
 
-	private List<ProductoPedidoDto> productos;
+	private List<ProductoPedidoDto> productosResponse;
 
 	public Integer getId() {
 		return id;
@@ -69,13 +69,6 @@ public class PedidoDto implements Serializable {
 		this.montoActual = montoActual;
 	}
 
-	public List<ProductoPedidoDto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<ProductoPedidoDto> productos) {
-		this.productos = productos;
-	}
 
 	public String getFechaCreacion() {
 		return fechaCreacion;
@@ -99,6 +92,14 @@ public class PedidoDto implements Serializable {
 
 	public void setTipo(TipoCompra tipo) {
 		this.tipo = tipo;
+	}
+
+	public List<ProductoPedidoDto> getProductosResponse() {
+		return productosResponse;
+	}
+
+	public void setProductosResponse(List<ProductoPedidoDto> productosResponse) {
+		this.productosResponse = productosResponse;
 	}
 
 

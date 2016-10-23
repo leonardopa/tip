@@ -115,7 +115,7 @@ public class ProductoServiceMock {
 			productos.add(crearteProductoPedido(1, 1, 1, createRandom(11) + 1));
 
 		}
-		pedido.setProductos(productos);
+		pedido.setProductosResponse(productos);
 
 		PedidoDto pedido2 = new PedidoDto();
 		pedido2.setTipo(TipoCompra.COLLECTIVA);
@@ -131,7 +131,7 @@ public class ProductoServiceMock {
 			productos2.add(crearteProductoPedido(1, 1, 1, createRandom(11) + 1));
 
 		}
-		pedido2.setProductos(productos2);
+		pedido2.setProductosResponse(productos2);
 
 		PedidoDto pedido3 = new PedidoDto();
 		pedido3.setTipo(TipoCompra.COLLECTIVA);
@@ -147,7 +147,7 @@ public class ProductoServiceMock {
 			productos3.add(crearteProductoPedido(1, 1, 1, createRandom(11) + 1));
 
 		}
-		pedido3.setProductos(productos3);
+		pedido3.setProductosResponse(productos3);
 
 		pedidos.add(pedido);
 		pedidos.add(pedido2);
