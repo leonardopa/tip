@@ -81,7 +81,7 @@
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ",response.data);
 				response.data
-				
+				ToastCommons.mensaje("Pedido creado ! deberia fallar si ya tiene uno");
 			}
 			
 			restProxy.post(CTE_REST.crearPedidoIndividual,{},doOk);
