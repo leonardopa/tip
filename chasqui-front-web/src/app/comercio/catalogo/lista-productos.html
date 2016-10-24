@@ -12,11 +12,11 @@
 			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
 	</div>	
  -->
-	<div flex-xs flex-gt-xs="30" layout="column">
-	<div ng-repeat="variante in listaProductoCtr.variantes">		
-		<md-card>
+<md-content class="md-padding" layout="row" layout-wrap>
+  <div flex="33" ng-repeat="variante in listaProductoCtr.variantes">
+		<md-card  >
 	        <img src="{{listaProductoCtr.urlBase}}/{{variante.imagenPrincipal}}"
-				 alt="{{variante.descripcion}}">
+				 alt="{{variante.descripcion}}"  >
 	        <md-card-title>
 	          <md-card-title-text>
 	          	<md-subheader  class="md-accent">{{variante.nombreProducto}}</md-subheader>            
@@ -56,7 +56,7 @@
 			 
 	        </md-card-actions>
 	      </md-card>
-	</div>
-	 
-</div>	
+	     </md-content>
+ </div>
+
 </div>

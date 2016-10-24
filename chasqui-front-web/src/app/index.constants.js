@@ -50,7 +50,7 @@
         	
         	productosByProductor: URL_REST_BASE_2 + "client/producto/byProductor",
         	
-        	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
+        	productosByMedalla: URL_REST_BASE_2+"client/producto/byMedalla",
         	
         	productosByQuery : URL_REST_BASE_2 + "client/producto/byQuery",
           	
