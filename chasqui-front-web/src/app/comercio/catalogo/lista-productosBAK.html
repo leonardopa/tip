@@ -1,8 +1,19 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
  
+   <p>XXXXXXXXXXX </p>
+  
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
 		productos.</span>
-
+ 
+	<!-- 
+	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
+		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
+			ng-model="listaProductoCtr.bigCurrentPage"
+			max-size="listaProductoCtr.maxSize" class="pagination-sm"
+			boundary-link-numbers="true" rotate="false"
+			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
+	</div>	
+ -->
 	<div ng-repeat="variante in listaProductoCtr.variantes">
 		<div flex-xs flex-gt-xs="120" layout="column">
 			<md-card> 
@@ -10,70 +21,72 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-2">
+					
 						<img
-							src="http://lorempixel.com/90/90/food/{{variante.idProducto}}"
+							src="{{listaProductoCtr.urlBase}}/{{variante.imagenPrincipal}}"
 							alt="{{variante.descripcionVariente}}">
 					</div>
 					<div class="col-md-5">
 						<div layout="column" layout-align="space-around start">
 							<div><strong> {{variante.nombreProducto}} </strong></div>
 							<div><a href="#">{{variante.nombreVariedad}}</a></div>
-							<div>Productor : <strong> {{variante.nombreFabricante}} </strong></div>							  
+							<div>Productor : <a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}} </a></div>							  
 						</div>
 					</div>
 					<div class="col-md-2">
 						<h4>
-							<strong>{{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
+							<strong>$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
 						</h4>
-						5 X $ 20<sup>50</sup>
+						 
 					</div>
 					<div class="col-md-3">
-						<section layout="row" layout-sm="column" layout-wrap>
-							<md-icon> info_outline </md-icon>
-							<md-icon> info_outline </md-icon>
-							<md-icon> info_outline </md-icon>
-							<md-icon> info_outline </md-icon>
-							<br>
-						</section>
-
-						<div ng-show="listaProductoCtr.isPaginaPrincipal">
-							<section layout="row" layout-sm="column"
+						<section layout="row" layout-sm="column"
 								layout-align="center center" layout-wrap>
 								<md-button class="md-raised md-primary"
 								ng-click="listaProductoCtr.agregar(variante)">Agregar <md-tooltip
 									md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
-							</section>
-						</div>
-
-						<div ng-show="! listaProductoCtr.isPaginaPrincipal">
-							<div layout="row">
-								<div flex>
-									<br>
-									<h8>Cant.</h8>
-									<strong>{{variante.cantidad}}</strong>
-								</div>
-								<div flex>
-									<md-button ng-click="listaProductoCtr.quitar(variante)">
-									<i style="font-size: 32px; color: red" class="material-icons">remove_shopping_cart</i>
-									<md-tooltip md-direction="left"> Quitar del
-									Chanquito </md-tooltip> </md-button>
-								</div>
-							</div>
-
-						</div>
+						</section>
+						 
 					</div>
 				</div>
-			</div>
+			
+			<!-- TODO ACOMODAR -->
+			<section layout="row" layout-sm="column" layout-wrap>
+							<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								          	<md-icon> info_outline </md-icon>
+								          	<md-tooltip md-direction="up">
+									          descripcion corta
+									        </md-tooltip>
+							</md-button>
+							
+							<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								          	<md-icon> info_outline </md-icon>
+								          	<md-tooltip md-direction="up">
+									          descripcion corta
+									        </md-tooltip>
+							</md-button>
+							
+								<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								          	<md-icon> info_outline </md-icon>
+								          	<md-tooltip md-direction="up">
+									          descripcion corta
+									        </md-tooltip>
+							</md-button>
+							
+								<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								          	<md-icon> info_outline </md-icon>
+								          	<md-tooltip md-direction="up">
+									          descripcion corta
+									        </md-tooltip>
+							</md-button>
+						
+			</section>
+			</div>			
+						
 			</md-card-content> </md-card>
 		</div>
 	</div>
 
 
-	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
-		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
-			ng-model="listaProductoCtr.bigCurrentPage"
-			max-size="listaProductoCtr.maxSize" class="pagination-sm"
-			boundary-link-numbers="true" rotate="false"
-			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
-	</div>
+	
 </div>

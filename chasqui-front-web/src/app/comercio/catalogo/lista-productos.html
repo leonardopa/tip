@@ -1,7 +1,5 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
- 
-  
-  
+
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
 		productos.</span>
  
@@ -14,79 +12,51 @@
 			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
 	</div>	
  -->
-	<div ng-repeat="variante in listaProductoCtr.variantes">
-		<div flex-xs flex-gt-xs="120" layout="column">
-			<md-card> 
-			<md-card-content>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-2">
-					
-						<img
-							src="{{listaProductoCtr.urlBase}}/{{variante.imagenPrincipal}}"
-							alt="{{variante.descripcionVariente}}">
-					</div>
-					<div class="col-md-5">
-						<div layout="column" layout-align="space-around start">
-							<div><strong> {{variante.nombreProducto}} </strong></div>
-							<div><a href="#">{{variante.nombreVariedad}}</a></div>
-							<div>Productor : <a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}} </a></div>							  
-						</div>
-					</div>
-					<div class="col-md-2">
-						<h4>
-							<strong>$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
-						</h4>
-						 
-					</div>
-					<div class="col-md-3">
-						<section layout="row" layout-sm="column"
-								layout-align="center center" layout-wrap>
-								<md-button class="md-raised md-primary"
+	<div flex-xs flex-gt-xs="30" layout="column">
+	<div ng-repeat="variante in listaProductoCtr.variantes">		
+		<md-card>
+	        <img src="{{listaProductoCtr.urlBase}}/{{variante.imagenPrincipal}}"
+				 alt="{{variante.descripcion}}">
+	        <md-card-title>
+	          <md-card-title-text>
+	          	<md-subheader  class="md-accent">{{variante.nombreProducto}}</md-subheader>            
+	          </md-card-title-text>
+	        </md-card-title>
+	        <md-card-content>
+		        <div layout="column">	  
+				  <div layout="row" layout-align="center center">
+				  		<div flex><span class="md-subhead">{{variante.nombreVariedad}}</span></div>			
+				  	<!-- 
+				  		<div flex ng-bind-html="variante.descripcion"></div> -->					  	 
+						<div flex><strong  class="md-headline" >$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong></div>				  		
+				  </div>
+				   
+				  <div>Productor : <a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}} </a></div>
+				</div>	     
+				
+				 <div layout="row"       layout-align="space-around center">
+				  <div ng-repeat="medalla in variante.medallasProducto">
+				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"> 
+								 <md-tooltip md-direction="up">
+									          {{medalla.nombre}}
+								 </md-tooltip>
+					    </md-button>
+				  </div>		 
+				</div>	
+	        </md-card-content>
+	       
+				
+	        <md-card-actions layout="column" layout-align="start">
+	          
+	          <md-button class="md-raised md-primary"
 								ng-click="listaProductoCtr.agregar(variante)">Agregar <md-tooltip
 									md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
-						</section>
-						 
-					</div>
-				</div>
-			
-			<!-- TODO ACOMODAR -->
-			<section layout="row" layout-sm="column" layout-wrap>
-							<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								          	<md-icon> info_outline </md-icon>
-								          	<md-tooltip md-direction="up">
-									          descripcion corta
-									        </md-tooltip>
-							</md-button>
-							
-							<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								          	<md-icon> info_outline </md-icon>
-								          	<md-tooltip md-direction="up">
-									          descripcion corta
-									        </md-tooltip>
-							</md-button>
-							
-								<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								          	<md-icon> info_outline </md-icon>
-								          	<md-tooltip md-direction="up">
-									          descripcion corta
-									        </md-tooltip>
-							</md-button>
-							
-								<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								          	<md-icon> info_outline </md-icon>
-								          	<md-tooltip md-direction="up">
-									          descripcion corta
-									        </md-tooltip>
-							</md-button>
-						
-			</section>
-			</div>			
-						
-			</md-card-content> </md-card>
-		</div>
+									
+			 
+	        </md-card-actions>
+	      </md-card>
 	</div>
-
-
-	
+	 
+</div>	
 </div>
