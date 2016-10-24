@@ -1,4 +1,5 @@
 <section ng-include="'app/comercio/principal/menu.html'"></section>
+
 <!-- Pantalla de perfil de usuario -->
 <div class="container-fluid">
 	<div class="row">
@@ -47,11 +48,10 @@
 				</md-tab> 
 							
 				
-				<md-tab label="Acciones"> <md-content class="md-padding">
-					
-					<h1 class="md-display-2">Acciones</h1>
-					<p>Aca pueden ur acciones varias como crear un grupo ,  cambiar contraseña</p>
-					</md-content> </md-tab> </md-tabs> </md-content>
+				<md-tab label="Acciones"> 
+					<div ng-include="'app/comercio/administracion/perfil.acciones.html'"></div>
+				</md-tabs> 
+				</md-content>
 			</div>
 
 		</div>

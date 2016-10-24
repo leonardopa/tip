@@ -31,7 +31,7 @@
         	login: URL_REST_BASE_2+"client/sso/singIn",
         	
         	resetPass: function (email){
-        		return URL_REST_BASE+"client/resetPass/"+email ;
+        		return URL_REST_BASE_2+"client/sso/resetPass/"+email ;
         	},
         	
         	singUp: URL_REST_BASE_2+"client/sso/singUp",
