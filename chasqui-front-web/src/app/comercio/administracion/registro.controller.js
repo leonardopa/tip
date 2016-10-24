@@ -20,8 +20,9 @@
 		/** Si ya cargo el usuario , ahora tiene que cargar el domicilo*/
 		$scope.$on("creo-usuario-nuevo", function (args,mass) {
 			$log.debug("llego el mensaje del otro controller ....",mass.user);
-			vm.isPasoUsuario = ! vm.isPasoUsuario;
-			vm.isPasoDomicilio = ! vm.isPasoDomicilio;
+			//vm.isPasoUsuario = ! vm.isPasoUsuario;
+			//vm.isPasoDomicilio = ! vm.isPasoDomicilio;
+			$state.go('login');
 		});
 	}
 

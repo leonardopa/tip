@@ -97,7 +97,7 @@
 				}
 			
 				// TODO : manejar error
-				restProxy.post(CTE_REST.singUp, vm.user, doOk);
+				restProxy.postPublic(CTE_REST.singUp, vm.user, doOk);
 			}else{
 				$log.error("las contrasenas no coinciden");
 				//TODO: enviar mensaje
