@@ -41,20 +41,10 @@
 					<br>
 				</div>
 							<div class="col-md-2">
-									<div class="span8">
-						    <h3>Una noticia importante</h3>
-						    <p>...y queres formar parte de este catalogo virtual, acercate a las oficinas de </p>
-						    <div>
-						        <span class="badge"> 2012-08-02 20:47:04</span>				        
-						    </div> 
-						    <hr>
-						    <h3>Otra gran noticia</h3>
-						    <p> cerveza gratis </p>
-						    <div>
-						        <span class="badge"> 2012-08-02 20:47:04</span>
-						    </div>     
-						    <hr>
-						</div>
+									<div class="span8" >
+						    <h3 class= "contexto"> {{catalogoCtrl.carrito.nombre}} </h3>
+						  
+						    
 				</div>
 			</div>
 		</div>
@@ -101,11 +91,17 @@
 			        	options="{{catalogoCtrl.options}}"/>
 				</a>
 				
-			</md-button>
-	 		
+			</md-button>	 		
+
 	 		<md-subheader class="md-primary">{{catalogoCtrl.carrito.nombre}}</md-subheader> </md-card>
-       	|	
+
+
+                                           
+
+       	
   </div>
+
+
  
  <style>
 <!--
@@ -118,6 +114,14 @@ right: 20px;
 bottom: 20px;
 left: auto;
 position: fixed;
+}
+
+.contexto {
+padding: 1em;
+background: rgb(244,81,30);
+border:1px solid red;
+text-align: center;
+box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
 }
 </style>
      
