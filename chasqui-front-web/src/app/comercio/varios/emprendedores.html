@@ -15,13 +15,15 @@
 		          </md-card-title-text>
 		        </md-card-title>
 		        <md-card-content>
-		          {{emprendedorCtrl.emprendedor.descripcionCorta}}
-		          {{emprendedorCtrl.emprendedor.descripcionLarga}}
+		          <span>{{emprendedorCtrl.emprendedor.descripcionCorta}}</span>
+		          
+		          <div ng-bind-html="emprendedorCtrl.emprendedor.descripcionLarga"></div>
+				  <span>		        
 		          {{emprendedorCtrl.emprendedor.direccion.pais}}
 		          {{emprendedorCtrl.emprendedor.direccion.provincia}}
 		          {{emprendedorCtrl.emprendedor.direccion.localidad}}
 		          {{emprendedorCtrl.emprendedor.direccion.calle}}
-		          {{emprendedorCtrl.emprendedor.direccion.altura}}
+		          {{emprendedorCtrl.emprendedor.direccion.altura}}</span>
 		     	</md-card-content>
 		  </div>
 		  <div flex hide-sm hide-xs>
