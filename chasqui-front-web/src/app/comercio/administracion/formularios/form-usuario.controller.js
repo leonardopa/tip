@@ -7,7 +7,7 @@
 	/**
 	 * @ngInject Formulario para crear un grupo
 	 */
-	function FormUsuarioController($log, $state, restProxy, CTE_REST,ToastCommons,StateCommons,$scope) {
+	function FormUsuarioController($log, $state, restProxy, CTE_REST,ToastCommons,StateCommons,$scope,$timeout) {
 		$log.debug("controler FormUsuarioController",$scope.perfil);
 		 
 		var vm = this;
@@ -18,6 +18,26 @@
 		vm.isAlta=$scope.perfil != true;    // si crea un usuario nuevo o es un update. Si viene de perfil es UPDATE 
 		vm.readOnly=! vm.isAlta; // si es alta siempre false, sino depende el modo.
 		vm.isModoEdit = false; 
+		
+		function mostrarMensajesDeBienvenida(){
+			
+			$timeout(function(){
+				ToastCommons.mensaje('Bienvenido !');
+			 }, 3000);
+			
+			$timeout(function(){
+				ToastCommons.mensaje('Ahora podes ingresar a CHASQUI !');
+			 }, 10000);
+								
+			$timeout(function(){
+				 ToastCommons.mensaje('Reciviras un mensaje de bienvenida por correo !');
+			 }, 15000);
+			
+			$timeout(function(){
+				 ToastCommons.mensaje('Podes seguir completando tu perfil !');
+			 }, 30000);
+		}
+				
 		
 		vm.init = function (){
 			if (! vm.isAlta){
@@ -86,7 +106,8 @@
 
 				function doOk(response) {
 					$log.debug("guardo usuario", response.data);
-					ToastCommons.mensaje('Bienvenido');
+					
+					mostrarMensajesDeBienvenida();
 					
 					StateCommons.ls.token = response.data.token;
 					
@@ -95,9 +116,18 @@
 					$scope.$emit("creo-usuario-nuevo", { user: response.data });
 					
 				}
-			
+				function doNoOk(response) {
+					$log.debug("error al guardar usuario", response.data);
+					
+					if (response.status == 409 ){
+						ToastCommons.mensaje(response.data.error);
+					}else{
+						ToastCommons.mensaje('error inesperado, intente nuevamente');
+					}
+					
+				}
 				// TODO : manejar error
-				restProxy.postPublic(CTE_REST.singUp, vm.user, doOk);
+				restProxy.postPublic(CTE_REST.singUp, vm.user, doOk,doNoOk);
 			}else{
 				$log.error("las contrasenas no coinciden");
 				//TODO: enviar mensaje
