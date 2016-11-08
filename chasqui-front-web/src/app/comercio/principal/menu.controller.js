@@ -72,5 +72,10 @@
 		  StateCommons.ls.pedidoSeleccionado=null;
 		  $state.go('principal')
 	  }
+
+
+
+      
+
   }
 })();
