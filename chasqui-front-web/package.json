@@ -1,7 +1,10 @@
 {
   "name": "chasqui",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "angular-leaflet-directive": "^0.10.0",
+    "leaflet": "^1.0.1"
+  },
   "scripts": {
     "test": "gulp test"
   },
