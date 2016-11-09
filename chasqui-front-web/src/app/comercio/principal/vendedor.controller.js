@@ -15,6 +15,7 @@
 	  
 	  vm.vendedor;
 	  vm.imagen;
+          vm.urlBase = CTE_REST.url_base;
 
 
 
