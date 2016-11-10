@@ -20,10 +20,26 @@
         var PRODUCTO = URL_REST_BASE + "productos/";
         
         var idVendedor = 6;
+
+        var nombreVendedor = 'adminpds';
+  
+     
+
+        
+      
+
         return {
         	//vendedor: 2,
-        	vendedor: 6,
+              //  vendedor: 6,
         	
+
+               
+
+                vendedor:  URL_REST_BASE_2+"client/vendedor/adminpds",
+			
+        	
+
+                 
         	url_base: "http://168.181.184.203:8080/chasqui",
         	
         	url_rest: URL_REST_BASE ,
@@ -44,7 +60,7 @@
         		return URL_REST_BASE_2 +"client/productor/all/" + idVendedor;
         	},
         	
-        	medallas: URL_REST_BASE+"client/medalla/all", 
+        	medallas: URL_REST_BASE_2 +"client/medalla/all", 
         	 
         	productosByCategoria: URL_REST_BASE_2 + "client/producto/byCategoria",
         	

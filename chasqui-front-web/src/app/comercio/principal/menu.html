@@ -3,11 +3,22 @@
 
 <div ng-controller="MenuController as menuCtrl">    
 
-	<md-toolbar class="md-hue-2" ngStiky>
+	<md-toolbar class="md-hue-2" >
 		<div class="md-toolbar-tools">
 		 
-		<a ui-sref="principal"><img alt="" src="app\components\image\logo_ch.png"> </a>
+                               
+
+    	  <a ui-sref="principal">  <img src=""> </a>
 	
+                       <div ng-controller= "VendedorController as vendedorCtrl" > 
+
+                        <img ng-src= "{{vendedorCtrl.urlBase}}{{ vendedorCtrl.vendedor.imagen }}" >
+
+
+                       </div>              
+
+
+
 		<span flex></span>
 	    
 		  
@@ -25,9 +36,9 @@
 		</div>
 	</md-toolbar>
 
+    <div class="menu" layout="row" layout-align="center center">
 
-
-	<md-button  class="{{menuCtrl.classFor('medalla')}}" ng-click="menuCtrl.ir('medalla')"  >
+    	<md-button  class="{{menuCtrl.classFor('medalla')}}" ng-click="menuCtrl.ir('medalla')"  >
 		 medalla </md-button>
 	    <span>|</span>
 	<md-button  class="{{menuCtrl.classFor('emprendedores')}}" ng-click="menuCtrl.ir('emprendedores')"  >
@@ -50,6 +61,9 @@
     <md-button  class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')" 
       ng-show="menuCtrl.isLogued" > 
       	 Perfil </md-button>
+    </div>
+
+	
         
      <md-divider ></md-divider>
 </div>

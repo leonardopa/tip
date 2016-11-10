@@ -44,7 +44,8 @@
 			}
 			// TODO: hacer el ID de VENDEDOR dinamico
 			// PASARLE el id del producto vm.idEmprendedor
-			restProxy.get(CTE_REST.productores(CTE_REST.vendedor),{},doOk);		    
+			//restProxy.get(CTE_REST.productores(CTE_REST.vendedor),{},doOk);	
+                          restProxy.get(CTE_REST.productores(6),{},doOk);		    
 	   }
 	   
 	   
