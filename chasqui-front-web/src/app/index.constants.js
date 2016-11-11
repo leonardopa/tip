@@ -33,7 +33,7 @@
               //  vendedor: 6,
         	
 
-               
+        	idVendedor: idVendedor, //TODO : hasta que sea dinamico
 
                 vendedor:  URL_REST_BASE_2+"client/vendedor/adminpds",
 			
