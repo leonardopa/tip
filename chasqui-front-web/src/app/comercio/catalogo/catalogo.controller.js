@@ -181,13 +181,13 @@
 	 }
 	  
 	  function callMedallas() {
-			$log.debug("---callMedallas ---");
+			$log.debug("---callMedallas de producto ---");
 
 			function doOk(response) {				 
 				vm.medallas = response.data;
 			}
 		
-			restProxy.get(CTE_REST.medallas,{},doOk);		    
+			restProxy.get(CTE_REST.medallasProducto,{},doOk);		    
 	 }
 	  
 	 

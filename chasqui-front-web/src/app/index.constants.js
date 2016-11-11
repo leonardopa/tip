@@ -61,6 +61,14 @@
         	},
         	
         	medallas: URL_REST_BASE_2 +"client/medalla/all", 
+        	
+        	medallasProducto: URL_REST_BASE_2 + "client/medalla/producto/all",
+        	
+        	medallasProductor : URL_REST_BASE_2 + "client/medalla/productor/all",
+        	
+        	medallaById: function (id){
+        		return URL_REST_BASE_2 +"client/producto/medalla/idMedalla" + id; 
+        	},
         	 
         	productosByCategoria: URL_REST_BASE_2 + "client/producto/byCategoria",
         	
