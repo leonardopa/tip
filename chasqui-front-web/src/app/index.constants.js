@@ -93,6 +93,11 @@
         	verPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ,
         	
         	agregarPedidoIndividual: URL_REST_BASE_2+  'user/pedido/individual',
+        	
+        	pedidoIndividual:function (id){
+        		return 	URL_REST_BASE_2+ 'user/pedido/individual/'+id;
+        	},
+        	
         	////////////////////////////////////////////////////////
         	
         	productosDestacados : URL_REST_BASE +"productos/destacados",

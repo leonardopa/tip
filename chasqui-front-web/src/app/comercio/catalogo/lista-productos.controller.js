@@ -39,7 +39,7 @@
 			.ok('Agregar').cancel('Cancelar');
 
 			$mdDialog.show(confirm).then(function(result) {
-				$log.debug("Agregar OK", result);
+				$log.debug("Agregar al carro cantidad ", result);
 
 				if (!isNaN(result) &&  result > 0) {
 					$log.debug("Entrada valida", result);
@@ -76,11 +76,17 @@
 		// /////////// REST
 
 		var callAgregarAlCarro = function(variante, cantidad) {
-			$log.debug('callAgregarAlCarro: ', StateCommons.ls.pedidoSeleccionado);
+			$log.debug('callAgregarAlCarro para pedido: ', StateCommons.ls.pedidoSeleccionado);
 
 			function doOk(response) {
 				//TODO: mensaje OK
 				$log.log('Agregar producto Response ', response);
+
+			}
+			
+			function doNoOk(response) {
+				//TODO: mensaje OK
+				$log.log('FALLO AGREGAR PRODUCTO ', response);
 
 			}
 			
@@ -91,7 +97,7 @@
 			
 			// / TODO : USUARIO HARDOC y pedido 
 			restProxy.post(
-					CTE_REST.agregarPedidoIndividual,params, doOk);
+					CTE_REST.agregarPedidoIndividual,params, doOk,doNoOk);
 
 		}
 

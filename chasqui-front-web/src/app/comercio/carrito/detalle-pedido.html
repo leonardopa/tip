@@ -16,7 +16,10 @@
 				<span class="md-subhead">Monto actual : ${{detallePedidoCtrl.pedido.montoActual}} / Monto minimo : ${{detallePedidoCtrl.pedido.montoMinimo}}</span>													
 				<span class="md-subhead">{{detallePedidoCtrl.pedido.estado}}  </span>
 		</md-card-content>
-		<md-card-actions layout="row" layout-align="end center">			 
+		<md-card-actions layout="row" layout-align="end center">	
+		    <md-button ng-click="detallePedidoCtrl.eliminar()"> Eliminar </md-button>
+		    <md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>	
+		    <md-button ng-click="detallePedidoCtrl.confirmar()"> Confirmar </md-button>		 
 			<md-button ng-click="detallePedidoCtrl.comprar($event)">
 				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>				 
 					<md-tooltip md-direction="left">
