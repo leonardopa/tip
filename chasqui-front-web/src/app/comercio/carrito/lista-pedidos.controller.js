@@ -74,7 +74,8 @@
 			}
 
 			// TODO: hacer el ID de usuario dinamico			
-			restProxy.get(CTE_REST.productosPedidoByUser(6),{},doOk);
+			restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);
+
 		}
 		
 		function callCrearPedidoIndividual(){

@@ -16,12 +16,7 @@
 
 		vm.guardar = function() {
 			$log.debug("guardar grupo", vm.grupo);
-
-			// TODO : SACAR USUARIO HARCODEADO
-//			$http.post(
-//					"http://localhost:8081/chasqui-mock/usuarios/" + 1
-//							+ "/grupos/", vm.grupo).then(doOk);
-
+ 
 			function doOk(response) {
 				$log.debug("respuesta guardar grupo ", response);
 				

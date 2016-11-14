@@ -16,8 +16,15 @@
     vm.ls.usuario ;
     
     vm.ls.pedidoSeleccionado;
-    
-    
+
+    vm.vendedor = function(){
+    	//TODO: pedir al servicio, hacer singleton con el LS
+    	var config={};
+    	config.id=6;
+    	 
+    	
+    	return config;
+    } 
 
   }// function
 })();// anonimo

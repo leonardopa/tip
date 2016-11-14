@@ -148,8 +148,8 @@
 				}
 			}
 			
-			// TODO: hacer el ID de usuario dinamico
-			restProxy.get(CTE_REST.productosPedidoByUser(6),{},doOk);		    
+			restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);		    
+
 	 }
 	 
 	  
@@ -161,10 +161,8 @@
 				vm.categorias = response.data;
 				vm.categoriaSelect =vm.categorias[0]; 
 			}
-			
-			// TODO: hacer el ID de VENDEDOR dinamico
-			//restProxy.get(CTE_REST.categorias(CTE_REST.vendedor),{},doOk);
-                         restProxy.get(CTE_REST.categorias(6),{},doOk);		    		    
+			restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},doOk);		    		    
+
 	 }
 	  
 	  function callProductores() {
@@ -175,9 +173,8 @@
 		//		vm.productorSelect =vm.productores[0]; 
 			}
 			
-			// TODO: hacer el ID de VENDEDOR dinamico
-			//restProxy.get(CTE_REST.productores(CTE_REST.vendedor),{},doOk);		
-                         restProxy.get(CTE_REST.productores(6),{},doOk);		    
+		 	restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
+		
 	 }
 	  
 	  function callMedallas() {

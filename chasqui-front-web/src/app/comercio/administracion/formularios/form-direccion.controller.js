@@ -76,10 +76,7 @@
 		var guardarDireccionGrupo = function (){
 			$log.debug("guardar domicilio al grupo",vm.domicilio);
 			
-			// TODO : SACAR USUARIO HARCODEADO
-//			$http.post("http://localhost:8081/chasqui-mock/direccion/usuario/"+"1/",vm.domicilio)
-//	        .then(doOk);
-			
+	
 	        function doOk(response) {	    			    		 
 	    		$log.debug("respuesta guardar domicilio ", response);
 
