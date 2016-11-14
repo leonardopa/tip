@@ -47,6 +47,9 @@ public class RestProducto {
 		// Ejemplo de como saber que Vendedor es
 		System.out.println("local " + request.getRequestURL());
 		System.out.println("local " + request.getRequestURI());
+		System.out.println("local " + request.getServerName());
+		System.out.println("local " + request.getLocalName());
+		System.out.println("local " + request.getPathInfo());
 		System.out.println(request.getLocalAddr());
 		;
 
