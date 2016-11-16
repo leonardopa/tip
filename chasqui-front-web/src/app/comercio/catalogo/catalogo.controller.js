@@ -149,7 +149,7 @@
 			}
 			
 			// TODO: hacer el ID de usuario dinamico
-			restProxy.get(CTE_REST.productosPedidoByUser(6),{},doOk);		    
+			restProxy.get(CTE_REST.productosPedidoByUser(CTE_REST.idVendedor),{},doOk);		    
 	 }
 	 
 	  
@@ -164,7 +164,7 @@
 			
 			// TODO: hacer el ID de VENDEDOR dinamico
 			//restProxy.get(CTE_REST.categorias(CTE_REST.vendedor),{},doOk);
-                         restProxy.get(CTE_REST.categorias(6),{},doOk);		    		    
+                         restProxy.get(CTE_REST.categorias(CTE_REST.idVendedor),{},doOk);		    		    
 	 }
 	  
 	  function callProductores() {
@@ -177,7 +177,7 @@
 			
 			// TODO: hacer el ID de VENDEDOR dinamico
 			//restProxy.get(CTE_REST.productores(CTE_REST.vendedor),{},doOk);		
-                         restProxy.get(CTE_REST.productores(6),{},doOk);		    
+                         restProxy.get(CTE_REST.productores(CTE_REST.idVendedor),{},doOk);		    
 	 }
 	  
 	  function callMedallas() {
