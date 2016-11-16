@@ -11,36 +11,33 @@
           })
   
     .constant('CTE_REST',  function() {
+
+        var URL_BASE = "http://localhost:8081/chasqui/";
+        //var URL_BASE = "http://168.181.184.203:8080/chasqui";
         
         var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
        // var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
-        var URL_REST_BASE_2 = "http://proyectochasqui.com:8080/chasqui/rest/";
+        
+        var URL_REST_BASE_2 = URL_BASE+"rest/";
+        
+        //var URL_REST_BASE_2 = "http://proyectochasqui.com:8080/chasqui/rest/";
         //var URL_REST_BASE = "http://factory.epidata.com.ar:9145/chasqui-mock/rest/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 6;
+        var idVendedor = 4;
 
         var nombreVendedor = 'adminpds';
-  
-     
-
         
-      
-
         return {
-        	//vendedor: 2,
-              //  vendedor: 6,
-        	
 
-               
+        	idVendedor: idVendedor, //TODO : hasta que sea dinamico
 
-                vendedor:  URL_REST_BASE_2+"client/vendedor/adminpds",
-			
-        	
+            vendedor:  URL_REST_BASE_2+"client/vendedor/"+nombreVendedor,
 
+            catalogo:  URL_REST_BASE_2+"client/catalogo", //Para que se deduzca de la URL
                  
-        	url_base: "http://168.181.184.203:8080/chasqui",
+        	url_base: URL_BASE,
         	
         	url_rest: URL_REST_BASE ,
         	
@@ -61,6 +58,14 @@
         	},
         	
         	medallas: URL_REST_BASE_2 +"client/medalla/all", 
+        	
+        	medallasProducto: URL_REST_BASE_2 + "client/medalla/producto/all",
+        	
+        	medallasProductor : URL_REST_BASE_2 + "client/medalla/productor/all",
+        	
+        	medallaById: function (id){
+        		return URL_REST_BASE_2 +"client/producto/medalla/idMedalla" + id; 
+        	},
         	 
         	productosByCategoria: URL_REST_BASE_2 + "client/producto/byCategoria",
         	
@@ -85,9 +90,18 @@
         	verPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ,
         	
         	agregarPedidoIndividual: URL_REST_BASE_2+  'user/pedido/individual',
+        	
+        	pedidoIndividual:function (id){
+        		return 	URL_REST_BASE_2+ 'user/pedido/individual/'+id;
+        	},
+        	
         	////////////////////////////////////////////////////////
         	
-        	productosDestacados : URL_REST_BASE +"productos/destacados",
+        	productosDestacados : URL_REST_BASE_2 +"client/producto/destacados/"+ idVendedor,
+
+        	productosDestacadosByVendedor : function(idV){
+        		return URL_REST_BASE_2 +"client/producto/destacados/"+idV;
+        	},
         	
         	productosPedidoByUser : function(idUser){
         		return URL_REST_BASE + "productos/pedidos/usuario/"+idUser;
