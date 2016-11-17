@@ -136,7 +136,7 @@
 		              break;
 		          case 'QUERY':
 		        	  json.query = filtro.valor;
-		        	  json.idVendedor = CTE_REST.idVendedor;
+		        	  json.idVendedor = StateCommons.vendedor().id;
 		        	  restProxy.postPublic(CTE_REST.productosByQuery, json, doOk);		
 		              break;
 		          default:

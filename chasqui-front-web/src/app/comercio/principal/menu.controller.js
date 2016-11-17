@@ -6,13 +6,13 @@
     .controller('MenuController',MenuController);
 
   /** @ngInject */
-  function MenuController( $scope,$log,$state,StateCommons) {
+  function MenuController( $scope,$log,$state,StateCommons,CTE_REST) {
 	  $log.debug("MenuController ..... ");
 	  $log.debug(StateCommons.ls.usuario);
 	  
 	  var vm = this;
-
-	 
+	  vm.urlBase = CTE_REST.url_base;
+	  vm.vendedor=StateCommons.vendedor();
 	 
 	  vm.categorias=[];
 	  vm.usuario= StateCommons.ls.usuario;

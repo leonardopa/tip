@@ -107,7 +107,7 @@
 				}
 			}
 			
-			restProxy.getPrivate(CTE_REST.verPedidoIndividual,{},doOk,doNoOk);
+			restProxy.getPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id),{},doOk,doNoOk);
 		
 		}
 		

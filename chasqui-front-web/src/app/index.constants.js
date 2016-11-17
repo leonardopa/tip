@@ -11,36 +11,33 @@
           })
   
     .constant('CTE_REST',  function() {
+
+      //  var URL_BASE = "http://localhost:8081/chasqui/";
+        var URL_BASE = "http://168.181.184.203:8080/chasqui/";
         
         var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
-       // var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
-        var URL_REST_BASE_2 = "http://proyectochasqui.com:8080/chasqui/rest/";
+    //    var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
+        
+        var URL_REST_BASE_2 = URL_BASE+"rest/";
+        
+        //var URL_REST_BASE_2 = "http://proyectochasqui.com:8080/chasqui/rest/";
         //var URL_REST_BASE = "http://factory.epidata.com.ar:9145/chasqui-mock/rest/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 6;
+  //      var idVendedor = 4;
 
-        var nombreVendedor = 'adminpds';
-  
-     
-
+        //var nombreVendedor = 'adminpds';
         
-      
-
         return {
-        	//vendedor: 2,
-              //  vendedor: 6,
-        	
 
-        	idVendedor: idVendedor, //TODO : hasta que sea dinamico
+       // 	idVendedor: idVendedor, //TODO : hasta que sea dinamico
 
-                vendedor:  URL_REST_BASE_2+"client/vendedor/adminpds",
-			
-        	
+       //     vendedor:  URL_REST_BASE_2+"client/vendedor/"+nombreVendedor,
 
+            catalogo:  URL_REST_BASE_2+"client/catalogo", //Para que se deduzca de la URL
                  
-        	url_base: "http://168.181.184.203:8080/chasqui",
+        	url_base: URL_BASE,
         	
         	url_rest: URL_REST_BASE ,
         	
@@ -90,7 +87,9 @@
         	
         	crearPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual',
         	
-        	verPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ,
+        	verPedidoIndividual: function (idVendedor){
+        		return URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ;
+        	},
         	
         	agregarPedidoIndividual: URL_REST_BASE_2+  'user/pedido/individual',
         	
@@ -99,8 +98,11 @@
         	},
         	
         	////////////////////////////////////////////////////////
-        	
-        	productosDestacados : URL_REST_BASE +"productos/destacados",
+       
+
+        	productosDestacadosByVendedor : function(idVendedor){
+        		return URL_REST_BASE_2 +"client/producto/destacados/"+idVendedor;
+        	},
         	
         	productosPedidoByUser : function(idUser){
         		return URL_REST_BASE + "productos/pedidos/usuario/"+idUser;

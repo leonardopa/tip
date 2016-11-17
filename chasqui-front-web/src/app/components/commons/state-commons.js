@@ -21,6 +21,7 @@
     	//TODO: pedir al servicio, hacer singleton con el LS
     	var config={};
     	config.id=6;
+    	config.imagen="/imagenes/usuarios/adminpds/chaqui-logo-15.png";
     	 
     	
     	return config;
