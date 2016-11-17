@@ -10,8 +10,8 @@
 	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
 	  StateCommons.ls.itemMenuSelect = 'catalogo';
 	  var vm = this;
-	  
-	  
+ 
+
 	  /////////// Para el selector de Grupos de compra
 	  vm.topDirections = ['left', 'up'];
 	  vm.bottomDirections = ['down', 'right'];
@@ -40,8 +40,8 @@
 	  vm.productorSelect;
 	  vm.medallaSelect;
 	  
-	  
-	  
+	  vm.urlBase=CTE_REST.url_base;
+ 
 	  vm.filtroPor = function(filtroPor){
 		  $log.debug("filtro por ",filtroPor);
 		  

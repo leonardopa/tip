@@ -27,7 +27,10 @@
 			ng-change="catalogoCtrl.filtroPor('MEDALLA')"
 			ng-model="catalogoCtrl.medallaSelect"> <md-option
 			ng-repeat="medalla in catalogoCtrl.medallas"
-			value="{{medalla.idMedalla}}"> <md-icon> info_outline </md-icon> {{medalla.nombre}} </md-option> </md-select> </md-input-container>
+			value="{{medalla.idMedalla}}">
+			  <img ng-src="{{catalogoCtrl.urlBase}}{{medalla.pathImagen}}" class="md-avatar"
+			  width="40" height="40"> 
+			 {{medalla.nombre}} </md-option> </md-select> </md-input-container>
 	</div>
 	<!-- 
 	<md-button
