@@ -161,6 +161,7 @@
 				vm.categorias = response.data;
 				vm.categoriaSelect =vm.categorias[0]; 
 			}
+
 			restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},doOk);		    		    
 
 	 }
@@ -174,7 +175,7 @@
 			}
 			
 		 	restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
-		
+
 	 }
 	  
 	  function callMedallas() {

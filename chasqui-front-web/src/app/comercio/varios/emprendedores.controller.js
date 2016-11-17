@@ -42,8 +42,9 @@
 				
 				vm.emprendedores= response.data;
 			}
-			
+
             restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
+
 	   }
 	   
 	   
