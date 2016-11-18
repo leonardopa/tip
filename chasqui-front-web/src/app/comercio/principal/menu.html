@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-
+<header>
 <div ng-controller="MenuController as menuCtrl">    
 
 	<md-toolbar class="md-hue-2" >
@@ -38,9 +38,9 @@
 
     <div class="menu" layout="row" layout-align="center center">
 
-    	<md-button  class="{{menuCtrl.classFor('medalla')}}" ng-click="menuCtrl.ir('medalla')"  >
-		 medalla </md-button>
-	    <span>|</span>
+    <md-button  class="{{menuCtrl.classFor('bienvenido')}}" ng-click="menuCtrl.ir('bienvenido')"  >
+		Bienvenido </md-button>
+	    <span>|</span> 	
 	<md-button  class="{{menuCtrl.classFor('emprendedores')}}" ng-click="menuCtrl.ir('emprendedores')"  >
 		productores </md-button>
 	    <span>|</span> 
@@ -67,3 +67,4 @@
         
      <md-divider ></md-divider>
 </div>
+</header>

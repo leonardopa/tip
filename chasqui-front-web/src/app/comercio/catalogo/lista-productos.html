@@ -37,7 +37,9 @@
 				 <div layout="row"       layout-align="space-around center">
 				  <div ng-repeat="medalla in variante.medallasProducto">
 				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"> 
+								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
+                                                                  width="60" height="60"> 
+
 								 <md-tooltip md-direction="up">
 									          {{medalla.nombre}}
 								 </md-tooltip>
