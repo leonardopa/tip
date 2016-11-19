@@ -23,6 +23,9 @@
 		  $log.debug("ir a ..... ",page);
 		  
 		  switch (page) { 
+	          case 'bienvenido':        	 
+	              $state.go('principal')
+	              break;
 	          case 'como-comprar':        	 
 	              $state.go('como-comprar')
 	              break;
