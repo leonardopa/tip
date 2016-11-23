@@ -18,7 +18,7 @@
 		//TODO: hacerlo flexible para grupo usuario vendedor ETC
 		// ahora esta para grupo
 		vm.guardar = function (){
-			
+			$log.debug("Guardar Domicilio , nuevo? ",isNew);
 			if (isNew){
 				callNuevaDireccion();				
 			}else{

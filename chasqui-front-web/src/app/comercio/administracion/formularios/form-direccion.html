@@ -1,85 +1,69 @@
 
-<div ng-controller="FormDireccionController as ctrl" layout="column"
-	ng-cloak class="md-inline-form">
-
-		<md-card> <md-card-title> <md-card-title-text>
-			 
+<div
+	ng-controller="FormDireccionController as ctrl"
+	layout="column" ng-cloak class="md-inline-form">
+	
+	<md-card> 		
 			<md-content layout-padding>
-			<div>
-				<form name="userForm">
-					
-					<div layout-gt-sm="row">
-						<md-input-container class="md-block" flex-gt-sm>
-						<label>Alias</label> <input ng-model="ctrl.domicilio.alias">
-						</md-input-container>
-						
-						<md-input-container class="md-block" flex-gt-sm>
-						<label>Calle</label> <input ng-model="ctrl.domicilio.calle">
-						</md-input-container>
-						
-					</div>
-					<div layout-gt-sm="row">
-						<md-input-container class="md-block"> <label>Altura</label>
-						<input ng-model="ctrl.domicilio.altura"> </md-input-container>
-						
-						<md-input-container class="md-block"> <label>Piso
-							/ Departamento</label> <input ng-model="ctrl.domicilio.departamento">
-						</md-input-container>
+					<div>
+						<form name="direccionForm">
+							<div layout-gt-sm="row">							
+								<md-input-container class="md-block" flex-gt-sm> 
+									<label>Alias</label> 							
+									<input ng-model="ctrl.domicilio.alias"> 
+								</md-input-container> 
+								<md-input-container class="md-block" flex-gt-sm>							
+									<label>Calle</label> 
+									<input ng-model="ctrl.domicilio.calle">
+								</md-input-container>
+							</div>
+														
+							<div layout-gt-sm="row">
+							
+								<md-input-container class="md-block">
+									<label>Altura</label>
+									<input ng-model="ctrl.domicilio.altura"> 
+								</md-input-container> 
+								<md-input-container class="md-block"> 
+									<label>Piso / Departamento</label> 
+									<input ng-model="ctrl.domicilio.departamento"> 
+								</md-input-container> 
+							
+								<md-input-container md-no-float class="md-block"> 
+									<label>Localidad </label> 
+									<input ng-model="ctrl.domicilio.localidad" placeholder="localidad"> 
+									</md-input-container>
+								</div>
+								
+								<div layout-gt-sm="row">
+									<md-input-container class="md-block" flex-gt-sm> 
+										<label>Codigo Postal</label> 
+										<input ng-model="ctrl.domicilio.codigoPostal"> 
+									</md-input-container> 
+									<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> --> 
+									<md-input-container class="md-block" flex-gt-sm> 
+										<label>Loguitud</label> 
+										<input ng-model="ctrl.domicilio.longitud"> 
+									</md-input-container> 
+									
+									<md-input-container class="md-block" flex-gt-sm> 
+										<label>Latitud</label> 
+										<input ng-model="ctrl.domicilio.latitud">
+									</md-input-container>
+								</div>
+							</form>
+						</div>
+			</md-content>
 
-						<md-input-container md-no-float class="md-block"> <label>Localidad
-						</label>
-						<input ng-model="ctrl.domicilio.localidad" placeholder="localidad">
-						</md-input-container>
-					</div>
-					<div layout-gt-sm="row">
-						<md-input-container class="md-block" flex-gt-sm>
-						<label>Codigo Postal</label> <input ng-model="ctrl.domicilio.codigoPostal">
-						</md-input-container>
-						<!-- 
-						<md-input-container class="md-block" flex-gt-sm>
-						<label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa">
-						</md-input-container>
-						 -->
-						<md-input-container class="md-block" flex-gt-sm>
-						<label>Loguitud</label> <input ng-model="ctrl.domicilio.longitud">
-						</md-input-container>
-						
-						<md-input-container class="md-block" flex-gt-sm>
-						<label>Latitud</label> <input ng-model="ctrl.domicilio.latitud">
-						</md-input-container>
-					</div>
-   
-
-
-     </div>
-
-
-
-
-
-     </div>
-
-
-
-
-
-				</form>
-			</div>
-			</md-content> </md-card-content> 
-			<md-card-actions layout="row" layout-align="end center">
-				<md-button ng-click="ctrl.eliminar()">
-								          	 <md-icon> remove_circle_outline </md-icon>
-								          	<md-tooltip md-direction="left">
-									          eliminar domicilo 
-									        </md-tooltip>
-				</md-button>
-				<md-button ng-click="ctrl.marcarPredeterminado()">
-								          	 <md-icon> compare_arrows </md-icon>
-								          	<md-tooltip md-direction="left">
-									          marcar como domicilo principal
-									        </md-tooltip>
-				</md-button>		
-				<md-button ng-click="ctrl.guardar()">Confirmar</md-button> 
-			</md-card-actions> </md-card>
-
-		
+			<md-card-actions layout="row" layout-align="end center"> 
+				<md-button ng-click="ctrl.eliminar()"> <md-icon> remove_circle_outline </md-icon> 
+					<md-tooltip md-direction="left"> eliminar domicilo </md-tooltip> </md-button> 
+				
+				<md-button ng-click="ctrl.marcarPredeterminado()"> <md-icon> compare_arrows </md-icon> 
+					<md-tooltip md-direction="left"> marcar como domicilo principal </md-tooltip> </md-button> 
+				
+				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
+				 
+			</md-card-actions>	
+</md-card>
+</div>
