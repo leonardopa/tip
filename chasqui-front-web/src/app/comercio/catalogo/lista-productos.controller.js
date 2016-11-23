@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $http, $log, restProxy, CTE_REST,
-			$mdDialog,$state,StateCommons) {
+			$mdDialog,$state,StateCommons,ToastCommons) {
 	
 		$log.debug('ListaProductosController',$scope.$parent.$parent.catalogoCtrl.isFiltro1);
 			
@@ -79,15 +79,14 @@
 			$log.debug('callAgregarAlCarro para pedido: ', StateCommons.ls.pedidoSeleccionado);
 
 			function doOk(response) {
-				//TODO: mensaje OK
 				$log.log('Agregar producto Response ', response);
-
+				ToastCommons.mensaje("Producto agregado !");
 			}
 			
 			function doNoOk(response) {
-				//TODO: mensaje OK
-				$log.log('FALLO AGREGAR PRODUCTO ', response);
 
+				$log.log('FALLO AGREGAR PRODUCTO ', response);
+				ToastCommons.mensaje(response.data.error);
 			}
 			
 			var params={};
