@@ -11,7 +11,7 @@
 		$log.debug("FormDireccionController",$scope.direccionParam);
 		
 		var vm = this;
-		var isNew = $scope.direccionParam !=undefined && $scope.direccionParam.alias =='nueva';
+		var isNew = angular.equals({}, $scope.direccionParam);
 		vm.domicilio =  $scope.direccionParam;
 		vm.isEdit=false;
 		

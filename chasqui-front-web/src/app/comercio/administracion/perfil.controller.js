@@ -14,10 +14,13 @@
 		vm.direcciones;
 		vm.pass1="";
 		vm.pass2="";
+		vm.selectedIndex;
 		
 		vm.addDireccion=function (){
 			$log.debug("add direccion");
-			vm.direcciones.push({alias: 'nueva'});
+		//	vm.direcciones.push({alias: 'nueva'});
+			vm.direcciones.push({});
+			vm.selectedIndex=vm.direcciones.length;
 		}
 		
 		
