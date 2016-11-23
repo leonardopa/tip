@@ -21,7 +21,9 @@
       if (response.status==401){
     	  ToastCommons.mensaje("Por favor vuelva a loguarse");
     	  $state.go('login');
-      }else{
+      }else if (response.status==406) 
+    	  ToastCommons.mensaje("Parametros incorrectos");
+      else{
     	  $state.go('error', {
     		  key: 'GENERIC_ERROR'
     	  });    	  
