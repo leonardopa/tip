@@ -152,7 +152,8 @@
       post: function(url, params, doOk, noOk) {
     	 var header = {} ;
  	     header = { 'Content-Type': 'application/json',
-	                 'Authorization': createHeader()
+	                 'Authorization': createHeader(),
+	                 'idVendedor':5 /// TODO: VENDEDOR HARDODEADO
 	              };
  	     
         post(url, header , params, doOk, noOk);

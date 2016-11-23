@@ -79,13 +79,20 @@
 		}
 		
 		function callCrearPedidoIndividual(){
+			function doNoOk(response) {
+				$log.debug("--- callPedidoIndividual  response",response.data.error);
+				
+				ToastCommons.mensaje(response.data.error);
+				 
+			}
+			
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ",response.data);
 				 
 				ToastCommons.mensaje("Pedido creado ! deberia fallar si ya tiene uno");
 			}
 			
-			restProxy.post(CTE_REST.crearPedidoIndividual,{},doOk);
+			restProxy.post(CTE_REST.crearPedidoIndividual,{},doOk,doNoOk);
 		}
 		
 		function callPedidoIndividual(){

@@ -75,7 +75,7 @@
 	    		 
 	    		loadDirecciones();
 			};
-			vm.domicilio.predeterminada =false;
+			vm.domicilio.predeterminada =true; // TODO : si es el primero deberia ser TRUE si no no
 			restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
 		}
 		
