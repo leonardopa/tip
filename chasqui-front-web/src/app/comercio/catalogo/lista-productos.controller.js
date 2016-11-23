@@ -94,9 +94,8 @@
 			params.idPedido=StateCommons.ls.pedidoSeleccionado.id;
 			params.idVariante=variante.idVariante;
 			params.cantidad=cantidad;
-			
-			// / TODO : USUARIO HARDOC y pedido 
-			restProxy.post(
+			 
+			restProxy.put(
 					CTE_REST.agregarPedidoIndividual,params, doOk,doNoOk);
 
 		}

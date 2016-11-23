@@ -10,7 +10,7 @@
 		
 		var vm = this;
 		vm.pedido = $scope.pedido;
-		
+		vm.urlBase=CTE_REST.url_base;
 		
 		vm.comprar = function (event){
 			$log.debug('DetallePedidoController , modo comprar ', $scope.pedido);

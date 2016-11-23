@@ -40,6 +40,9 @@
 		vm.crearPedidoIndividual = function(){
 			$log.debug("--- Crear pedido individual----");
 			callCrearPedidoIndividual();
+			
+			callLoadPedidos()
+			callPedidoIndividual()
 		}
 	
 		///////////////// REST
