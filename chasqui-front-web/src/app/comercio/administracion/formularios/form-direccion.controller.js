@@ -15,6 +15,10 @@
 		vm.domicilio =  $scope.direccionParam;
 		vm.isEdit=false;
 		
+		function loadDirecciones(){
+			$scope.$emit("load-direcciones", {});//recarga las direcciones que estan el el conteoller de perfil
+		}
+		
 		//TODO: hacerlo flexible para grupo usuario vendedor ETC
 		// ahora esta para grupo
 		vm.guardar = function (){
@@ -29,14 +33,34 @@
 			
 		}
 		
-		vm.marcarPredeterminado = function(){
-			ToastCommons.mensaje('TODO : marcar como predeterminado cuando se tenga el id de direccion');
-			$log.debug("TODO : marcar como predeterminado cuando se tenga el id de direccion");
+		vm.marcarPredeterminado = function(){			
+			$log.debug("marcar como predeterminado");
+			function doOk(response) {	    			    		 
+	    		$log.debug("respuesta marcar como predeterminado ", response);
+	    		vm.domicilio.predeterminada=true;
+	    		ToastCommons.mensaje('Se marco como predeterminada');
+	    			    		
+			};
+			
+			vm.domicilioParam={};
+			vm.domicilioParam.idDireccion=vm.domicilio.idDireccion;
+			vm.domicilioParam.predeterminada=true;
+			
+			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilioParam,doOk);
 		}
 		
 		vm.eliminar = function(){
-			ToastCommons.mensaje('TODO : eliminar cuando se tenga el id de direccion');
-			$log.debug("TODO : eliminar cuando se tenga el id de direccion");
+			$log.debug("eliminar direccion");
+			
+			function doOk(response) {	    			    		 
+	    		$log.debug("respuesta eliminar direccion ", response);
+	    		
+	    		ToastCommons.mensaje('Se elimino direccion');
+	    		loadDirecciones();    		
+			};
+ 
+			restProxy.delete(CTE_REST.eliminarDireccion(vm.domicilio.idDireccion),doOk);
+			
 		}
 		
 		//////////////////////
@@ -48,9 +72,8 @@
 	    		$log.debug("respuesta guardar domicilio ", response);
 
 	    		ToastCommons.mensaje('Se agrego dirección !');
-	    		
-	    		//TODO: en realidad la navegacion depende de donde vino 
-	    		$state.go("perfil");
+	    		 
+	    		loadDirecciones();
 			};
 			vm.domicilio.predeterminada =false;
 			restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
@@ -64,8 +87,8 @@
 
 	    		ToastCommons.mensaje('Se Actualizo dirección !');
 	    		
-	    		//TODO: en realidad la navegacion depende de donde vino 
-	    		$state.go("perfil");
+	    		loadDirecciones();
+	    		
 			};
 			vm.domicilio.predeterminada =false;
 			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilio,doOk);

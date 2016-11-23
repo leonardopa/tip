@@ -84,6 +84,10 @@
         	nuevaDireccion : URL_REST_BASE_2 + "user/adm/dir",
         	
         	actualizarDireccion : URL_REST_BASE_2 +"user/adm/dir/",
+        	 
+        	eliminarDireccion :  function (idDireccion){
+        		return URL_REST_BASE_2 + 'user/adm/dir/'+ idDireccion ;
+        	},
         	
         	crearPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual',
         	

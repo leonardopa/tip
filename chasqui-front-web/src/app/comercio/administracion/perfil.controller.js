@@ -16,6 +16,11 @@
 		vm.pass2="";
 		vm.selectedIndex;
 		
+		$scope.$on("load-direcciones", function (args,mass) {
+			vm.callDirecciones();
+		});
+		
+		
 		vm.addDireccion=function (){
 			$log.debug("add direccion");
 		//	vm.direcciones.push({alias: 'nueva'});
