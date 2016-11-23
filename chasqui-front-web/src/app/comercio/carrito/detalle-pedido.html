@@ -41,9 +41,8 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{ item.nombre }}</span>
-            <span class="md-subhead">$ {{ item.precio }}</span>
-            <span class="md-subhead">Cantidad : {{ item.cantidad }}</span>
-              
+            <span class="md-subhead">
+            	<h1><strong>$ {{ item.precio * item.cantidad }}</strong></h1> $ {{ item.precio }} x  {{ item.cantidad }} </span>                         
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-sm card-media"><img src="{{detallePedidoCtrl.urlBase}}/{{item.imagen}}"></div>
