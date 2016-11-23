@@ -16,11 +16,11 @@
 
     /** En caso de no ser un respues exitosa va a la pantalla de error generica */
     var doNoOkDefault = function(response) {
-      $log.error("error al llamar a un servicio", response);
+      $log.error("[NotOkDefault] error al llamar a un servicio", response);
  
-      $state.go('error', {
-        key: 'GENERIC_ERROR'
-      });
+//      $state.go('error', {
+//      key: 'GENERIC_ERROR'
+  //    });
     }
 
     var createHeader = function (){
@@ -78,13 +78,13 @@
     return {
 
       get: function(url, params, doOk, noOk) {
-	        $log.debug('getting Public ' + url);
+	        $log.debug('[Getting Public] ' + url);
 	        
 	        get(url, {} , params, doOk, noOk);
        
       },
       getPrivate: function(url, params, doOk, noOk) {
-	        $log.debug('getting Private ' + url);
+	        $log.debug('[Getting Private] ' + url);
 	                
 	        var header = {} ;
 	     
@@ -142,10 +142,12 @@
       },
       
       post: function(url, params, doOk, noOk) {
+        $log.debug("[post]"+ url);
+        $log.debug("[params]" +params);
     	 var header = {} ;
  	     header = { 'Content-Type': 'application/json',
 	                 'Authorization': createHeader(),
-	                 'idVendedor':6
+	                 'idVendedor':5
 	              };
  	     
         post(url, header , params, doOk, noOk);
