@@ -12,28 +12,32 @@
   
     .constant('CTE_REST',  function() {
 
-      //  var URL_BASE = "http://localhost:8081/chasqui/";
+        //Servidor LOCAL
+        //var URL_BASE = "http://localhost:8019/chasqui/";
+        //var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
+        
+        //Servidor REMOTOs
+        var URL_REST_BASE = "http://168.181.184.203:8080/chasqui-mock/rest/";
         var URL_BASE = "http://168.181.184.203:8080/chasqui/";
-        
-        var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
-    //    var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
-        
+       
+
         var URL_REST_BASE_2 = URL_BASE+"rest/";
-        
-        //var URL_REST_BASE_2 = "http://proyectochasqui.com:8080/chasqui/rest/";
-        //var URL_REST_BASE = "http://factory.epidata.com.ar:9145/chasqui-mock/rest/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-  //      var idVendedor = 4;
+        var idVendedor = 5;
 
-        //var nombreVendedor = 'adminpds';
+        var nombreVendedor = 'adminpds';
+
+
         
         return {
 
-       // 	idVendedor: idVendedor, //TODO : hasta que sea dinamico
+            defaultLogo: "imagenes/logo_ch_login.png",
 
-       //     vendedor:  URL_REST_BASE_2+"client/vendedor/"+nombreVendedor,
+        	idVendedor: idVendedor, //TODO : hasta que sea dinamico
+
+            vendedor:  URL_REST_BASE_2+"client/vendedor/"+nombreVendedor,
 
             catalogo:  URL_REST_BASE_2+"client/catalogo", //Para que se deduzca de la URL
                  
@@ -64,7 +68,9 @@
         	medallasProductor : URL_REST_BASE_2 + "client/medalla/productor/all",
         	
         	medallaById: function (id){
-        		return URL_REST_BASE_2 +"client/producto/medalla/idMedalla" + id; 
+
+        		return URL_REST_BASE_2 +"client/producto/medalla/idMedalla/" + id; 
+
         	},
         	 
         	productosByCategoria: URL_REST_BASE_2 + "client/producto/byCategoria",

@@ -1,5 +1,5 @@
 <section ng-include="'app/comercio/principal/menu.html'"></section>  
-
+<div class="wrapper">
 <div class="container-fluid">
 	
 	<div layout="row" ng-show="emprendedorCtrl.isVistaUnica">
@@ -35,7 +35,7 @@
 		          <md-icon  class="md-avatar"> info_outline </md-icon>
 		          -->
 		           <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" 
-		           class="md-card-image" alt="{{ item.nombre }}" width="60" height="60"> 	           
+                          class="md-card-image" alt="{{ item.nombre }}" width="60" height="60"> 	           
 		          <div class="md-list-item-text" layout="column">
 		            <h3>{{ item.nombre }}</h3>
 		            <div ng-bind-html="item.descripcion"></div>		            	           
@@ -64,4 +64,5 @@
 		</md-list-item>
 	</div>
 	
+</div>
 </div>

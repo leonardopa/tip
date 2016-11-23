@@ -163,7 +163,6 @@
 			}
 
 			restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},doOk);		    		    
-
 	 }
 	  
 	  function callProductores() {
@@ -175,6 +174,7 @@
 			}
 			
 		 	restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
+
 
 	 }
 	  

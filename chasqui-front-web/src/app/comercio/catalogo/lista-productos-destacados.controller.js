@@ -31,8 +31,7 @@
 				function notOk(response){
 					vm.hello=response;
 				}
-				//TODO: descomentar cuando publicado el servicio
-				//restProxy.get(CTE_REST.productosDestacadosByVendedor(StateCommons.vendedor().id), {}, doOk);
+				restProxy.get(CTE_REST.productosDestacadosByVendedor(CTE_REST.idVendedor), {}, doOk);
 	    }
 	//	$timeout(findProductos, 5000);
 	 	findProductos();

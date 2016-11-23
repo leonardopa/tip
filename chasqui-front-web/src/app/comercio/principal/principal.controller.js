@@ -26,7 +26,6 @@
 			}
 			
 			restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},doOk);
-
 	 }
 	  
 	  callCategorias()
