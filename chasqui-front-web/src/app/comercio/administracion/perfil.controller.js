@@ -30,7 +30,7 @@
 		
 		
 		 vm.callDirecciones = function() {
-				$log.debug('call direcciones ', vm.user);
+				$log.debug('call direcciones ');
 				// TODO NO OK , que vuelva a donde vino
 				function doOk(response) {
 					$log.debug('call direcciones response ',response);

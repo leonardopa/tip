@@ -102,6 +102,8 @@
         	},
         	
         	agregarPedidoIndividual: URL_REST_BASE_2+  'user/pedido/individual',
+        	        	
+        	confirmarPedidoIndividual: URL_REST_BASE_2+'user/pedido/confirmar',
         	
         	pedidoIndividual:function (id){
         		return 	URL_REST_BASE_2+ 'user/pedido/individual/'+id;

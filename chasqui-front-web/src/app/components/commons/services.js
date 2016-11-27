@@ -106,7 +106,7 @@
      
       },
       
-      delete: function(url, doOk, noOk) {
+      delete: function(url,params, doOk, noOk) {
         $log.debug('delete ' + url + ' url.');
 
         if (noOk == undefined) {
@@ -117,6 +117,7 @@
           $http({
             method: 'DELETE',
             url: url,
+            data: params,
             headers: {
               'Content-Type': 'application/json',
               'Authorization': createHeader()

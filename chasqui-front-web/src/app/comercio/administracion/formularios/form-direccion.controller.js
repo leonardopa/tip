@@ -59,7 +59,7 @@
 	    		loadDirecciones();    		
 			};
  
-			restProxy.delete(CTE_REST.eliminarDireccion(vm.domicilio.idDireccion),doOk);
+			restProxy.delete(CTE_REST.eliminarDireccion(vm.domicilio.idDireccion),{},doOk);
 			
 		}
 		

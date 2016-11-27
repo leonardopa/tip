@@ -5,20 +5,23 @@
 			DetallePedidoController);
 
 	/** @ngInject */
-	function DetallePedidoController($http, $log,$state,$scope,restProxy, CTE_REST,ToastCommons ) {
+	function DetallePedidoController($http, $log,$state,$scope,restProxy, CTE_REST,ToastCommons,$mdDialog  ) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 		
 		var vm = this;
 		vm.pedido = $scope.pedido;
 		vm.urlBase=CTE_REST.url_base;
+		vm.direcciones;
+		vm.direccionSelected;
 		
 		vm.comprar = function (event){
 			$log.debug('DetallePedidoController , modo comprar ', $scope.pedido);
 			$state.go('catalogo')
 		}
 		  
-		vm.eliminar = function (event){
-			$log.debug('DetallePedidoController , eliminar ', $scope.pedido);
+		vm.eliminar = function (item){			
+			$log.debug('DetallePedidoController , eliminar ', item);
+/*
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ",response.data);
 				 
@@ -30,8 +33,12 @@
 				 
 				ToastCommons.mensaje("error");
 			}
+			var params = {};
+			params.idPedido = item.idPedido;
+			params.idVariante = item.idVariante;
+			params.cantidad = item.cantidad;
 			
-			restProxy.delete(CTE_REST.agregarPedidoIndividual,{},doOk,doNoOk);
+			restProxy.delete(CTE_REST.agregarPedidoIndividual,params,doOk,doNoOk);*/
 		}
 		
 		vm.cancelar = function (event){
@@ -51,9 +58,8 @@
 			restProxy.delete(CTE_REST.pedidoIndividual(vm.pedido.id),{},doOk,doNoOk);
 		}
 		
-		vm.confirmar = function (event){
-			$log.debug('DetallePedidoController ,confirmar ', $scope.pedido);
-			
+		 function callConfirmar(){
+			$log.debug('callConfirmar   ', $scope.pedido);		
 			function doOk(response) {
 				$log.debug("--- confirmar pedido response ",response.data);
 				 
@@ -66,10 +72,46 @@
 				ToastCommons.mensaje("error");
 			}
 			
-			restProxy.put(CTE_REST.pedidoIndividual(vm.pedido.id),{},doOk,doNoOk);
+			var params={};
+			params.idPedido=vm.pedido.id;
+			params.idDireccion = vm.direccionSelected.idDireccion;
+	
+			restProxy.post(CTE_REST.confirmarPedidoIndividual,params,doOk,doNoOk);
 	
 		}
-	
+ 
+		vm.confirmarDomicilio = function() {
+			 $log.debug('close');
+			 $mdDialog.hide();
+			 callConfirmar();
+		};
+		 
+		vm.confirmar = function(ev) {
+			popUpElegirDireccion(ev);			
+		};
+		  
+		vm.callDirecciones = function () {
+				$log.debug('call direcciones ');
+			 
+				function doOk(response) {
+					$log.debug('call direcciones response ',response);
+					vm.direcciones = response.data;
+					//abre pop
+				}
+
+				restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
+
+		 }
+		 
+		 function popUpElegirDireccion(ev){
+			 $log.debug('confirmarDomicilioOpenDialog');
+			    $mdDialog.show({
+			        templateUrl: 'dialog-direccion.html',
+			        scope: $scope,
+			        preserveScope: true,
+			        targetEvent: ev
+			      });
+		 }
 	}
 
 })();
