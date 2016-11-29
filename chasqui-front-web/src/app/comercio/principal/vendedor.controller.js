@@ -15,7 +15,7 @@
 	  
 	  vm.vendedor;
 	  vm.imagen;
-          vm.urlBase = CTE_REST.url_base;
+      vm.urlBase = CTE_REST.url_base;
 
 
 
@@ -24,13 +24,22 @@
 			
 
 			function doOk(response) {
-				 
+				$log.debug(response.data); 
 				vm.vendedor = response.data;
 				vm.imagen = vm.vendedor.imagen; 
+				$log.debug(vm.imagen); 
+			}
+			
+			function notOk(response) {
+				$log.debug("No se encuentra vendedor con nombre: "+CTE_REST.vendedor); 
+				vm.vendedor=response;
+				vm.vendedor.id=CTE_REST.idVendedor;
+				vm.vendedor.nombre="No se encuentra vendedor con ese nombre";
+				vm.vendedor.imagen=CTE_REST.defaultLogo;
 			}
 			
 			
-			restProxy.get(CTE_REST.vendedor,{},doOk);		    
+			restProxy.get(CTE_REST.vendedor,{},doOk,notOk);		    
 	 }
 
     callVendedorImagen()
