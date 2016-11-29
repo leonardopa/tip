@@ -145,7 +145,7 @@
     	 var header = {} ;
  	     header = { 'Content-Type': 'application/json',
 	                 'Authorization': createHeader(),
-	                 'idVendedor':6
+	                 'idVendedor':5
 	              };
  	     
         post(url, header , params, doOk, noOk);

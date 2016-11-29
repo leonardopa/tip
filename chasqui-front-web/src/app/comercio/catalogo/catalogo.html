@@ -16,10 +16,10 @@
 					
 				</div>
 				<div class="col-md-8">
-					 <div layout="row" layout-wrap>
+					 <div layout="row" layout-wrap >
 						  <div flex="25"></div>
-						  <div flex="50">
-						    	  <md-input-container md-no-float class="md-block"> 
+						  <div flex="50" layout-align="stretch">
+						    	  <md-input-container md-no-float class="md-block " > 
 							      <input ng-model="catalogoCtrl.queryText" type="text" placeholder="Buscar" >
 							      
 							    </md-input-container>
@@ -35,7 +35,7 @@
 	
 					<h1>Catalogo</h1>			
 					<section ng-include="'app/comercio/catalogo/lista-productos.html'"
-					ng-init="count = catalogoCtrl.count" ng-cloak></section>
+					ng-init="count = catalogoCtrl.count" ng-cloak ></section>
 					<!-- ng-init="paginaProducto = catalogoCtrl.paginaProducto -->
 					<br><!-- FIX CSSS , sino no se ve el paginador -->
 					<br>
@@ -56,8 +56,9 @@
   	</md-content>
  
  <!--  Menu de contexto de COMPRA -->
- 
- <div class="fixed" ng-cloak>
+<!--  Menu de contexto de COMPRA -->
+ <div flex layout="row" layout-align="end start">
+ 	 <div class="fixed" ng-cloak>
      <md-fab-speed-dial md-open="catalogoCtrl.isOpen" md-direction="{{catalogoCtrl.selectedDirection}}" 
      	ng-class="catalogoCtrl.selectedMode">
         <md-fab-trigger>
@@ -75,7 +76,7 @@
 	          ng-click="catalogoCtrl.cambiarContexto(pedido)">
 	          	
 	            <ng-md-icon icon="{{pedido.icon}}" style="fill: black" size="24"></ng-md-icon> 	
-	            <md-tooltip md-direction="left"> 
+	            <md-tooltip md-direction="left" > 
 	               {{pedido.nombre}} </md-tooltip>              
 	          </md-button>
           </div>         
@@ -87,22 +88,26 @@
        		
        		<md-button>
 				<a ui-sref="lista-pedidos">
-					<ng-md-icon id="icon" icon="{{catalogoCtrl.icon}}" 
+					<!-- <ng-md-icon id="icon" icon="{{catalogoCtrl.icon}}" 
 			        	style="fill: black" size="{{catalogoCtrl.size}}"
-			        	options="{{catalogoCtrl.options}}"/>
+			        	options="{{catalogoCtrl.options}}"/> -->
+		        	<img ng-src="app/components/image/changuito_48x48.png" alt="hola" class="changuito-sm">
 				</a>
 				
 			</md-button>	 		
 
-	 		<md-subheader class="md-primary">{{catalogoCtrl.carrito.nombre}}</md-subheader> </md-card>
+	 		<md-subheader class="md-primary btn-chango rojo">{{catalogoCtrl.carrito.nombre}}</md-subheader> </md-card>
 
 
                                            
 
        	
   </div>
-</div>
+ </div>
 
+</div>
+	
+</div>
 
  
  <style>
@@ -111,20 +116,32 @@
 -->
 
 .fixed {
-top: auto;
-right: 20px;
-bottom: 20px;
+/*top: auto;
+right: -85%;
+top: -80%;
 left: auto;
-position: fixed;
+position: relative;*/
+z-index: 20;
+max-width: 150px;
+position: relative;
+top: -4em;
 }
 
 .contexto {
-padding: 1em;
-background: rgb(244,81,30);
-border:1px solid red;
+padding: 1em 0;
+background: rgba(244,81,30,.7);
 text-align: center;
-box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+text-shadow: 0px 1px 2px rgba(0, 0, 0, .3);
+text-align: center;
+}
+
+.contexto > h3{
+	margin:0 auto;
 }
 </style>
      
 
+<section ng-include="'app/comercio/principal/footer.html'">
+	
+</section>

@@ -5,14 +5,16 @@
 
 	<md-toolbar class="md-hue-2" >
 		<div class="md-toolbar-tools">
-		 
-                               
-
-    	  <a ui-sref="principal">  <img src=""> 
+		 <div class="wrapper" layout="row" layout-align="space-between center">
+		 	    	  <a ui-sref="principal">  <img src=""> 
 	
                        <div ng-controller= "VendedorController as vendedorCtrl" > 
 
-                        <img ng-src= "{{vendedorCtrl.urlBase}}{{ vendedorCtrl.vendedor.imagen }}" >
+                      <!--  <img ng-src= "{{vendedorCtrl.urlBase}}{{ vendedorCtrl.vendedor.imagen }}" > -->
+
+                      
+
+                       <img ng-src="/app/components/image/logo_ch.png" alt="">
 
 
                        </div>              
@@ -22,7 +24,8 @@
 		<span flex></span>
 	    
 		  
-	      <h2 class="md-title"
+	     <div  class="notificcion-entrante" layout="row" layout-align="center center" ng-click="menuCtrl.ir('perfil')" ng-show="menuCtrl.isLogued"><span>4</span></div>
+       <h2 class="md-title"
 	      ng-show="menuCtrl.isLogued">{{menuCtrl.usuario.nickname}}</h2>
 	         
 	     <md-button class="md-raised" ng-click="menuCtrl.ir('login')"
@@ -34,6 +37,10 @@
 		</md-button>
 	    
 		</div>
+		 </div>
+                               
+
+
 	</md-toolbar>
 
     <div class="menu" layout="row" layout-align="center center">

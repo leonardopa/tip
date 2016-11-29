@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $http, $log, restProxy, CTE_REST,
-			$mdDialog,$state,StateCommons) {
+			$mdDialog,$state,StateCommons,ToastCommons) {
 	
 		$log.debug('ListaProductosController',$scope.$parent.$parent.catalogoCtrl.isFiltro1);
 			
@@ -39,7 +39,7 @@
 			.ok('Agregar').cancel('Cancelar');
 
 			$mdDialog.show(confirm).then(function(result) {
-				$log.debug("Agregar OK", result);
+				$log.debug("Agregar al carro cantidad ", result);
 
 				if (!isNaN(result) &&  result > 0) {
 					$log.debug("Entrada valida", result);
@@ -60,8 +60,7 @@
 			
 			$state.go('medalla',{'idMedalla':medalla});
 		}
-		
-		
+			
 		/////////////////////////
 		/// Recive el evento de filtrado 
 		
@@ -79,9 +78,14 @@
 			$log.debug('callAgregarAlCarro: ', StateCommons.ls.pedidoSeleccionado);
 
 			function doOk(response) {
-				//TODO: mensaje OK
+				
 				$log.log('Agregar producto Response ', response);
+ToastCommons.mensaje("Producto agregado !");
+			}
+			function doNoOk(response) {
 
+				$log.log('FALLO AGREGAR PRODUCTO ', response);
+				ToastCommons.mensaje(response.data.error);
 			}
 			
 			var params={};
@@ -89,9 +93,9 @@
 			params.idVariante=variante.idVariante;
 			params.cantidad=cantidad;
 			
-			// / TODO : USUARIO HARDOC y pedido 
-			restProxy.post(
-					CTE_REST.agregarPedidoIndividual,params, doOk);
+		
+			restProxy.put(
+					CTE_REST.agregarPedidoIndividual,params, doOk,doNoOk);
 
 		}
 
@@ -126,11 +130,12 @@
 		              break;   
 		          case 'MEDALLA':
 		        	  json.idMedalla = filtro.valor;
+				  json.idVendedor = CTE_REST.idVendedor;
 		        	  restProxy.postPublic(CTE_REST.productosByMedalla, json, doOk);
 		              break;
 		          case 'QUERY':
 		        	  json.query = filtro.valor;
-		        	  json.idVendedor = CTE_REST.vendedor;
+		        	  json.idVendedor = CTE_REST.idVendedor;
 		        	  restProxy.postPublic(CTE_REST.productosByQuery, json, doOk);		
 		              break;
 		          default:

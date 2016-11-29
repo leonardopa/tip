@@ -14,15 +14,24 @@
 		vm.direcciones;
 		vm.pass1="";
 		vm.pass2="";
+		vm.selectedIndex;
+		
+		$scope.$on("load-direcciones", function (args,mass) {
+			vm.callDirecciones();
+		});
+		
 		
 		vm.addDireccion=function (){
 			$log.debug("add direccion");
-			vm.direcciones.push({alias: 'nueva'});
+		//	vm.direcciones.push({alias: 'nueva'});
+			vm.direcciones.push({});
+			vm.selectedIndex=vm.direcciones.length;
 		}
 		
 		
 		 vm.callDirecciones = function() {
-				$log.debug('call direcciones ', vm.user);
+		
+						$log.debug('call direcciones ');
 				// TODO NO OK , que vuelva a donde vino
 				function doOk(response) {
 					$log.debug('call direcciones response ',response);

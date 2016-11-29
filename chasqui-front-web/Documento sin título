@@ -1,11 +1,10 @@
-
-<div ng-controller="FormDireccionController as ctrl"
+<div
+	ng-controller="FormDireccionController as ctrl"
 	layout="column" ng-cloak class="md-inline-form">
 	
 	<md-card> 		
-			<md-content layout-padding>
-					 
-					 
+ 			<md-content layout-padding>
+
 					<div>
 						<form name="direccionForm">
 							<div layout-gt-sm="row">							
@@ -15,7 +14,7 @@
 								</md-input-container> 
 								<md-input-container class="md-block" flex-gt-sm>							
 									<label>Calle</label> 
-									<input ng-model="ctrl.domicilio.calle">
+								<input ng-model="ctrl.domicilio.calle">
 								</md-input-container>
 							</div>
 														
@@ -43,7 +42,7 @@
 									</md-input-container> 
 									<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> --> 
 									<md-input-container class="md-block" flex-gt-sm> 
-										<label>Loguitud</label> 
+									<label>Loguitud</label> 
 										<input ng-model="ctrl.domicilio.longitud"> 
 									</md-input-container> 
 									
@@ -52,9 +51,6 @@
 										<input ng-model="ctrl.domicilio.latitud">
 									</md-input-container>
 								</div>
-							 
-								<code ng-show='{{ctrl.domicilio.predeterminada}}' >Domicilio predeterminado</code>
-					
 							</form>
 						</div>
 			</md-content>
@@ -65,7 +61,7 @@
 				
 				<md-button ng-click="ctrl.marcarPredeterminado()"> <md-icon> compare_arrows </md-icon> 
 					<md-tooltip md-direction="left"> marcar como domicilo principal </md-tooltip> </md-button> 
-				
+			
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
 				 
 			</md-card-actions>	

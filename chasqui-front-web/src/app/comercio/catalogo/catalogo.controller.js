@@ -40,7 +40,7 @@
 	  vm.productorSelect;
 	  vm.medallaSelect;
 	  
-	  
+	  vm.urlBase=CTE_REST.url_base;
 	  
 	  vm.filtroPor = function(filtroPor){
 		  $log.debug("filtro por ",filtroPor);
@@ -162,8 +162,7 @@
 				vm.categoriaSelect =vm.categorias[0]; 
 			}
 			
-			// TODO: hacer el ID de VENDEDOR dinamico
-			//restProxy.get(CTE_REST.categorias(CTE_REST.vendedor),{},doOk);
+			
                          restProxy.get(CTE_REST.categorias(CTE_REST.idVendedor),{},doOk);		    		    
 	 }
 	  
@@ -175,8 +174,7 @@
 		//		vm.productorSelect =vm.productores[0]; 
 			}
 			
-			// TODO: hacer el ID de VENDEDOR dinamico
-			//restProxy.get(CTE_REST.productores(CTE_REST.vendedor),{},doOk);		
+			
                          restProxy.get(CTE_REST.productores(CTE_REST.idVendedor),{},doOk);		    
 	 }
 	  
@@ -187,7 +185,7 @@
 				vm.medallas = response.data;
 			}
 		
-			restProxy.get(CTE_REST.medallas,{},doOk);		    
+			restProxy.get(CTE_REST.medallasProducto,{},doOk);		    
 	 }
 	  
 	 

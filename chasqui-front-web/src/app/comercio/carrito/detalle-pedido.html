@@ -16,9 +16,12 @@
 				<span class="md-subhead">Monto actual : ${{detallePedidoCtrl.pedido.montoActual}} / Monto minimo : ${{detallePedidoCtrl.pedido.montoMinimo}}</span>													
 				<span class="md-subhead">{{detallePedidoCtrl.pedido.estado}}  </span>
 		</md-card-content>
-		<md-card-actions layout="row" layout-align="end center">			 
+		<md-card-actions layout="row" layout-align="end center">	
+		    <md-button ng-click="detallePedidoCtrl.eliminar()"> Eliminar </md-button>
+		    <md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>	
+		    <md-button ng-click="detallePedidoCtrl.confirmar()"> Confirmar </md-button>		 
 			<md-button ng-click="detallePedidoCtrl.comprar($event)">
-				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>				 
+				<img ng-src="app/components/image/changuito_48x48.png" alt="hola" class="changuito">				 
 					<md-tooltip md-direction="left">
 						puedes seguir comprando para el pedido {{detallePedidoCtrl.pedido.nombre}}
 					</md-tooltip>
@@ -29,7 +32,26 @@
 	<section ng-include="'app/comercio/carrito/lista-productos-pedido.html'"
 	ng-init="pedido = detallePedidoCtrl.pedido">
 		
-	</section>  
+	</section>
+	
+	<h1> Productos en el carro </h1>
+	
+	
+	<md-card   ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{ item.nombre }}</span>
+            <span class="md-subhead">
+            	<h1><strong>$ {{ item.precio * item.cantidad }}</strong></h1> $ {{ item.precio }} x  {{ item.cantidad }} </span>                         
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"><img src="{{detallePedidoCtrl.urlBase}}/{{item.imagen}}"></div>
+          </md-card-title-media>
+        </md-card-title>
+         
+      </md-card>
+	
+	 
 <!-- 
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin productos.</span>
 

@@ -3,7 +3,7 @@
 
   angular.module('chasqui').factory('restProxy', CharquiRest);
 
-  function CharquiRest($http, $rootScope, $log, $state, StateCommons) {
+  function CharquiRest($http, $rootScope, $log, $state, StateCommons,ToastCommons ) {
     
     /*
      * StateCommons conserva el token del usuario. Para acceder él:
@@ -17,10 +17,18 @@
     /** En caso de no ser un respues exitosa va a la pantalla de error generica */
     var doNoOkDefault = function(response) {
       $log.error("error al llamar a un servicio", response);
- 
-      $state.go('error', {
-        key: 'GENERIC_ERROR'
-      });
+      
+      if (response.status==401){
+    	  ToastCommons.mensaje("Por favor vuelva a loguarse");
+    	  $state.go('login');
+      }else if (response.status==406) 
+    	  ToastCommons.mensaje("Parametros incorrectos");
+      else{
+    	  $state.go('error', {
+    		  key: 'GENERIC_ERROR'
+    	  });    	  
+      }
+      
     }
 
     var createHeader = function (){
@@ -144,7 +152,8 @@
       post: function(url, params, doOk, noOk) {
     	 var header = {} ;
  	     header = { 'Content-Type': 'application/json',
-	                 'Authorization': createHeader()
+	                 'Authorization': createHeader(),
+	                 'idVendedor':5 /// TODO: VENDEDOR HARDODEADO
 	              };
  	     
         post(url, header , params, doOk, noOk);

@@ -1,14 +1,11 @@
 <section ng-include="'app/comercio/principal/menu.html'"></section>  
 <div class="wrapper">
-<div class="container-fluid">
+<div flex=>
 	
-	<div layout="row" ng-show="emprendedorCtrl.isVistaUnica">
-		  <div flex="30">
-		   
-		  </div>
-		  <div flex="30">
-		     <md-card>
-		        <img ng-src="http://168.181.184.203:8080/chasqui/{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image" alt="Washed Out">
+	<div layout="column" ng-show="emprendedorCtrl.isVistaUnica">
+
+		     <md-card flex="80" class="width-total">
+		        <img ng-src="http://168.181.184.203:8080/chasqui/{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image img-productor" alt="Washed Out">
 		        <md-card-title>
 		          <md-card-title-text>
 		            <span class="md-headline">{{emprendedorCtrl.emprendedor.nombreProductor}}</span>
@@ -25,7 +22,6 @@
 		          {{emprendedorCtrl.emprendedor.direccion.calle}}
 		          {{emprendedorCtrl.emprendedor.direccion.altura}}</span>
 		     	</md-card-content>
-		  </div>
 		  <div flex hide-sm hide-xs>
 		     
 		     <md-list flex>
@@ -54,7 +50,7 @@
 		         <md-card> 
 					<md-card-content>
 					 	<div class="md-list-item-text" layout="column">
-						            <h3>{{ item.nombreProductor }}</h3>
+						            <h3>{{ item.nombreProductor | uppercase }}</h3>
 						            <h3>{{ item.descripcionCorta }}</h3>						             	           
 						          </div>
 					</md-card-content>
@@ -66,3 +62,6 @@
 	
 </div>
 </div>
+<section ng-include="'app/comercio/principal/footer.html'">
+	
+</section>

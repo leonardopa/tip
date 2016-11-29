@@ -12,11 +12,11 @@
   
     .constant('CTE_REST',  function() {
 
-        var URL_BASE = "http://localhost:8081/chasqui/";
-        //var URL_BASE = "http://168.181.184.203:8080/chasqui";
+       //var URL_BASE = "http://localhost:8081/chasqui/";
+       var URL_BASE = "http://168.181.184.203:8080/chasqui/";
         
-        var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
-       // var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
+       var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
+       //var URL_REST_BASE_2 = "http://168.181.184.203:8080/chasqui/rest/";
         
         var URL_REST_BASE_2 = URL_BASE+"rest/";
         
@@ -25,7 +25,7 @@
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 4;
+        var idVendedor = 5;
 
         var nombreVendedor = 'adminpds';
         
@@ -84,16 +84,23 @@
         	nuevaDireccion : URL_REST_BASE_2 + "user/adm/dir",
         	
         	actualizarDireccion : URL_REST_BASE_2 +"user/adm/dir/",
+  
+		eliminarDireccion :  function (idDireccion){
+        		return URL_REST_BASE_2 + 'user/adm/dir/'+ idDireccion ;
+        	},
         	
         	crearPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual',
         	
-        	verPedidoIndividual: URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ,
+        	verPedidoIndividual: function (idVendedor){
+        		return URL_REST_BASE_2 + 'user/pedido/individual/'+ idVendedor ;
+        	},
         	
         	agregarPedidoIndividual: URL_REST_BASE_2+  'user/pedido/individual',
         	
         	pedidoIndividual:function (id){
         		return 	URL_REST_BASE_2+ 'user/pedido/individual/'+id;
         	},
+        	
         	
         	////////////////////////////////////////////////////////
         	
