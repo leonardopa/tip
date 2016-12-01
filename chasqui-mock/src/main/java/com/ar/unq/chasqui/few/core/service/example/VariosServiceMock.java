@@ -8,6 +8,7 @@ import com.ar.unq.chasqui.few.core.dto.DireccionDto;
 import com.ar.unq.chasqui.few.core.dto.MedallasDto;
 import com.ar.unq.chasqui.few.core.dto.ProductorDto;
 import com.ar.unq.chasqui.few.core.dto.UsuarioFullDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.NotificacionesDto;
 
 public class VariosServiceMock {
 
@@ -72,5 +73,29 @@ public class VariosServiceMock {
 		usuario.setDireccion(direccion);
 		return usuario;
 	}
+
+	public List<NotificacionesDto> findNotificacionesNoLeidas(Integer pagina) {
+		List<NotificacionesDto> list=new ArrayList<>();
+
+		for (int i = (0); i <= pagina; i++) {
+			list.add(new NotificacionesDto(i, "usuarioOrigen", "usuarioDestino", "Pagina "+pagina +" mensaje"+i, "No Leido"));
+		}
+
+		return list;
+	}
+
+	public List<NotificacionesDto> findNotificaciones(Integer pagina,Boolean leida) {
+		List<NotificacionesDto> list=new ArrayList<>();
+
+		String estado = "No Leido";
+		if (leida) estado = "Leido";
+
+		for (int i = (pagina); i <= pagina+5; i++) {
+			list.add(new NotificacionesDto(i, "usuarioOrigen", "usuarioDestino", "Pagina "+pagina +" mensaje"+i, estado));
+		}
+
+		return list;
+	}
+
 
 }
