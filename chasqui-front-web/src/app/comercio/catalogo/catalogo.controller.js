@@ -148,7 +148,7 @@
 				}
 			}
 			
-			restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);		    
+	//		restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);		    
 
 	 }
 	 

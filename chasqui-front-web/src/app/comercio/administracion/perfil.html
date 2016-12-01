@@ -9,8 +9,8 @@
  			<span class="md-headline">Mi Perfil</span>
 			<div ng-cloak>
 				<md-content> 
-					<md-tabs md-dynamic-height md-border-bottom> 
-						<md-tab label="Datos Personales">
+					<md-tabs md-dynamic-height md-border-bottom md-selected="perfilCtrl.selectedIndex"> 
+						<md-tab label="Datos Personales" >
 							<md-content class="md-padding">
  								<div ng-include="'app/comercio/administracion/formularios/form-usuario.html'" 
 									 ng-init="perfil = true"/>	

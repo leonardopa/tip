@@ -6,7 +6,7 @@
     .controller('MenuController',MenuController);
 
   /** @ngInject */
-  function MenuController( $scope,$log,$state,StateCommons,CTE_REST) {
+  function MenuController( $scope,$log,$state,StateCommons,CTE_REST,$interval,restProxy) {
 	  $log.debug("MenuController ..... ");
 	  $log.debug(StateCommons.ls.usuario);
 	  
@@ -17,7 +17,12 @@
 	  vm.categorias=[];
 	  vm.usuario= StateCommons.ls.usuario;
 	  vm.isLogued = ! angular.equals(StateCommons.ls.usuario, {}); 
- 
+	  
+	  vm.notificacionesSinLeer=StateCommons.ls.notificacionesSinLeer;
+	  vm.icon=StateCommons.ls.icon;
+	  vm.fill=StateCommons.ls.fill;
+	  
+	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
 	  
 	  vm.ir = function (page){
 		  $log.debug("ir a ..... ",page);
@@ -68,17 +73,60 @@
 		  return "";
 	  }
 	  
+	  var llamadoPeriodico;
+	  
 	  vm.logOut = function (){
 		  $log.debug("Log Out ..... ");
 		  StateCommons.ls.usuario={};
 		  StateCommons.ls.token=null;
 		  StateCommons.ls.pedidoSeleccionado=null;
+		  StateCommons.ls.notificacionesSinLeer='';
+		  StateCommons.ls.callNotificaciones=false;
+		  $interval.cancel(llamadoPeriodico);
+		  
 		  $state.go('principal')
 	  }
 
 
+	  vm.verNotificaciones=function (){
+		  $log.debug("Ver notificaciones");
+		  $state.go('perfil',{index:1});
+	  }
+    
+	  if (!StateCommons.ls.callNotificaciones && vm.isLogued){
+		  StateCommons.ls.callNotificaciones=true;
+		  
+		  llamadoPeriodico=$interval(function() {
+			  $log.debug("call notificaciones nuevas?");
+			  callNotificacionesNoLeidas();
+		  	}, 15000);// TODO: sacar a constante  
+	  }
+	  
+    
+	  function callNotificacionesNoLeidas(){
+			
+			function doOk(response) {
+				$log.debug('callObtenerNotificaciones',response);
+				
+				if (response.data.length > StateCommons.ls.notificacionesSinLeer ) {
+					$log.debug('hay nuevas notificaciones !');	
+					
+					
+					vm.icon='notifications';
+					vm.fill='red';
+					StateCommons.ls.icon='notifications';
+					StateCommons.ls.fill='red';
+					
+					StateCommons.ls.notificacionesSinLeer = response.data.length;
+					vm.notificacionesSinLeer = response.data.length;
 
-      
+					
+				}
+				
+			}
+		  
+			restProxy.get(CTE_REST.notificacionesNoLeidas,{}, doOk);
+	  }
 
   }
 })();

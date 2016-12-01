@@ -6,15 +6,26 @@
 
 	/** @ngInject . Pantalla de perfil de usuario*/
 	function PerfilController($http, $log, $scope,CTE_REST, restProxy,StateCommons ,$mdDialog
-			,ToastCommons) {
+			,ToastCommons,$window,$stateParams) {
 		$log.debug("Init PerfilController ....");
+		
+		
 		StateCommons.ls.itemMenuSelect = 'perfil'; 
 		var vm = this;
 		
 		vm.direcciones;
 		vm.pass1="";
 		vm.pass2="";
-		vm.selectedIndex;
+		
+		vm.notificaciones=[];
+		vm.notificacionesNoLeidas=[];
+		vm.count=1;
+		
+		vm.selectedIndex=0;
+		if ($stateParams.index !=null){
+			$log.debug('Viene de notificaciones' , $stateParams.index);
+			vm.selectedIndex=$stateParams.index;
+		}
 		
 		$scope.$on("load-direcciones", function (args,mass) {
 			vm.callDirecciones();
@@ -80,7 +91,47 @@
 				restProxy.put(CTE_REST.editUsuario,params, doOk);
 
 		 }
-		 vm.callDirecciones()
+		
+		vm.marcarLeido = function(notificacion){
+			function doOk(response) {
+				ToastCommons.mensaje('Leido');
+				notificacion.estado='Leido';
+			}
+		  
+			restProxy.post(CTE_REST.notificacionesLeidas(notificacion.id),{}, doOk);
+		}
+		
+		function callNotificacionesNoLeidas(){
+			
+			function doOk(response) {
+				$log.debug('callObtenerNotificaciones',response);
+				vm.notificacionesNoLeidas = response.data;
+			}
+		  
+			restProxy.get(CTE_REST.notificacionesNoLeidas,{}, doOk);
+		}
+		
+		function callNotificaciones(){
+			
+			function doOk(response) {
+				$log.debug('callObtenerNotificaciones',response);
+				vm.notificaciones = vm.notificaciones.concat(response.data);;
+			}
+		  
+			restProxy.get(CTE_REST.notificacionesLeidas(vm.count),{}, doOk);
+		}
+
+		vm.verMas = function (){
+			vm.count++;
+			$log.debug('ver mas',vm.count);			
+			callNotificaciones();
+		}
+		
+		vm.callDirecciones();
+		callNotificacionesNoLeidas();
+		callNotificaciones();
+		
+		 
 	}
 
 })();

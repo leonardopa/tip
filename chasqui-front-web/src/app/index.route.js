@@ -104,7 +104,8 @@
           url: '/perfil',
           templateUrl: 'app/comercio/administracion/perfil.html',
           controller: 'PerfilController',        
-          controllerAs: 'perfilCtrl'
+          controllerAs: 'perfilCtrl',
+          params:{index:null}
         })
         .state('registro', {
             url: '/registro',
