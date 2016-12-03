@@ -21,10 +21,10 @@
 		vm.notificacionesNoLeidas=[];
 		vm.count=1;
 		
-		vm.selectedIndex=0;
+		vm.selectedIndexDireccion=0;
 		if ($stateParams.index !=null){
 			$log.debug('Viene de notificaciones' , $stateParams.index);
-			vm.selectedIndex=$stateParams.index;
+			vm.selectedIndexDireccion=$stateParams.index;
 		}
 		
 		$scope.$on("load-direcciones", function (args,mass) {
@@ -36,7 +36,7 @@
 			$log.debug("add direccion");
 		//	vm.direcciones.push({alias: 'nueva'});
 			vm.direcciones.push({});
-			vm.selectedIndex=vm.direcciones.length;
+			vm.selectedIndexDireccion=vm.direcciones.length;
 		}
 		
 		
