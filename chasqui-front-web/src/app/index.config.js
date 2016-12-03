@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig,$translateProvider) {
+  function config($logProvider, toastrConfig,$translateProvider,cfpLoadingBarProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -16,7 +16,7 @@
     toastrConfig.positionClass = 'toast-top-right';
     toastrConfig.preventDuplicates = true;
     toastrConfig.progressBar = true;
-    
+    cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Cargando ...</div>';
     
     ////////////// TRADUCCIONES
    /* TODO: VER por que no anda,  se dispara el proceso
