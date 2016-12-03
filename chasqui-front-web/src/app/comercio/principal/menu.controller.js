@@ -6,7 +6,7 @@
     .controller('MenuController',MenuController);
 
   /** @ngInject */
-  function MenuController( $scope,$log,$state,StateCommons,CTE_REST,$interval,restProxy) {
+  function MenuController( $scope,$log,$state,StateCommons,CTE_REST,$interval,restProxy,ToastCommons) {
 	  $log.debug("MenuController ..... ");
 	  $log.debug(StateCommons.ls.usuario);
 	  
@@ -18,7 +18,6 @@
 	  vm.usuario= StateCommons.ls.usuario;
 	  vm.isLogued = ! angular.equals(StateCommons.ls.usuario, {}); 
 	  
-	  vm.notificacionesSinLeer=StateCommons.ls.notificacionesSinLeer;
 	  vm.icon=StateCommons.ls.icon;
 	  vm.fill=StateCommons.ls.fill;
 	  
@@ -108,7 +107,7 @@
 			function doOk(response) {
 				$log.debug('callObtenerNotificaciones',response);
 				
-				if (response.data.length > StateCommons.ls.notificacionesSinLeer ) {
+				if (response.data.length >0 ) {
 					$log.debug('hay nuevas notificaciones !');	
 					
 					
@@ -116,11 +115,15 @@
 					vm.fill='red';
 					StateCommons.ls.icon='notifications';
 					StateCommons.ls.fill='red';
-					
-					StateCommons.ls.notificacionesSinLeer = response.data.length;
+				
 					vm.notificacionesSinLeer = response.data.length;
 
+					ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
+				}else{
 					
+					vm.fill='white';
+					StateCommons.ls.icon='notifications_none';
+					StateCommons.ls.fill='white';
 				}
 				
 			}
