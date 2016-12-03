@@ -32,7 +32,8 @@
 
         
         return {
-
+        	INTERVALO_NOTIFICACION_MIN : 60000,
+        	
             defaultLogo: "imagenes/logo_ch_login.png",
 
         	idVendedor: idVendedor, //TODO : hasta que sea dinamico

@@ -98,7 +98,7 @@
 		  llamadoPeriodico=$interval(function() {
 			  $log.debug("call notificaciones nuevas?");
 			  callNotificacionesNoLeidas();
-		  	}, 15000);// TODO: sacar a constante  
+		  	}, CTE_REST.INTERVALO_NOTIFICACION_MIN);  
 	  }
 	  
     
@@ -106,6 +106,8 @@
 			
 			function doOk(response) {
 				$log.debug('callObtenerNotificaciones',response);
+				
+				vm.notificacionesSinLeer = response.data.length
 				
 				if (response.data.length >0 ) {
 					$log.debug('hay nuevas notificaciones !');	
@@ -115,9 +117,7 @@
 					vm.fill='red';
 					StateCommons.ls.icon='notifications';
 					StateCommons.ls.fill='red';
-				
-					vm.notificacionesSinLeer = response.data.length;
-
+		 
 					ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
 				}else{
 					
