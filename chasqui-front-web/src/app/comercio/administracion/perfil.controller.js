@@ -21,10 +21,10 @@
 		vm.notificacionesNoLeidas=[];
 		vm.count=1;
 		
-		vm.selectedIndexDireccion=0;
+		vm.selectedIndexPerfil=0;
 		if ($stateParams.index !=null){
 			$log.debug('Viene de notificaciones' , $stateParams.index);
-			vm.selectedIndexDireccion=$stateParams.index;
+			vm.selectedIndexPerfil=$stateParams.index;
 		}
 		
 		$scope.$on("load-direcciones", function (args,mass) {
