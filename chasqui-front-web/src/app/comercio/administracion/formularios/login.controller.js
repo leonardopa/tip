@@ -5,7 +5,7 @@
 
 	/** @ngInject */
 	function LogInController($scope, $http, $log, CTE_REST, restProxy,$mdDialog,$state
-			,StateCommons,ToastCommons) {
+			,StateCommons,ToastCommons,$rootScope) {
 		$log.debug('controler log in ..... ');
 
 		var vm = this
@@ -52,7 +52,7 @@
 					StateCommons.ls.usuario = response.data;
 					
 					ToastCommons.mensaje("Bienvenido !");
-					
+					$rootScope.$broadcast('resetHeader', "");
 					$state.go("principal");
 					
 				}

@@ -13,15 +13,32 @@
 	  var vm = this;
 	  vm.urlBase = CTE_REST.url_base;
 	  vm.vendedor=StateCommons.vendedor();
-	 
-	  vm.categorias=[];
-	  vm.usuario= StateCommons.ls.usuario;
-	  vm.isLogued = ! angular.equals(StateCommons.ls.usuario, {}); 
-	  
-	  vm.icon=StateCommons.ls.icon;
-	  vm.fill=StateCommons.ls.fill;
 	  
 	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
+	  
+	  function initHeader(){
+		  vm.categorias=[];
+		  vm.usuario= StateCommons.ls.usuario;
+		  vm.isLogued = ! angular.equals(StateCommons.ls.usuario, {}); 
+		  
+		  resetNotificacion();
+	  }
+	  
+	  function resetNotificacion(){
+		  vm.callNotificaciones=false;
+		  vm.icon='notifications_none';
+		  vm.fill='white';
+	  }
+	  	 
+	  function addNotificacion(){
+		  vm.callNotificaciones=true;
+		  vm.icon='notifications';
+		  vm.fill='red';
+	  }
+	  
+	  $scope.$on('resetHeader', function(event, msg) {
+		  initHeader();
+	  });
 	  
 	  vm.ir = function (page){
 		  $log.debug("ir a ..... ",page);
@@ -83,6 +100,8 @@
 		  StateCommons.ls.callNotificaciones=false;
 		  $interval.cancel(llamadoPeriodico);
 		  
+		  initHeader();
+		  
 		  $state.go('principal')
 	  }
 
@@ -111,19 +130,10 @@
 				
 				if (response.data.length >0 ) {
 					$log.debug('hay nuevas notificaciones !');	
-					
-					
-					vm.icon='notifications';
-					vm.fill='red';
-					StateCommons.ls.icon='notifications';
-					StateCommons.ls.fill='red';
-		 
+					addNotificacion();
 					ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
 				}else{
-					
-					vm.fill='white';
-					StateCommons.ls.icon='notifications_none';
-					StateCommons.ls.fill='white';
+					resetNotificacion
 				}
 				
 			}
@@ -131,5 +141,8 @@
 			restProxy.get(CTE_REST.notificacionesNoLeidas,{}, doOk);
 	  }
 
+	  
+	  
+	  initHeader();
   }
 })();
