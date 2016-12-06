@@ -64,6 +64,20 @@
 												puedes agregar miembros al grupo
 											</md-tooltip>
 										 </md-button>
+
+					<div ng-controller="DetallePedidoController as detallePedidoCtr"
+	       	     						ng-cloak>
+					 <md-button ng-click="detallePedidoCtrl.comprar($event)">
+				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>				 
+						<md-tooltip md-direction="left">
+						
+						Agrega productos al pedido {{detallePedidoCtrl.pedido.nombre}}
+										
+										</md-tooltip>
+										</md-button>	
+
+
+						</div>				
 										  								       
 								          <md-button ng-click="listaGruposCtrl.edit()">
 								          	 <md-icon> edit </md-icon>
@@ -98,5 +112,7 @@
 			</div>
 
 		</div>
+		
+		
 	</div>
- <section ng-include="'app/comercio/principal/footer.html'"></section>
+ 

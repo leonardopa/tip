@@ -20,6 +20,7 @@ import com.ar.unq.chasqui.few.core.dto.MedallasDto;
 import com.ar.unq.chasqui.few.core.dto.ProductorDto;
 import com.ar.unq.chasqui.few.core.dto.UsuarioFullDto;
 import com.ar.unq.chasqui.few.core.dto.apiary.FiltoProductoDto;
+import com.ar.unq.chasqui.few.core.dto.apiary.NotificacionesDto;
 import com.ar.unq.chasqui.few.core.dto.apiary.NuevoUsuarioDto;
 import com.ar.unq.chasqui.few.core.dto.apiary.PaginaProductoDto;
 import com.ar.unq.chasqui.few.core.service.example.ProductoServiceMock;
@@ -173,7 +174,24 @@ public class ApiaryRestController {
 
 	}
 
+	///////////////////////////////////////////////
+	///////// NOTIFICACIONES
+	private Integer noLeidasCount=0;
+	@RequestMapping(value = "/user/adm/notificacion/noLeidas", method = RequestMethod.GET)
+	public @ResponseBody List<NotificacionesDto> notificacionesNoLeidas() {
+		noLeidasCount=noLeidasCount+1;
+		return serv.findNotificacionesNoLeidas(noLeidasCount);
+	}
 
+	@RequestMapping(value = "user/adm/notificacion/{pagina}", method = RequestMethod.GET)
+	public @ResponseBody List<NotificacionesDto> notificaciones(@PathVariable("pagina") Integer pagina) {
+		return serv.findNotificaciones(pagina,Boolean.TRUE);
+	}
+
+	@RequestMapping(value = "/user/adm/notificacion/{idNotificacion}", method = RequestMethod.POST)
+	public @ResponseBody void notificacionesLeer(@PathVariable("idNotificacion") Integer idNotificacion) {
+		System.out.println("notificacionesLeer " + idNotificacion);
+	}
 
 	/////////////////// privados
 

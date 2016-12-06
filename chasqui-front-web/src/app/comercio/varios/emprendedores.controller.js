@@ -42,8 +42,7 @@
 				
 				vm.emprendedores= response.data;
 			}
-			// PASARLE el id del producto vm.idEmprendedor
-			restProxy.get(CTE_REST.productores(CTE_REST.idVendedor),{},doOk);		    
+            restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
 	   }
 	   
 	   

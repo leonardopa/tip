@@ -12,9 +12,9 @@
 			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
 	</div>	
  -->
-<md-content class="md-padding" layout="row" layout-wrap >
-  <div flex="33" ng-repeat="variante in listaProductoCtr.variantes" layout="column" layout-align="space-between stretch">
-		<md-card class="hf-chasqui" layout="column" layout-align="space-between stretch">
+<md-content class="md-padding" layout="row" layout-wrap>
+  <div flex="33" ng-repeat="variante in listaProductoCtr.variantes">
+		<md-card  >
 	        <img src="{{listaProductoCtr.urlBase}}/{{variante.imagenPrincipal}}"
 				 alt="{{variante.descripcion}}"  >
 	        <md-card-title>
@@ -37,9 +37,7 @@
 				 <div layout="row"       layout-align="space-around center">
 				  <div ng-repeat="medalla in variante.medallasProducto">
 				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
-                                                                  width="60" height="60"> 
-
+								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}                                                                width="60" height="60"> 
 								 <md-tooltip md-direction="up">
 									          {{medalla.nombre}}
 								 </md-tooltip>

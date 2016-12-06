@@ -11,7 +11,7 @@
 	  StateCommons.ls.itemMenuSelect = 'medalla'; 
 	   var vm = this
 	   
-	   vm.urlBase= CTE_REST.url_base;
+	   vm.urlBase=CTE_REST.url_base;
 	   vm.idMedalla = $stateParams.idMedalla; // usar en caso de tener mas datos que mostrar . Vista indivudual
 	   vm.medalla;
 	   vm.medallas;

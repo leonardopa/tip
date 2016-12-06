@@ -13,11 +13,11 @@
 	 <div ng-repeat="slide in ctrl.variantes" >
 	 <div  style="padding-right: 10px;padding-left: 10px" ngCloak>
         <div class="thumbnail">
-				      <img ng-src="{{ctrl.urlbase}}{{slide.imagenPrincipal}}"  >
+				      <img src="{{ctrl.urlbase}}{{slide.imagenPrincipal}}"  >
 				      <div class="caption">
 	 			        <p>{{slide.nombreProducto}}</p>
-	 			          
-                                  
+	 			    
+				        <p>{{slide.nombreCategoria}}</p>
 				        <h4><strong>{{slide.precioParteEntera}}<sup>{{slide.precioParteDecimal}}</sup>
 				      </div>
 		 </div>

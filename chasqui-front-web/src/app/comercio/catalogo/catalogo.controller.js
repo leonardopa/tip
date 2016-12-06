@@ -10,8 +10,8 @@
 	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
 	  StateCommons.ls.itemMenuSelect = 'catalogo';
 	  var vm = this;
-	  
-	  
+ 
+
 	  /////////// Para el selector de Grupos de compra
 	  vm.topDirections = ['left', 'up'];
 	  vm.bottomDirections = ['down', 'right'];
@@ -41,7 +41,7 @@
 	  vm.medallaSelect;
 	  
 	  vm.urlBase=CTE_REST.url_base;
-	  
+ 
 	  vm.filtroPor = function(filtroPor){
 		  $log.debug("filtro por ",filtroPor);
 		  
@@ -148,8 +148,8 @@
 				}
 			}
 			
-			// TODO: hacer el ID de usuario dinamico
-			restProxy.get(CTE_REST.productosPedidoByUser(CTE_REST.idVendedor),{},doOk);		    
+	//		restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);		    
+
 	 }
 	 
 	  
@@ -161,9 +161,8 @@
 				vm.categorias = response.data;
 				vm.categoriaSelect =vm.categorias[0]; 
 			}
-			
-			
-                         restProxy.get(CTE_REST.categorias(CTE_REST.idVendedor),{},doOk);		    		    
+
+			restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},doOk);		    		    
 	 }
 	  
 	  function callProductores() {
@@ -174,12 +173,13 @@
 		//		vm.productorSelect =vm.productores[0]; 
 			}
 			
-			
-                         restProxy.get(CTE_REST.productores(CTE_REST.idVendedor),{},doOk);		    
+		 	restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
+
+
 	 }
 	  
 	  function callMedallas() {
-			$log.debug("---callMedallas ---");
+			$log.debug("---callMedallas de producto ---");
 
 			function doOk(response) {				 
 				vm.medallas = response.data;

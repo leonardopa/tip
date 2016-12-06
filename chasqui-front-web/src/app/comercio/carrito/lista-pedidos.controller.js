@@ -77,7 +77,7 @@
 			}
 
 			// TODO: hacer el ID de usuario dinamico			
-			restProxy.get(CTE_REST.productosPedidoByUser(CTE_REST.idVendedor),{},doOk);
+	    	restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);
 
 		}
 		
@@ -117,11 +117,11 @@
 				}
 			}
 			
-			restProxy.getPrivate(CTE_REST.verPedidoIndividual(CTE_REST.idVendedor),{},doOk,doNoOk);
+			restProxy.getPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id),{},doOk,doNoOk);
 		
 		}
 		
-		callLoadPedidos()
+		//callLoadPedidos()
 		callPedidoIndividual()
 	}
 

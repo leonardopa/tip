@@ -3,26 +3,22 @@
 <header>
 <div ng-controller="MenuController as menuCtrl">    
 
-	<md-toolbar class="md-hue-2" >
-		<div class="md-toolbar-tools">
-		 <div class="wrapper" layout="row" layout-align="space-between center">
-		 	    	  <a ui-sref="principal"> 
-	
-                       <div ng-controller= "VendedorController as vendedorCtrl" > 
-
-                        <img ng-src= "{{vendedorCtrl.urlBase}}{{ vendedorCtrl.vendedor.imagen }}" >
-
-
-
-                       </div>              
-         </a>
-
-
+<md-toolbar class="md-hue-2" >
+	<div class="md-toolbar-tools">
+		<a ui-sref="principal"> <img ng-src="{{menuCtrl.urlBase}}{{menuCtrl.vendedor.imagen}}" > </a>
 		<span flex></span>
 	    
-		  
-	     <div  class="notificcion-entrante" layout="row" layout-align="center center" ng-click="menuCtrl.ir('perfil')" ng-show="menuCtrl.isLogued"><span>4</span></div>
-       <h2 class="md-title"
+	     <md-button ng-show="menuCtrl.isLogued"  ng-click="menuCtrl.verNotificaciones()">
+				<ng-md-icon options="{{menuCtrl.options}}"
+				id="icon" icon="{{menuCtrl.icon}}"
+				style="fill: {{menuCtrl.fill}}"/>
+				  
+				<md-tooltip md-direction="left">
+					 Notificaciones sin leer  {{menuCtrl.notificacionesSinLeer}} </md-tooltip>
+		
+		</md-button>
+		     
+	    <h2 class="md-title"
 	      ng-show="menuCtrl.isLogued">{{menuCtrl.usuario.nickname}}</h2>
 	         
 	     <md-button class="md-raised" ng-click="menuCtrl.ir('login')"
@@ -33,14 +29,10 @@
 		 	<md-icon> exit_to_app </md-icon>
 		</md-button>
 	    
-		</div>
-		 </div>
-                               
+	</div>
+</md-toolbar>
 
-
-	</md-toolbar>
-
-    <div class="menu" layout="row" layout-align="center center">
+<div class="menu" layout="row" layout-align="center center">
 
     <md-button  class="{{menuCtrl.classFor('bienvenido')}}" ng-click="menuCtrl.ir('bienvenido')"  >
 		Bienvenido </md-button>
@@ -69,6 +61,6 @@
 
 	
         
-     <md-divider ></md-divider>
+<md-divider ></md-divider>
 </div>
 </header>

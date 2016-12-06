@@ -105,10 +105,7 @@
 		// TODO : cambiar la lista de contactos por un boton que pida en ingreso
 		// al grupo por mail.
 		function loadContacts() {
-
-			// $http.get("http://localhost:8081/chasqui-mock/usuarios/grupos/"+vm.idGrupo+"/integrantes")
-			// .then(doOk)
-
+ 
 			function doOk(response) {
 				// vm.productos=response.data;
 				vm.allContacts = response.data;

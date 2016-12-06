@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ar.unq.chasqui.few.core.dto.Config;
 import com.ar.unq.chasqui.few.core.dto.PedidoDto;
 import com.ar.unq.chasqui.few.core.dto.ProductoDto;
 import com.ar.unq.chasqui.few.core.dto.apiary.PaginaProductoDto;
@@ -44,12 +45,6 @@ public class RestProducto {
 
 	@RequestMapping(value = "/destacados", method = RequestMethod.GET)
 	public @ResponseBody List<ProductoDto> findProductosDestacados(HttpServletRequest request) {
-		// Ejemplo de como saber que Vendedor es
-		System.out.println("local " + request.getRequestURL());
-		System.out.println("local " + request.getRequestURI());
-		System.out.println(request.getLocalAddr());
-		;
-
 		return service.findProductosDestacados();
 	}
 
@@ -77,6 +72,32 @@ public class RestProducto {
 		System.out.println("agregar " +producto);
 		// return service.findPedidos(idUser);
 		return 0;
+	}
+
+	@RequestMapping(value = "/config", method = RequestMethod.GET)
+	public @ResponseBody Config config(HttpServletRequest request) {
+		// Ejemplo de como saber que Vendedor es
+		System.out.println("local " + request.getRequestURL());
+		System.out.println("local " + request.getRequestURI());
+		System.out.println("local " + request.getServerName());
+		System.out.println("local " + request.getLocalName());
+		System.out.println("local " + request.getPathInfo());
+		System.out.println(request.getLocalAddr());
+
+
+		return findConfig(request.getServerName());
+	}
+
+	private Config findConfig(String serverName) {
+
+		if ("MatLock".equalsIgnoreCase(serverName)) return new Config(2, "MatLock", "/imagenes/usuarios/ROOT/perfil.jpg");
+		if ("damian".equalsIgnoreCase(serverName)) return new Config(4, "damian", null);
+		if ("adminpds".equalsIgnoreCase(serverName)) return new Config(6, "adminpds", "/imagenes/usuarios/adminpds/chaqui-logo-15.png");
+		if ("prueba".equalsIgnoreCase(serverName)) return new Config(7, "prueba", null);
+		if ("mercado".equalsIgnoreCase(serverName)) return new Config(10, "mercado", "/imagenes/usuarios/mercado/logoMT.png");
+
+		//por defecto es PDS
+		return new Config(6, "adminpds", "/imagenes/usuarios/adminpds/chaqui-logo-15.png");
 	}
 
 }

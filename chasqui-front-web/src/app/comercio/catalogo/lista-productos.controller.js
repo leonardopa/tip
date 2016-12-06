@@ -60,7 +60,8 @@
 			
 			$state.go('medalla',{'idMedalla':medalla});
 		}
-			
+		
+		
 		/////////////////////////
 		/// Recive el evento de filtrado 
 		
@@ -75,13 +76,13 @@
 		// /////////// REST
 
 		var callAgregarAlCarro = function(variante, cantidad) {
-			$log.debug('callAgregarAlCarro: ', StateCommons.ls.pedidoSeleccionado);
+			$log.debug('callAgregarAlCarro para pedido: ', StateCommons.ls.pedidoSeleccionado);
 
 			function doOk(response) {
-				
 				$log.log('Agregar producto Response ', response);
-ToastCommons.mensaje("Producto agregado !");
+				ToastCommons.mensaje("Producto agregado !");
 			}
+			
 			function doNoOk(response) {
 
 				$log.log('FALLO AGREGAR PRODUCTO ', response);
@@ -92,8 +93,7 @@ ToastCommons.mensaje("Producto agregado !");
 			params.idPedido=StateCommons.ls.pedidoSeleccionado.id;
 			params.idVariante=variante.idVariante;
 			params.cantidad=cantidad;
-			
-		
+			 
 			restProxy.put(
 					CTE_REST.agregarPedidoIndividual,params, doOk,doNoOk);
 
@@ -130,12 +130,12 @@ ToastCommons.mensaje("Producto agregado !");
 		              break;   
 		          case 'MEDALLA':
 		        	  json.idMedalla = filtro.valor;
-				  json.idVendedor = CTE_REST.idVendedor;
+		        	  json.idVendedor = StateCommons.vendedor().id;
 		        	  restProxy.postPublic(CTE_REST.productosByMedalla, json, doOk);
 		              break;
 		          case 'QUERY':
 		        	  json.query = filtro.valor;
-		        	  json.idVendedor = CTE_REST.idVendedor;
+		        	  json.idVendedor = StateCommons.vendedor().id;
 		        	  restProxy.postPublic(CTE_REST.productosByQuery, json, doOk);		
 		              break;
 		          default:

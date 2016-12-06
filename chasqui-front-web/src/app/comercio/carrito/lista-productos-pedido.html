@@ -1,0 +1,66 @@
+<div ng-controller="ListaProductosPedidoController as listaProductoPedidoCtr">
+ 
+
+	<span ng-show="listaProductoPedidoCtr.variantes.length == 0">
+	Sin productos en el carrito</span>
+
+	<div ng-repeat="variante in listaProductoPedidoCtr.variantes">
+		<div flex-xs flex-gt-xs="120" layout="column">
+			<md-card> 
+			<md-card-content>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2">
+						<img
+							src="http://lorempixel.com/90/90/food/{{variante.idProducto}}"
+							alt="{{variante.descripcionVariente}}">
+					</div>
+					<div class="col-md-5">
+						<div layout="column" layout-align="space-around start">
+							<div><strong> {{variante.nombreProducto}} </strong></div>
+							<div><a href="#">{{variante.nombreVariedad}}</a></div>
+							<div>Productor : <strong> {{variante.nombreFabricante}} </strong></div>							  
+						</div>
+					</div>
+					<div class="col-md-2">
+						<h4>
+							<strong>{{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
+						</h4>
+						5 X $ 20<sup>50</sup>
+					</div>
+					<div class="col-md-3">
+						<section layout="row" layout-sm="column" layout-wrap>
+							<md-icon> info_outline </md-icon>
+							<md-icon> info_outline </md-icon>
+							<md-icon> info_outline </md-icon>
+							<md-icon> info_outline </md-icon>
+							<br>
+						</section>
+
+						 
+
+						 
+							<div layout="row">
+								<div flex>
+									<br>
+									<h8>Cant.</h8>
+									<strong>{{variante.cantidad}}</strong>
+								</div>
+								<div flex>
+									<md-button ng-click="listaProductoPedidoCtr.quitar(variante)">
+									<i style="font-size: 32px; color: red" class="material-icons">remove_shopping_cart</i>
+									<md-tooltip md-direction="left"> Quitar del
+									Chanquito </md-tooltip> </md-button>
+								</div>
+							</div>
+ 
+					</div>
+				</div>
+			</div>
+			</md-card-content> </md-card>
+		</div>
+	</div>
+
+
+	 
+</div>
