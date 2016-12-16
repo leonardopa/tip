@@ -113,10 +113,16 @@
             controller: 'RegistroController',        
             controllerAs: 'registroCtrl'
           })
+        .state('footer', {
+            url: '/footer',
+            templateUrl: 'app/comercio/varios/footer.html',
+            controller: 'FooterController',        
+            controllerAs: 'footerCtrl'
+          })
         .state('error', {
-        url: '/error/:key',
-        controller: 'ErrorController as error',
-        templateUrl: 'app/error/error.html'
+	        url: '/error/:key',
+	        controller: 'ErrorController as error',
+	        templateUrl: 'app/error/error.html'
       })
 
       ;

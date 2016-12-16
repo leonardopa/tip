@@ -130,7 +130,7 @@
 		              break;   
 		          case 'MEDALLA':
 		        	  json.idMedalla = filtro.valor;
-		        	  json.idVendedor = StateCommons.vendedor().id;
+				  json.idVendedor = StateCommons.vendedor().id;
 		        	  restProxy.postPublic(CTE_REST.productosByMedalla, json, doOk);
 		              break;
 		          case 'QUERY':

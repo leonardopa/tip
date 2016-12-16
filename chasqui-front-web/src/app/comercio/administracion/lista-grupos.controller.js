@@ -111,7 +111,7 @@
 			
 			// TODO: hacer el ID de usuario dinamico
 			restProxy.get(CTE_REST.gruposByusuario(StateCommons.vendedor().id),{},doOk);
-             	//restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);
+
 		}
 		
 		function callSalirGrupo(){

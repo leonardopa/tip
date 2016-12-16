@@ -101,8 +101,8 @@
 		function callPedidoIndividual(){
 			function doOk(response) {
 				//TODO: ver si lo puede traer el servicio
-				response.data.creador = 'INDIVIDUAL'
-				response.data.nombre = 'INDIVIDUAL'
+				response.data.creador = 'INDIVUDUAL'
+				response.data.nombre = 'INDIVUDUAL'
 				vm.tabs.push(response.data);
 				
 			}

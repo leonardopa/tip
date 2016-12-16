@@ -176,11 +176,13 @@ public class ApiaryRestController {
 
 	///////////////////////////////////////////////
 	///////// NOTIFICACIONES
-	private Integer noLeidasCount=0;
+	Integer count=1;
 	@RequestMapping(value = "/user/adm/notificacion/noLeidas", method = RequestMethod.GET)
 	public @ResponseBody List<NotificacionesDto> notificacionesNoLeidas() {
-		noLeidasCount=noLeidasCount+1;
-		return serv.findNotificacionesNoLeidas(noLeidasCount);
+		Integer cantidad=0;
+		if (count%2 == 0) cantidad = 3;
+		count++;
+		return serv.findNotificacionesNoLeidas(cantidad);
 	}
 
 	@RequestMapping(value = "user/adm/notificacion/{pagina}", method = RequestMethod.GET)

@@ -15,12 +15,7 @@
     
     vm.ls.usuario ;
     
-    vm.ls.pedidoSeleccionado;
-    
-    vm.ls.notificacionesSinLeer;
-    vm.ls.callNotificaciones=false;
-	vm.ls.icon='notifications_none';
-	vm.ls.fill='white';
+    vm.ls.pedidoSeleccionado; 
 
     vm.vendedor = function(){
     	//TODO: pedir al servicio, hacer singleton con el LS

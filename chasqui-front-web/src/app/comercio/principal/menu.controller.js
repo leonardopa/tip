@@ -6,23 +6,39 @@
     .controller('MenuController',MenuController);
 
   /** @ngInject */
-  function MenuController( $scope,$log,$state,StateCommons,CTE_REST,$interval,restProxy) {
+  function MenuController( $scope,$log,$state,StateCommons,CTE_REST,$interval,restProxy,ToastCommons) {
 	  $log.debug("MenuController ..... ");
 	  $log.debug(StateCommons.ls.usuario);
 	  
 	  var vm = this;
 	  vm.urlBase = CTE_REST.url_base;
 	  vm.vendedor=StateCommons.vendedor();
-	 
-	  vm.categorias=[];
-	  vm.usuario= StateCommons.ls.usuario;
-	  vm.isLogued = ! angular.equals(StateCommons.ls.usuario, {}); 
-	  
-	  vm.notificacionesSinLeer=StateCommons.ls.notificacionesSinLeer;
-	  vm.icon=StateCommons.ls.icon;
-	  vm.fill=StateCommons.ls.fill;
 	  
 	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
+	  
+	  function initHeader(){
+		  vm.categorias=[];
+		  vm.usuario= StateCommons.ls.usuario;
+		  vm.isLogued = ! angular.equals(StateCommons.ls.usuario, {}); 
+		  
+		  resetNotificacion();
+	  }
+	  
+	  function resetNotificacion(){
+		  vm.callNotificaciones=false;
+		  vm.icon='notifications_none';
+		  vm.fill='white';
+	  }
+	  	 
+	  function addNotificacion(){
+		  vm.callNotificaciones=true;
+		  vm.icon='notifications';
+		  vm.fill='red';
+	  }
+	  
+	  $scope.$on('resetHeader', function(event, msg) {
+		  initHeader();
+	  });
 	  
 	  vm.ir = function (page){
 		  $log.debug("ir a ..... ",page);
@@ -84,6 +100,8 @@
 		  StateCommons.ls.callNotificaciones=false;
 		  $interval.cancel(llamadoPeriodico);
 		  
+		  initHeader();
+		  
 		  $state.go('principal')
 	  }
 
@@ -99,7 +117,7 @@
 		  llamadoPeriodico=$interval(function() {
 			  $log.debug("call notificaciones nuevas?");
 			  callNotificacionesNoLeidas();
-		  	}, 15000);// TODO: sacar a constante  
+		  	}, CTE_REST.INTERVALO_NOTIFICACION_MIN);  
 	  }
 	  
     
@@ -108,19 +126,14 @@
 			function doOk(response) {
 				$log.debug('callObtenerNotificaciones',response);
 				
-				if (response.data.length > StateCommons.ls.notificacionesSinLeer ) {
+				vm.notificacionesSinLeer = response.data.length
+				
+				if (response.data.length >0 ) {
 					$log.debug('hay nuevas notificaciones !');	
-					
-					
-					vm.icon='notifications';
-					vm.fill='red';
-					StateCommons.ls.icon='notifications';
-					StateCommons.ls.fill='red';
-					
-					StateCommons.ls.notificacionesSinLeer = response.data.length;
-					vm.notificacionesSinLeer = response.data.length;
-
-					
+					addNotificacion();
+					ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
+				}else{
+					resetNotificacion
 				}
 				
 			}
@@ -128,5 +141,8 @@
 			restProxy.get(CTE_REST.notificacionesNoLeidas,{}, doOk);
 	  }
 
+	  
+	  
+	  initHeader();
   }
 })();

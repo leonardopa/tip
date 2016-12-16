@@ -17,7 +17,7 @@
         //var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
         
         //Servidor REMOTOs
-       // var URL_REST_BASE = "http://168.181.184.203:8080/chasqui-mock/rest/";
+        var URL_REST_BASE = "http://168.181.184.203:8080/chasqui-mock/rest/";
         var URL_BASE = "http://168.181.184.203:8080/chasqui/";
        
 
@@ -32,7 +32,8 @@
 
         
         return {
-
+        	INTERVALO_NOTIFICACION_MIN : 60000,
+        	
             defaultLogo: "imagenes/logo_ch_login.png",
 
         	idVendedor: idVendedor, //TODO : hasta que sea dinamico
