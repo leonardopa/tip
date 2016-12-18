@@ -21,6 +21,7 @@
 		  vm.usuario= StateCommons.ls.usuario;
 		  vm.isLogued = ! angular.equals(StateCommons.ls.usuario, {}); 
 		  
+		  initRefreshNotification();
 		  resetNotificacion();
 	  }
 	  
@@ -97,7 +98,7 @@
 		  StateCommons.ls.token=null;
 		  StateCommons.ls.pedidoSeleccionado=null;
 		  StateCommons.ls.notificacionesSinLeer='';
-		  StateCommons.ls.callNotificaciones=false;
+		  
 		  $interval.cancel(llamadoPeriodico);
 		  
 		  initHeader();
@@ -110,14 +111,16 @@
 		  $log.debug("Ver notificaciones");
 		  $state.go('perfil',{index:1});
 	  }
-    
-	  if (!StateCommons.ls.callNotificaciones && vm.isLogued){
-		  StateCommons.ls.callNotificaciones=true;
-		  
-		  llamadoPeriodico=$interval(function() {
-			  $log.debug("call notificaciones nuevas?");
-			  callNotificacionesNoLeidas();
-		  	}, CTE_REST.INTERVALO_NOTIFICACION_MIN);  
+	
+	  
+	  function initRefreshNotification(){
+		  if (vm.isLogued){
+			  $log.debug("interval notifications");
+			  llamadoPeriodico=$interval(function() {
+				  $log.debug("call notificaciones nuevas?");
+				  callNotificacionesNoLeidas();
+			  }, CTE_REST.INTERVALO_NOTIFICACION_MIN);  
+		  }		  
 	  }
 	  
     
@@ -133,7 +136,7 @@
 					addNotificacion();
 					ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
 				}else{
-					resetNotificacion
+					resetNotificacion();
 				}
 				
 			}
@@ -141,8 +144,7 @@
 			restProxy.get(CTE_REST.notificacionesNoLeidas,{}, doOk);
 	  }
 
-	  
-	  
+ 
 	  initHeader();
   }
 })();
