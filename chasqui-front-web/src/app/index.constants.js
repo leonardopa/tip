@@ -61,8 +61,16 @@
         	productores: function (idVendedor){
         		return URL_REST_BASE +"client/productor/all/" + idVendedor;
         	},
+
+           // productosSinFiltro: URL_REST_BASE + "client/producto/sinFiltro",
+
+            productosSinFiltro: function (idVendedor){
+                return URL_REST_BASE + "client/producto/sinFiltro";
+            },
         	
         	medallas: URL_REST_BASE +"client/medalla/all", 
+
+          
         	
         	medallasProducto: URL_REST_BASE + "client/medalla/producto/all",
         	
@@ -116,10 +124,15 @@
         		return URL_BASE_MOCK + "user/adm/notificacion/"+pagina;
         	},
 
-        	productosDestacadosByVendedor : function(idVendedor){
-        		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
-        	},
+        	//productosDestacadosByVendedor : function(idVendedor){
+        	//	return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
+        	//},
         	
+            productosDestacadosByVendedor : function(idVendedor){
+              return "http://localhost:8081/chasqui/rest/"  + "client/producto/destacados/"+idVendedor;
+            },
+
+
         	////////////////////////////////////////////////////////
        
         	productosPedidoByUser : function(idUser){

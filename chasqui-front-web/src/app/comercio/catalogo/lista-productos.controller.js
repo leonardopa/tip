@@ -20,6 +20,39 @@
 		
 		vm.urlBase = CTE_REST.url_base;
 		vm.variantes = [];
+		vm.variantes = callProductosSinFiltro();
+
+
+		function callProductosSinFiltro() {
+			$log.debug("---hola favio ---");
+
+			var json = {
+                    pagina: 1,
+                    cantItems: 10,
+                    precio: 'Down',
+                    idVendedor: 5,
+                   
+            }
+
+			function doOk(response) {				 
+			
+				vm.variantes = response.data.productos;
+
+				vm.maxSize = 10;
+				vm.bigTotalItems = response.data.itemsTotal;
+				vm.bigCurrentPage = response.data.paginaActual;
+
+			}
+		
+			restProxy.post(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
+	 }
+
+
+
+
+
+
+
 	
 		vm.pageChanged = function() {
 			$log.log('Page changed to: ' + vm.bigCurrentPage);
@@ -130,7 +163,7 @@
 		              break;   
 		          case 'MEDALLA':
 		        	  json.idMedalla = filtro.valor;
-				  json.idVendedor = StateCommons.vendedor().id;
+				      json.idVendedor = StateCommons.vendedor().id;
 		        	  restProxy.postPublic(CTE_REST.productosByMedalla, json, doOk);
 		              break;
 		          case 'QUERY':
@@ -139,7 +172,11 @@
 		        	  restProxy.postPublic(CTE_REST.productosByQuery, json, doOk);		
 		              break;
 		          default:
-		        	  $log.log('tipo de filtro desconocido');
+		             json.query = filtro.valor;
+		        	 $log.log('mostrar productos sin filtrar');
+		        	 json.idVendedor = StateCommons.vendedor().id;
+		        	 restProxy.postPublic(CTE_REST.productosSinFiltro, json, doOk);
+		             break;
 	          }
 		}
 		
