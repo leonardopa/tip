@@ -1,15 +1,10 @@
- <div  ng-controller="FooterController as footerCtrl">
-
- <md-content>
-	<footer  >
-      <md-toolbar >
-        <div layout="column" layout-align="center center" flex class="footer">
-        	<h1 class="mensaje-footer"> {{footerCtrl.texto}} </h1>
-        	<h1 > {{footerCtrl.texto}} </h1>   
-        </div>
-      </md-toolbar>
-    </footer>
-     
-</md-content>	      
-	
-</div>
+<footer>
+        <md-toolbar>
+          <div layout="row" layout-align="center center" flex class="footer">
+          <div class="wrapper" flex layout="row" layout-align="space-between">	
+          		<div class="chasqui">Chasqui</div>
+				<img ng-src="app/components/image/chasqui-footer.png" alt="hola" class="changuito">
+          </div>
+          </div>
+        </md-toolbar>
+  </footer>

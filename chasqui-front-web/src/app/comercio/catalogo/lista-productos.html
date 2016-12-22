@@ -1,7 +1,9 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
 
 	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
-		productos.</span>
+		productos.</span> 
+
+		
  
 	<!-- 
 	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
@@ -46,15 +48,25 @@
 				</div>	
 	        </md-card-content>
 	       
-				
+	       <div ng-controller="MenuController as menuCtrl">
+    		
+			
 	        <md-card-actions layout="column" layout-align="start">
-	          
-	          <md-button class="md-raised md-primary"
-								ng-click="listaProductoCtr.agregar(variante)">Agregar <md-tooltip
-									md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
-									
-			 
-	        </md-card-actions>
+	        <md-button ng-show="menuCtrl.isLogued" class="md-raised md-primary"
+			ng-click="listaProductoCtr.agregar(variante)">Agregar <md-tooltip
+			md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
+	        
+	         
+		  
+
+	        <md-button ng-hide="menuCtrl.isLogued" class="md-raised md-primary"
+			ng-click="listaProductoCtr.agregar(variante)">Comprar <md-tooltip
+			md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
+			</md-card-actions>	
+		    </div>
+
+
+
 	      </md-card>
 	     </md-content>
  </div>

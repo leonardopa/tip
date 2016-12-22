@@ -26,6 +26,7 @@
 	  vm.productores = [];
 	  vm.medallas = [];
 	  vm.query=''; 
+	  vm.productosSinFiltro= [];
 	  
 	  vm.pedidos={};
 	  vm.carrito=StateCommons.ls.pedidoSeleccionado;
@@ -39,6 +40,7 @@
 	  vm.categoriaSelect;
 	  vm.productorSelect;
 	  vm.medallaSelect;
+	  vm.sinFiltroSelect;
 	  
 	  vm.urlBase=CTE_REST.url_base;
  
@@ -64,6 +66,7 @@
 	        	  vm.medallaSelect=null;
 	              break;
 	          default:
+	          vm.sinFiltroSelect=null;
 		  }
 		  
 		  vm.filtrar();
@@ -75,6 +78,7 @@
 		  vm.categoriaSelect=null;
 		  vm.productorSelect=null;
 		  vm.medallaSelect=null;
+		  vm.sinFiltroSelect=null;	
 		  doFiltrar(vm.queryText);
 	  }
 	  
@@ -93,6 +97,9 @@
 	        	  doFiltrar(vm.queryText);
 	              break;
 	          default:
+	          //Agregado 16/12
+	          	  doFiltrar(vm.sinFiltroSelect);
+	          	  break;
 		  }
 	 
 	  }
@@ -120,6 +127,9 @@
 		  filtro.valor = valor;			 
 		  $scope.$broadcast('filterEvent', filtro);	// llama al evento del list-producto-controller	 
 	  }
+
+
+			
 	  
 	  /// CALL REST 
 	  
@@ -187,6 +197,29 @@
 		
 			restProxy.get(CTE_REST.medallasProducto,{},doOk);		    
 	 }
+
+//Agregado 16/12
+	 function callProductosSinFiltro() {
+			$log.debug("---Deberia mostrar productos sin filtros ---");
+
+			var json = {
+                    pagina: 1,
+                    cantItems: 5,
+                    precio: 'Down',
+                    idVendedor: 5,
+                   
+            }
+
+			function doOk(response) {				 
+				vm.productosSinFiltro = response.data;
+
+			}
+		
+			restProxy.post(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
+	 }
+
+
+
 	  
 	 
 	 
@@ -194,6 +227,7 @@
 	 callCategorias();
 	 callProductores();
 	 callMedallas(); 
+	 callProductosSinFiltro();
 	    
 	
   }

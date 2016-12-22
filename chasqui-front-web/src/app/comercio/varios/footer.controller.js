@@ -11,6 +11,8 @@
 	 
 	  var vm = this
 	   
-	  vm.texto=" Mi hermoso pie de pagina"
+	  vm.texto=" Chasqui"
+	 
+	  
   }
 })();
