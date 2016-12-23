@@ -124,13 +124,13 @@
         		return URL_BASE_MOCK + "user/adm/notificacion/"+pagina;
         	},
 
-        	//productosDestacadosByVendedor : function(idVendedor){
-        	//	return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
-        	//},
-        	
+        	productosDestacadosByVendedor : function(idVendedor){
+        		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
+        	},
+        	/*
             productosDestacadosByVendedor : function(idVendedor){
               return "http://localhost:8081/chasqui/rest/"  + "client/producto/destacados/"+idVendedor;
-            },
+            },*/
 
 
         	////////////////////////////////////////////////////////

@@ -7,6 +7,8 @@
   function ErrorController($log, $filter, $stateParams) {
     $log.debug('Error controller starting...' , $stateParams.key);
     var vm = this;
-    vm.errorMessage = $filter('translate')($stateParams.key);
+  //  vm.key =$stateParams.key;
+  //  vm.errorMessage = $filter('translate')($stateParams.key);
+      vm.errorMessage = 'Error inesperado';
   }
 })();
