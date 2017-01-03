@@ -1,5 +1,5 @@
-angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootScope', '$q','leafletData','StateCommons','ToastCommons', '$mdDialog',
-    function($scope, $rootScope, $q, leafletData, StateCommons,ToastCommons , $mdDialog) {
+angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootScope', '$log', '$q','leafletData','StateCommons','ToastCommons', '$mdDialog',
+    function($scope, $rootScope, $log, $q, leafletData, StateCommons,ToastCommons , $mdDialog) {
 	/*-------------------------------
 	 *------Variables Gobales--------
 	 *------------------------------*/
@@ -8,8 +8,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		vm.domicilio =  $scope.direccionParam;
 		var deshabilitarBoton = true;
 		$rootScope.isDisabled = true;
-		var mostrarBotones = true;
-		$scope.status = true;
+		$rootScope.mostrarBotones = true;
     	var blueIcon = L.icon({
     	    iconUrl: 'assets/images/map-marker-40.png',
 
@@ -58,20 +57,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		/*
     	 * Controles del Pop up
     	 */
-    	  $scope.showPrerenderedDialog = function(ev) {
-    		  $scope.status = false;
-    		    $mdDialog.show({
-    		      controller: DialogController,
-    		      contentElement: '#myDialog',
-    		      parent: angular.element(document.body),
-    		      targetEvent: ev,
-    		      clickOutsideToClose: true
-    		    }).then(function() {
-    		      }, function() {
-    		        $scope.status = 'You cancelled the dialog.';
-    		      });
-    		   
-    		  };
+
     	
     	function show(ev) {
       		    $mdDialog.show({
@@ -83,8 +69,20 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
       		    }
       		    ).then(function() {
     		      }, function() {
-    		        $scope.status = 'You cancelled the dialog.';
     		      });
+      		  };
+        
+      	 function showAlert(ev, mensaje) {
+      		    $mdDialog.show(
+      		      $mdDialog.alert()
+      		        .parent(angular.element(document.querySelector('#popupContainer')))
+      		        .clickOutsideToClose(true)
+      		        .title('Se ha producido un error')
+      		        .textContent(mensaje)
+      		        .ariaLabel('Alert Dialog Demo')
+      		        .ok('OK')
+      		        .targetEvent(ev)
+      		    );
       		  };
 
 	 	function DialogController($scope, $rootScope, $mdDialog) {
@@ -107,7 +105,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		  };
 		  
 		$scope.mostrarBotonesEnMapa = function(){
-			return mostrarBotones;
+			return $rootScope.mostrarBotones;
 		};
 		
 		$scope.direccionCorrecta = function(){
@@ -123,8 +121,24 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         leafletData.getMap().then(function(map) {
         	vmap=map;
         	var marker = null;
+        	var group = new L.featureGroup([])
         	vmap.setView([-34.7739,-58.5520]);
         	vmap.setZoom(9);
+        	
+      	  $scope.mostrarMapaGeneral = function(ev) {
+      		  	vmap.setView([vmap.getCenter().lat,vmap.getCenter().lng], 11);
+        		$rootScope.mostrarBotones=false;
+      		    $mdDialog.show({
+      		      controller: DialogController,
+      		      contentElement: '#myDialog',
+      		      parent: angular.element(document.body),
+      		      targetEvent: ev,
+      		      clickOutsideToClose: true
+      		    }).then(function() {
+      		      }, function() {
+      		      });
+      		   
+      		  };
         	//guarda una funcion para setear markers;
     		var agregarMarker = function() {
     			//funcion primaria para setear el Marker
@@ -149,9 +163,14 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     			}
     			//Le agrega el PopUp al marker
     			this.markerPopUp = function(marker, lat,lng){
-    				marker.bindPopup('<div align="center">'+vm.domicilio.alias+"<div>");
+    				marker.bindPopup('<div align="center"> Alias: '+vm.domicilio.alias+'</div>'+
+    								 '<div align="center"> Calle: '+vm.domicilio.calle+'</div>'+
+    								 '<div align="center"> Altura: '+vm.domicilio.altura+'</div>'+
+    								 '<div align="center"> Localidad: '+vm.domicilio.localidad+'</div>'+
+    								 '<div align="center"> Latitud: '+vm.domicilio.latitud+'</div>'+
+    								 '<div align="center"> Longitud: '+vm.domicilio.longitud+'</div>');
     				marker.on('click', function(e) {
-    					alert("hi. you clicked the marker at " + e.latlng);
+    					//alert("hi. you clicked the marker at " + e.latlng);
     				});
     			}
     		}
@@ -177,7 +196,8 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     		}
     		
         	$scope.localizar = function(ev){
-        		
+
+        		$rootScope.mostrarBotones=true;
         		 if (navigator.geolocation) {
         	          navigator.geolocation.getCurrentPosition(function(position) {
         	            var pos = {
@@ -256,10 +276,12 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
             			latitud = json.lat;
             			longitud = json.lng;
         				loadproperties();
-        				show(ev);  
-        				//mostrarMensaje('Por favor verifique la dirección y la posición sean correctas')
+        				show(ev);
         			}else{
-        				//mostrarMensaje('Faltan datos para calular su posición')
+        				var mensaje = 'No se logro ubicar su posicion';
+        				showAlert(ev,mensaje);
+        				$log.debug('Error Map.controller.js en la funcion reverseGeoCoding()');
+        				$log.debug(mensaje);
         			}
         		});        		
         	}
@@ -268,7 +290,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         
         	
         	$scope.buscar = function(ev){
-    			mostrarBotones=true;
+        		$rootScope.mostrarBotones=true;
     			
         		//Arma la query
         		encodedQuery=vm.domicilio.calle + '+' + vm.domicilio.altura + '+' + vm.domicilio.localidad + '+' + "Argentina";
@@ -286,12 +308,14 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
             			longitud = json.lng;
             			loadproperties();
         				vmap.setView([json.lat, json.lng], 15);  
-        				$scope.status = true;
+
         				
         				show(ev);        				
         			}else{
-        				//console.log(encodedQuery);
-        				//enviarlo al log de errores.
+        				var mensaje = 'No se encontro la direccion '+ encodedQuery ;
+        				showAlert(ev,mensaje);
+        				$log.debug('Error Map.controller.js en la funcion $scope.buscar()');
+        				$log.debug(mensaje);
         			}
         		});
             }
