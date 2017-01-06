@@ -25,12 +25,13 @@
 	<bean id="namesService" class="com.ar.unq.chasqui.few.core.service.example.DefaultNamesService">
 		<property name="backendApiService" ref="backendApiService" />
 	</bean>
-	 -->							   
+	 -->	
+	 <!-- 						   
 	<bean id="backendApiService" class="com.ar.unq.chasqui.few.restcall.example.ChasquiBackendApiService">
 		<property name="apiUrl" value="https://montanaflynn-gender-guesser.p.mashape.com/?name=" />
 		<property name="xMashapeKey" value="uoW9Az0kjSmshWqJzCaflVGrfRYkp1DbVqyjsnHXh1Ch3EFL6E" />
 		<property name="contentType" value="application/json" />
 	</bean>
-	
+	 -->
 	 
 </beans>
