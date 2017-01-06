@@ -71,11 +71,11 @@
 				-->
 				 
 				 <div ng-controller="MapGeocoderController">
-					<md-button class="md-raised md-primary" ng-click="buscar($event)">
-                  		Buscar direccion
+					<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="buscar($event)">
+                  		{{buscar_direccion}}
                		</md-button>
-               		<md-button class="md-raised md-primary" ng-click="localizar()">         
-                  		Auto localizar
+               		<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="localizar()">         
+                  		{{auto_localizar}}
                   	</md-button>
 					<md-button ng-disabled=isDisabled() class="md-raised md-primary" ng-click="ctrl.guardar()">
 						Confirmar

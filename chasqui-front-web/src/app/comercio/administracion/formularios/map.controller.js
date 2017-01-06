@@ -9,6 +9,9 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		var deshabilitarBoton = true;
 		$rootScope.isDisabled = true;
 		$rootScope.mostrarBotones = true;
+		$rootScope.isSearching = false;
+		$rootScope.buscar_direccion = "Buscar Direccion";
+		$rootScope.auto_localizar = "Auto Localizar";
     	var blueIcon = L.icon({
     	    iconUrl: 'assets/images/map-marker-40.png',
 
@@ -61,11 +64,10 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     	
     	function show(ev) {
       		    $mdDialog.show({
-      		      controller: DialogController,
-      		      contentElement: '#myDialog',
+      		      contentElement: '#myMap',
       		      parent: angular.element(document.body),
       		      targetEvent: ev,
-      		      clickOutsideToClose: true
+      		      clickOutsideToClose: false
       		    }
       		    ).then(function() {
     		      }, function() {
@@ -79,7 +81,6 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
       		        .clickOutsideToClose(true)
       		        .title('Se ha producido un error')
       		        .textContent(mensaje)
-      		        .ariaLabel('Alert Dialog Demo')
       		        .ok('OK')
       		        .targetEvent(ev)
       		    );
@@ -104,19 +105,37 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		      return $rootScope.isDisabled;
 		  };
 		  
+		$scope.isSearching = function() {
+			  return $rootScope.isSearching;
+		};  
+		  
 		$scope.mostrarBotonesEnMapa = function(){
 			return $rootScope.mostrarBotones;
 		};
 		
+		function cambiarDescripcionDeBotonesDeBusqueda(){
+			$rootScope.buscar_direccion = "Buscar Direccion";
+			$rootScope.auto_localizar = "Auto Localizar";
+		}
+		
 		$scope.direccionCorrecta = function(){
+			cambiarDescripcionDeBotonesDeBusqueda();
+			$rootScope.isSearching = false;
 			$rootScope.isDisabled = false;
 			$mdDialog.hide();
 		}
 		
 		$scope.direccionIncorrecta = function(){
+			cambiarDescripcionDeBotonesDeBusqueda();
+			$rootScope.isSearching = false;
 			$rootScope.isDisabled = true;
 			$mdDialog.hide();
 		}
+		
+		
+		/*
+		 * Funciones del mapa
+		 */
 		
         leafletData.getMap().then(function(map) {
         	vmap=map;
@@ -128,9 +147,9 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
       	  $scope.mostrarMapaGeneral = function(ev) {
       		  	vmap.setView([vmap.getCenter().lat,vmap.getCenter().lng], 11);
         		$rootScope.mostrarBotones=false;
+        		map.closePopup();
       		    $mdDialog.show({
-      		      controller: DialogController,
-      		      contentElement: '#myDialog',
+      		      contentElement: '#myMap',
       		      parent: angular.element(document.body),
       		      targetEvent: ev,
       		      clickOutsideToClose: true
@@ -182,7 +201,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     			
     			vmap.setView([vm.domicilio.latitud, vm.domicilio.longitud], 12);
     		}
-    		
+
     		function marcar (ev){
         		new agregarMarker().setMarker(vmap.getCenter().lat,vmap.getCenter().lng)
         		.addTo(vmap)
@@ -196,8 +215,10 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     		}
     		
         	$scope.localizar = function(ev){
-
+        		
         		$rootScope.mostrarBotones=true;
+        		$rootScope.isSearching = true;
+        		$rootScope.auto_localizar = "Buscando...";
         		 if (navigator.geolocation) {
         	          navigator.geolocation.getCurrentPosition(function(position) {
         	            var pos = {
@@ -207,7 +228,6 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         	            vmap.setView(pos);
         	            vmap.setZoom(20);
         	            marcar(ev);
-        	            //mostrarMensaje('Por favor verifique la dirección y la posición sean correctas')
         	          });
         	     }
         	}
@@ -291,7 +311,9 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         	
         	$scope.buscar = function(ev){
         		$rootScope.mostrarBotones=true;
-    			
+    			$rootScope.isSearching=true;
+    			$rootScope.buscar_direccion = "Buscando...";
+    			cambiarDescripcionDeBotonesDeBusqueda();
         		//Arma la query
         		encodedQuery=vm.domicilio.calle + '+' + vm.domicilio.altura + '+' + vm.domicilio.localidad + '+' + "Argentina";
         		aQuery = new HttpClient();
