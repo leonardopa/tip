@@ -215,7 +215,7 @@
 
 			}
 		
-			restProxy.post(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
+			restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
 	 }
 
 
