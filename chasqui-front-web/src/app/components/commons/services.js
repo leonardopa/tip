@@ -161,7 +161,9 @@
       },
       
       postPublic: function(url, params, doOk, noOk) {
-          post(url, {} , params, doOk, noOk)
+    	  var  header = { 'Content-Type': 'application/json'};
+	              
+          post(url, header , params, doOk, noOk)
       }
       
     };// return
