@@ -20,8 +20,9 @@
 		}
 		  
 		vm.eliminar = function (item){			
-			$log.debug('DetallePedidoController , eliminar ', item);
-/*
+			$log.debug('DetallePedidoController , eliminar '
+					, item);
+
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ",response.data);
 				 
@@ -34,11 +35,11 @@
 				ToastCommons.mensaje("error");
 			}
 			var params = {};
-			params.idPedido = item.idPedido;
+			params.idPedido = vm.pedido.id;
 			params.idVariante = item.idVariante;
 			params.cantidad = item.cantidad;
-			
-			restProxy.delete(CTE_REST.agregarPedidoIndividual,params,doOk,doNoOk);*/
+			 
+			restProxy.put(CTE_REST.quitarProductoIndividual,params,doOk,doNoOk);
 		}
 		
 		vm.cancelar = function (event){
@@ -55,7 +56,7 @@
 				ToastCommons.mensaje("error");
 			}
 			
-			restProxy.delete(CTE_REST.pedidoIndividual(vm.pedido.id),{},doOk,doNoOk);
+			restProxy.delete(CTE_REST.cancelarPedidoIndividual(vm.pedido.id),{},doOk,doNoOk);
 		}
 		
 		 function callConfirmar(){

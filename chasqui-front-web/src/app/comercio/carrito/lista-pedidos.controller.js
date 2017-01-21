@@ -76,7 +76,7 @@
 				vm.selectedIndex = indexSelect;
 			}
 
-			// TODO: hacer el ID de usuario dinamico			
+			
 	    	restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);
 
 		}
@@ -94,8 +94,9 @@
 				 
 				ToastCommons.mensaje("Pedido creado ! deberia fallar si ya tiene uno");
 			}
-			
-			restProxy.post(CTE_REST.crearPedidoIndividual,{},doOk,doNoOk);
+			var json={};
+			json.idVendedor=5;
+			restProxy.post(CTE_REST.crearPedidoIndividual,json,doOk,doNoOk);
 		}
 		
 		function callPedidoIndividual(){
