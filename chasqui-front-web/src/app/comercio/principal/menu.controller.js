@@ -122,8 +122,7 @@
 			  }, CTE_REST.INTERVALO_NOTIFICACION_MIN);  
 		  }		  
 	  }
-	  
-    
+	   
 	  function callNotificacionesNoLeidas(){
 			
 			function doOk(response) {
