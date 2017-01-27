@@ -44,8 +44,6 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 			}
 		}
 		
-
-		
 		var calle;
 		var altura;
 		var partido;
@@ -60,7 +58,11 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		/*
     	 * Controles del Pop up
     	 */
-
+    	function bloquearBotones(){
+    		$rootScope.mostrarBotones=true;
+			$rootScope.isSearching=true;
+			$rootScope.isDisabled = true;
+    	} 
     	
     	function show(ev) {
       		    $mdDialog.show({
@@ -216,9 +218,9 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     		
         	$scope.localizar = function(ev){
         		
-        		$rootScope.mostrarBotones=true;
-        		$rootScope.isSearching = true;
+        		bloquearBotones();
         		$rootScope.auto_localizar = "Buscando...";
+
         		 if (navigator.geolocation) {
         	          navigator.geolocation.getCurrentPosition(function(position) {
         	            var pos = {
@@ -229,6 +231,11 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         	            vmap.setZoom(20);
         	            marcar(ev);
         	          });
+        	     }else{
+        	    	$rootScope.mostrarBotones=true;
+             		$rootScope.isSearching = false;
+             		$rootScope.isDisabled = true;
+             		$rootScope.auto_localizar = "Auto Localizar";
         	     }
         	}
         	
@@ -305,13 +312,11 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         			}
         		});        		
         	}
-        	
-        	 
+        
         
         	
         	$scope.buscar = function(ev){
-        		$rootScope.mostrarBotones=true;
-    			$rootScope.isSearching=true;
+        		bloquearBotones();
     			$rootScope.buscar_direccion = "Buscando...";
     			cambiarDescripcionDeBotonesDeBusqueda();
         		//Arma la query

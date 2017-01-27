@@ -80,7 +80,7 @@
 					<md-button ng-disabled=isDisabled() class="md-raised md-primary" ng-click="ctrl.guardar()">
 						Confirmar
 					</md-button> 
-					<md-button class="md-primary md-raised" ng-click="mostrarMapaGeneral($event)"   >
+					<md-button ng-disabled=isSearching() class="md-primary md-raised" ng-click="mostrarMapaGeneral($event)"   >
       					Mostrar Mapa
     				</md-button>
 				
