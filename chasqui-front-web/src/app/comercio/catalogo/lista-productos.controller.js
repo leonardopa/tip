@@ -30,7 +30,7 @@
                     pagina: 1,
                     cantItems: 10,
                     precio: 'Down',
-                    idVendedor: 5,
+                    idVendedor: StateCommons.vendedor().id,
                    
             }
 
@@ -44,7 +44,7 @@
 
 			}
 		
-			restProxy.post(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
+			restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
 	 }
 
 

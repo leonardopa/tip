@@ -41,7 +41,7 @@
 			$log.debug("--- Crear pedido individual----");
 			callCrearPedidoIndividual();
 			
-			callLoadPedidos()
+			//callLoadPedidos()
 			callPedidoIndividual()
 		}
 	
@@ -76,7 +76,7 @@
 				vm.selectedIndex = indexSelect;
 			}
 
-			// TODO: hacer el ID de usuario dinamico			
+			
 	    	restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);
 
 		}
@@ -94,15 +94,16 @@
 				 
 				ToastCommons.mensaje("Pedido creado ! deberia fallar si ya tiene uno");
 			}
-			
-			restProxy.post(CTE_REST.crearPedidoIndividual,{},doOk,doNoOk);
+			var json={};
+			json.idVendedor=StateCommons.vendedor().id;
+			restProxy.post(CTE_REST.crearPedidoIndividual,json,doOk,doNoOk);
 		}
 		
 		function callPedidoIndividual(){
 			function doOk(response) {
 				//TODO: ver si lo puede traer el servicio
-				response.data.creador = 'INDIVUDUAL'
-				response.data.nombre = 'INDIVUDUAL'
+				response.data.creador = 'INDIVIDUAL'
+				response.data.nombre = 'INDIVIDUAL'
 				vm.tabs.push(response.data);
 				
 			}

@@ -110,9 +110,15 @@
         		return URL_REST_BASE + 'user/pedido/individual/'+ idVendedor ;
         	},
         	
-        	agregarPedidoIndividual: URL_REST_BASE+  'user/pedido/individual',
+        	agregarPedidoIndividual: URL_REST_BASE+  'user/pedido/individual/agregar-producto',
         	        	
-        	confirmarPedidoIndividual: URL_REST_BASE+'user/pedido/confirmar',
+        	confirmarPedidoIndividual: URL_REST_BASE+'user/pedido/individual/confirmar',
+        	
+        	quitarProductoIndividual : URL_REST_BASE + "user/pedido/individual/eliminar-producto",
+        	
+        	cancelarPedidoIndividual :function (idPedido){
+        		return URL_REST_BASE + "user/pedido/individual/"+idPedido;
+        	},
         	
         	pedidoIndividual:function (id){
         		return 	URL_REST_BASE+ 'user/pedido/individual/'+id;

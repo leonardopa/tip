@@ -17,7 +17,7 @@
 <md-content class="md-padding" layout="row" layout-wrap>
   <div flex="33" ng-repeat="variante in listaProductoCtr.variantes">
 		<md-card  >
-	        <img src="{{listaProductoCtr.urlBase}}/{{variante.imagenPrincipal}}"
+	        <img src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}"
 				 alt="{{variante.descripcion}}"  >
 	        <md-card-title>
 	          <md-card-title-text>
@@ -45,6 +45,15 @@
 								 </md-tooltip>
 					    </md-button>
 				  </div>		 
+				  <div layout="row"       layout-align="space-around center">
+				  <div ng-repeat="medalla in variante.medallasProductor">
+				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60"> 
+								 <md-tooltip md-direction="up">
+									          {{medalla.nombre}}
+								 </md-tooltip>
+					    </md-button>
+				  </div>
 				</div>	
 	        </md-card-content>
 	       
@@ -60,7 +69,7 @@
 		  
 
 	        <md-button ng-hide="menuCtrl.isLogued" class="md-raised md-primary"
-			ng-click="listaProductoCtr.agregar(variante)">Comprar <md-tooltip
+			ng-click="menuCtrl.ir('login')">Comprar <md-tooltip
 			md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
 			</md-card-actions>	
 		    </div>
