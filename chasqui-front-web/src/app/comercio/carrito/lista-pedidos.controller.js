@@ -95,7 +95,10 @@
 				ToastCommons.mensaje("Pedido creado ! deberia fallar si ya tiene uno");
 			}
 			var json={};
+
 			json.idVendedor=StateCommons.vendedor().id;
+
+
 			restProxy.post(CTE_REST.crearPedidoIndividual,json,doOk,doNoOk);
 		}
 		

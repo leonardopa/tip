@@ -1,0 +1,21 @@
+
+
+    <div ng-controller="MapGeocoderController" style="visibility: hidden" >  	
+    	<div class="md-dialog-container" id="myMap">
+      		<md-dialog layout-padding> 
+      		 		<md-dialog-content>
+        					<leaflet width="800px" height="400px"></leaflet>
+        			</md-dialog-content>
+   				<md-dialog-actions ng-show="mostrarBotonesEnMapa()" layout="row">
+   					<div> <h1> Por favor, confirme si la ubicacion es correcta</h1> </div>
+   					<span flex></span>
+					<md-button  ng-click="direccionCorrecta()" class="md-raised md-primary">
+       					Es Correcta
+      				</md-button>      				
+      				<md-button  ng-click="direccionIncorrecta()" class="md-raised md-accent">
+       					Es Incorrecta
+      				</md-button>
+    			</md-dialog-actions>
+      		</md-dialog>
+       </div>
+     </div>
