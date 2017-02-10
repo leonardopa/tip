@@ -53,38 +53,43 @@
 									</md-input-container>
 								</div>
 							 
-								<code ng-show='{{ctrl.domicilio.predeterminada}}' >Domicilio predeterminado</code>
+								<code ng-show='{{ctrl.domicilio.predeterminada}}' > <md-icon> beenhere</md-icon> Domicilio predeterminado</code>
 					
 							</form>
 						</div>
 			</md-content>
 
-			<md-card-actions layout="row" layout-align="end center"> 
-				<md-button ng-click="ctrl.eliminar()"> <md-icon> remove_circle_outline </md-icon> 
+			<md-card-actions ng-controller="MapGeocoderController" layout="row" layout-align="end center"> 
+				<md-button ng-click="ctrl.eliminar()"> <md-icon> delete_forever </md-icon> 
 					<md-tooltip md-direction="left"> eliminar domicilo </md-tooltip> </md-button> 
 				
-				<md-button ng-click="ctrl.marcarPredeterminado()"> <md-icon> compare_arrows </md-icon> 
+				<md-button ng-click="ctrl.marcarPredeterminado()"> <md-icon> beenhere	 </md-icon> 
 					<md-tooltip md-direction="left"> marcar como domicilo principal </md-tooltip> </md-button> 
 				
 				<!--  
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
 				-->
 				 
-				 <div ng-controller="MapGeocoderController">
 					<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="buscar($event)">
+						<md-icon md-font-set="material-icons"> gps_fixed </md-icon>
+					   <md-tooltip md-direction="top"> Ubica su posicion geografica basada en la direccion ingresada </md-tooltip>
                   		{{buscar_direccion}}
                		</md-button>
-               		<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="localizar()">         
+               		<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="localizar()">
+               		   <md-icon md-font-set="material-icons"> room </md-icon>
+               		   <md-tooltip md-direction="top"> Permite marcar su posicion geografica manualmente en el mapa</md-tooltip>         
                   		{{auto_localizar}}
                   	</md-button>
 					<md-button ng-disabled=isDisabled() class="md-raised md-primary" ng-click="ctrl.guardar()">
+						<md-icon md-font-set="material-icons"> save </md-icon>
 						Confirmar
 					</md-button> 
 					<md-button ng-disabled=isSearching() class="md-primary md-raised" ng-click="mostrarMapaGeneral($event)"   >
-      					Mostrar Mapa
+						<md-icon md-font-set="material-icons"> explore </md-icon>
+						<md-tooltip md-direction="top"> Muestra el mapa con las direcciones </md-tooltip>
+      					Mapa
     				</md-button>
-				
-    			 </div>
+
 			</md-card-actions>
 			
 

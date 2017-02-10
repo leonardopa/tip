@@ -1,38 +1,38 @@
  
 
 <!-- Pantalla de perfil de usuario -->
-<div class="container-fluid" class="md-padding" id="popupContainer" ng-cloak>
-	<div class="row">
+<div class="container-fluid" class="md-padding"  ng-cloak>
+	<div class="row" >
 		<div class="col-md-2"></div>
 
 		<div class="col-md-8">
  			<span class="md-headline">Mi Perfil</span>
 			<div ng-cloak>
-				<md-content> 
+				<md-content id="mappopupContainer"> 
 					<md-tabs md-dynamic-height md-border-bottom md-selected="perfilCtrl.selectedIndexPerfil"> 
 						<md-tab label="Datos Personales" >
 							<md-content class="md-padding">
- 								<div ng-include="'app/comercio/administracion/formularios/form-usuario.html'" 
+ 								<div  ng-include="'app/comercio/administracion/formularios/form-usuario.html'" 
 									 ng-init="perfil = true"/>	
 							
 								<md-card>			         
 							        <md-card-title>
 							          <md-card-title-text>
-							            <span class="md-headline">Direcciones </span>
+							            <span class="md-headline" align="center">Direcciones </span>
 							        
 						 				<md-button ng-click="perfilCtrl.addDireccion()">
-												          	 <md-icon> add_circle_outline </md-icon>
-												          	<md-tooltip md-direction="left">
+												          	 <md-icon> create_new_folder </md-icon>
+												          	<md-tooltip md-direction="bottom">
 													          agregar una dirección
 													        </md-tooltip>
 							          </md-card-title-text>
 							        </md-card-title>
 							        
-							        <md-card-content>
+							        <md-card-content >
 							            <md-tabs md-dynamic-height md-border-bottom 
 							             md-selected="perfilCtrl.selectedIndexDireccion" >
 							              
-									      <md-tab ng-repeat="tab in perfilCtrl.direcciones" label="{{tab.idDireccion==undefined ? 'Nuevo' : tab.alias}}">
+									      <md-tab  ng-click="perfilCtrl.cambioDeTab()" ng-repeat="tab in perfilCtrl.direcciones" label="{{tab.idDireccion==undefined ? 'Nuevo' : tab.alias}}">
 									        <md-content class="md-padding">				          
 									  		 
 									          <div ng-include="'app/comercio/administracion/formularios/form-direccion.html'"

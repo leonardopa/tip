@@ -1,27 +1,49 @@
-angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootScope', '$log', '$q','leafletData','StateCommons','ToastCommons', '$mdDialog',
-    function($scope, $rootScope, $log, $q, leafletData, StateCommons,ToastCommons , $mdDialog) {
+angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootScope', '$log', '$q','leafletData','StateCommons','ToastCommons', '$mdDialog', '$mdSidenav',
+    function($scope, $rootScope, $log, $q, leafletData, StateCommons,ToastCommons , $mdDialog, $mdSidenav) {
 	/*-------------------------------
 	 *------Variables Gobales--------
 	 *------------------------------*/
+	
+	/*
+	 * Nota: la Accion "Confirmar" debe ser sincronizada
+	 * con la validacion de los campos de la direccion
+	 * o bien crear una accion linear, por ejemplo
+	 * 1: Completar los campos obligatorios
+	 * 2: Buscar o marcar manualmente
+	 * 3: Guardar/Confirmar.
+	 * En ese orden especifico.
+	 */
 		var vm = this;
 		var vmap;
 		vm.domicilio =  $scope.direccionParam;
 		var deshabilitarBoton = true;
 		$rootScope.isDisabled = true;
 		$rootScope.mostrarBotones = true;
+		$rootScope.mostrarBotonesMarcaManual = false;
 		$rootScope.isSearching = false;
-		$rootScope.buscar_direccion = "Buscar Direccion";
-		$rootScope.auto_localizar = "Auto Localizar";
+		$rootScope.buscar_direccion = "Buscar";
+		$rootScope.auto_localizar = "Marcar";
+		$rootScope.global_marker;
+		$rootScope.vmGlobal;
+		
     	var blueIcon = L.icon({
-    	    iconUrl: 'assets/images/map-marker-40.png',
+    	    iconUrl: 'assets/images/map-marker-40-alter.png',
 
     	    iconSize:     [51, 51],
     	    iconAnchor:   [0, 40],
     	    popupAnchor:  [24, -40] 
     	});
     	
+    	var yellowIcon = L.icon({
+    	    iconUrl: 'assets/images/map-marker-40-manual.png',
+
+    	    iconSize:     [51, 51],
+    	    iconAnchor:   [25, 60],
+    	    popupAnchor:  [0, -55] 
+    	});
+    	
     	var greenIcon = L.icon({
-    	    iconUrl: 'assets/images/map-marker-40-green.png',
+    	    iconUrl: 'assets/images/map-marker-40-predet.png',
 
     	    iconSize:     [51, 51],
     	    iconAnchor:   [0, 40],
@@ -29,7 +51,6 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     	});    	
     	
     	
-		//guarda un httpRequest;
 		var HttpClient = function() {
 			//genera un httpGET request;
 			this.get = function(aUrl, aCallback) {
@@ -58,18 +79,71 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		/*
     	 * Controles del Pop up
     	 */
+		
+		function moveMarker(e)
+		{
+		  $rootScope.global_marker.setLatLng(e.latlng);
+		}
+		
+		function desactivarArrastreEnMarcador(){
+			if($rootScope.global_marker != null ){
+				$rootScope.global_marker.dragging.disable();
+			}
+		}
+		
+
+		
+		/*
+		 * Funciones de Control de estado
+		 * de los botones.
+		 */
     	function bloquearBotones(){
     		$rootScope.mostrarBotones=true;
 			$rootScope.isSearching=true;
 			$rootScope.isDisabled = true;
     	} 
     	
+    	function desbloquearBotones(){
+			$rootScope.isSearching= false;
+			$rootScope.isDisabled = true;
+    	}
+    	
+    	function restaurarMostrarBotones(){
+			$rootScope.mostrarBotones=true;
+			$rootScope.mostrarBotonesMarcaManual = false;
+    	}
+    	
+    	function restaurarBotonesAlCancelar(){
+			$rootScope.isSearching = false;
+			$rootScope.isDisabled = true;
+    	}
+    	
+    	function restaurarBotonesAlAceptar(){
+			$rootScope.isSearching = false;
+			$rootScope.isDisabled = false;
+    	}
+    	
+    	function cambiarDescripcionDeBotonesDeBusqueda(){
+    		$rootScope.buscar_direccion = "Buscar";
+    		$rootScope.auto_localizar = "Marcar";
+    	}
+    	
+    	function restaurarEstadoDeLosBotones(){
+			cambiarDescripcionDeBotonesDeBusqueda();
+			restaurarMostrarBotones();
+			desactivarArrastreEnMarcador();
+    	}
+    	/*
+    	 * Funcion de llamado al
+    	 * PopUp con el mapa
+    	 */
     	function show(ev) {
       		    $mdDialog.show({
       		      contentElement: '#myMap',
       		      parent: angular.element(document.body),
       		      targetEvent: ev,
-      		      clickOutsideToClose: false
+      		      clickOutsideToClose: false,
+      		      escapeToClose: false
       		    }
       		    ).then(function() {
     		      }, function() {
@@ -79,10 +153,10 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
       	 function showAlert(ev, mensaje) {
       		    $mdDialog.show(
       		      $mdDialog.alert()
-      		        .parent(angular.element(document.querySelector('#popupContainer')))
+      		        .parent(angular.element(document.querySelector('#mappopupContainer')))
       		        .clickOutsideToClose(true)
       		        .title('Se ha producido un error')
-      		        .textContent(mensaje)
+      		        .htmlContent(mensaje)
       		        .ok('OK')
       		        .targetEvent(ev)
       		    );
@@ -102,7 +176,11 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 	 		      $mdDialog.hide(answer);
 	 		    };
 	 	}
-		
+		/*
+		 * Funciones de acceso 
+		 * estado de los botones
+		 * desde la vista 
+		 */
 		$scope.isDisabled = function() {
 		      return $rootScope.isDisabled;
 		  };
@@ -115,38 +193,74 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 			return $rootScope.mostrarBotones;
 		};
 		
-		function cambiarDescripcionDeBotonesDeBusqueda(){
-			$rootScope.buscar_direccion = "Buscar Direccion";
-			$rootScope.auto_localizar = "Auto Localizar";
-		}
+		$scope.mostrarBotonesMarcaManual = function(){
+			return $rootScope.mostrarBotonesMarcaManual;
+		};
+		
+		
+		/*
+		 * Botones de Confirmacion y cancelacion 
+		 * en el Mapa
+		 */
 		
 		$scope.direccionCorrecta = function(){
-			cambiarDescripcionDeBotonesDeBusqueda();
-			$rootScope.isSearching = false;
-			$rootScope.isDisabled = false;
+			restaurarEstadoDeLosBotones();
+			restaurarBotonesAlAceptar();
+			$scope.$emit('posicionValida',[$rootScope.global_marker.getLatLng().lat,$rootScope.global_marker.getLatLng().lng]);
 			$mdDialog.hide();
 		}
 		
 		$scope.direccionIncorrecta = function(){
-			cambiarDescripcionDeBotonesDeBusqueda();
-			$rootScope.isSearching = false;
-			$rootScope.isDisabled = true;
+			restaurarEstadoDeLosBotones();
+			restaurarBotonesAlCancelar();		
 			$mdDialog.hide();
 		}
 		
+    	function loadGlobalCoordinatesInProfile(lat,lng){
+
+    		$rootScope.vmGlobal.latitud = lat;
+    		$rootScope.vmGlobal.longitud = lng;    		
+    	}
+		
+    	
+        $rootScope.$on('cambioANuevaDireccion', function(event,args) {
+    		deshabilitarBoton = true;
+    		$rootScope.isDisabled = true;
+    		$rootScope.mostrarBotones = true;
+    		$rootScope.mostrarBotonesMarcaManual = false;
+    		$rootScope.isSearching = false;
+    		$rootScope.buscar_direccion = "Buscar";
+    		$rootScope.auto_localizar = "Marcar";
+        });
 		
 		/*
 		 * Funciones del mapa
 		 */
 		
         leafletData.getMap().then(function(map) {
-        	vmap=map;
-        	var marker = null;
-        	var group = new L.featureGroup([])
-        	vmap.setView([-34.7739,-58.5520]);
-        	vmap.setZoom(9);
+          /*
+           * Variables en contexto del mapa
+           */
+          attribution = map.attributionControl;
+          vmap=map;
+          var marker = null;
+          vmap.setView([-34.7739,-58.5520]);
+          vmap.setZoom(9);
+          map.invalidateSize(false);
+          attribution.setPosition('bottomleft');
+  		  $scope.ayuda = "<h1>Mensaje de ayuda desde el controlador</h1>";
+		  $scope.toggleLeft = buildToggler('left');
+	      $scope.toggleRight = buildToggler('right');
+          /*
+           * fin de variables en contexto de mapa
+           */
+	      
+          $scope.$on('posicionValida', function(event, args) {
+        	  loadGlobalCoordinatesInProfile(args[0],args[1]);
+          });
         	
       	  $scope.mostrarMapaGeneral = function(ev) {
+      		  	map.off('click', moveMarker);
       		  	vmap.setView([vmap.getCenter().lat,vmap.getCenter().lng], 11);
         		$rootScope.mostrarBotones=false;
         		map.closePopup();
@@ -173,6 +287,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     					 this.markerPopUp(marker,lat,lng);
     					 return marker;
     				}else{
+    					marker.dragging.disable();
    					 if(!vm.domicilio.predeterminada){
      					marker.setLatLng([lat,lng]).setIcon(blueIcon);
 					 }else{
@@ -182,14 +297,22 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     					return marker;
     				}
     			}
+    			
+    			this.markerManualMarkerPopUp = function(marker, lat,lng){
+    				marker.bindPopup('<div align="center"> Coloqueme en la ubicación deseada </div>');
+    				marker.on('click', function(e) {
+    					//alert("hi. you clicked the marker at " + e.latlng);
+    				});
+    			}
+    			
     			//Le agrega el PopUp al marker
     			this.markerPopUp = function(marker, lat,lng){
     				marker.bindPopup('<div align="center"> Alias: '+vm.domicilio.alias+'</div>'+
     								 '<div align="center"> Calle: '+vm.domicilio.calle+'</div>'+
     								 '<div align="center"> Altura: '+vm.domicilio.altura+'</div>'+
     								 '<div align="center"> Localidad: '+vm.domicilio.localidad+'</div>'+
-    								 '<div align="center"> Latitud: '+vm.domicilio.latitud+'</div>'+
-    								 '<div align="center"> Longitud: '+vm.domicilio.longitud+'</div>');
+    								 '<div align="center"> Latitud: '+lat+'</div>'+
+    								 '<div align="center"> Longitud: '+lng+'</div>');
     				marker.on('click', function(e) {
     					//alert("hi. you clicked the marker at " + e.latlng);
     				});
@@ -205,23 +328,45 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     		}
 
     		function marcar (ev){
-        		new agregarMarker().setMarker(vmap.getCenter().lat,vmap.getCenter().lng)
-        		.addTo(vmap)
-        		.openPopup();
-        		vmap.setView([vmap.getCenter().lat,vmap.getCenter().lng], 15);
-        		reverseGeoCoding(ev);
-    		}
+    			map.on('click', moveMarker);
+    			if(marker != null){
+    				map.removeLayer(marker);
+    			};
+        		var markereditor = new agregarMarker();
+        		map.closePopup();
+        		markereditor
+        		.setMarker(vmap.getCenter().lat,vmap.getCenter().lng)
+        		.setIcon(yellowIcon)
+        		.closePopup()
+        		.addTo(vmap);        		
+        		markereditor.markerManualMarkerPopUp(marker,marker.getLatLng().lat, marker.getLatLng().lng);
+        		$rootScope.mostrarBotonesMarcaManual = true;
+        		$rootScope.mostrarBotones = false;
+	            marker.dragging.enable();
+        		vmap.setView([vmap.getCenter().lat,vmap.getCenter().lng], 11);
+        		$rootScope.global_marker = marker;        		
+        		$rootScope.vmGlobal = vm.domicilio;
+        		show(ev);        		
+    		}    
     		
-    		function mostrarMensaje(msj){
-    			ToastCommons.mensaje(msj);
-    		}
-    		
+
+
+    	    function buildToggler(componentId) {
+    	      return function() {
+    	        $mdSidenav(componentId).toggle();
+    	      };
+    	    }
+    			 
+    		//No funciona en GoogleChrome, debido a cambios en la seguridad
+    	    //getCurrentPosition y watchCurrentPositon, puede ser solo accedido
+    		//desde una llamada https.
         	$scope.localizar = function(ev){
         		
         		bloquearBotones();
         		$rootScope.auto_localizar = "Buscando...";
-
-        		 if (navigator.geolocation) {
+        		
+//        		 if (navigator.geolocation) {
+        		if (false) {
         	          navigator.geolocation.getCurrentPosition(function(position) {
         	            var pos = {
         	              lat: position.coords.latitude,
@@ -230,12 +375,10 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         	            vmap.setView(pos);
         	            vmap.setZoom(20);
         	            marcar(ev);
-        	          });
+        	          }
+        	          );
         	     }else{
-        	    	$rootScope.mostrarBotones=true;
-             		$rootScope.isSearching = false;
-             		$rootScope.isDisabled = true;
-             		$rootScope.auto_localizar = "Auto Localizar";
+        	    	 marcar(ev);
         	     }
         	}
         	
@@ -245,13 +388,17 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		vm.domicilio.localidad = partido;
         		vm.domicilio.latitud = latitud;
         		vm.domicilio.longitud = longitud;
-        		if(codigo_postal != null){
-        			vm.domicilio.codigoPostal = codigo_postal;
-        		}
+        		$scope.$apply();
+        	}
+        	
+        	function loadCoordinatesInProfile(){
+        		vm.domicilio.latitud = latitud;
+        		vm.domicilio.longitud = longitud;
         		$scope.$apply();
         		
         	}
         	
+
         	function validateArrayWithElement(array,compare){
         		var ret = false;
         		for (i in array){
@@ -305,10 +452,12 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         				loadproperties();
         				show(ev);
         			}else{
+
+        		    	desbloquearBotones();  
         				var mensaje = 'No se logro ubicar su posicion';
         				showAlert(ev,mensaje);
         				$log.debug('Error Map.controller.js en la funcion reverseGeoCoding()');
-        				$log.debug(mensaje);
+        				$log.debug(mensaje);      		    	
         			}
         		});        		
         	}
@@ -317,6 +466,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         	
         	$scope.buscar = function(ev){
         		bloquearBotones();
+        		map.off('click', moveMarker);
     			$rootScope.buscar_direccion = "Buscando...";
     			cambiarDescripcionDeBotonesDeBusqueda();
         		//Arma la query
@@ -326,20 +476,28 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		aQuery.get('https://maps.googleapis.com/maps/api/geocode/json?address='+encodedQuery+'+&key=AIzaSyD_8mUpLuoMmB6qSW_kI3vQXY7jpvbfnB4', function(response) {
         			if(JSON.parse(response).status == "OK"){
         				var json= JSON.parse(response).results[0].geometry.location;
-        				var jsonarray =JSON.parse(response).results[0].address_components
-        				new agregarMarker().setMarker(json.lat,json.lng)
-        				.addTo(vmap)        				
-        				.openPopup();
-        				getJsonDataComponents(jsonarray);
+        				var jsonarray = JSON.parse(response).results[0].address_components
+        				getJsonDataComponents(jsonarray);    
             			latitud = json.lat;
             			longitud = json.lng;
-            			loadproperties();
+        				new agregarMarker().setMarker(json.lat,json.lng)
+        				.addTo(vmap)        				
+        				.openPopup();        
+                		$rootScope.vmGlobal = vm.domicilio;
+        				$rootScope.global_marker = marker;
         				vmap.setView([json.lat, json.lng], 15);  
-
-        				
         				show(ev);        				
         			}else{
-        				var mensaje = 'No se encontro la direccion '+ encodedQuery ;
+        		    	desbloquearBotones();  
+        				var mensaje = '<br>'+
+        							  '<div>No se encontro la dirección con los siguientes datos</div>'+
+        							  '<br>'+
+        							  '<div> Calle: '+ vm.domicilio.calle+' </div>'+
+        							  '<div> Altura: '+ vm.domicilio.altura+' </div>'+
+        							  '<div> Localidad: '+ vm.domicilio.localidad+' </div>'+
+        							  '<div> Pais: Argentina </div>'+
+        							  '<br>'+
+		        			          '<div> Si el problema persiste, puede marcar manualmente su posición en el mapa </div>';        		
         				showAlert(ev,mensaje);
         				$log.debug('Error Map.controller.js en la funcion $scope.buscar()');
         				$log.debug(mensaje);

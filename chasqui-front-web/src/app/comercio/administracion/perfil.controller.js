@@ -6,7 +6,7 @@
 
 	/** @ngInject . Pantalla de perfil de usuario*/
 	function PerfilController($http, $log, $scope,CTE_REST, restProxy,StateCommons ,$mdDialog
-			,ToastCommons,$window,$stateParams) {
+			,ToastCommons,$window,$stateParams,$rootScope) {
 		$log.debug("Init PerfilController ....");
 		
 		
@@ -31,12 +31,16 @@
 			vm.callDirecciones();
 		});
 		
+		vm.cambioDeTab=function(){
+			$rootScope.$emit('cambioANuevaDireccion',0);
+		}
 		
 		vm.addDireccion=function (){
 			$log.debug("add direccion");
 		//	vm.direcciones.push({alias: 'nueva'});
 			vm.direcciones.push({});
 			vm.selectedIndexDireccion=vm.direcciones.length;
+			$rootScope.$emit('cambioANuevaDireccion',0);
 		}
 		
 		
