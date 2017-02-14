@@ -4,15 +4,6 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 	 *------Variables Gobales--------
 	 *------------------------------*/
 	
-	/*
-	 * Nota: la Accion "Confirmar" debe ser sincronizada
-	 * con la validacion de los campos de la direccion
-	 * o bien crear una accion linear, por ejemplo
-	 * 1: Completar los campos obligatorios
-	 * 2: Buscar o marcar manualmente
-	 * 3: Guardar/Confirmar.
-	 * En ese orden especifico.
-	 */
 		var vm = this;
 		var vmap;
 		vm.domicilio =  $scope.direccionParam;
@@ -182,7 +173,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		 * desde la vista 
 		 */
 		$scope.isDisabled = function() {
-		      return $rootScope.isDisabled;
+		      return !$scope.calleValida || !$scope.localidadValida || !$scope.alturaValida || !$scope.aliasValido || $rootScope.isDisabled;
 		  };
 		  
 		$scope.isSearching = function() {
@@ -232,6 +223,8 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     		$rootScope.buscar_direccion = "Buscar";
     		$rootScope.auto_localizar = "Marcar";
         });
+        
+
 		
 		/*
 		 * Funciones del mapa
@@ -462,49 +455,63 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		});        		
         	}
         
-        
+
+        	$scope.buscar = function(ev){     
         	
-        	$scope.buscar = function(ev){
-        		bloquearBotones();
-        		map.off('click', moveMarker);
-    			$rootScope.buscar_direccion = "Buscando...";
-    			cambiarDescripcionDeBotonesDeBusqueda();
-        		//Arma la query
-        		encodedQuery=vm.domicilio.calle + '+' + vm.domicilio.altura + '+' + vm.domicilio.localidad + '+' + "Argentina";
-        		aQuery = new HttpClient();
-        		//Ejecuta la query y delega la respuesta (response) a la funcion anonima
-        		aQuery.get('https://maps.googleapis.com/maps/api/geocode/json?address='+encodedQuery+'+&key=AIzaSyD_8mUpLuoMmB6qSW_kI3vQXY7jpvbfnB4', function(response) {
-        			if(JSON.parse(response).status == "OK"){
-        				var json= JSON.parse(response).results[0].geometry.location;
-        				var jsonarray = JSON.parse(response).results[0].address_components
-        				getJsonDataComponents(jsonarray);    
-            			latitud = json.lat;
-            			longitud = json.lng;
-        				new agregarMarker().setMarker(json.lat,json.lng)
-        				.addTo(vmap)        				
-        				.openPopup();        
-                		$rootScope.vmGlobal = vm.domicilio;
-        				$rootScope.global_marker = marker;
-        				vmap.setView([json.lat, json.lng], 15);  
-        				show(ev);        				
-        			}else{
-        		    	desbloquearBotones();  
-        				var mensaje = '<br>'+
-        							  '<div>No se encontro la dirección con los siguientes datos</div>'+
-        							  '<br>'+
-        							  '<div> Calle: '+ vm.domicilio.calle+' </div>'+
-        							  '<div> Altura: '+ vm.domicilio.altura+' </div>'+
-        							  '<div> Localidad: '+ vm.domicilio.localidad+' </div>'+
-        							  '<div> Pais: Argentina </div>'+
-        							  '<br>'+
-		        			          '<div> Si el problema persiste, puede marcar manualmente su posición en el mapa </div>';        		
-        				showAlert(ev,mensaje);
-        				$log.debug('Error Map.controller.js en la funcion $scope.buscar()');
-        				$log.debug(mensaje);
-        			}
-        		});
+        			if($scope.calleValida && $scope.localidadValida && $scope.alturaValida){
+        					bloquearBotones();
+        					map.off('click', moveMarker);
+            				$rootScope.buscar_direccion = "Buscando...";
+            				cambiarDescripcionDeBotonesDeBusqueda();
+            				//Arma la query
+            				encodedQuery=vm.domicilio.calle + '+' + vm.domicilio.altura + '+' + vm.domicilio.localidad + '+' + "Argentina";
+            				aQuery = new HttpClient();
+            				//Ejecuta la query y delega la respuesta (response) a la funcion anonima
+            				aQuery.get('https://maps.googleapis.com/maps/api/geocode/json?address='+encodedQuery+'+&key=AIzaSyD_8mUpLuoMmB6qSW_kI3vQXY7jpvbfnB4', function(response) {
+            					if(JSON.parse(response).status == "OK"){
+            						var json= JSON.parse(response).results[0].geometry.location;
+            						var jsonarray = JSON.parse(response).results[0].address_components
+            						getJsonDataComponents(jsonarray);    
+            						latitud = json.lat;
+            						longitud = json.lng;
+            						new agregarMarker().setMarker(json.lat,json.lng)
+            						.addTo(vmap)        				
+            						.openPopup();        
+            						$rootScope.vmGlobal = vm.domicilio;
+            						$rootScope.global_marker = marker;
+            						vmap.setView([json.lat, json.lng], 15);  
+            						show(ev);        				
+            					}else{
+            						desbloquearBotones();  
+            						var mensaje = 	'<br>'+
+                							  		'<div>No se encontro la dirección con los siguientes datos</div>'+
+                							  		'<br>'+
+                							  		'<div> Calle: '+ vm.domicilio.calle+' </div>'+
+                							  		'<div> Altura: '+ vm.domicilio.altura+' </div>'+
+                							  		'<div> Localidad: '+ vm.domicilio.localidad+' </div>'+
+                							  		'<div> Pais: Argentina </div>'+
+                							  		'<br>'+
+                							  		'<div> Si el problema persiste, puede marcar manualmente su posición en el mapa </div>';        		
+            						showAlert(ev,mensaje);
+            						$log.debug('Error Map.controller.js en la funcion $scope.buscar()');
+                			}
+                		});
+            	}else{
+					var mensaje = 	'<br>'+
+							  		'<h4> Faltan datos para ejecutar esta accion </h4>'+
+							  		'<br>'+
+							  		'<div>  Por favor asegurese de completar los siguientes campos </div>'+
+							  		'<br>'+
+							  		'<li> Calle </li>'+
+							  		'<li> Altura </li>'+
+							  		'<li> Localidad </li>'+
+							  		'<br>';        		
+					showAlert(ev,mensaje);
+					$log.debug('Error Map.controller.js en la funcion $scope.buscar()');
+            	}
             }
-      });
+
+       });
         
     }
 ]);

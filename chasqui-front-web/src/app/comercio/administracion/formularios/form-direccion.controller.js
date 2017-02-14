@@ -6,7 +6,7 @@
 
 	/** @ngInject 
 	 *  Formulario para direccion */
-	function FormDireccionController( $log,$state,$scope,restProxy, CTE_REST,ToastCommons) {
+	function FormDireccionController( $log,$state,$scope,$rootScope,restProxy, CTE_REST,ToastCommons) {
 		
 		$log.debug("FormDireccionController",$scope.direccionParam);
 		
@@ -14,6 +14,11 @@
 		var isNew = angular.equals({}, $scope.direccionParam);
 		vm.domicilio =  $scope.direccionParam;
 		vm.isEdit=false;
+		$scope.formularioValido = false;
+		$scope.aliasValido = false;
+		$scope.calleValida= false;
+		$scope.localidadValida=false;
+		$scope.alturaValida=false;		
 		
 		function loadDirecciones(){
 			$scope.$emit("load-direcciones", {});//recarga las direcciones que estan el el conteoller de perfil
@@ -114,5 +119,7 @@
 			restProxy.post(CTE_REST.direccionGrupo(1),vm.domicilio,doOk);
 		}
 	}
+	
+
 	
 })();

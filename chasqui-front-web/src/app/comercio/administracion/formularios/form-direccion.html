@@ -11,11 +11,19 @@
 							<div layout-gt-sm="row">							
 								<md-input-container class="md-block" flex-gt-sm> 
 									<label>Alias</label> 							
-									<input ng-model="ctrl.domicilio.alias" required> 
+									<input type="text" name="alias" ng-model="ctrl.domicilio.alias" required>
+									        <div ng-messages="direccionForm.alias.$error" >
+          										<div ng-message="required">Campo obligatorio. </div>
+          										<span style="display:none" >{{ aliasValido = direccionForm.alias.$valid}}</span>          										
+        									</div>
 								</md-input-container> 
 								<md-input-container class="md-block" flex-gt-sm >							
 									<label>Calle</label> 
-									<input ng-model="ctrl.domicilio.calle" required>
+									<input type="text" name="calle" ng-model="ctrl.domicilio.calle" required>
+											<div ng-messages="direccionForm.calle.$error">
+          										<div ng-message="required">Campo obligatorio.</div> 
+          										<span style="display:none" >{{ calleValida = direccionForm.calle.$valid}}</span>         										
+        									</div>
 								</md-input-container>
 							</div>
 														
@@ -23,7 +31,11 @@
 							
 								<md-input-container class="md-block" >
 									<label>Altura</label>
-									<input ng-model="ctrl.domicilio.altura" required> 
+									<input type="number" name="altura" ng-model="ctrl.domicilio.altura" required>
+											<div ng-messages="direccionForm.altura.$error">
+          										<div ng-message="required">Campo obligatorio.</div>
+          										<span style="display:none" >{{ alturaValida = direccionForm.altura.$valid}}</span>          										
+        									</div> 
 								</md-input-container> 
 								<md-input-container class="md-block"> 
 									<label>Piso / Departamento</label> 
@@ -32,7 +44,11 @@
 							
 								<md-input-container md-no-float class="md-block"> 
 									<label>Localidad </label> 
-									<input ng-model="ctrl.domicilio.localidad" placeholder="localidad" required> 
+									<input  type="text" name="localidad" ng-model="ctrl.domicilio.localidad" placeholder="localidad" required> 
+											<div ng-messages="direccionForm.localidad.$error">
+          										<div ng-message="required">Campo obligatorio.</div>
+          										<span style="display:none" >{{ localidadValida = direccionForm.localidad.$valid}}</span>          										
+        									</div>
 									</md-input-container>
 								</div>
 								
@@ -82,7 +98,7 @@
                   	</md-button>
 					<md-button ng-disabled=isDisabled() class="md-raised md-primary" ng-click="ctrl.guardar()">
 						<md-icon md-font-set="material-icons"> save </md-icon>
-						Confirmar
+						Guardar
 					</md-button> 
 					<md-button ng-disabled=isSearching() class="md-primary md-raised" ng-click="mostrarMapaGeneral($event)"   >
 						<md-icon md-font-set="material-icons"> explore </md-icon>
