@@ -68,11 +68,14 @@
 										<input ng-model="ctrl.domicilio.latitud"  disabled>
 									</md-input-container>
 								</div>
-							 
+							 	<md-button class="md-icon-button md-primary" ng-click="mostrarAyuda()">
+									<md-icon> help_outline </md-icon> 
+								</md-button>
 								<code ng-show='{{ctrl.domicilio.predeterminada}}' > <md-icon> beenhere</md-icon> Domicilio predeterminado</code>
 					
 							</form>
 						</div>
+
 			</md-content>
 
 			<md-card-actions ng-controller="MapGeocoderController" layout="row" layout-align="end center"> 
@@ -86,7 +89,7 @@
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
 				-->
 				 
-					<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="buscar($event)">
+					<md-button ng-disabled=formIsValid() class="md-raised md-primary" ng-click="buscar($event)">
 						<md-icon md-font-set="material-icons"> gps_fixed </md-icon>
 					   <md-tooltip md-direction="top"> Ubica su posicion geografica basada en la direccion ingresada </md-tooltip>
                   		{{buscar_direccion}}

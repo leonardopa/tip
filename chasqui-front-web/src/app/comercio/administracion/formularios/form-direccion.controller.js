@@ -6,7 +6,7 @@
 
 	/** @ngInject 
 	 *  Formulario para direccion */
-	function FormDireccionController( $log,$state,$scope,$rootScope,restProxy, CTE_REST,ToastCommons) {
+	function FormDireccionController( $log,$state,$scope,restProxy,$mdDialog, CTE_REST,ToastCommons) {
 		
 		$log.debug("FormDireccionController",$scope.direccionParam);
 		
@@ -118,7 +118,33 @@
 			
 			restProxy.post(CTE_REST.direccionGrupo(1),vm.domicilio,doOk);
 		}
+		
+		//Muestra un alert simple, puede cambiarse para levantar
+		//mensaje mas complejo y amigable definiendo una pagina HTML.
+		function showAlert(ev, mensaje) {
+		    $mdDialog.show(
+		      $mdDialog.alert()
+		        .parent(angular.element(document.querySelector('#mappopupContainer')))
+		        .clickOutsideToClose(true)
+		        .title( 'Ayuda' )
+		        .htmlContent(mensaje)
+		        .ok('OK')
+		        .targetEvent(ev)
+		    );
+		  };
+		  
+		  $scope.mostrarAyuda = function(ev){
+			  console.log("Ayuda")
+			  var mensaje = '<br>'+
+			  '<div align="center">Requisitos para Guardar una dirección</div>'+
+			  '<br>'+
+			  '<li> Se debe almenos Marcar o Buscar la dirección </li>'+
+			  '<li> Todos los campos con * debe ser completados </li>';	
+			  showAlert(ev,mensaje);
+		  };
 	}
+	
+	
 	
 
 	
