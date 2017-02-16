@@ -1,0 +1,95 @@
+<div ng-controller="ListaProductosController as listaProductoCtr">
+
+	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
+		productos.</span> 
+
+		
+	<!-- 
+	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
+		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
+			ng-model="listaProductoCtr.bigCurrentPage"
+			max-size="listaProductoCtr.maxSize" class="pagination-sm"
+			boundary-link-numbers="true" rotate="false"
+			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
+	</div>	
+ -->
+<md-content class="md-padding" layout="row" layout-wrap>
+ 
+  <div flex="33" ng-repeat="variante in listaProductoCtr.variantes">
+		<md-card  >
+	        <img src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}"
+				 alt="{{variante.descripcion}}"  >
+	        <md-card-title>
+	          <md-card-title-text>
+	          	<md-subheader  class="md-accent">{{variante.nombreProducto}}</md-subheader>            
+	          </md-card-title-text>
+	        </md-card-title>
+	        <md-card-content>
+		        <div layout="column">	  
+				  <div layout="row" layout-align="center center">
+				  		<div flex><span class="md-subhead">{{variante.nombreVariedad}}</span></div>			
+				  	<!-- 
+				  		<div flex ng-bind-html="variante.descripcion"></div> -->					  	 
+						<div flex><strong  class="md-headline" >$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong></div>				  		
+				  </div>
+				   
+				  <div>Productor : <a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}} </a></div>
+				</div>	     
+				
+				 <div layout="row"       layout-align="space-around center">
+				  <div ng-repeat="medalla in variante.medallasProducto">
+				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60"> 
+								 <md-tooltip md-direction="up">
+									          {{medalla.nombre}}
+								 </md-tooltip>
+					    </md-button>
+				  </div>		 
+				  <div layout="row"       layout-align="space-around center">
+				  <div ng-repeat="medalla in variante.medallasProductor">
+				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60"> 
+								 <md-tooltip md-direction="up">
+									          {{medalla.nombre}}
+								 </md-tooltip>
+					    </md-button>
+				  </div>
+				</div>	
+	        </md-card-content>
+
+			
+
+
+	       
+	       <div ng-controller="MenuController as menuCtrl">
+    		
+			
+	        <md-card-actions layout="column" layout-align="start">
+	        <md-button ng-show="menuCtrl.isLogued" class="md-raised md-primary"
+			ng-click="listaProductoCtr.agregar(variante)">Agregar <md-tooltip
+			md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
+	        
+	         
+		  
+
+	        <md-button ng-hide="menuCtrl.isLogued" class="md-raised md-primary"
+			ng-click="menuCtrl.ir('login')">Comprar <md-tooltip
+			md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
+
+			
+
+		
+
+
+			</div>
+
+			</md-card-actions>	
+		    </div>
+
+
+
+	      </md-card>
+	     </md-content>
+ </div>
+
+</div>

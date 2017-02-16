@@ -14,13 +14,14 @@
 
         //Servidor LOCAL
         var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
+        // var URL_BASE = "http://localhost:8081/chasqui/";
+
         //var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
         
         //Servidor REMOTOs
-        var URL_REST_BASE = "http://168.181.184.203:8080/chasqui-mock/rest/";
+        //var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
         var URL_BASE = "http://168.181.184.203:8080/chasqui/";
-       
-
+        
         var URL_REST_BASE = URL_BASE+"rest/";
         
         var PRODUCTO = URL_REST_BASE + "productos/";
@@ -133,17 +134,22 @@
         	productosDestacadosByVendedor : function(idVendedor){
         		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
         	},
-        	/*
-            productosDestacadosByVendedor : function(idVendedor){
-              return "http://localhost:8081/chasqui/rest/"  + "client/producto/destacados/"+idVendedor;
-            },*/
+        	
 
+          //  gruposByusuario: URL_REST_BASE+'user/gcc/all',
+
+            gruposByusuario: function (idUser) {
+                return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
+            },
 
         	////////////////////////////////////////////////////////
        
         	productosPedidoByUser : function(idUser){
         		return URL_BASE_MOCK + "productos/pedidos/usuario/"+idUser;
         	},
+
+
+
         	
         	productosQuitar : function(idUser,idPedido,cantidad){        								               
         		return URL_BASE_MOCK + "productos/pedido/"+idPedido+"/usuario/" +idUser+"/quitarProducto/"+cantidad;
@@ -153,10 +159,13 @@
         		return URL_BASE_MOCK + "productos/pedido/"+idPedido+"/usuario/" +idUser+"/agregarProducto/"+cantidad;
         	}, 
         		        		
-        	gruposByusuario: function (idUser) {
-        		return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
-        	},
+        	// gruposByusuario: function (idUser) {
+        	// 	return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
+        	// },
         
+
+
+
         	salirGrupo: function (idUser,idGrupo){
         		return URL_BASE_MOCK + "usuarios/"+idUser+"/grupos/"+idGrupo+"/salir";
         	},

@@ -42,15 +42,11 @@
 	    			    		
 			};
 			
-			// modificado 27-1:
-
-			//vm.domicilioParam={};
-			//vm.domicilioParam.idDireccion=vm.domicilio.idDireccion;
-			//vm.domicilioParam.predeterminada=true;
-			vm.domicilio.predeterminada=true;
-			//restProxy.put(CTE_REST.actualizarDireccion,vm.domicilioParam,doOk);
-			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilio,doOk);
-
+			vm.domicilioParam={};
+			vm.domicilioParam.idDireccion=vm.domicilio.idDireccion;
+			vm.domicilioParam.predeterminada=true;
+			
+			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilioParam,doOk);
 		}
 		
 		vm.eliminar = function(){

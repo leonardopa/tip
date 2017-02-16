@@ -1,83 +1,215 @@
-<div ng-controller="ListaProductosController as listaProductoCtr">
+<div  ng-controller="ListaProductosController as listaProductoCtr">
 
-	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
-		productos.</span> 
+
+		<span ng-show="listaProductoCtr.variantes.length == 0">Sin
+		productos.</span>
+
+
 
 		
- 
-	<!-- 
-	<div align="center" ng-show="listaProductoCtr.isPaginaPrincipal">
-		<uib-pagination total-items="listaProductoCtr.bigTotalItems"
-			ng-model="listaProductoCtr.bigCurrentPage"
-			max-size="listaProductoCtr.maxSize" class="pagination-sm"
-			boundary-link-numbers="true" rotate="false"
-			ng-change="listaProductoCtr.pageChanged()"> </uib-pagination>
-	</div>	
- -->
-<md-content class="md-padding" layout="row" layout-wrap>
-  <div flex="33" ng-repeat="variante in listaProductoCtr.variantes">
-		<md-card  >
-	        <img src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}"
-				 alt="{{variante.descripcion}}"  >
-	        <md-card-title>
-	          <md-card-title-text>
-	          	<md-subheader  class="md-accent">{{variante.nombreProducto}}</md-subheader>            
-	          </md-card-title-text>
-	        </md-card-title>
-	        <md-card-content>
-		        <div layout="column">	  
-				  <div layout="row" layout-align="center center">
-				  		<div flex><span class="md-subhead">{{variante.nombreVariedad}}</span></div>			
-				  	<!-- 
-				  		<div flex ng-bind-html="variante.descripcion"></div> -->					  	 
-						<div flex><strong  class="md-headline" >$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong></div>				  		
-				  </div>
-				   
-				  <div>Productor : <a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}} </a></div>
-				</div>	     
-				
-				 <div layout="row"       layout-align="space-around center">
-				  <div ng-repeat="medalla in variante.medallasProducto">
-				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60"> 
-								 <md-tooltip md-direction="up">
-									          {{medalla.nombre}}
-								 </md-tooltip>
-					    </md-button>
-				  </div>		 
-				  <div layout="row"       layout-align="space-around center">
-				  <div ng-repeat="medalla in variante.medallasProductor">
-				  		<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-								 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60"> 
-								 <md-tooltip md-direction="up">
-									          {{medalla.nombre}}
-								 </md-tooltip>
-					    </md-button>
-				  </div>
-				</div>	
-	        </md-card-content>
-	       
-	       <div ng-controller="MenuController as menuCtrl">
-    		
-			
-	        <md-card-actions layout="column" layout-align="start">
-	        <md-button ng-show="menuCtrl.isLogued" class="md-raised md-primary"
-			ng-click="listaProductoCtr.agregar(variante)">Agregar <md-tooltip
-			md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
-	        
-	         
-		  
 
-	        <md-button ng-hide="menuCtrl.isLogued" class="md-raised md-primary"
-			ng-click="menuCtrl.ir('login')">Comprar <md-tooltip
-			md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
-			</md-card-actions>	
-		    </div>
+    <md-grid-list  md-cols-sm="5" md-cols-md="6" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="1:1" md-gutter="5px" md-gutter-gt-sm="8px"> 
+
+   
+    
+    <md-grid-tile  ng-repeat="variante in listaProductoCtr.variantes"  md-colspan="3"
+                    md-rowspan="4">
+     
+
+		<img class="img" src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}"
+				 layout-fill >
 
 
 
-	      </md-card>
-	     </md-content>
- </div>
+      <md-grid-tile-footer layout-padding>
+       <p style="font-family:Andale Mono; ">{{variante.nombreProducto}}</p>
+       <h5 style="font-family:Andale Mono; ">Productor: <a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a></h5>
+       <h5 style="font-family:Andale Mono; ">{{variante.nombreVariedad}}</h5>
+       <strong>$ {{variante.precioParteEntera}}
+       <sup>{{variante.precioParteDecimal}}</sup></strong>
 
+       
+      
+
+  
+
+        <div layout=row ng-controller="MenuController as menuCtrl">
+        
+      
+         
+          <md-button style="background: #73584b" ng-show="menuCtrl.isLogued" class="md-raised md-primary"
+      ng-click="listaProductoCtr.agregar(variante)"> <p style="font-family:Andale Mono; " > Agregar</p> <md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
+          
+           
+      
+
+          <md-button style="background: #73584b" ng-hide="menuCtrl.isLogued" class="md-raised md-primary"
+      ng-click="menuCtrl.ir('login')">Comprar <md-tooltip
+      md-direction="left"> Agregar al Changuito </md-tooltip> </md-button>
+
+      <div ng-repeat="medalla in variante.medallasProducto">
+              <md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+                 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60"> 
+                 <md-tooltip md-direction="up">
+                            {{medalla.nombre}}
+                 </md-tooltip>
+              </md-button>
+          </div>     
+
+
+          <div ng-repeat="medalla in variante.medallasProductor">
+              <md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
+                 <img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60"> 
+                 <md-tooltip md-direction="up">
+                            {{medalla.nombre}}
+                 </md-tooltip>
+              </md-button>
+          </div>
+    
+    
+
+
+      </div>
+
+
+
+      </md-grid-tile-footer >
+    
+  
+
+    
+    </md-grid-tile>
+
+   
+
+  </md-grid-list>
+  
 </div>
+
+
+<style >
+	.gridListdemoBasicUsage md-grid-list {
+ 	
+ 	 margin: 8px; 
+
+}
+
+  md-grid-tile-footer {
+
+	height: 190px !important;
+	align-items: center;
+	font-size: 20px;
+	}
+
+
+	.container{   
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top:20px;
+}
+
+.div-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    &.hidden{
+            overflow: hidden;
+        }
+    .img{
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;           
+        transform:translate(0px,0px);
+        -ms-transform:translate(0px,0px); // IE 9 
+        -moz-transform:translate(0px,0px); // Firefox 
+        -webkit-transform:translate(0px,0px); // Safari and Chrome 
+        -o-transform:translate(0px,0px); // Opera 
+        -webkit-transition: all 500ms ease-in-out; // IE 9
+        -moz-transition: all 500ms ease-in-out; // Firefox
+        -ms-transition: all 500ms ease-in-out; // Safari and Chrome 
+        -o-transition: all 500ms ease-in-out; // Opera    
+    }      
+    .text{
+        font-family: 'Open Sans';
+        position:absolute;
+        z-index: -1;
+        display:block;
+        bottom:20px;
+        width:100%;
+        text-align:center;
+    }
+    &:hover{
+        .img{
+            transform:translate(0px,-100px);
+            -ms-transform:translate(0px,-100px); // IE 9 
+            -moz-transform:translate(0px,-100px); // Firefox 
+            -webkit-transform:translate(0px,-100px); // Safari and Chrome 
+            -o-transform:translate(0px,-100px); 
+        }
+     } 
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+ <md-grid-list class="md-padding" md-cols="4" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"  md-row-height="2:2" md-gutter="8px" md-gutter-gt-sm="5px">
+
+
+
+<md-grid-tile  ng-repeat="variante in listaProductoCtr.variantes" >
+     
+     
+                                        
+    
+
+ 	<img src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}"
+				 alt="{{variante.descripcion}}"  >
+
+                                            
+		
+
+     			
+    <md-grid-tile-footer><h3>{{variante.nombreProducto}}</h3></md-grid-tile-footer>
+    
+   
+
+    </md-grid-tile>
+  
+
+ </md-grid-list>
+
+
+
+
+</div> -->
