@@ -134,12 +134,12 @@
 		  };
 		  
 		  $scope.mostrarAyuda = function(ev){
-			  console.log("Ayuda")
 			  var mensaje = '<br>'+
 			  '<div align="center">Requisitos para Guardar una dirección</div>'+
 			  '<br>'+
-			  '<li> Se debe almenos Marcar o Buscar la dirección </li>'+
-			  '<li> Todos los campos con * debe ser completados </li>';	
+			  '<li> Se debe almenos Buscar o Marcar la dirección. </li>'+
+			  '<li> Se debe confirmar la posición en alguno de los modos previamente mencionados. </li>'+
+			  '<li> Todos los campos con " * " deben ser completados. </li>';	
 			  showAlert(ev,mensaje);
 		  };
 	}

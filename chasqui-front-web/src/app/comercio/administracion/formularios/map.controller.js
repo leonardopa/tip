@@ -16,6 +16,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		$rootScope.auto_localizar = "Marcar";
 		$rootScope.global_marker;
 		$rootScope.vmGlobal;
+		var posicionMapaPredeterminado = [-34.7739,-58.5520];
 		
     	var blueIcon = L.icon({
     	    iconUrl: 'assets/images/map-marker-40-alter.png',
@@ -228,7 +229,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
           attribution = map.attributionControl;
           vmap=map;
           var marker = null;
-          vmap.setView([-34.7739,-58.5520]);
+          vmap.setView(posicionMapaPredeterminado);
           vmap.setZoom(9);
           map.invalidateSize(false);
           attribution.setPosition('bottomleft');
@@ -256,7 +257,11 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         	
       	  $scope.mostrarMapaGeneral = function(ev) {
       		  	map.off('click', moveMarker);
-      		  	vmap.setView(marker.getLatLng(), 11);
+      		  	if(marker != null){
+      		  		vmap.setView(marker.getLatLng(), 11);
+      		  	}else{
+      		  	vmap.setView(posicionMapaPredeterminado, 11);
+      		  	}
         		$rootScope.mostrarBotones=false;
         		map.closePopup();
       		    $mdDialog.show({
@@ -339,7 +344,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		$rootScope.mostrarBotonesMarcaManual = true;
         		$rootScope.mostrarBotones = false;
 	            marker.dragging.enable();
-        		vmap.setView([-34.7739,-58.5520], 11);
+        		vmap.setView(posicionMapaPredeterminado, 11);
         		$rootScope.global_marker = marker;        		
         		$rootScope.vmGlobal = vm.domicilio;
         		show(ev);        		
