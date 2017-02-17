@@ -335,8 +335,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		var markereditor = new agregarMarker();
         		map.closePopup();
         		markereditor
-        		//.setMarker(vmap.getCenter().lat,vmap.getCenter().lng)
-        		.setMarker(-34.7739,-58.5520)
+        		.setMarker(vmap.getCenter().lat,vmap.getCenter().lng)
         		.setIcon(yellowIcon)
         		.closePopup()
         		.addTo(vmap);
@@ -344,7 +343,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		$rootScope.mostrarBotonesMarcaManual = true;
         		$rootScope.mostrarBotones = false;
 	            marker.dragging.enable();
-        		vmap.setView(posicionMapaPredeterminado, 11);
+        		vmap.setView([vmap.getCenter().lat,vmap.getCenter().lng], 11);
         		$rootScope.global_marker = marker;        		
         		$rootScope.vmGlobal = vm.domicilio;
         		show(ev);        		
