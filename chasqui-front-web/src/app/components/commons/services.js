@@ -154,7 +154,7 @@
     	 var header = {} ;
  	     header = { 'Content-Type': 'application/json',
 	                 'Authorization': createHeader(),
-	                 'idVendedor':5 /// TODO: VENDEDOR HARDODEADO
+	                 'idVendedor':StateCommons.vendedor().id /// TODO: VENDEDOR HARDODEADO
 	              };
  	     
         post(url, header , params, doOk, noOk);
