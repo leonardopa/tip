@@ -42,8 +42,8 @@
 	    			    		
 			};
 			
-			vm.domicilioParam={};
-			vm.domicilioParam.idDireccion=vm.domicilio.idDireccion;
+			// vm.domicilioParam={};
+			// vm.domicilioParam.idDireccion=vm.domicilio.idDireccion;
 			vm.domicilioParam.predeterminada=true;
 			
 			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilioParam,doOk);

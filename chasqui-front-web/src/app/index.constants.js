@@ -142,16 +142,11 @@
         		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
         	},
         	
-<<<<<<< HEAD
 
-          //  gruposByusuario: URL_REST_BASE+'user/gcc/all',
 
-=======
 
-          //  gruposByusuario: URL_REST_BASE+'user/gcc/all',
 
->>>>>>> c93a1cf2b3ab1c696888a478535de70ccc455ede
-            gruposByusuario: function (idUser) {
+                gruposByusuario: function (idUser) {
                 return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
             },
 

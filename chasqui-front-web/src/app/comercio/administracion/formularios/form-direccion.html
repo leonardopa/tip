@@ -70,21 +70,14 @@
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
 				-->
 				 
-				 <div ng-controller="MapGeocoderController">
-					<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="buscar($event)">
-                  		{{buscar_direccion}}
-               		</md-button>
-               		<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="localizar()">         
-                  		{{auto_localizar}}
-                  	</md-button>
+				 
+               		
 					<md-button ng-disabled=isDisabled() class="md-raised md-primary" ng-click="ctrl.guardar()">
 						Confirmar
 					</md-button> 
-					<md-button ng-disabled=isSearching() class="md-primary md-raised" ng-click="mostrarMapaGeneral($event)"   >
-      					Mostrar Mapa
-    				</md-button>
+					
 				
-    			 </div>
+    			 
 			</md-card-actions>
 			
 
