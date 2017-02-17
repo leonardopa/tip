@@ -208,7 +208,8 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		
 		$scope.direccionIncorrecta = function(){
 			restaurarEstadoDeLosBotones();
-			restaurarBotonesAlCancelar();		
+			restaurarBotonesAlCancelar();
+			$rootScope.$emit('recargarMarcas',0);
 			$mdDialog.hide();
 		}
 		
@@ -262,6 +263,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
       		  	}else{
       		  	vmap.setView(posicionMapaPredeterminado, 11);
       		  	}
+      		  	$rootScope.$emit('recargarMarcas',0);
         		$rootScope.mostrarBotones=false;
         		map.closePopup();
       		    $mdDialog.show({
@@ -319,11 +321,24 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     			}
     		}
     		//Marca en primera instancia las direcciones guardadas.
-    		if(vm.domicilio != null && vm.domicilio.latitud != null){
-    			new agregarMarker()
-    			.setMarker(vm.domicilio.latitud,vm.domicilio.longitud)
-    			.addTo(vmap);
+    		function cargarMarcador(){
+    			if(vm.domicilio != null && vm.domicilio.latitud != null){
+    				new agregarMarker()
+    				.setMarker(vm.domicilio.latitud,vm.domicilio.longitud)
+    				.addTo(vmap);
+    			}
     		}
+    			
+    		cargarMarcador();
+    		
+    		$rootScope.$on('recargarMarcas',function(){
+    			if(vm.domicilio != null && vm.domicilio.latitud != null && marker != null){
+    				map.removeLayer(marker);
+    				new agregarMarker()
+    				.setMarker(vm.domicilio.latitud,vm.domicilio.longitud)
+    				.addTo(vmap);
+    			}
+    		});  			
     		//Si se soluciona el problema de GoogleChrome con la restriccion del https
     		//con el autolocate, se debe reposicionar la vista 
     		// como esta comentado .setMarker tanto en el maker como en el map.setView
