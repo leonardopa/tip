@@ -14,14 +14,20 @@
 
         //Servidor LOCAL
 
+
 	var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
-       // var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
-        //var URL_REST_BASE = "http://localhost:8081/chasqui-mock/rest/";
+
+        //var URL_BASE = "http://localhost:8081/chasqui/";
         
         //Servidor REMOTOs
-       // var URL_REST_BASE = "http://168.181.184.203:8080/chasqui-mock/rest/";
-     var URL_BASE = "http://168.181.184.203:8080/chasqui/";
-       // var URL_BASE = "http://localhost:8081/chasqui/";
+
+       // var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
+
+     
+
+  	   var URL_BASE = "http://168.181.184.203:8080/chasqui/";
+
+
 
         var URL_REST_BASE = URL_BASE+"rest/";
         
@@ -136,9 +142,15 @@
         		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
         	},
         	
+<<<<<<< HEAD
 
           //  gruposByusuario: URL_REST_BASE+'user/gcc/all',
 
+=======
+
+          //  gruposByusuario: URL_REST_BASE+'user/gcc/all',
+
+>>>>>>> c93a1cf2b3ab1c696888a478535de70ccc455ede
             gruposByusuario: function (idUser) {
                 return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
             },
