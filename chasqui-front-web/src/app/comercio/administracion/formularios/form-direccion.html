@@ -60,13 +60,13 @@
 									<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> --> 
 									<md-input-container class="md-block" flex-gt-sm> 
 										<label>Loguitud</label> 
-										<input ng-model="ctrl.domicilio.longitud"  md-no-asterisk disabled required> 
+										<input ng-model="ctrl.domicilio.longitud" name="longitud" md-no-asterisk disabled required> 
 										<span style="display:none" >{{ longitudValida = direccionForm.longitud.$valid}}</span> 
 									</md-input-container> 
 									
 									<md-input-container class="md-block" flex-gt-sm> 
 										<label>Latitud</label> 
-										<input ng-model="ctrl.domicilio.latitud"  md-no-asterisk disabled required>
+										<input ng-model="ctrl.domicilio.latitud" name="latitud" md-no-asterisk disabled required>
 										<span style="display:none" >{{ latitudValida = direccionForm.latitud.$valid}}</span> 
 									</md-input-container>
 								</div>
@@ -91,7 +91,7 @@
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
 				-->
 				 
-					<md-button ng-disabled=formIsValid() class="md-raised md-primary" ng-click="buscar($event)">
+					<md-button ng-disabled=formIsValidForSearch() class="md-raised md-primary" ng-click="buscar($event)">
 						<md-icon md-font-set="material-icons"> gps_fixed </md-icon>
 					   <md-tooltip md-direction="top"> Ubica su posicion geografica basada en la direccion ingresada </md-tooltip>
                   		{{buscar_direccion}}
@@ -101,7 +101,7 @@
                		   <md-tooltip md-direction="top"> Permite marcar su posicion geografica manualmente en el mapa</md-tooltip>         
                   		{{auto_localizar}}
                   	</md-button>
-					<md-button ng-disabled=isDisabled() class="md-raised md-primary" ng-click="ctrl.guardar()">
+					<md-button ng-disabled=formIsValidForSave() class="md-raised md-primary" ng-click="ctrl.guardar()">
 						<md-icon md-font-set="material-icons"> save </md-icon>
 						Guardar
 					</md-button> 

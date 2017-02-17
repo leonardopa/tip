@@ -14,16 +14,15 @@
 		var isNew = angular.equals({}, $scope.direccionParam);
 		vm.domicilio =  $scope.direccionParam;
 		vm.isEdit=false;
-		$scope.formularioValido = false;
 		$scope.aliasValido = false;
 		$scope.calleValida= false;
-		$scope.localidadValida=false;
 		$scope.alturaValida=false;
+		$scope.localidadValida=false;
 		$scope.latitudValida = false;
-		$scope.longitud= false;
+		$scope.longitudValida= false;
 		
 		function loadDirecciones(){
-			$scope.$emit("load-direcciones", {});//recarga las direcciones que estan el el conteoller de perfil
+			$scope.$emit("load-direcciones", {});//recarga las direcciones que estan el el controller de perfil
 		}
 		
 		//TODO: hacerlo flexible para grupo usuario vendedor ETC
@@ -35,8 +34,7 @@
 			}else{
 				callUpdateDireccion();
 			//	ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de direccion');
-			}
-			
+			}			
 			
 		}
 		

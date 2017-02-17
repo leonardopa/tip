@@ -173,15 +173,20 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		 * estado de los botones
 		 * desde la vista 
 		 */
-		$scope.isDisabled = function() {
-		      return !$scope.calleValida || !$scope.localidadValida || !$scope.alturaValida || !$scope.aliasValido && (!$rootScope.isDisabled || (!$scope.latitudValida && !$scope.longitudValida));
-		  };
+	 	
+	 	function formValidoParaGuardar(){
+	 		return (!$scope.calleValida || !$scope.localidadValida || !$scope.alturaValida || !$scope.aliasValido || $scope.isDisabled);
+	 	}
+	 	
+		$scope.formIsValidForSave = function() {
+		      return formValidoParaGuardar();
+		};
 		  
 		$scope.isSearching = function() {
 			  return $rootScope.isSearching;
 		};
 		
-		$scope.formIsValid = function(){
+		$scope.formIsValidForSearch = function(){
 			return $rootScope.isSearching || !$scope.calleValida || !$scope.localidadValida || !$scope.alturaValida ;
 		}
 		  
@@ -259,9 +264,9 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
       	  $scope.mostrarMapaGeneral = function(ev) {
       		  	map.off('click', moveMarker);
       		  	if(marker != null){
-      		  		vmap.setView(marker.getLatLng(), 11);
+      		  		map.setView(marker.getLatLng(), 11);
       		  	}else{
-      		  	vmap.setView(posicionMapaPredeterminado, 11);
+      		  		map.setView(posicionMapaPredeterminado, 11);
       		  	}
       		  	$rootScope.$emit('recargarMarcas',0);
         		$rootScope.mostrarBotones=false;
@@ -358,7 +363,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		$rootScope.mostrarBotonesMarcaManual = true;
         		$rootScope.mostrarBotones = false;
 	            marker.dragging.enable();
-        		vmap.setView([vmap.getCenter().lat,vmap.getCenter().lng], 11);
+        		map.setView([vmap.getCenter().lat,vmap.getCenter().lng], 11);
         		$rootScope.global_marker = marker;        		
         		$rootScope.vmGlobal = vm.domicilio;
         		show(ev);        		
