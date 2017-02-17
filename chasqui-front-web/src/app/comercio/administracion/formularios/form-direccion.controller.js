@@ -18,7 +18,9 @@
 		$scope.aliasValido = false;
 		$scope.calleValida= false;
 		$scope.localidadValida=false;
-		$scope.alturaValida=false;		
+		$scope.alturaValida=false;
+		$scope.latitudValida = false;
+		$scope.longitud= false;
 		
 		function loadDirecciones(){
 			$scope.$emit("load-direcciones", {});//recarga las direcciones que estan el el conteoller de perfil
@@ -138,7 +140,7 @@
 			  '<div align="center">Requisitos para Guardar una dirección</div>'+
 			  '<br>'+
 			  '<li> Se debe almenos Buscar o Marcar la dirección. </li>'+
-			  '<li> Se debe confirmar la posición en alguno de los modos previamente mencionados. </li>'+
+			  '<li> Se debe confirmar la posición en alguna de las opciones previamente mencionadas. </li>'+
 			  '<li> Todos los campos con " * " deben ser completados. </li>';	
 			  showAlert(ev,mensaje);
 		  };
