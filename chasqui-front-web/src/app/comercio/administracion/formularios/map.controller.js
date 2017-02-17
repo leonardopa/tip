@@ -174,7 +174,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		 * desde la vista 
 		 */
 		$scope.isDisabled = function() {
-		      return !$scope.calleValida || !$scope.localidadValida || !$scope.alturaValida || !$scope.aliasValido && ($rootScope.isDisabled || ($scope.latitudValida && $scope.longitudValida));
+		      return !$scope.calleValida || !$scope.localidadValida || !$scope.alturaValida || !$scope.aliasValido && (!$rootScope.isDisabled || (!$scope.latitudValida && !$scope.longitudValida));
 		  };
 		  
 		$scope.isSearching = function() {

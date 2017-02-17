@@ -60,13 +60,13 @@
 									<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> --> 
 									<md-input-container class="md-block" flex-gt-sm> 
 										<label>Loguitud</label> 
-										<input ng-model="ctrl.domicilio.longitud"  disabled required> 
+										<input ng-model="ctrl.domicilio.longitud"  md-no-asterisk disabled required> 
 										<span style="display:none" >{{ longitudValida = direccionForm.longitud.$valid}}</span> 
 									</md-input-container> 
 									
 									<md-input-container class="md-block" flex-gt-sm> 
 										<label>Latitud</label> 
-										<input ng-model="ctrl.domicilio.latitud"  disabled required>
+										<input ng-model="ctrl.domicilio.latitud"  md-no-asterisk disabled required>
 										<span style="display:none" >{{ latitudValida = direccionForm.latitud.$valid}}</span> 
 									</md-input-container>
 								</div>
