@@ -3,7 +3,7 @@
 <header>
 <div ng-controller="MenuController as menuCtrl">    
 
-<md-toolbar class="md-hue-2" >
+<md-toolbar>
 	<div class="md-toolbar-tools">
 		<a ui-sref="principal"> <img ng-src="{{menuCtrl.urlBase}}{{menuCtrl.vendedor.imagen}}" > </a>
 		<span flex></span>
@@ -13,12 +13,12 @@
 				id="icon" icon="{{menuCtrl.icon}}"
 				style="fill: {{menuCtrl.fill}}"/>
 				  
-				<md-tooltip md-direction="left">
+				<md-tooltip style="color:#73584b" md-direction="left">
 					 Notificaciones sin leer  {{menuCtrl.notificacionesSinLeer}} </md-tooltip>
 		
 		</md-button>
 		     
-	    <h2 class="md-title"
+	    <h2 class="md-title" style="color:#73584b; font-family:Andale Mono"
 	      ng-show="menuCtrl.isLogued">{{menuCtrl.usuario.nickname}}</h2>
 	         
 	     <md-button class="md-raised" ng-click="menuCtrl.ir('login')"
@@ -26,7 +26,7 @@
 	 	
 	 	 <md-button class="md-secondary" ng-click="menuCtrl.logOut()"
 	 	 ng-show="menuCtrl.isLogued">
-		 	<md-icon> exit_to_app </md-icon>
+		 	<md-icon style="color:#73584b"> exit_to_app </md-icon>
 		</md-button>
 	    
 	</div>

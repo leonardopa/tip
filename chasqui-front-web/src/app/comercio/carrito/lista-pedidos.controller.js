@@ -41,7 +41,7 @@
 			$log.debug("--- Crear pedido individual----");
 			callCrearPedidoIndividual();
 			
-			callLoadPedidos()
+			//callLoadPedidos()
 			callPedidoIndividual()
 		}
 	
@@ -95,15 +95,18 @@
 				ToastCommons.mensaje("Pedido creado ! deberia fallar si ya tiene uno");
 			}
 			var json={};
-			json.idVendedor=5;
+
+			json.idVendedor=StateCommons.vendedor().id;
+
+
 			restProxy.post(CTE_REST.crearPedidoIndividual,json,doOk,doNoOk);
 		}
 		
 		function callPedidoIndividual(){
 			function doOk(response) {
 				//TODO: ver si lo puede traer el servicio
-				response.data.creador = 'INDIVUDUAL'
-				response.data.nombre = 'INDIVUDUAL'
+				response.data.creador = 'INDIVIDUAL'
+				response.data.nombre = 'INDIVIDUAL'
 				vm.tabs.push(response.data);
 				
 			}

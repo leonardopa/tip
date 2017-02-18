@@ -206,7 +206,7 @@
                     pagina: 1,
                     cantItems: 5,
                     precio: 'Down',
-                    idVendedor: 5,
+                    idVendedor: StateCommons.vendedor().id,
                    
             }
 

@@ -66,8 +66,21 @@
 				<md-button ng-click="ctrl.marcarPredeterminado()"> <md-icon> compare_arrows </md-icon> 
 					<md-tooltip md-direction="left"> marcar como domicilo principal </md-tooltip> </md-button> 
 				
+				<!--  
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
+				-->
 				 
-			</md-card-actions>	
+				 
+               		
+					<md-button ng-disabled=isDisabled() class="md-raised md-primary" ng-click="ctrl.guardar()">
+						Confirmar
+					</md-button> 
+					
+				
+    			 
+			</md-card-actions>
+			
+
+				
 </md-card>
 </div>

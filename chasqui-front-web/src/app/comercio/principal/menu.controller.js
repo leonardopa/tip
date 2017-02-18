@@ -133,7 +133,7 @@
 				if (response.data.length >0 ) {
 					$log.debug('hay nuevas notificaciones !');	
 					addNotificacion();
-					ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
+					//ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
 				}else{
 					resetNotificacion();
 				}

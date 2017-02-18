@@ -1,9 +1,10 @@
 (function() {
 	'use strict';
 
-	angular.module('chasqui').controller('ListaProductosController',
-			ListaProductosController);
+	angular.module('chasqui').controller('ListaProductosController', ListaProductosController); 
 
+		
+ 	
 	/**
 	 * @ngInject Lista de productos.
 	 */
@@ -16,6 +17,11 @@
 		
 		var vm = this;
 		
+
+
+
+
+
 		vm.otherCtrl=$scope.$parent.$parent.catalogoCtrl.isFiltro1;
 		
 		vm.urlBase = CTE_REST.url_base;
@@ -30,7 +36,7 @@
                     pagina: 1,
                     cantItems: 10,
                     precio: 'Down',
-                    idVendedor: 5,
+                    idVendedor: StateCommons.vendedor().id,
                    
             }
 
@@ -46,6 +52,7 @@
 		
 			restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
 	 }
+
 
 
 
@@ -183,4 +190,11 @@
 	//	findProductos();
 
 	}
+
+
+
+
+
+
+
 })();
