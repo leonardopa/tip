@@ -6,7 +6,7 @@
     .controller('EmprenController',EmprenController);
 
   /** @ngInject */
-  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons) {
+  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons,productorService,ToastCommons) {
 	  $log.debug('EmprenController ..... ',$stateParams.id); 
 	  StateCommons.ls.itemMenuSelect = 'emprendedores'; 
 	   var vm = this
@@ -35,14 +35,10 @@
 	   
 	   function callEmprendedores() {
 			$log.debug("---callEmprendedor ---");
-
-			function doOk(response) {
-				$log.debug("---callEmprendedor ---",response.data);
-				//vm.categorias = response.data;
-				
-				vm.emprendedores= response.data;
-			}
-            restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
+			
+			productorService.getProductores()
+		        .then(function(data) {vm.emprendedores=data.data;})
+		        .catch(function(err) {ToastCommons.mensaje(err.data.error);});
 	   }
 	   
 	   
