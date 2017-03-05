@@ -4,8 +4,9 @@
 	angular.module('chasqui').controller('LogInController', LogInController);
 
 	/** @ngInject */
-	function LogInController($scope, $http, $log, CTE_REST, restProxy,
-			$mdDialog, $state, StateCommons, ToastCommons, $rootScope) {
+	function LogInController($log, CTE_REST, restProxy, $state, StateCommons,
+			ToastCommons, $rootScope, dialogCommons) {
+
 		$log.debug('controler log in ..... ');
 
 		var vm = this
@@ -17,23 +18,15 @@
 			$state.go("registro");
 
 		}
-
 		vm.recuperar = function(ev) {
-			// Appending dialog to document.body to cover sidenav in docs app
-			var confirm = $mdDialog.prompt().title('Recuperar contrasenia')
-					.textContent('Enviaremos instrucciones a tu correo')
-					.placeholder('correo')
-					// .ariaLabel('Dog name')
-					// .initialValue('Buddy')
-					// .targetEvent(ev)
-					.ok('Enviar').cancel('Cancelar');
-			$mdDialog.show(confirm).then(function(result) {
-				$log.debug('Ingreso Correo ' + result + '.');
-				vm.callReset(result);
-
-			}, function() {
-				$log.debug('Cancelo correo');
-			});
+			dialogCommons.prompt('Recuperar contraseña',
+					'Enviaremos instrucciones a tu correo',
+					'correo@correo.com', 'Enviar', 'Cancelar',
+					function(result) {
+						vm.callReset(result)
+					}, function() {
+						$log.debug('Cancelo correo')
+					});
 		};
 
 		// ///// REST

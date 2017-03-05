@@ -4,8 +4,8 @@
 	angular.module('chasqui').controller('PerfilController', PerfilController);
 
 	/** @ngInject . Pantalla de perfil de usuario */
-	function PerfilController($http, $log, $scope, CTE_REST, restProxy,
-			StateCommons, $mdDialog, ToastCommons, $window, $stateParams) {
+	function PerfilController($log, $scope, CTE_REST, restProxy,
+			StateCommons, $mdDialog, ToastCommons, $stateParams) {
 		$log.debug("Init PerfilController ....");
 
 		StateCommons.ls.itemMenuSelect = 'perfil';
@@ -51,7 +51,7 @@
 		var showPrerenderedDialog = function(ev) {
 			$mdDialog.show({
 				controller : PerfilController,
-				contentElement : '#myDialog',
+				contentElement : '#changePassDialogId',
 				parent : angular.element(document.body),
 				targetEvent : ev,
 				clickOutsideToClose : true

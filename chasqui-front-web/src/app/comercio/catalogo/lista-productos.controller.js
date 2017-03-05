@@ -7,8 +7,8 @@
 	/**
 	 * @ngInject Lista de productos.
 	 */
-	function ListaProductosController($scope, $http, $log, restProxy, CTE_REST,
-			$mdDialog, $state, StateCommons, ToastCommons,dialogCommons) {
+	function ListaProductosController($scope, $log, restProxy, CTE_REST,
+			$state, StateCommons, ToastCommons, dialogCommons) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -72,9 +72,8 @@
 				$log.debug("Cancelo Agregar")
 			}
 
-			dialogCommons.prompt('Agregar al changuito',
-					'Cuantos mecesitas ?', 'Cantidad', 'Agregar', 'Cancelar',
-					doOk, doNoOk);
+			dialogCommons.prompt('Agregar al changuito', 'Cuantos mecesitas ?',
+					'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
 		}
 
 		vm.verMedalla = function(medalla) {

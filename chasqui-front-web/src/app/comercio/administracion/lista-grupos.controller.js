@@ -5,8 +5,9 @@
 			ListaGruposController);
 
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
-	function ListaGruposController($http, $log, $scope, $q, $timeout,
-			$mdDialog, $mdMedia, $state, restProxy, CTE_REST, StateCommons) {
+	function ListaGruposController($log, $scope, $state, restProxy, CTE_REST,
+			StateCommons, dialogCommons, ToastCommons) {
+
 		$log.debug("controler ListaGruposController");
 		StateCommons.ls.itemMenuSelect = 'lista-grupos';
 		var vm = this;
@@ -43,45 +44,26 @@
 
 		/** habilita el panel para agregar integrantes. */
 		vm.habilitar = function() {
-
 			$log.debug("Agregar Miembro al grupo ");
-
-			var confirm = $mdDialog.prompt().title('Agregar Miembro al Grupo')
-					.textContent('ingrese una direccion de correo')
-					.placeholder('ejemplo@ejemplo.com')
-					// .ariaLabel('Dog name')
-					// .initialValue('Buddy')
-					// .targetEvent(ev)
-					.ok('Agregar').cancel('Cancelar');
-
-			$mdDialog.show(confirm).then(function(result) {
-				$log.debug("agregar OK", result);
-
-				// TODO: LLAMAR al servicio
-
-			}, function() {
-
-				$log.debug("Cancelo Agregar Grupo");
-			});
-
+			// TODO: conectarcon servicio cuando este
+			dialogCommons.prompt('Agregar Miembro al Grupo',
+					'ingrese una direccion de correo', 'correo@correo.com',
+					'Agregar', 'Cancelar', function(result) {
+						ToastCommons.mensaje("TODO: agregar miembro al grupo");
+					}, function() {
+						$log.debug("Cancelo Agregar Grupo");
+					});
 		}
 
 		/** Salir del grupo. Manejo del popUP */
 		vm.salir = function(ev) {
-			$log.debug(ev);
-			// TODO: externalizar
-			var confirm = $mdDialog.confirm().title(
-					'Seguro quieres salir del grupo ' + vm.selected.nombre
-							+ ' ?').textContent(
-					'Mala onda, tus amigos van a pagar todo mas caro !')
-					.ariaLabel('Lucky day').targetEvent(ev).ok('Si, me voy')
-					.cancel('bueno, me quedo');
-			$mdDialog.show(confirm).then(function() {
+			dialogCommons.confirm('Salir', 'Seguro quieres salir del grupo '
+					+ vm.selected.nombre, 'Si, me voy', 'Cancelar', function(
+					result) {
 				callSalirGrupo();
 			}, function() {
 				$log.debug("se quedo");
 			});
-
 		}
 
 		/** Redirecciona al formulario crear grupo */
@@ -117,17 +99,13 @@
 			$log.debug("--- call salir del grupo --------", vm.selected.nombre);
 
 			// TODO: hacer el ID de usuario dinamico
-			$http.get(
-					"http://localhost:8081/chasqui-mock/usuarios/4/grupos/"
-							+ vm.selected.id + "/salir").then(doOk)
-
 			function doOk(response) {
 				$log.debug("--- call salir del grupo respuesta", response.data);
 
 				callLoadGrupos();
 			}
-
-			// TODO: hacer el ID de usuario dinamico
+			ToastCommons.mensaje("MOCK");
+			// TODO: hacer el ID de usuario dinamico //
 			restProxy.get(CTE_REST.salirGrupo(4, vm.selected.id), {}, doOk);
 		}
 

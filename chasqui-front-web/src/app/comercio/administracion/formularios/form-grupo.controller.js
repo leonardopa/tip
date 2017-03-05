@@ -7,8 +7,7 @@
 	/**
 	 * @ngInject Formulario para crear un grupo
 	 */
-	function FormGrupoController($http, $log, $scope, $mdDialog, $mdMedia,
-			$state, restProxy, CTE_REST) {
+	function FormGrupoController($log, $state, restProxy, CTE_REST) {
 		$log.debug("controler FormGrupoController");
 		var vm = this;
 

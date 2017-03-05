@@ -9,7 +9,7 @@
 	 *           grupo
 	 */
 	function DetalleGruposController($http, $log, $scope, $q, $timeout,
-			restProxy, CTE_REST, $mdDialog, ToastCommons) {
+			restProxy, CTE_REST, ToastCommons,dialogCommons ) {
 		$log.debug("controler DetalleGruposController inti grupo ",
 				$scope.idGrupo)
 		var vm = this;
@@ -63,21 +63,13 @@
 			$log.debug("quitar miembro", miembro);
 			// TODO: quitar miembro del gupo
 
-			var confirm = $mdDialog
-					.confirm()
-					.title('Quitar Miembro del grupo')
-					.textContent(
-							'Estas seguro de quitar a ' + miembro.nombre + ' ?')
-					// .ariaLabel('Lucky day').targetEvent(ev)
-					.ok('Si, lo quito').cancel('Cancelo');
-			$mdDialog.show(confirm).then(function() {
-
-				ToastCommons.mensaje('TODO: llamar servicio')
-
-			}, function() {
-				$log.debug("se quedo");
-			});
-
+			dialogCommons.confirm('Quitar Miembro del grupo',
+					'Estas seguro de quitar a ' + miembro.nombre + ' ?',
+					'Si, lo quito', 'no', function() {
+						ToastCommons.mensaje('TODO: llamar servicio')
+					}, function() {
+						$log.debug("se quedo");
+					});
 		}
 		// //////////
 		// //////REST
