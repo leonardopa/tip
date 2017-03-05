@@ -6,7 +6,8 @@
     .controller('CatalogoController',CatalogoController);
 
   /** @ngInject */
-  function CatalogoController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons,productorService) {
+  function CatalogoController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons,productorService
+		  ,ToastCommons) {
 	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
 	  StateCommons.ls.itemMenuSelect = 'catalogo';
 	  var vm = this;
@@ -164,15 +165,13 @@
 	 
 	  
 	  function callCategorias() {
-			$log.debug("---callCategorias ---");
-
-			function doOk(response) {
-				 
-				vm.categorias = response.data;
+		  productorService.getCategorias()
+		  	.then(function(response) {
+		  		vm.categorias = response.data;
 				vm.categoriaSelect =vm.categorias[0]; 
-			}
-
-			restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},doOk);		    		    
+		  	})
+	        .catch(function(err) {ToastCommons.mensaje(err.data.error);});	
+		    		    
 	 }
 	  
 	  function callProductores() {
