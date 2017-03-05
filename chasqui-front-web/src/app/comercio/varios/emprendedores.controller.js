@@ -11,7 +11,7 @@
 	  StateCommons.ls.itemMenuSelect = 'emprendedores'; 
 	   var vm = this
 	   
-	   vm.urlBase=CTE_REST.url_base;
+	   vm.urlBase = CTE_REST.url_base;
 	   vm.idEmprendedor = $stateParams.id;
 	   vm.isCollapsed = true;
 	   
@@ -42,21 +42,6 @@
 	   }
 	   
 	   
-	   
-	   ///// TODO: en realidad deberia venir dentro del productor
-	   function callMedallas() {
-			$log.debug("---callMedallas ---");
-
-			function doOk(response) {				 
-				vm.medallas = response.data;
-		//		vm.productorSelect =vm.productores[0]; 
-			}
-			
-			// TODO: hacer el ID de VENDEDOR dinamico
-			restProxy.get(CTE_REST.medallas,{},doOk);		    
-	  }
-	   
-
 	   callEmprendedores();
   
   }

@@ -1,68 +1,64 @@
- 
-<div class="wrapper">
-<div class="container-fluid">
-	
-	<div layout="row" ng-show="emprendedorCtrl.isVistaUnica">
-		  <div flex="30">
-		   
-		  </div>
-		  <div flex="30">
-		     <md-card>
-		        <img ng-src="http://168.181.184.203:8080/chasqui/{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image" alt="Washed Out">
-		        <md-card-title>
-		          <md-card-title-text>
-		            <span class="md-headline">{{emprendedorCtrl.emprendedor.nombreProductor}}</span>
-		          </md-card-title-text>
-		        </md-card-title>
-		        <md-card-content>
-		          <span>{{emprendedorCtrl.emprendedor.descripcionCorta}}</span>
-		          
-		          <div ng-bind-html="emprendedorCtrl.emprendedor.descripcionLarga"></div>
-				  <span>		        
+ <div class="wrapper">
+    <div class="container-fluid">
+
+        <div layout="row" ng-show="emprendedorCtrl.isVistaUnica">
+         
+            <div flex="70">
+                <md-card>
+                    <img ng-src="{{menuCtrl.urlBase}}{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image" 
+                    	alt="productor">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{emprendedorCtrl.emprendedor.nombreProductor}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <span>{{emprendedorCtrl.emprendedor.descripcionCorta}}</span>
+
+                        <div ng-bind-html="emprendedorCtrl.emprendedor.descripcionLarga"></div>
+                        <span>		        
 		          {{emprendedorCtrl.emprendedor.direccion.pais}}
 		          {{emprendedorCtrl.emprendedor.direccion.provincia}}
 		          {{emprendedorCtrl.emprendedor.direccion.localidad}}
 		          {{emprendedorCtrl.emprendedor.direccion.calle}}
 		          {{emprendedorCtrl.emprendedor.direccion.altura}}</span>
-		     	</md-card-content>
-		  </div>
-		  <div flex hide-sm hide-xs>
-		     
-		     <md-list flex>
-		        <md-subheader class="md-no-sticky">Medallas del productor</md-subheader>
-		        <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.medallas" ng-click="null">
-		         <!--  
+                    </md-card-content>
+                  </md-card>
+            </div>
+            <div flex="30">
+
+                <md-list flex>
+                    <md-subheader class="md-no-sticky">Medallas del productor</md-subheader>
+                    <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.medallas" ng-click="null">
+                        <!--  
 		          <md-icon  class="md-avatar"> info_outline </md-icon>
 		          -->
-		           <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" 
-                          class="md-card-image" alt="{{ item.nombre }}" width="60" height="60"> 	           
-		          <div class="md-list-item-text" layout="column">
-		            <h3>{{ item.nombre }}</h3>
-		            <div ng-bind-html="item.descripcion"></div>		            	           
-		          </div>
-		        </md-list-item>
-        
-		  </div>
-	</div>
-	
-	<div layout="row" ng-show="! emprendedorCtrl.isVistaUnica">
-		<md-list flex>
-		        <md-subheader class="md-no-sticky">Productores</md-subheader>
-		        <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.emprendedores" 
-		        ng-click="emprendedorCtrl.verMas(item)">
-		        
-		         <md-card> 
-					<md-card-content>
-					 	<div class="md-list-item-text" layout="column">
-						            <h3>{{ item.nombreProductor }}</h3>
-						            <h3>{{ item.descripcionCorta }}</h3>						             	           
-						          </div>
-					</md-card-content>
-				 </md-card>
-		                  
-		         
-		</md-list-item>
-	</div>
-	
-</div>
+                        <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" class="md-card-image" alt="{{ item.nombre }}" width="60" height="60">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ item.nombre }}</h3>
+                            <div ng-bind-html="item.descripcion"></div>
+                        </div>
+                    </md-list-item>
+
+            </div>
+        </div>
+
+        <div layout="row" ng-show="! emprendedorCtrl.isVistaUnica">
+            <md-list flex>
+                <md-subheader class="md-no-sticky">Productores</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.emprendedores" ng-click="emprendedorCtrl.verMas(item)">
+
+                    <md-card>
+                        <md-card-content>
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ item.nombreProductor }}</h3>
+                                <h3>{{ item.descripcionCorta }}</h3>
+                            </div>
+                        </md-card-content>
+                    </md-card>
+
+                </md-list-item>
+        </div>
+
+    </div>
 </div>
