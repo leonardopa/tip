@@ -6,7 +6,8 @@
     .controller('EmprenController',EmprenController);
 
   /** @ngInject */
-  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons,productorService,ToastCommons) {
+  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons,productorService,ToastCommons
+		  ,utilsService) {
 	  $log.debug('EmprenController ..... ',$stateParams.id); 
 	  StateCommons.ls.itemMenuSelect = 'emprendedores'; 
 	   var vm = this
@@ -21,12 +22,23 @@
 	   
 	   ///////////////// Eventos
 	   
-	   vm.verMas=function (item){
-		   $log.debug("---ver mas ---",item);
-		   
+	   vm.verDetalle=function (item){
 		   vm.emprendedor= item;
-		   vm.medallas=[item.medalla];
+		   console.log(item.medalla)
+		   console.log(angular.isUndefined(item.medalla))
+		   if (!utilsService.isUndefinedOrNull(item.medalla)){
+			   vm.medallas=[item.medalla];//Por alguna razon mandan una sola medalla			  
+		   }
 		   vm.isVistaUnica=true;
+	   }
+	   
+	   
+	   vm.verMas=function (){
+		   $log.debug("---ver mas ---");
+		   
+		   vm.emprendedor= undefined;
+		   vm.medallas=[];
+		   vm.isVistaUnica=false;
 	   }
 	   
 	   /////////////////
