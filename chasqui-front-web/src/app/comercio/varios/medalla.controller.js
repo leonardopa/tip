@@ -6,7 +6,8 @@
     .controller('MedallaController',MedallaController);
 
   /** @ngInject */
-  function MedallaController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons) {
+  function MedallaController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons
+		  ,productoService) {
 	  $log.debug('MedallaController ..... ',$stateParams.idMedalla); 
 	  StateCommons.ls.itemMenuSelect = 'medalla'; 
 	   var vm = this
@@ -16,11 +17,11 @@
 	   vm.medalla;
 	   vm.medallas;
 	   vm.isVistaUnica=false;
-	   
+	  /*  TODO : caso de mostrar una sola medalla
 	   if(vm.idMedalla){
 		   vm.isVistaUnica=true;
 	   }
-	   
+	   */
 	   vm.verMas=function (item){
 		   $log.debug("---ver mas ---",item);
 		   
@@ -36,15 +37,13 @@
 	   
 	   ///// TODO: en realidad deberia venir dentro del productor
 	   function callMedallas() {
-			$log.debug("---callMedallas ---");
-
-			function doOk(response) {				 
-				vm.medallas = response.data;
-				vm.medalla = response.data[0]; 
-			}
-			
-			// TODO: hacer el ID de VENDEDOR dinamico
-			restProxy.get(CTE_REST.medallas,{},doOk);		    
+		   productoService.getMedallas()
+		   	.then(function(response) {
+		   		
+		   		vm.medallas = response.data;
+		   		
+		   	})
+		   	.catch(function(err) {ToastCommons.mensaje(err.data.error);});		    
 	  }
 	   
 	   /////////////////
