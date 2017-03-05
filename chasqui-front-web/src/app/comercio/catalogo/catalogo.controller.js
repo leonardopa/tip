@@ -27,7 +27,7 @@
 	  vm.productores = [];
 	  vm.medallas = [];
 	  vm.query=''; 
-	  vm.productosSinFiltro= [];
+	  
 	  
 	  vm.pedidos={};
 	  vm.carrito=StateCommons.ls.pedidoSeleccionado;
@@ -186,36 +186,12 @@
 	        .catch(function(err) {ToastCommons.mensaje(err.data.error);});
 	    
 	 }
-
-//Agregado 16/12
-	 function callProductosSinFiltro() {			
-			var json = {
-                    pagina: 1,
-                    cantItems: 5,
-                    precio: 'Down',
-                    idVendedor: StateCommons.vendedor().id,
-                   
-            }
-
-			function doOk(response) {				 
-				vm.productosSinFiltro = response.data;
-
-			}
-		
-			restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
-	 }
-
-
-
-	  
-	 
+ 
 	 
 	 callLoadGrupos();
 	 callCategorias();
 	 callProductores();
 	 callMedallas(); 
-	 callProductosSinFiltro();
-	    
-	
+
   }
 })();
