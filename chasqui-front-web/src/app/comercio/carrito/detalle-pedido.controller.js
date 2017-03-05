@@ -5,7 +5,8 @@
 		DetallePedidoController);
 
 	/** @ngInject */
-	function DetallePedidoController($http, $log, $state, $scope, restProxy, CTE_REST, ToastCommons, $mdDialog) {
+	function DetallePedidoController($http, $log, $state, $scope, restProxy, CTE_REST, ToastCommons, $mdDialog
+			,dialogCommons) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -13,14 +14,16 @@
 		vm.urlBase = CTE_REST.url_base;
 		vm.direcciones;
 		vm.direccionSelected;
-
+		vm.productoEliminar;
+		
 		vm.comprar = function(event) {
 			$log.debug('DetallePedidoController , modo comprar ', $scope.pedido);
 			$state.go('catalogo')
 		}
 
-		vm.eliminar = function(item) {
-			$log.debug('DetallePedidoController , eliminar ', item);
+		
+		function doEliminar(){
+			$log.debug('DetallePedidoController , eliminar ', vm.productoEliminar);
 
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ", response.data);
@@ -35,10 +38,22 @@
 			}
 			var params = {};
 			params.idPedido = vm.pedido.id;
-			params.idVariante = item.idVariante;
-			params.cantidad = item.cantidad;
+			params.idVariante = vm.productoEliminar.idVariante;
+			params.cantidad = vm.productoEliminar.cantidad;
 
 			restProxy.put(CTE_REST.quitarProductoIndividual, params, doOk, doNoOk);
+		}
+		
+		vm.eliminar = function(item) {
+			vm.productoEliminar=item;
+			
+			dialogCommons.confirm('Quitar producto del Changuito',
+					'Esta seguro queres sacar el producto del changuito ?',					
+					'SI',
+					'no',
+					doEliminar,
+					function(){}
+					);			
 		}
 
 		vm.cancelar = function(event) {
