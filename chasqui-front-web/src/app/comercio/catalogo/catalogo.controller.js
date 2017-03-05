@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function CatalogoController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons,productorService
-		  ,ToastCommons) {
+		  ,productoService,ToastCommons) {
 	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
 	  StateCommons.ls.itemMenuSelect = 'catalogo';
 	  var vm = this;
@@ -165,7 +165,7 @@
 	 
 	  
 	  function callCategorias() {
-		  productorService.getCategorias()
+		  productoService.getCategorias()
 		  	.then(function(response) {
 		  		vm.categorias = response.data;
 				vm.categoriaSelect =vm.categorias[0]; 
@@ -181,16 +181,14 @@
 	 }
 	  
 	  function callMedallas() {
-		  productorService.getMedallas()
+		  productoService.getMedallas()
 	        .then(function(response) {vm.medallas = response.data;})
 	        .catch(function(err) {ToastCommons.mensaje(err.data.error);});
 	    
 	 }
 
 //Agregado 16/12
-	 function callProductosSinFiltro() {
-			$log.debug("---Deberia mostrar productos sin filtros ---");
-
+	 function callProductosSinFiltro() {			
 			var json = {
                     pagina: 1,
                     cantItems: 5,
