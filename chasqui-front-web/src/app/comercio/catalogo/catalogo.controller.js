@@ -5,7 +5,8 @@
     .module('chasqui')
     .controller('CatalogoController',CatalogoController);
 
-  /** @ngInject */
+  /** Pagina donde se muestran los productos. Contiene los filtros y el contexto
+   * de compra , pero NO la lista de productos la cual se incluye */
   function CatalogoController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons,productorService
 		  ,productoService,ToastCommons) {
 	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
@@ -105,7 +106,12 @@
 	 
 	  }
 	  
-
+	  var doFiltrar = function (valor){
+		  var filtro = {};
+		  filtro.tipo = vm.tipoFiltro;
+		  filtro.valor = valor;			 
+		  $scope.$broadcast('filterEvent', filtro);	// llama al evento del list-producto-controller	 
+	  }
 	  
 	  vm.cambiarContexto = function (pedido){
 		  $log.debug("cambia contexo de carrito ",pedido);
@@ -121,20 +127,11 @@
 			  }, 1500);
 
 	  }
-	  
-	  var doFiltrar = function (valor){
-		  var filtro = {};
-		  filtro.tipo = vm.tipoFiltro;
-		  filtro.valor = valor;			 
-		  $scope.$broadcast('filterEvent', filtro);	// llama al evento del list-producto-controller	 
-	  }
 
-
-			
-	  
 	  /// CALL REST 
 	  
 	  //TODO: cache , para no sobrecargar con grupos
+	  //TODO: implemantar cuante este funcionando grupos
 	  function callLoadGrupos() {
 			$log.debug("--- find  pedidos abiertos ---");
 
@@ -159,7 +156,7 @@
 				}
 			}
 			
-	//		restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);		    
+			restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);		    
 
 	 }
 	 
