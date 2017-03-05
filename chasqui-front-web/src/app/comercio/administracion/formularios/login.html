@@ -1,46 +1,37 @@
- 
 <div class="container-fluid">
 	<div layout="column" layout-align="space-around center">
-
-
 		<div>
-			<md-card> 
-				 <md-card-title>
-		          <md-card-title-text>
-		            <span class="md-headline">Iniciar  sesion</span>
-		          </md-card-title-text>
-		        </md-card-title>
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">Iniciar  sesion</span>
+					</md-card-title-text>
+				</md-card-title>
 				<md-card-content>
-				 	<md-content  layout-gt-sm="row" layout-padding>
-					    <div>
-					      <md-input-container>
-					        <label>Email</label>
-					        <input ng-model="loginCtrl.user.email" type="email">
-					      </md-input-container>
-					      <md-input-container>
-					        <label>Contrasea</label>
-					        <input ng-model="loginCtrl.user.password" type="password">
-					      </md-input-container>
-					      
-					    </div>
-					  </md-content>
-					
-				</md-card-content> 
-			
+					<md-content layout-gt-sm="row" layout-padding>
+						<div>
+							<md-input-container>
+								<label>Email</label>
+								<input ng-model="loginCtrl.user.email" type="email">
+							</md-input-container>
+							<md-input-container>
+								<label>Contrasea</label>
+								<input ng-model="loginCtrl.user.password" type="password">
+							</md-input-container>
+
+						</div>
+					</md-content>
+
+				</md-card-content>
+
 				<md-card-actions layout="row" layout-align="end center">
-					<md-button md-no-ink class="md-primary"
-					ng-click="loginCtrl.nuevo()" >Soy nuevo !</md-button>
-					
-					<md-button md-no-ink class="md-primary"
-					ng-click="loginCtrl.recuperar()" >Olvide mi Contrasea</md-button>
-					
-					<md-button class="md-raised md-primary"
-					ng-click="loginCtrl.login()" >Ingresar</md-button> 					 
+					<md-button md-no-ink class="md-primary" ng-click="loginCtrl.nuevo()">Soy nuevo !</md-button>
+
+					<md-button md-no-ink class="md-primary" ng-click="loginCtrl.recuperar()">Olvide mi Contrasea</md-button>
+
+					<md-button class="md-raised md-primary" ng-click="loginCtrl.login()">Ingresar</md-button>
 				</md-card-actions>
 			</md-card>
-
-
 		</div>
-		
 	</div>
 </div>

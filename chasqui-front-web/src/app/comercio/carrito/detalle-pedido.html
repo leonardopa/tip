@@ -1,111 +1,78 @@
- 
-<div ng-controller="DetallePedidoController as detallePedidoCtrl"
-	ng-cloak>
-	
-	<script type="text/ng-template" id="dialog-direccion.html">
-      <md-dialog aria-label="options dialog">
-        <md-dialog-content layout-padding>
-          <h2 class="md-title">Elige un Domicilio</h2>
-          
-			<md-select placeholder="Domicilio" ng-model="detallePedidoCtrl.direccionSelected"
-										   md-on-open="detallePedidoCtrl.callDirecciones()" style="min-width: 200px;">
-          		  <md-option ng-value="dire" 
-					  ng-repeat="dire in detallePedidoCtrl.direcciones">{{dire.alias}}</md-option>
-         	 </md-select>
+ <div ng-controller="DetallePedidoController as detallePedidoCtrl" ng-cloak>
 
-        </md-dialog-content>
-        <md-dialog-actions>
-          <span flex></span>
-          <md-button class="md-primary" ng-click="detallePedidoCtrl.confirmarDomicilio()">Confirmar</md-button>
-        </md-dialog-actions>
-      </md-dialog>
-    </script>
-    
-	<md-card> 
-		<md-card-title> 
+	<script type="text/ng-template" id="dialog-direccion.html">
+		<md-dialog aria-label="options dialog">
+			<md-dialog-content layout-padding>
+				<h2 class="md-title">Elige un Domicilio</h2>
+
+				<md-select placeholder="Domicilio" ng-model="detallePedidoCtrl.direccionSelected" md-on-open="detallePedidoCtrl.callDirecciones()"
+				 style="min-width: 200px;">
+					<md-option ng-value="dire" ng-repeat="dire in detallePedidoCtrl.direcciones">{{dire.alias}}</md-option>
+				</md-select>
+
+			</md-dialog-content>
+			<md-dialog-actions>
+				<span flex></span>
+				<md-button class="md-primary" ng-click="detallePedidoCtrl.confirmarDomicilio()">Confirmar</md-button>
+			</md-dialog-actions>
+		</md-dialog>
+	</script>
+
+	<md-card>
+		<md-card-title>
 			<md-card-title-text>
-				<span class="md-headline">{{detallePedidoCtrl.pedido.nombre}}</span> 
+				<span class="md-headline">{{detallePedidoCtrl.pedido.nombre}}</span>
 				<md-divider></md-divider>
-				
-			</md-card-title-text> 	
-		</md-card-title> 
-		  <md-card-content layout="column" layout-align="space-between">			  
-				<span class="md-subhead">Creado por : {{detallePedidoCtrl.pedido.creador}}  </span>
-				<span class="md-subhead">Creado el  : {{detallePedidoCtrl.pedido.fechaCreacion}}  </span>
-				<span class="md-subhead">Monto actual : ${{detallePedidoCtrl.pedido.montoActual}} / Monto minimo : ${{detallePedidoCtrl.pedido.montoMinimo}}</span>													
-				<span class="md-subhead">{{detallePedidoCtrl.pedido.estado}}  </span>
+
+			</md-card-title-text>
+		</md-card-title>
+		<md-card-content layout="column" layout-align="space-between">
+			<span class="md-subhead">Creado por : {{detallePedidoCtrl.pedido.creador}}  </span>
+			<span class="md-subhead">Creado el  : {{detallePedidoCtrl.pedido.fechaCreacion}}  </span>
+			<span class="md-subhead">Monto actual : ${{detallePedidoCtrl.pedido.montoActual}} / Monto minimo : ${{detallePedidoCtrl.pedido.montoMinimo}}</span>
+			<span class="md-subhead">{{detallePedidoCtrl.pedido.estado}}  </span>
 		</md-card-content>
-		<md-card-actions layout="row" layout-align="end center">	
-		   
-		    <md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>	
-		    <md-button ng-click="detallePedidoCtrl.confirmar()"
-		    	class="md-primary"> Confirmar </md-button>		 
+		<md-card-actions layout="row" layout-align="end center">
+
+			<md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>
+			<md-button ng-click="detallePedidoCtrl.confirmar()" class="md-primary"> Confirmar </md-button>
 			<md-button ng-click="detallePedidoCtrl.comprar($event)">
-				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>				 
-					<md-tooltip md-direction="left">
-						puedes seguir comprando para el pedido {{detallePedidoCtrl.pedido.nombre}}
-					</md-tooltip>
-			</md-button>			
-		</md-card-actions> 		
+				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>
+				<md-tooltip md-direction="left">
+					puedes seguir comprando para el pedido {{detallePedidoCtrl.pedido.nombre}}
+				</md-tooltip>
+			</md-button>
+		</md-card-actions>
 	</md-card>
-<!--  SACAR ESTO
+	<!--  SACAR ESTO
 	<section ng-include="'app/comercio/carrito/lista-productos-pedido.html'"
 	ng-init="pedido = detallePedidoCtrl.pedido">
 	
 	</section>
- -->	
+ -->
 	<h1> Productos en el carro </h1>
 
-	<md-card   ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" md-theme-watch>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{ item.nombre }}</span>
-            <span class="md-subhead">
-            	<h1><strong>$ {{ item.precio * item.cantidad }}</strong></h1> $ {{ item.precio }} x  {{ item.cantidad }} </span>                         
-          </md-card-title-text>
-          
-          <md-button ng-click="detallePedidoCtrl.eliminar(item)">
-			<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
-				<md-tooltip md-direction="left">
-					Quitar producto del carro </md-tooltip></md-button>
-          <md-card-title-media>
-          
-            <div class="md-media-sm card-media"><img src="{{detallePedidoCtrl.urlBase}}/{{item.imagen}}"></div>
-          </md-card-title-media>
-        </md-card-title>
-         
-      </md-card>
-	
-	 
-<!-- 
-	<span ng-show="listaProductoCtr.variantes.length == 0">Sin productos.</span>
+	<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" md-theme-watch>
+		<md-card-title>
+			<md-card-title-text>
+				<span class="md-headline">{{ item.nombre }}</span>
+				<span class="md-subhead">
+            	<h1><strong>$ {{ item.precio * item.cantidad }}</strong></h1> $ {{ item.precio }} x  {{ item.cantidad }} </span>
+			</md-card-title-text>
 
-	<ul class="list-group" ng-repeat="variante in detallePedidoCtrl.pedido.productos">
-	  <li class="list-group-item">
-	  		<div class="container-fluid">
-				<div class="row">			
-					<div class="col-md-2">
-						<img src="http://lorempixel.com/90/90/food/{{variante.idProducto}}" alt="{{variante.descripcionVariente}}">
-					</div>
-					<div class="col-md-6">
-						<strong> {{variante.nombreProducto}} </strong><br>
-						<a href="#">{{variante.descripcionVariente}}</a><br>
-					    Productor :<strong> {{variante.nombreFabricante}} </strong>			 
-					</div>
-					<div class="col-md-2">
-						<h4><strong>{{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong></h4> 
-						 5 X $ 20<sup>50</sup>
-					</div>
-					
-					<div class="col-md-2">
-						Cantidad : <strong>{{variante.cantidad}} </strong>
-						Subtotal : <strong> $ 30</strong>						 
-					</div>
-					
-					
-				</div>
-			</div>
-	</li>
- -->
+			<md-button ng-click="detallePedidoCtrl.eliminar(item)">
+				<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
+				<md-tooltip md-direction="left">
+					Quitar producto del carro </md-tooltip>
+			</md-button>
+			<md-card-title-media>
+
+				<div class="md-media-sm card-media"><img src="{{detallePedidoCtrl.urlBase}}/{{item.imagen}}"></div>
+			</md-card-title-media>
+		</md-card-title>
+
+	</md-card>
+</div>
+
  
  

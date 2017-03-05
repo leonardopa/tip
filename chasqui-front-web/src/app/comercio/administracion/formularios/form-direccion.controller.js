@@ -4,8 +4,9 @@
 	angular.module('chasqui').controller('FormDireccionController',
 			FormDireccionController);
 
-	/** @ngInject 
-	 *  Formulario para direccion */
+	/**
+	 * @ngInject Formulario para direccion
+	 */
 	function FormDireccionController( $log,$state,$scope,restProxy, CTE_REST,ToastCommons) {
 		
 		$log.debug("FormDireccionController",$scope.direccionParam);
@@ -16,10 +17,12 @@
 		vm.isEdit=false;
 		
 		function loadDirecciones(){
-			$scope.$emit("load-direcciones", {});//recarga las direcciones que estan el el conteoller de perfil
+			$scope.$emit("load-direcciones", {});// recarga las direcciones
+													// que estan el el
+													// conteoller de perfil
 		}
 		
-		//TODO: hacerlo flexible para grupo usuario vendedor ETC
+		// TODO: hacerlo flexible para grupo usuario vendedor ETC
 		// ahora esta para grupo
 		vm.guardar = function (){
 			$log.debug("Guardar Domicilio , nuevo? ",isNew);
@@ -27,7 +30,8 @@
 				callNuevaDireccion();				
 			}else{
 				callUpdateDireccion();
-			//	ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de direccion');
+			// ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de
+			// direccion');
 			}
 			
 			
@@ -64,7 +68,7 @@
 			
 		}
 		
-		//////////////////////
+		// ////////////////////
 		
 		var callNuevaDireccion = function (){
 			$log.debug("guardar domicilio",vm.domicilio);
@@ -76,7 +80,8 @@
 	    		 
 	    		loadDirecciones();
 			};
-			vm.domicilio.predeterminada =true; // TODO : si es el primero deberia ser TRUE si no no
+			vm.domicilio.predeterminada =true; // TODO : si es el primero
+												// deberia ser TRUE si no no
 			restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
 		}
 		
@@ -96,7 +101,7 @@
 		}
 		
 		
-		/////// TODO: ver cuando este para asociar a una grupo
+		// ///// TODO: ver cuando este para asociar a una grupo
 		var guardarDireccionGrupo = function (){
 			$log.debug("guardar domicilio al grupo",vm.domicilio);
 			
@@ -104,7 +109,7 @@
 	        function doOk(response) {	    			    		 
 	    		$log.debug("respuesta guardar domicilio ", response);
 
-	    		//TODO: en realidad la navegacion depende de donde vino 
+	    		// TODO: en realidad la navegacion depende de donde vino
 	    		$state.go("lista-grupos");
 			};
 			

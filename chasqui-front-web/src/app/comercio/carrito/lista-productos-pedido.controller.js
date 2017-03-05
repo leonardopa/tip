@@ -2,18 +2,18 @@
 	'use strict';
 
 	angular.module('chasqui').controller('ListaProductosPedidoController',
-			ListaProductosPedidoController);
+		ListaProductosPedidoController);
 
 	/**
 	 * @ngInject Lista de productos para la pagina de pedidos.
 	 */
 	function ListaProductosPedidoController($scope, $http, $log, restProxy, CTE_REST,
-			$mdDialog,$state) {
+		$mdDialog, $state) {
 		$log.debug('ListaProductosPedidoController');
-		$log.debug('Pedido' , $scope.pedido);
-		
+		$log.debug('Pedido', $scope.pedido);
+
 		var vm = this;
-		
+
 		vm.pedido = $scope.pedido;
 		vm.variantes = $scope.pedido.productos;
 
@@ -24,10 +24,10 @@
 					'Quitar producto del Changuito').textContent(
 					'Cuanto producto queres quitar ?').placeholder(
 					'Cantidad entre 1 y ' + variante.cantidad)
-			// .ariaLabel('Dog name')
-			// .initialValue('Buddy')
-			// .targetEvent(ev)
-			.ok('Quitar').cancel('Cancelar');
+				// .ariaLabel('Dog name')
+				// .initialValue('Buddy')
+				// .targetEvent(ev)
+				.ok('Quitar').cancel('Cancelar');
 
 			$mdDialog.show(confirm).then(function(result) {
 				$log.debug("quitar OK", result);
@@ -46,11 +46,11 @@
 
 		}
 
-		 
+
 
 		// /////////// REST
- 
-		var callQuitarProducto = function(variante,cantidad) {
+
+		var callQuitarProducto = function(variante, cantidad) {
 			$log.log('callQuitarProducto: ');
 
 			function doOk(response) {
@@ -58,10 +58,10 @@
 
 			}
 			// / TODO : USUARIO HARDOC
-			restProxy.post(CTE_REST.productosQuitar(77, vm.pedido.id,cantidad), variante,
-					doOk);
+			restProxy.post(CTE_REST.productosQuitar(77, vm.pedido.id, cantidad), variante,
+				doOk);
 
 		}
- 
+
 	}
 })();

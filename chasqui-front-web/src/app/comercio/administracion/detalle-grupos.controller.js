@@ -105,7 +105,7 @@
 		// TODO : cambiar la lista de contactos por un boton que pida en ingreso
 		// al grupo por mail.
 		function loadContacts() {
- 
+
 			function doOk(response) {
 				// vm.productos=response.data;
 				vm.allContacts = response.data;

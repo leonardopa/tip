@@ -1,43 +1,28 @@
-  
 <div class="wrapper">
-		
-			
-			<span class="md-headline">Mis pedidos en progreso </span>
-				<md-button ng-click="listaPedidoCtrl.crearPedidoIndividual()">
-				<i style="font-size: 48px;" class="material-icons">add_circle_outline</i>				 
-					<md-tooltip md-direction="left">
-						Nuevo pedido
-					</md-tooltip>
-				</md-button>		
-			 
-				
-				<div 
-					class="sample" layout="column" ng-cloak>
-					<md-content>
-					<md-content class="md-padding"> 
-						<md-tabs md-selected="listaPedidoCtrl.selectedIndex" 
-							 md-dynamic-height md-border-bottom>
-							<md-tab ng-repeat="tab in listaPedidoCtrl.tabs"
-								ng-disabled="tab.disabled" label="{{tab.nombre}}">
-				
-								 <md-content class="md-padding">
-									
-									 <div ng-include="'app/comercio/carrito/detalle-pedido.html'" 
-									 ng-init="pedido = tab"/>	
-									 						
-								 </md-content>
-						 
-							</md-tab> 						 
-						</md-tabs>
-						
-					</md-content>
-					</md-content>
-				</div>
-				
-		 
+	<span class="md-headline">Mis pedidos en progreso </span>
+	<md-button ng-click="listaPedidoCtrl.crearPedidoIndividual()">
+		<i style="font-size: 48px;" class="material-icons">add_circle_outline</i>
+		<md-tooltip md-direction="left">
+			Nuevo pedido
+		</md-tooltip>
+	</md-button>
 
-		</div>
-		
-		
+	<div class="sample" layout="column" ng-cloak>
+		<md-content>
+			<md-content class="md-padding">
+				<md-tabs md-selected="listaPedidoCtrl.selectedIndex" md-dynamic-height md-border-bottom>
+					<md-tab ng-repeat="tab in listaPedidoCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.nombre}}">
 
-</div>	
+						<md-content class="md-padding">
+
+							<div ng-include="'app/comercio/carrito/detalle-pedido.html'" ng-init="pedido = tab" />
+
+						</md-content>
+
+					</md-tab>
+				</md-tabs>
+
+			</md-content>
+		</md-content>
+	</div>
+</div>

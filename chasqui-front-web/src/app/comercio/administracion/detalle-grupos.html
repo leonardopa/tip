@@ -1,45 +1,33 @@
- 
-<div ng-controller="DetalleGruposController as detalleGrupoCtrl"
-	layout="column" ng-cloak>
-
+ <div ng-controller="DetalleGruposController as detalleGrupoCtrl" layout="column" ng-cloak>
 	<div ng-if="detalleGrupoCtrl.isAdmin">
-				<md-subheader  class="md-accent">
-				<h3>Tu eres el administrador del Grupo !</h3>					
-				</md-subheader>
-		
+		<md-subheader class="md-accent">
+			<h3>Tu eres el administrador del Grupo !</h3>
+		</md-subheader>
 	</div>
 
-	
-				
-	<md-list class="fixedRows"> 
- 
-	<div layout="row">
-		 
-		<div ng-if="detalleGrupoCtrl.contacts.length !=0" > 
-			<div flex>
-				<md-subheader class="md-accent">Miembros del grupo</md-subheader>
-				
-				<md-list-item class="md-2-line contact-item selected"
-					ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
-				<img ng-src="{{contact.urlImagen}}" class="md-avatar"
-					alt="{{contact.nombre}}" />
-				<div class="md-list-item-text compact">			 
-					<h3>{{contact.nombre}}</h3>
-					<p>{{contact.email}}</p>
+	<md-list class="fixedRows">
+		<div layout="row">
+			<div ng-if="detalleGrupoCtrl.contacts.length !=0">
+				<div flex>
+					<md-subheader class="md-accent">Miembros del grupo</md-subheader>
+
+					<md-list-item class="md-2-line contact-item selected" ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
+						<img ng-src="{{contact.urlImagen}}" class="md-avatar" alt="{{contact.nombre}}" />
+						<div class="md-list-item-text compact">
+							<h3>{{contact.nombre}}</h3>
+							<p>{{contact.email}}</p>
+						</div>
+
+						<div ng-if="detalleGrupoCtrl.isAdmin">
+							<md-button ng-click="detalleGrupoCtrl.quitarMiembro(contact)">
+								<ng-md-icon icon="remove_circle_outline" style="fill: red"></ng-md-icon>
+								<md-tooltip md-direction="right">
+									Quitar del Grupo </md-tooltip>
+							</md-button>
+						</div>
 				</div>
-				
-				<div ng-if="detalleGrupoCtrl.isAdmin">
-					<md-button ng-click="detalleGrupoCtrl.quitarMiembro(contact)">
-			            <ng-md-icon icon="remove_circle_outline" style="fill: red"  ></ng-md-icon> 
-			             <md-tooltip md-direction="right"> 
-				              Quitar del Grupo </md-tooltip> 
-			         </md-button>
-				</div>
-			
 			</div>
 		</div>
-		 
-	</div>
 	</md-list>
 </div>
 
