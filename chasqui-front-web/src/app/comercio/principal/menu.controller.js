@@ -38,6 +38,7 @@
 			vm.callNotificaciones = true;
 			vm.icon = 'notifications';
 			vm.fill = 'red';
+			ToastCommons.mensaje("Tenes una nueva notificacion")
 		}
 
 		$scope.$on('resetHeader', function(event, msg) {
