@@ -181,13 +181,10 @@
 	 }
 	  
 	  function callMedallas() {
-			$log.debug("---callMedallas de producto ---");
-
-			function doOk(response) {				 
-				vm.medallas = response.data;
-			}
-		
-			restProxy.get(CTE_REST.medallasProducto,{},doOk);		    
+		  productorService.getMedallas()
+	        .then(function(response) {vm.medallas = response.data;})
+	        .catch(function(err) {ToastCommons.mensaje(err.data.error);});
+	    
 	 }
 
 //Agregado 16/12

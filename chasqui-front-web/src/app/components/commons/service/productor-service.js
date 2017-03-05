@@ -33,5 +33,21 @@
 	        return promise;
 	    }
 		
+		vm.getMedallas = function () {
+			$log.debug(" service getMedallas ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.get(CTE_REST.medallasProducto,{},	        
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
+			
+		
 	}// function
 })();// anonimo
