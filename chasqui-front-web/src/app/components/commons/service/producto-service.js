@@ -33,6 +33,20 @@
 	        return promise;
 	    }
 		
+		vm.getProductosDestacados = function () {
+			$log.debug(" service getProductosDestacados ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.get(CTE_REST.productosDestacadosByVendedor(CTE_REST.idVendedor), {},         
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
 		
 	}// function
 })();// anonimo
