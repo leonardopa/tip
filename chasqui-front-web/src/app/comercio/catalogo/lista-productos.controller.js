@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $http, $log, restProxy, CTE_REST,
-			$mdDialog, $state, StateCommons, ToastCommons) {
+			$mdDialog, $state, StateCommons, ToastCommons,dialogCommons) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -55,16 +55,8 @@
 
 		vm.agregar = function(variante) {
 			$log.debug("agregar ", variante)
-			var confirm = $mdDialog.prompt().title(
-					'Agregar producto del Changuito').textContent(
-					'Cuantos productos queres Agregar ?').placeholder(
-					'Cantidad')
-			// .ariaLabel('Dog name')
-			// .initialValue(1)
-			// .targetEvent(ev)
-			.ok('Agregar').cancel('Cancelar');
 
-			$mdDialog.show(confirm).then(function(result) {
+			function doOk(result) {
 				$log.debug("Agregar al carro cantidad ", result);
 
 				if (!isNaN(result) && result > 0) {
@@ -74,10 +66,15 @@
 					$log.debug("Entrada invalida", result);
 				}
 
-			}, function() {
+			}
 
-				$log.debug("Cancelo Agregar");
-			});
+			function doNoOk() {
+				$log.debug("Cancelo Agregar")
+			}
+
+			dialogCommons.prompt('Agregar al changuito',
+					'Cuantos mecesitas ?', 'Cantidad', 'Agregar', 'Cancelar',
+					doOk, doNoOk);
 		}
 
 		vm.verMedalla = function(medalla) {
