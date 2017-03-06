@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $log, restProxy, CTE_REST,
-			$state, StateCommons, ToastCommons, dialogCommons) {
+			$state, StateCommons, ToastCommons, dialogCommons,productoService) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -24,28 +24,23 @@
 		vm.variantes = callProductosSinFiltro();
 
 		function callProductosSinFiltro() {
-			$log.debug("---hola favio ---");
-
 			var json = {
 				pagina : 1,
 				cantItems : 10,
 				precio : 'Down',
-				idVendedor : StateCommons.vendedor().id,
-
+				idVendedor : StateCommons.vendedor().id
 			}
-
 			function doOk(response) {
-
 				vm.variantes = response.data.productos;
-
 				vm.maxSize = 10;
 				vm.bigTotalItems = response.data.itemsTotal;
 				vm.bigCurrentPage = response.data.paginaActual;
 
 			}
-
-			restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons
-					.vendedor().id), json, doOk);
+			productoService.getProductosSinFiltro(json).then(doOk)
+				.catch(function(err) {
+					ToastCommons.mensaje(err.data.error);
+			});
 		}
 
 		vm.pageChanged = function() {
@@ -101,14 +96,13 @@
 		var callAgregarAlCarro = function(variante, cantidad) {
 			$log.debug('callAgregarAlCarro para pedido: ',
 					StateCommons.ls.pedidoSeleccionado);
-
-			function doOk(response) {
+		 
+			var doOk = function (response) {
 				$log.log('Agregar producto Response ', response);
 				ToastCommons.mensaje("Producto agregado !");
 			}
 
-			function doNoOk(response) {
-
+			var doNoOk = function (response) {
 				$log.log('FALLO AGREGAR PRODUCTO ', response);
 				ToastCommons.mensaje(response.data.error);
 			}
@@ -118,8 +112,8 @@
 			params.idVariante = variante.idVariante;
 			params.cantidad = cantidad;
 
-			restProxy.put(CTE_REST.agregarPedidoIndividual, params, doOk,
-					doNoOk);
+			productoService.agregarPedidoIndividual(params).then(params)
+				.catch(doNoOk);
 
 		}
 
