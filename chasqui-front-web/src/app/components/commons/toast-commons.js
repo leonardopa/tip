@@ -5,10 +5,9 @@
 	function ToastCommons($mdToast) {
 		var vm = this;
 
-		
 		vm.mensaje = function(mensaje) {
-			
-			$mdToast.show($mdToast.simple().textContent(mensaje)
+
+			$mdToast.show($mdToast.simple().textContent(mensaje).position('bottom center')  // or 'bottom center
 					.hideDelay(5000));
 		}
 

@@ -1,8 +1,7 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<header>
-	<div ng-controller="MenuController as menuCtrl">
+<header class="nav-header nav-header-sticky">
+	<div ng-controller="MenuController as menuCtrl"  >
 
-		<md-toolbar>
+		<md-toolbar class="md-medium-tall">
 			<div class="md-toolbar-tools">
 				<a ui-sref="principal"> <img ng-src="{{menuCtrl.urlBase}}{{menuCtrl.vendedor.imagen}}"> </a>
 				<span flex></span>

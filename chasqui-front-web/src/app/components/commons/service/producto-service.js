@@ -46,7 +46,34 @@
 		 	 
 	        return promise;
 	    }
-		
-		
+
+		vm.getProductosSinFiltro = function (params) {
+			$log.debug(" service getProductosSinFiltro ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id), params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+
+		vm.agregarPedidoIndividual = function (params) {
+			$log.debug(" service agregarPedidoIndividual ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.put(CTE_REST.agregarPedidoIndividual, params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+			
 	}// function
 })();// anonimo
