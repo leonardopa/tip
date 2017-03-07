@@ -5,8 +5,8 @@
 		ListaProductosDestacadosController);
 
 	/** @ngInject */
-	function ListaProductosDestacadosController($http, $log, $scope, restProxy,
-		CTE_REST, $timeout, StateCommons, productoService) {
+	function ListaProductosDestacadosController($log, $scope,
+		CTE_REST, productoService) {
 		$log.log('ListaProductosDestacadosController ..... ');
 
 		var vm = this;
