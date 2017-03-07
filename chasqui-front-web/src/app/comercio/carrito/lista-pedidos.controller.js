@@ -5,7 +5,7 @@
 		ListaPedidosController);
 
 	/** @ngInject */
-	function ListaPedidosController($log, $state, $scope, restProxy, CTE_REST, StateCommons 
+	function ListaPedidosController($log, $state, $scope, StateCommons 
 			,productoService,ToastCommons) {
 		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSeleccionado);
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
