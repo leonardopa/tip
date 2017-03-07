@@ -9,7 +9,7 @@
 	 * Pagina donde se muestran los productos. Contiene los filtros y el
 	 * contexto de compra , pero NO la lista de productos la cual se incluye
 	 */
-	function CatalogoController($scope, $log, restProxy, CTE_REST, $timeout, StateCommons, productorService,
+	function CatalogoController($scope, $log,CTE_REST, $timeout, StateCommons, productorService,
 		productoService, ToastCommons) {
 		$log.debug("CatalogoController ..... ", StateCommons.ls.pedidoSeleccionado);
 		StateCommons.ls.itemMenuSelect = 'catalogo';
@@ -139,6 +139,8 @@
 
 		// TODO: cache , para no sobrecargar con grupos
 		// TODO: implemantar cuante este funcionando grupos
+		// TODO : aca se trae los grupos y sus pedidos, pero deberia ser solo 
+		// nombre del grupo y ID-Pedido 
 		function callLoadGrupos() {
 			$log.debug("--- find  pedidos abiertos ---");
 
@@ -162,9 +164,12 @@
 					vm.carrito = vm.pedidos[0];
 				}
 			}
-
-			restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id), {}, doOk);
-
+			
+			productoService.productosPedidoByUser()
+				.then(doOk)
+				.catch(function(err) {
+					ToastCommons.mensaje(err.data.error);
+				});
 		}
 
 

@@ -130,6 +130,24 @@
 		 	 
 	        return promise;
 	    }
+		
+		/////////////////////////////////////
+		//////////// M O C K S 
+		
+		vm.productosPedidoByUser = function (params) {
+			$log.debug(" service agregarPedidoIndividual ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id), {},      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+	 
 			
 	}// function
 })();// anonimo
