@@ -175,5 +175,9 @@ md-toast.md-center {
 }
 
 md-dialog {
-  position:absolute;
+  position: fixed;
+    top: 40%;
+    left: 50%;
+    z-index: 1050;
+    margin-left: -10%;
 }
