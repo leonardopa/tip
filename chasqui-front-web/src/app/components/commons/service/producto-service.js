@@ -132,7 +132,7 @@
 	    }
 		
 		vm.crearPedidoIndividual = function (params) {
-			$log.debug(" service agregarPedidoIndividual ");
+			$log.debug(" service crearPedidoIndividual ");
 
 	        var defered = $q.defer();
 	        var promise = defered.promise;
@@ -144,8 +144,21 @@
 		 	 
 	        return promise;
 	    }
- 	
-		/////////////////////////////////////
+		
+		vm.verPedidoIndividual = function (params) {
+			$log.debug(" service verPedidoIndividual ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.getPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id),{},      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+	 	/////////////////////////////////////
 		//////////// M O C K S 
 		
 		vm.productosPedidoByUser = function (params) {

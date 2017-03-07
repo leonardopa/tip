@@ -123,9 +123,11 @@
 					ToastCommons.mensaje("algo fallo !");
 				}
 			}
-
-			restProxy.getPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {}, doOk, doNoOk);
-
+			
+			productoService.verPedidoIndividual()
+				.then(doOk)
+				.catch(doNoOk);
+			
 		}
 
 		callLoadPedidos()
