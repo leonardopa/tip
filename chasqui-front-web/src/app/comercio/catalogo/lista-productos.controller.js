@@ -112,7 +112,7 @@
 			params.idVariante = variante.idVariante;
 			params.cantidad = cantidad;
 
-			productoService.agregarPedidoIndividual(params).then(params)
+			productoService.agregarPedidoIndividual(params).then(doOk)
 				.catch(doNoOk);
 
 		}
