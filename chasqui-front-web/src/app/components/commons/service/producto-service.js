@@ -131,6 +131,20 @@
 	        return promise;
 	    }
 		
+		vm.crearPedidoIndividual = function (params) {
+			$log.debug(" service agregarPedidoIndividual ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.post(CTE_REST.crearPedidoIndividual, params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+ 	
 		/////////////////////////////////////
 		//////////// M O C K S 
 		

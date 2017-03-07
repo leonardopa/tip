@@ -5,7 +5,8 @@
 		ListaPedidosController);
 
 	/** @ngInject */
-	function ListaPedidosController($log, $state, $scope, restProxy, CTE_REST, StateCommons, ToastCommons) {
+	function ListaPedidosController($log, $state, $scope, restProxy, CTE_REST, StateCommons 
+			,productoService,ToastCommons) {
 		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSeleccionado);
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
 		var vm = this;
@@ -40,9 +41,6 @@
 		vm.crearPedidoIndividual = function() {
 			$log.debug("--- Crear pedido individual----");
 			callCrearPedidoIndividual();
-
-			//callLoadPedidos()
-			callPedidoIndividual()
 		}
 
 		///////////////// REST
@@ -76,8 +74,11 @@
 				vm.selectedIndex = indexSelect;
 			}
 
-
-			restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id), {}, doOk);
+			//TODO ESTO ES MOCK
+			productoService.productosPedidoByUser().then(doOk)
+				.catch(function(err) {
+					ToastCommons.mensaje(err.data.error);
+				});
 
 		}
 
@@ -92,14 +93,16 @@
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ", response.data);
 
-				ToastCommons.mensaje("Pedido creado ! deberia fallar si ya tiene uno");
+				ToastCommons.mensaje("Pedido creado !");
+				callPedidoIndividual();
 			}
 			var json = {};
 
 			json.idVendedor = StateCommons.vendedor().id;
 
-
-			restProxy.post(CTE_REST.crearPedidoIndividual, json, doOk, doNoOk);
+			productoService.crearPedidoIndividual(json)
+				.then(doOk)
+				.catch(doNoOk);
 		}
 
 		function callPedidoIndividual() {
@@ -125,7 +128,7 @@
 
 		}
 
-		//callLoadPedidos()
+		callLoadPedidos()
 		callPedidoIndividual()
 	}
 
