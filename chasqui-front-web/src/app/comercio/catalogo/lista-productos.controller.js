@@ -7,7 +7,7 @@
 	/**
 	 * @ngInject Lista de productos.
 	 */
-	function ListaProductosController($scope, $log, restProxy, CTE_REST,
+	function ListaProductosController($scope, $log, CTE_REST,
 			$state, StateCommons, ToastCommons, dialogCommons,productoService) {
 
 		$log.debug('ListaProductosController',
