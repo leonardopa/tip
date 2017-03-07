@@ -130,7 +130,7 @@
 				vm.bigCurrentPage = response.data.paginaActual;
 			}
 
-			var json = {
+			var params = {
 				pagina : 1,
 				cantItems : 5,
 				precio : 'Down'
@@ -139,30 +139,32 @@
 
 			switch (filtro.tipo) {
 			case 'CATEGORIA':
-				json.idCategoria = filtro.valor;
-				restProxy.postPublic(CTE_REST.productosByCategoria, json, doOk);
+				params.idCategoria = filtro.valor;				
+				productoService.getProductosByCategoria(params).then(doOk)
 				break;
 			case 'PRODUCTOR':
-				json.idProductor = filtro.valor;
-				restProxy.postPublic(CTE_REST.productosByProductor, json, doOk);
+				params.idProductor = filtro.valor;				
+				productoService.getProductosByProductor(params).then(doOk)
 				break;
 			case 'MEDALLA':
-				json.idMedalla = filtro.valor;
-				json.idVendedor = StateCommons.vendedor().id;
-				restProxy.postPublic(CTE_REST.productosByMedalla, json, doOk);
+				params.idMedalla = filtro.valor;
+				params.idVendedor = StateCommons.vendedor().id;
+				productoService.getProductosByMedalla(params).then(doOk)
 				break;
 			case 'QUERY':
-				json.query = filtro.valor;
-				json.idVendedor = StateCommons.vendedor().id;
-				restProxy.postPublic(CTE_REST.productosByQuery, json, doOk);
+				params.query = filtro.valor;
+				params.idVendedor = StateCommons.vendedor().id;
+				productoService.getProductosByQuery(params).then(doOk)				
 				break;
 			default:
-				json.query = filtro.valor;
+				params.query = filtro.valor;
 				$log.log('mostrar productos sin filtrar');
-				json.idVendedor = StateCommons.vendedor().id;
-				restProxy.postPublic(CTE_REST.productosSinFiltro, json, doOk);
+				params.idVendedor = StateCommons.vendedor().id;				
+				productoService.getProductosSinFiltro(params).then(doOk)
 				break;
 			}
+			
+			
 		}
 
 		// findProductos();

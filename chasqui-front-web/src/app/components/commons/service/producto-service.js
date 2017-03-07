@@ -60,7 +60,63 @@
 		 	 
 	        return promise;
 	    }
+		
+		vm.getProductosByCategoria = function (params) {
+			$log.debug(" service getProductosSinFiltro ");
 
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.postPublic(CTE_REST.productosByCategoria, params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+				
+		vm.getProductosByProductor = function (params) {
+			$log.debug(" service getProductosSinFiltro ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.postPublic(CTE_REST.productosByProductor, params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
+		vm.getProductosByMedalla = function (params) {
+			$log.debug(" service getProductosSinFiltro ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.postPublic(CTE_REST.productosByMedalla, params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
+		vm.getProductosByQuery = function (params) {
+			$log.debug(" service getProductosSinFiltro ");
+
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.postPublic(CTE_REST.productosByQuery, params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
 		vm.agregarPedidoIndividual = function (params) {
 			$log.debug(" service agregarPedidoIndividual ");
 
