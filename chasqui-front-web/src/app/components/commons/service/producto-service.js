@@ -3,8 +3,8 @@
 
 	angular.module('chasqui').service('productoService', productoService);
 	function productoService(restProxy, $q,$log,CTE_REST,StateCommons ) {
-		var vm = this;
-	
+		var vm = this;		
+		
 		vm.getCategorias = function () {
 			$log.debug(" service getCategorias ");
 
@@ -39,7 +39,7 @@
 	        var defered = $q.defer();
 	        var promise = defered.promise;
 	        
-	        restProxy.get(CTE_REST.productosDestacadosByVendedor(CTE_REST.idVendedor), {},         
+	        restProxy.get(CTE_REST.productosDestacadosByVendedor(CTE_REST.StateCommons.vendedor().id), {},         
 	        		function doOk(response) {defered.resolve(response);},
 					function doNoOk(response) {defered.reject(response);}
 	        );
@@ -147,17 +147,98 @@
 		
 		vm.verPedidoIndividual = function (params) {
 			$log.debug(" service verPedidoIndividual ");
-
+			
+	        return doGetPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {});
+	    }
+		
+		vm.quitarProductoIndividual = function (params) {
+			$log.debug(" service quitarProductoIndividual ");
+			
+	        return doPut(CTE_REST.quitarProductoIndividual, params);
+	    }
+		/*
+		vm.verPedidoIndividual = function (params) {
+			$log.debug(" service verPedidoIndividual ");
+			
+	        return doGetPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {});
+	    }
+		*/
+	//	restProxy.put(CTE_REST.quitarProductoIndividual, params, doOk, doNoOk);
+		//////////////////////////////////////
+		///////////// PRIVADOS
+		
+		function doGet(url,params) {		
 	        var defered = $q.defer();
 	        var promise = defered.promise;
 	        
-	        restProxy.getPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id),{},      
+	        restProxy.get(url,params,      
 	        		function doOk(response) {defered.resolve(response);},
 					function doNoOk(response) {defered.reject(response);}
 	        );
 		 	 
 	        return promise;
 	    }
+		
+		 function doGetPrivate(url,params) {		
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.getPrivate(url,params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
+		 function doPost(url,params) {		
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.post(url,params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
+		 function doPostPublic(url,params) {		
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.postPublic(url,params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		
+		 function doPut(url,params) {		
+	        var defered = $q.defer();
+	        var promise = defered.promise;
+	        
+	        restProxy.put(url,params,      
+	        		function doOk(response) {defered.resolve(response);},
+					function doNoOk(response) {defered.reject(response);}
+	        );
+		 	 
+	        return promise;
+	    }
+		 
+		 function doDelete(url,params) {		
+		        var defered = $q.defer();
+		        var promise = defered.promise;
+		        
+		        restProxy.delete(url,params,      
+		        		function doOk(response) {defered.resolve(response);},
+						function doNoOk(response) {defered.reject(response);}
+		        );
+			 	 
+		        return promise;
+		    }
+		
 	 	/////////////////////////////////////
 		//////////// M O C K S 
 		

@@ -6,7 +6,7 @@
 
 	/** @ngInject */
 	function DetallePedidoController($http, $log, $state, $scope, restProxy, CTE_REST, ToastCommons, $mdDialog
-			,dialogCommons) {
+			,dialogCommons,productoService) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -27,8 +27,8 @@
 
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ", response.data);
-
 				ToastCommons.mensaje("Eliminado !");
+				$state.reload();
 			}
 
 			function doNoOk(response) {
@@ -41,7 +41,7 @@
 			params.idVariante = vm.productoEliminar.idVariante;
 			params.cantidad = vm.productoEliminar.cantidad;
 
-			restProxy.put(CTE_REST.quitarProductoIndividual, params, doOk, doNoOk);
+			productoService.quitarProductoIndividual(params).then(doOk).catch(doNoOk);
 		}
 		
 		vm.eliminar = function(item) {
