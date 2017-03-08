@@ -163,12 +163,12 @@
 	        return doDelete(CTE_REST.cancelarPedidoIndividual(id), {});
 	    }
 		
-		vm.confirmarPedidoIndividual = function (params) {
-			$log.debug(" service confirmarPedidoIndividual ");
+		vm.verDirecciones = function (params) {
+			$log.debug(" service verDirecciones ");
 			
-	        return doPost(CTE_REST.confirmarPedidoIndividual, params);
+	        return doGetPrivate(CTE_REST.verDirecciones, {});
 	    }
-		//restProxy.post(CTE_REST.confirmarPedidoIndividual, params, doOk, doNoOk);
+		//restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
 		//////////////////////////////////////
 		///////////// PRIVADOS
 		

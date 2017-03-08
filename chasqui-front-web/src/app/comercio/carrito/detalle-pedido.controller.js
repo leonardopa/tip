@@ -114,9 +114,8 @@
 				vm.direcciones = response.data;
 				// abre pop
 			}
-
-			restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
-
+			
+			productoService.verDirecciones().then(doOk);
 		}
 
 		function popUpElegirDireccion(ev) {
