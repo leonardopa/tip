@@ -162,8 +162,13 @@
 			
 	        return doDelete(CTE_REST.cancelarPedidoIndividual(id), {});
 	    }
-		 
-		//restProxy.delete(CTE_REST.cancelarPedidoIndividual(vm.pedido.id), {}, doOk, doNoOk);
+		
+		vm.confirmarPedidoIndividual = function (params) {
+			$log.debug(" service confirmarPedidoIndividual ");
+			
+	        return doPost(CTE_REST.confirmarPedidoIndividual, params);
+	    }
+		//restProxy.post(CTE_REST.confirmarPedidoIndividual, params, doOk, doNoOk);
 		//////////////////////////////////////
 		///////////// PRIVADOS
 		

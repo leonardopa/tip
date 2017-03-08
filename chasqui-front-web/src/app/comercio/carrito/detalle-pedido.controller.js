@@ -79,8 +79,8 @@
 
 			function doOk(response) {
 				$log.debug("--- confirmar pedido response ", response.data);
-
 				ToastCommons.mensaje("Pedido Confirmado !");
+				$state.reload();
 			}
 
 			function doNoOk(response) {
@@ -92,9 +92,8 @@
 			var params = {};
 			params.idPedido = vm.pedido.id;
 			params.idDireccion = vm.direccionSelected.idDireccion;
-
-			restProxy.post(CTE_REST.confirmarPedidoIndividual, params, doOk, doNoOk);
-
+			
+			productoService.confirmarPedidoIndividual(params).then(doOk).catch(doNoOk);
 		}
 
 		vm.confirmarDomicilio = function() {
