@@ -6,7 +6,7 @@
 
 	/** @ngInject */
 	function DetallePedidoController($http, $log, $state, $scope, restProxy, CTE_REST, ToastCommons, $mdDialog
-			,dialogCommons,productoService) {
+			,dialogCommons,productoService,perfilService) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -115,7 +115,7 @@
 				// abre pop
 			}
 			
-			productoService.verDirecciones().then(doOk);
+			perfilService.verDirecciones().then(doOk);
 		}
 
 		function popUpElegirDireccion(ev) {

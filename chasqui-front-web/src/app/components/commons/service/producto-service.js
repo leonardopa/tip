@@ -2,247 +2,79 @@
 	'use strict';
 
 	angular.module('chasqui').service('productoService', productoService);
-	function productoService(restProxy, $q,$log,CTE_REST,StateCommons ) {
+	function productoService(restProxy, $q,$log,CTE_REST,StateCommons,promiseService ) {
 		var vm = this;		
 		
 		vm.getCategorias = function () {
-			$log.debug(" service getCategorias ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+			$log.debug(" service getCategorias ");	        
+	        return promiseService.doGet(CTE_REST.categorias(StateCommons.vendedor().id),{});
 	    }
 		
 		vm.getMedallas = function () {
 			$log.debug(" service getMedallas ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.get(CTE_REST.medallasProducto,{},	        
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+	        return promiseService.doGet(CTE_REST.medallasProducto,{});
 	    }
 		
 		vm.getProductosDestacados = function () {
 			$log.debug(" service getProductosDestacados ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.get(CTE_REST.productosDestacadosByVendedor(CTE_REST.StateCommons.vendedor().id), {},         
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+	        return promiseService.doGet(CTE_REST.productosDestacadosByVendedor(StateCommons.vendedor().id), {});
 	    }
 
 		vm.getProductosSinFiltro = function (params) {
 			$log.debug(" service getProductosSinFiltro ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id), params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+	        return  promiseService.doPostPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id), params);
 	    }
 		
 		vm.getProductosByCategoria = function (params) {
 			$log.debug(" service getProductosSinFiltro ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.postPublic(CTE_REST.productosByCategoria, params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+	        return  promiseService.doPostPublic(CTE_REST.productosByCategoria, params);
 	    }
 				
 		vm.getProductosByProductor = function (params) {
 			$log.debug(" service getProductosSinFiltro ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.postPublic(CTE_REST.productosByProductor, params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+			return  promiseService.doPostPublic(CTE_REST.productosByProductor, params);
 	    }
 		
 		vm.getProductosByMedalla = function (params) {
 			$log.debug(" service getProductosSinFiltro ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.postPublic(CTE_REST.productosByMedalla, params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+	        return promiseService.doPostPublic(CTE_REST.productosByMedalla, params);		 	 	       
 	    }
 		
 		vm.getProductosByQuery = function (params) {
-			$log.debug(" service getProductosSinFiltro ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.postPublic(CTE_REST.productosByQuery, params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+			$log.debug(" service getProductosSinFiltro ");       
+	        return promiseService.doPostPublic(CTE_REST.productosByQuery, params);
 	    }
 		
 		vm.agregarPedidoIndividual = function (params) {
 			$log.debug(" service agregarPedidoIndividual ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.put(CTE_REST.agregarPedidoIndividual, params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+	        return promiseService.doPut(CTE_REST.agregarPedidoIndividual, params);
 	    }
 		
 		vm.crearPedidoIndividual = function (params) {
 			$log.debug(" service crearPedidoIndividual ");
-
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.post(CTE_REST.crearPedidoIndividual, params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
+	        return promiseService.doPost(CTE_REST.crearPedidoIndividual, params);
 	    }
 		
 		vm.verPedidoIndividual = function (params) {
-			$log.debug(" service verPedidoIndividual ");
-			
-	        return doGetPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {});
+			$log.debug(" service verPedidoIndividual ");			
+	        return promiseService.doGetPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {});
 	    }
 		
 		vm.quitarProductoIndividual = function (params) {
-			$log.debug(" service quitarProductoIndividual ");
-			
-	        return doPut(CTE_REST.quitarProductoIndividual, params);
+			$log.debug(" service quitarProductoIndividual ");			
+	        return promiseService.doPut(CTE_REST.quitarProductoIndividual, params);
 	    }
 	 
 		vm.cancelarPedidoIndividual = function (id) {
-			$log.debug(" service cancelarPedidoIndividual ");
-			
-	        return doDelete(CTE_REST.cancelarPedidoIndividual(id), {});
+			$log.debug(" service cancelarPedidoIndividual ");			
+	        return promiseService.doDelete(CTE_REST.cancelarPedidoIndividual(id), {});
 	    }
 		
 		vm.verDirecciones = function (params) {
-			$log.debug(" service verDirecciones ");
-			
-	        return doGetPrivate(CTE_REST.verDirecciones, {});
+			$log.debug(" service verDirecciones ");			
+	        return promiseService.doGetPrivate(CTE_REST.verDirecciones, {});
 	    }
-		//restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
-		//////////////////////////////////////
-		///////////// PRIVADOS
-		
-		function doGet(url,params) {		
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.get(url,params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
-	    }
-		
-		 function doGetPrivate(url,params) {		
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.getPrivate(url,params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
-	    }
-		
-		 function doPost(url,params) {		
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.post(url,params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
-	    }
-		
-		 function doPostPublic(url,params) {		
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.postPublic(url,params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
-	    }
-		
-		 function doPut(url,params) {		
-	        var defered = $q.defer();
-	        var promise = defered.promise;
-	        
-	        restProxy.put(url,params,      
-	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
-	        );
-		 	 
-	        return promise;
-	    }
-		 
-		 function doDelete(url,params) {		
-		        var defered = $q.defer();
-		        var promise = defered.promise;
-		        
-		        restProxy.delete(url,params,      
-		        		function doOk(response) {defered.resolve(response);},
-						function doNoOk(response) {defered.reject(response);}
-		        );
-			 	 
-		        return promise;
-		    }
+	
 		
 	 	/////////////////////////////////////
 		//////////// M O C K S 
