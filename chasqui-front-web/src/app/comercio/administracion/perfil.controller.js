@@ -5,7 +5,7 @@
 
 	/** @ngInject . Pantalla de perfil de usuario */
 	function PerfilController($log, $scope, CTE_REST, restProxy,
-			StateCommons, $mdDialog, ToastCommons, $stateParams) {
+			StateCommons, $mdDialog, ToastCommons, $stateParams,perfilService) {
 		$log.debug("Init PerfilController ....");
 
 		StateCommons.ls.itemMenuSelect = 'perfil';
@@ -43,8 +43,8 @@
 				$log.debug('call direcciones response ', response);
 				vm.direcciones = response.data;
 			}
-
-			restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
+			
+			perfilService.verDirecciones(CTE_REST.verDirecciones, {}).then(doOk);			
 
 		}
 
