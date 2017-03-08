@@ -156,14 +156,14 @@
 			
 	        return doPut(CTE_REST.quitarProductoIndividual, params);
 	    }
-		/*
-		vm.verPedidoIndividual = function (params) {
-			$log.debug(" service verPedidoIndividual ");
+	 
+		vm.cancelarPedidoIndividual = function (id) {
+			$log.debug(" service cancelarPedidoIndividual ");
 			
-	        return doGetPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {});
+	        return doDelete(CTE_REST.cancelarPedidoIndividual(id), {});
 	    }
-		*/
-	//	restProxy.put(CTE_REST.quitarProductoIndividual, params, doOk, doNoOk);
+		 
+		//restProxy.delete(CTE_REST.cancelarPedidoIndividual(vm.pedido.id), {}, doOk, doNoOk);
 		//////////////////////////////////////
 		///////////// PRIVADOS
 		

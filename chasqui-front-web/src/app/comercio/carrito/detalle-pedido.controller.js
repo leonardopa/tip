@@ -61,8 +61,8 @@
 
 			function doOk(response) {
 				$log.debug("--- cancelar pedido response ", response.data);
-
 				ToastCommons.mensaje("Cancelado !");
+				$state.reload();
 			}
 
 			function doNoOk(response) {
@@ -71,7 +71,7 @@
 				ToastCommons.mensaje("error");
 			}
 
-			restProxy.delete(CTE_REST.cancelarPedidoIndividual(vm.pedido.id), {}, doOk, doNoOk);
+			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk).catch(doNoOk);
 		}
 
 		function callConfirmar() {
