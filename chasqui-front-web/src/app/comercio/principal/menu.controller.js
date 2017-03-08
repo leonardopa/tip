@@ -120,12 +120,15 @@
 
 
 		function initRefreshNotification() {
-			if (vm.isLogued) {
+			if (vm.isLogued && !StateCommons.ls.notificacionActiva) {
 				$log.debug("interval notifications");
+				
 				llamadoPeriodico = $interval(function() {
 					$log.debug("call notificaciones nuevas?");
 					callNotificacionesNoLeidas();
 				}, CTE_REST.INTERVALO_NOTIFICACION_MIN);
+				
+				StateCommons.ls.notificacionActiva=true;
 			}
 		}
 

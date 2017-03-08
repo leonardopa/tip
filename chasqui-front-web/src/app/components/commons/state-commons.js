@@ -17,6 +17,8 @@
     
     vm.ls.pedidoSeleccionado; 
 
+    vm.ls.notificacionActiva=false;
+    
     vm.vendedor = function(){
     	//TODO: pedir al servicio, hacer singleton con el LS
     	var config={};
