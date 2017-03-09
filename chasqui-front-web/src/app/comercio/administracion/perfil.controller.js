@@ -4,7 +4,7 @@
 	angular.module('chasqui').controller('PerfilController', PerfilController);
 
 	/** @ngInject . Pantalla de perfil de usuario */
-	function PerfilController($log, $scope, CTE_REST, restProxy,
+	function PerfilController($log, $scope,
 			StateCommons, $mdDialog, ToastCommons, $stateParams,perfilService) {
 		$log.debug("Init PerfilController ....");
 
@@ -44,7 +44,7 @@
 				vm.direcciones = response.data;
 			}
 			
-			perfilService.verDirecciones(CTE_REST.verDirecciones, {}).then(doOk);			
+			perfilService.verDirecciones().then(doOk);			
 
 		}
 
@@ -81,11 +81,8 @@
 			function doNoOk(response) {
 				ToastCommons.mensaje(response.data);
 			}
-
-			var params = {};
-			params.password = vm.pass1;
-			restProxy.put(CTE_REST.editUsuario, params, doOk);
-
+		
+			perfilService.cambiarPass( vm.pass1).then(doOk);
 		}
 
 		vm.marcarLeido = function(notificacion) {
@@ -93,9 +90,8 @@
 				ToastCommons.mensaje('Leido');
 				notificacion.estado = 'Leido';
 			}
-
-			restProxy.post(CTE_REST.notificacionesLeidas(notificacion.id), {},
-					doOk);
+			perfilService.marcarComoLeido(notificacion.id).then(doOk);
+			
 		}
 
 		function callNotificacionesNoLeidas() {
@@ -104,8 +100,7 @@
 				$log.debug('callObtenerNotificaciones', response);
 				vm.notificacionesNoLeidas = response.data;
 			}
-
-			restProxy.get(CTE_REST.notificacionesNoLeidas, {}, doOk);
+			perfilService.notificacionesNoLeidas().then(doOk);						
 		}
 
 		function callNotificaciones() {
@@ -115,8 +110,8 @@
 				vm.notificaciones = vm.notificaciones.concat(response.data);
 				;
 			}
-
-			restProxy.get(CTE_REST.notificacionesLeidas(vm.count), {}, doOk);
+			perfilService.notificacionesLeidas(vm.count).then(doOk);		
+			
 		}
 
 		vm.verMas = function() {
