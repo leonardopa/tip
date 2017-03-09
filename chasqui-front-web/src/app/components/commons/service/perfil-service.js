@@ -36,6 +36,22 @@
 			params.password =pass;
 	        return promiseService.doPut(CTE_REST.editUsuario,params);
 	    }
+		
+		///////////////////////////////
+		/////////// MOCKS 
+		vm.gruposByusuario = function () {
+			$log.debug(" service gruposByusuario ");
+	        return promiseService.doGet(CTE_REST.gruposByusuario(StateCommons.vendedor().id),{});
+	    }
+		
+		vm.salirGrupo = function (id, idSelect) {
+			$log.debug(" service salirGrupo ");
+	        return promiseService.doGet(CTE_REST.salirGrupo(id,idSelect),{});
+	    }
+		
+	//	restProxy.get(CTE_REST.salirGrupo(), {}, doOk);
+	//	restProxy.get(CTE_REST.gruposByusuario(StateCommons.vendedor().id),
+		
 	 
 	}// function
 })();// anonimo

@@ -5,8 +5,8 @@
 			ListaGruposController);
 
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
-	function ListaGruposController($log, $scope, $state, restProxy, CTE_REST,
-			StateCommons, dialogCommons, ToastCommons) {
+	function ListaGruposController($log, $scope, $state,
+			StateCommons, dialogCommons, ToastCommons,perfilService) {
 
 		$log.debug("controler ListaGruposController");
 		StateCommons.ls.itemMenuSelect = 'lista-grupos';
@@ -90,9 +90,8 @@
 			}
 
 			// TODO: hacer el ID de usuario dinamico
-			restProxy.get(CTE_REST.gruposByusuario(StateCommons.vendedor().id),
-					{}, doOk);
-
+			//TODO: MOCK !!
+			perfilService.gruposByusuario().then(doOk)
 		}
 
 		function callSalirGrupo() {
@@ -106,7 +105,9 @@
 			}
 			ToastCommons.mensaje("MOCK");
 			// TODO: hacer el ID de usuario dinamico //
-			restProxy.get(CTE_REST.salirGrupo(4, vm.selected.id), {}, doOk);
+			//TODO: MOCK !!
+			perfilService.salirGrupo(4, vm.selected.id).then(doOk)
+			
 		}
 
 		// // INIT
