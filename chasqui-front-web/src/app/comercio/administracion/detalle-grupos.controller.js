@@ -9,7 +9,7 @@
 	 *           grupo
 	 */
 	function DetalleGruposController($http, $log, $scope, $q, $timeout,
-			restProxy, CTE_REST, ToastCommons,dialogCommons ) {
+			restProxy, CTE_REST, ToastCommons,dialogCommons,perfilService ) {
 		$log.debug("controler DetalleGruposController inti grupo ",
 				$scope.idGrupo)
 		var vm = this;
@@ -83,10 +83,8 @@
 
 				vm.canAddIntegrante = !vm.canAddIntegrante;
 			}
-			;
-
-			restProxy.post(CTE_REST.integrantesGrupo(vm.idGrupo), vm.contacts,
-					doOk);
+			
+			perfilService.integrantesGrupo(vm.idGrupo,vm.contacts).then(doOk)
 
 		}
 

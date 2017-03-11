@@ -6,7 +6,7 @@
 
 	/** @ngInject . Pantalla de registro de usuario. Contempla los datos personales y 
 	 *  el domicilio en dos pasos pero en la misma pantalla*/
-	function RegistroController($http, $log,$state,$scope) {
+	function RegistroController($log,$state,$scope) {
 		$log.debug("Init RegistroController ....",$state.params.domicilio);
 		
 		///	$state.go("form-usuario",{ "domicilio" : vm.domicilio});

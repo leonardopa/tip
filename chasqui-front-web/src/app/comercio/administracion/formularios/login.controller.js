@@ -4,8 +4,8 @@
 	angular.module('chasqui').controller('LogInController', LogInController);
 
 	/** @ngInject */
-	function LogInController($log, CTE_REST, restProxy, $state, StateCommons,
-			ToastCommons, $rootScope, dialogCommons) {
+	function LogInController($log, $state, StateCommons,
+			ToastCommons, $rootScope, dialogCommons,perfilService) {
 
 		$log.debug('controler log in ..... ');
 
@@ -47,11 +47,10 @@
 
 			function doNoOk(response, headers) {
 				ToastCommons
-						.mensaje("Fallo la autenticación, <br>verifique los datos");
+						.mensaje("Fallo la autenticación, verifique los datos");
 			}
-
-			restProxy.postPublic(CTE_REST.login, vm.user, doOk, doNoOk);
-
+			
+			perfilService.login(vm.user).then(doOk).catch(doNoOk)
 		}
 
 		vm.callReset = function(email) {
@@ -65,8 +64,7 @@
 				ToastCommons.mensaje("Error , el mail es correcto ?");
 			}
 
-			restProxy.get(CTE_REST.resetPass(email), {}, doOk, doNoOk);
-
+			perfilService.resetPass(email).then(doOk).catch(doNoOk)
 		}
 
 	}

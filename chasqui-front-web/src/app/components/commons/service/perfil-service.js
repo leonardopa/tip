@@ -37,6 +37,18 @@
 	        return promiseService.doPut(CTE_REST.editUsuario,params);
 	    }
 		
+		vm.login = function (user) {
+			$log.debug(" service login ");
+	        return promiseService.doPostPublic(CTE_REST.login,user);
+	    }
+		
+		vm.resetPass = function (user) {
+			$log.debug(" service resetPass ");
+	        return promiseService.resetPass(email, {});
+	    }
+	//	restProxy.get(CTE_REST.resetPass(email), {}, doOk, doNoOk);
+	//	restProxy.postPublic(CTE_REST.login, vm.user, doOk, doNoOk);
+
 		///////////////////////////////
 		/////////// MOCKS 
 		vm.gruposByusuario = function () {
@@ -49,6 +61,12 @@
 	        return promiseService.doGet(CTE_REST.salirGrupo(id,idSelect),{});
 	    }
 		
+		vm.integrantesGrupo = function (id, contacts) {
+			$log.debug(" service integrantesGrupo ");
+	        return promiseService.doGet(CTE_REST.integrantesGrupo(id),contacts);
+	    }
+		
+	//	restProxy.post(CTE_REST.integrantesGrupo(vm.idGrupo), vm.contacts,		doOk);
 	//	restProxy.get(CTE_REST.salirGrupo(), {}, doOk);
 	//	restProxy.get(CTE_REST.gruposByusuario(StateCommons.vendedor().id),
 		
