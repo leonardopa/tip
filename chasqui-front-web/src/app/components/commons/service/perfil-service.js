@@ -44,11 +44,24 @@
 		
 		vm.resetPass = function (user) {
 			$log.debug(" service resetPass ");
-	        return promiseService.resetPass(email, {});
+	        return promiseService.doGet(CTE_REST.resetPass(email), {});
 	    }
-	//	restProxy.get(CTE_REST.resetPass(email), {}, doOk, doNoOk);
-	//	restProxy.postPublic(CTE_REST.login, vm.user, doOk, doNoOk);
+		
+		vm.verUsuario = function () {
+			$log.debug(" service verUsuario ");
+	        return promiseService.doGetPrivate(CTE_REST.verUsuario, {});
+	    }
+		
+		vm.editUsuario = function (user) {
+			$log.debug(" service editUsuario ");
+	        return promiseService.doPut(CTE_REST.editUsuario, user);
+	    }
 
+		vm.singUp = function (user) {
+			$log.debug(" service singUp ");
+	        return promiseService.doPostPublic(CTE_REST.singUp, user);
+	    }
+	 
 		///////////////////////////////
 		/////////// MOCKS 
 		vm.gruposByusuario = function () {
