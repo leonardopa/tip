@@ -31,9 +31,8 @@
 				}
 
 			}
-			;
+		 
 			// TODO : SACAR USUARIO HARCODEADO
-		//	restProxy.post(CTE_REST.gruposByusuario(1), vm.grupo, doOk);
 			perfilService.gruposByusuarioSave(1,vm.grupo).then(doOk)
 		}
 	}

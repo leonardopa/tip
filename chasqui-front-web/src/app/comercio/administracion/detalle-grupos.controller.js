@@ -8,8 +8,8 @@
 	 * @ngInject Contenido del tab de grupo. Recibe por parametro el id del
 	 *           grupo
 	 */
-	function DetalleGruposController($http, $log, $scope, $q, $timeout,
-			restProxy, CTE_REST, ToastCommons,dialogCommons,perfilService ) {
+	function DetalleGruposController($log, $scope, $timeout,
+			ToastCommons, dialogCommons, perfilService) {
 		$log.debug("controler DetalleGruposController inti grupo ",
 				$scope.idGrupo)
 		var vm = this;
@@ -83,8 +83,8 @@
 
 				vm.canAddIntegrante = !vm.canAddIntegrante;
 			}
-			
-			perfilService.integrantesGrupo(vm.idGrupo,vm.contacts).then(doOk)
+
+			perfilService.integrantesGrupo(vm.idGrupo, vm.contacts).then(doOk)
 
 		}
 
@@ -108,7 +108,7 @@
 				});
 			}
 
-			restProxy.get(CTE_REST.integrantesGrupo(vm.idGrupo), {}, doOk);
+			perfilService.integrantesGrupo(vm.idGrupo, {}).then(doOk)
 
 		}
 	}

@@ -5,7 +5,7 @@
 		DetallePedidoController);
 
 	/** @ngInject */
-	function DetallePedidoController($http, $log, $state, $scope, restProxy, CTE_REST, ToastCommons, $mdDialog
+	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog
 			,dialogCommons,productoService,perfilService) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 

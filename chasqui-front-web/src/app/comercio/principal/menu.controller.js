@@ -6,7 +6,8 @@
 		.controller('MenuController', MenuController);
 
 	/** @ngInject */
-	function MenuController($scope, $log, $state, StateCommons, CTE_REST, $interval, restProxy, ToastCommons) {
+	function MenuController($scope, $log, $state, StateCommons, CTE_REST, $interval, ToastCommons,
+			perfilService) {
 		$log.debug("MenuController ..... ");
 		$log.debug(StateCommons.ls.usuario);
 
@@ -149,7 +150,7 @@
 
 			}
 
-			restProxy.get(CTE_REST.notificacionesNoLeidas, {}, doOk);
+			perfilService.notificacionesNoLeidas().then(doOk);	
 		}
 
 
