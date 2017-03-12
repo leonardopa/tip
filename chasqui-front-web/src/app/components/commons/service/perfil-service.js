@@ -29,11 +29,7 @@
 			$log.debug(" service actualizarDireccion ");			
 	        return promiseService.doPut(CTE_REST.actualizarDireccion, domicilio);
 	    }
-		//restProxy.put(CTE_REST.actualizarDireccion,vm.domicilio,doOk);
-		//restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
-		//restProxy.delete(CTE_REST.eliminarDireccion(vm.domicilio.idDireccion),{},doOk);
-		//restProxy.put(CTE_REST.actualizarDireccion,vm.domicilioParam,doOk);
-		
+	
 		vm.notificacionesNoLeidas = function () {
 			$log.debug(" service notificacionesNoLeidas ");			
 	        return promiseService.doGetPrivate(CTE_REST.notificacionesNoLeidas, {});
@@ -113,12 +109,6 @@
 			$log.debug(" service direccionGrupo ");
 	        return promiseService.doPost(CTE_REST.direccionGrupo(id),direccion);
 	    }
-	
-	//	restProxy.post(CTE_REST.direccionGrupo(1),vm.domicilio,doOk);
-	//	restProxy.post(CTE_REST.gruposByusuario(1), vm.grupo, doOk);
-	//	restProxy.post(CTE_REST.integrantesGrupo(vm.idGrupo), vm.contacts,		doOk);
-	//	restProxy.get(CTE_REST.salirGrupo(), {}, doOk);
-	//	restProxy.get(CTE_REST.gruposByusuario(StateCommons.vendedor().id),
 		
 	 
 	}// function
