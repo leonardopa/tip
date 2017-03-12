@@ -9,7 +9,31 @@
 			$log.debug(" service verDirecciones ");			
 	        return promiseService.doGetPrivate(CTE_REST.verDirecciones, {});
 	    }
-	
+		
+		vm.actualizarDireccion = function (direccion) {
+			$log.debug(" service actualizarDireccion ");			
+	        return promiseService.doPut(CTE_REST.actualizarDireccion, direccion);
+	    }
+		
+		vm.eliminarDireccion = function (id) {
+			$log.debug(" service eliminarDireccion ");			
+	        return promiseService.doDelete(CTE_REST.eliminarDireccion(id), {});
+	    }
+		
+		vm.nuevaDireccion = function (domicilio) {
+			$log.debug(" service nuevaDireccion ");			
+	        return promiseService.doPost(CTE_REST.nuevaDireccion, domicilio);
+	    }
+		
+		vm.actualizarDireccion = function (domicilio) {
+			$log.debug(" service actualizarDireccion ");			
+	        return promiseService.doPut(CTE_REST.actualizarDireccion, domicilio);
+	    }
+		//restProxy.put(CTE_REST.actualizarDireccion,vm.domicilio,doOk);
+		//restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
+		//restProxy.delete(CTE_REST.eliminarDireccion(vm.domicilio.idDireccion),{},doOk);
+		//restProxy.put(CTE_REST.actualizarDireccion,vm.domicilioParam,doOk);
+		
 		vm.notificacionesNoLeidas = function () {
 			$log.debug(" service notificacionesNoLeidas ");			
 	        return promiseService.doGetPrivate(CTE_REST.notificacionesNoLeidas, {});
@@ -69,6 +93,12 @@
 	        return promiseService.doGet(CTE_REST.gruposByusuario(StateCommons.vendedor().id),{});
 	    }
 		
+		
+		vm.gruposByusuarioSave = function (id, contacts) {
+			$log.debug(" service gruposByusuario ");
+	        return promiseService.doPost(CTE_REST.gruposByusuario(id),contacts);
+	    }
+		
 		vm.salirGrupo = function (id, idSelect) {
 			$log.debug(" service salirGrupo ");
 	        return promiseService.doGet(CTE_REST.salirGrupo(id,idSelect),{});
@@ -79,6 +109,13 @@
 	        return promiseService.doGet(CTE_REST.integrantesGrupo(id),contacts);
 	    }
 		
+		vm.direccionGrupo = function (id, direccion) {
+			$log.debug(" service direccionGrupo ");
+	        return promiseService.doPost(CTE_REST.direccionGrupo(id),direccion);
+	    }
+	
+	//	restProxy.post(CTE_REST.direccionGrupo(1),vm.domicilio,doOk);
+	//	restProxy.post(CTE_REST.gruposByusuario(1), vm.grupo, doOk);
 	//	restProxy.post(CTE_REST.integrantesGrupo(vm.idGrupo), vm.contacts,		doOk);
 	//	restProxy.get(CTE_REST.salirGrupo(), {}, doOk);
 	//	restProxy.get(CTE_REST.gruposByusuario(StateCommons.vendedor().id),

@@ -7,7 +7,7 @@
 	/**
 	 * @ngInject Formulario para direccion
 	 */
-	function FormDireccionController( $log,$state,$scope,restProxy, CTE_REST,ToastCommons) {
+	function FormDireccionController( $log,$state,$scope,ToastCommons,perfilService) {
 		
 		$log.debug("FormDireccionController",$scope.direccionParam);
 		
@@ -51,7 +51,8 @@
 
 			vm.domicilioParam.predeterminada=true;
 			
-			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilioParam,doOk);
+			perfilService.actualizarDireccion(vm.domicilioParam).then(doOk);
+			
 		}
 		
 		vm.eliminar = function(){
@@ -64,8 +65,7 @@
 	    		loadDirecciones();    		
 			};
  
-			restProxy.delete(CTE_REST.eliminarDireccion(vm.domicilio.idDireccion),{},doOk);
-			
+			perfilService.eliminarDireccion(vm.domicilio.idDireccion).then(doOk);
 		}
 		
 		// ////////////////////
@@ -80,9 +80,11 @@
 	    		 
 	    		loadDirecciones();
 			};
+			
 			vm.domicilio.predeterminada =true; // TODO : si es el primero
 												// deberia ser TRUE si no no
-			restProxy.post(CTE_REST.nuevaDireccion,vm.domicilio,doOk);
+		
+			perfilService.nuevaDireccion(vm.domicilio).then(doOk);
 		}
 		
 		var callUpdateDireccion = function (){
@@ -97,7 +99,8 @@
 	    		
 			};
 			vm.domicilio.predeterminada =false;
-			restProxy.put(CTE_REST.actualizarDireccion,vm.domicilio,doOk);
+			perfilService.actualizarDireccion(vm.domicilio).then(doOk);
+		
 		}
 		
 		
@@ -113,7 +116,7 @@
 	    		$state.go("lista-grupos");
 			};
 			
-			restProxy.post(CTE_REST.direccionGrupo(1),vm.domicilio,doOk);
+			perfilService.direccionGrupo(1,vm.domicilio).then(doOk);			
 		}
 	}
 	
