@@ -16,10 +16,13 @@
 				<h5 style="font-family:Andale Mono; ">{{variante.nombreVariedad}}</h5>
 				<strong>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></strong>
 
-					<md-button style="background: #73584b" class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
+				<div layout=row  >
+
+					<md-button style="background: #73584b"  class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
 						<p style="font-family:Andale Mono; "> Agregar</p>
 						<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
 					</md-button>
+
 
 					<div ng-repeat="medalla in variante.medallasProducto">
 						<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
@@ -38,7 +41,7 @@
 							</md-tooltip>
 						</md-button>
 					</div>
-			
+				</div>
 			</md-grid-tile-footer>
 		</md-grid-tile>
 	</md-grid-list>
