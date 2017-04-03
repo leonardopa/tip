@@ -16,14 +16,8 @@
 				<h5 style="font-family:Andale Mono; ">{{variante.nombreVariedad}}</h5>
 				<strong>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></strong>
 
-				<div layout=row ng-controller="MenuController as menuCtrl">
-
-					<md-button style="background: #73584b" ng-show="menuCtrl.isLogued" class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
+					<md-button style="background: #73584b" class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
 						<p style="font-family:Andale Mono; "> Agregar</p>
-						<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
-					</md-button>
-
-					<md-button style="background: #73584b" ng-hide="menuCtrl.isLogued" class="md-raised md-primary" ng-click="menuCtrl.ir('login')">Comprar
 						<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
 					</md-button>
 
@@ -44,7 +38,7 @@
 							</md-tooltip>
 						</md-button>
 					</div>
-				</div>
+			
 			</md-grid-tile-footer>
 		</md-grid-tile>
 	</md-grid-list>
