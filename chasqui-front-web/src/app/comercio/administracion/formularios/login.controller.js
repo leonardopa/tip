@@ -45,12 +45,7 @@
 
 			}
 
-			function doNoOk(response, headers) {
-				ToastCommons
-						.mensaje("Fallo la autenticación, verifique los datos");
-			}
-			
-			perfilService.login(vm.user).then(doOk).catch(doNoOk)
+			perfilService.login(vm.user).then(doOk)
 		}
 
 		vm.callReset = function(email) {
@@ -59,12 +54,7 @@
 				ToastCommons.mensaje("Revisa tu correo !");
 			}
 
-			function doNoOk(response) {
-				$log.debug('response reset pass ', response);
-				ToastCommons.mensaje("Error , el mail es correcto ?");
-			}
-
-			perfilService.resetPass(email).then(doOk).catch(doNoOk)
+			perfilService.resetPass(email).then(doOk)
 		}
 
 	}

@@ -75,20 +75,12 @@
 			}
 
 			//TODO ESTO ES MOCK
-			productoService.productosPedidoByUser().then(doOk)
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
+			productoService.productosPedidoByUser().then(doOk);
 
 		}
 
 		function callCrearPedidoIndividual() {
-			function doNoOk(response) {
-				$log.debug("--- callPedidoIndividual  response", response.data.error);
-
-				ToastCommons.mensaje(response.data.error);
-
-			}
+			
 
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ", response.data);
@@ -100,9 +92,7 @@
 
 			json.idVendedor = StateCommons.vendedor().id;
 
-			productoService.crearPedidoIndividual(json)
-				.then(doOk)
-				.catch(doNoOk);
+			productoService.crearPedidoIndividual(json).then(doOk)
 		}
 
 		function callPedidoIndividual() {
@@ -113,20 +103,8 @@
 				vm.tabs.push(response.data);
 
 			}
-
-			function doNoOk(response) {
-				$log.debug("--- callPedidoIndividual ", response.data);
-
-				if (response.status == 404) {
-					ToastCommons.mensaje("Noy  hay pedidos !");
-				} else {
-					ToastCommons.mensaje("algo fallo !");
-				}
-			}
 			
-			productoService.verPedidoIndividual()
-				.then(doOk)
-				.catch(doNoOk);
+			productoService.verPedidoIndividual().then(doOk);
 			
 		}
 

@@ -2,79 +2,106 @@
 	'use strict';
 
 	angular.module('chasqui').service('promiseService', promiseService);
-	function promiseService($q,restProxy) {
+	function promiseService($q,restProxy,utilsService,$log,$state,ToastCommons) {
 		var vm = this;		
 
-		vm.doGet = function (url,params) {		
+		vm.doGet = function (url,params,noOkFuctionParam) {		
 	        var defered = $q.defer();
 	        var promise = defered.promise;
 	        
 	        restProxy.get(url,params,      
 	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
+	        		getNoOkFuction(noOkFuctionParam) 
 	        );
 		 	 
 	        return promise;
 	    }
 		
-		 vm.doGetPrivate = function (url,params) {		
+		 vm.doGetPrivate = function (url,params,noOkFuctionParam) {		
 	        var defered = $q.defer();
 	        var promise = defered.promise;
 	        
 	        restProxy.getPrivate(url,params,      
 	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
+	        		getNoOkFuction(noOkFuctionParam) 
 	        );
 		 	 
 	        return promise;
 	    }
 		
-		 vm.doPost = function (url,params) {		
+		 vm.doPost = function (url,params,noOkFuctionParam) {		
 	        var defered = $q.defer();
 	        var promise = defered.promise;
 	        
 	        restProxy.post(url,params,      
 	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
+	        		getNoOkFuction(noOkFuctionParam) 
 	        );
 		 	 
 	        return promise;
 	    }
 		
-		 vm.doPostPublic = function (url,params) {		
+		 vm.doPostPublic = function (url,params,noOkFuctionParam) {		
 	        var defered = $q.defer();
 	        var promise = defered.promise;
 	        
 	        restProxy.postPublic(url,params,      
 	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
+	        		getNoOkFuction(noOkFuctionParam) 
 	        );
 		 	 
 	        return promise;
 	    }
 		
-		 vm.doPut = function (url,params) {		
+		 vm.doPut = function (url,params,noOkFuctionParam) {		
 	        var defered = $q.defer();
 	        var promise = defered.promise;
 	        
 	        restProxy.put(url,params,      
 	        		function doOk(response) {defered.resolve(response);},
-					function doNoOk(response) {defered.reject(response);}
+	        		getNoOkFuction(noOkFuctionParam) 
 	        );
 		 	 
 	        return promise;
 	    }
 		 
-		 vm.doDelete= function (url,params) {		
+		 vm.doDelete= function (url,params,noOkFuctionParam) {		
 		        var defered = $q.defer();
 		        var promise = defered.promise;
 		        
 		        restProxy.delete(url,params,      
 		        		function doOk(response) {defered.resolve(response);},
-						function doNoOk(response) {defered.reject(response);}
+		        		getNoOkFuction(noOkFuctionParam) 
 		        );
 			 	 
 		        return promise;
+		 }
+		 
+		 
+		 var getNoOkFuction= function (noOkFuctionParam){		
+			 if (utilsService.isUndefinedOrNull(noOkFuctionParam)){
+				 return doNoOkDefault;
+			 }else{
+				 return noOkFuctionParam;
+			 }
+			 
+		 }
+		 
+		  /** En caso de no ser un respues exitosa va a la pantalla de error generica */
+		    var doNoOkDefault = function(response) {
+		      $log.error("error al llamar a un servicio", response);
+		      
+		      if (response.status==401){
+		    	  ToastCommons.mensaje("Por favor vuelva a loguarse");
+		    	  $state.go('login');
+		      }else if (response.status==406) 
+		    	  ToastCommons.mensaje("Parametros incorrectos");
+		      else{
+		    	  $state.go('error', {
+		    		  key: 'GENERIC_ERROR'
+		    	  });    	  
+		      }
+		      
 		    }
 			
 	}// function

@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $log, CTE_REST,
-			$state, StateCommons, ToastCommons, dialogCommons,productoService) {
+			$state, StateCommons, ToastCommons, dialogCommons,productoService,utilsService) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -38,37 +38,20 @@
 
 			}
 			productoService.getProductosSinFiltro(json).then(doOk)
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-			});
+			
 		}
 
 		vm.pageChanged = function() {
 			$log.log('Page changed to: ' + vm.bigCurrentPage);
 			findProductos(vm.bigCurrentPage, CANT_ITEMS);
 		};
-
+ 
 		vm.agregar = function(variante) {
-			$log.debug("agregar ", variante)
-
-			function doOk(result) {
-				$log.debug("Agregar al carro cantidad ", result);
-
-				if (!isNaN(result) && result > 0) {
-					$log.debug("Entrada valida", result);
-					callAgregarAlCarro(variante, result);
-				} else {
-					$log.debug("Entrada invalida", result);
-				}
-
+			if (StateCommons.isLogued()){
+				crearPedidoYagregarProducto(variante);
+			}else{
+				ToastCommons.mensaje("TODO not logued");
 			}
-
-			function doNoOk() {
-				$log.debug("Cancelo Agregar")
-			}
-
-			dialogCommons.prompt('Agregar al changuito', 'Cuantos mecesitas ?',
-					'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
 		}
 
 		vm.verMedalla = function(medalla) {
@@ -91,6 +74,63 @@
 			findProductos(1, 1, arg);
 		}
 
+		function crearPedidoYagregarProducto(variante){			
+
+			function setPedidoYagregarProducto(){
+				function doOkPedido(response){
+					$log.debug("setPedidoYagregarProducto", response);
+					StateCommons.ls.pedidoSeleccionado = response.data;					
+				}
+
+				productoService.verPedidoIndividual().then(doOkPedido);
+
+				agregarProductoDialog(variante)				
+			}
+
+			function doNoOK(response){			
+				if(utilsService.contieneCadena(response.data.error,CTE_REST.ERROR_YA_TIENE_PEDIDO)){
+					ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
+					setPedidoYagregarProducto();
+				}
+			}
+
+			function doOk(){
+				setPedidoYagregarProducto();
+			}
+
+			var json = {};
+			json.idVendedor = StateCommons.vendedor().id;
+			
+
+			//si falla es poque ya tiene un pedido abierto TODO mejorar
+			productoService.crearPedidoIndividual(json,doNoOK).then(doOk)
+		}
+
+		function agregarProductoDialog(variante){
+			$log.debug("agregarProductoDialog ", variante)
+
+			function doOk(result) {
+				$log.debug("Agregar al carro cantidad ", result);
+
+				if (!isNaN(result) && result > 0) {
+					$log.debug("Entrada valida", result);
+					callAgregarAlCarro(variante, result);
+				} else {
+					$log.debug("Entrada invalida", result);
+				}
+
+			}
+
+			function doNoOk() {
+				$log.debug("Cancelo Agregar")
+			}
+
+			dialogCommons.prompt('Agregar al changuito', 'Cuantos mecesitas ?',
+					'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
+		}
+
+		
+
 		// /////////// REST
 
 		var callAgregarAlCarro = function(variante, cantidad) {
@@ -102,18 +142,13 @@
 				ToastCommons.mensaje("Producto agregado !");
 			}
 
-			var doNoOk = function (response) {
-				$log.log('FALLO AGREGAR PRODUCTO ', response);
-				ToastCommons.mensaje(response.data.error);
-			}
-
+			
 			var params = {};
 			params.idPedido = StateCommons.ls.pedidoSeleccionado.id;
 			params.idVariante = variante.idVariante;
 			params.cantidad = cantidad;
 
 			productoService.agregarPedidoIndividual(params).then(doOk)
-				.catch(doNoOk);
 
 		}
 

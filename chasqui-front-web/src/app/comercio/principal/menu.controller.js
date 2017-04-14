@@ -23,7 +23,7 @@
 		function initHeader() {
 			vm.categorias = [];
 			vm.usuario = StateCommons.ls.usuario;
-			vm.isLogued = !angular.equals(StateCommons.ls.usuario, {});
+			vm.isLogued = StateCommons.isLogued();
 
 			initRefreshNotification();
 			resetNotificacion();
@@ -100,8 +100,8 @@
 		vm.logOut = function() {
 			$log.debug("Log Out ..... ");
 			StateCommons.ls.usuario = {};
-			StateCommons.ls.token = null;
-			StateCommons.ls.pedidoSeleccionado = null;
+			StateCommons.ls.token = undefined;
+			StateCommons.ls.pedidoSeleccionado = undefined;
 			StateCommons.ls.notificacionesSinLeer = '';
 
 			$interval.cancel(llamadoPeriodico);

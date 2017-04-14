@@ -44,7 +44,7 @@
 		   		vm.medallas = response.data;
 		   		
 		   	})
-		   	.catch(function(err) {ToastCommons.mensaje(err.data.error);});		    
+		   	    
 	  }
 	   
 	   // ///////////////

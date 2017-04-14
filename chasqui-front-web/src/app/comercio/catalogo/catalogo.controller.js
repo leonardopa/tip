@@ -165,11 +165,7 @@
 				}
 			}
 			
-			productoService.productosPedidoByUser()
-				.then(doOk)
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
+			productoService.productosPedidoByUser().then(doOk)
 		}
 
 
@@ -179,9 +175,6 @@
 					vm.categorias = response.data;
 					vm.categoriaSelect = vm.categorias[0];
 				})
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
 
 		}
 
@@ -190,9 +183,6 @@
 				.then(function(response) {
 					vm.productores = response.data;
 				})
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
 		}
 
 		function callMedallas() {
@@ -200,10 +190,6 @@
 				.then(function(response) {
 					vm.medallas = response.data;
 				})
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
-
 		}
 
 

@@ -2,7 +2,7 @@
   'use strict';
   
   angular.module('chasqui').service('StateCommons', StateCommons);
-  function StateCommons($localStorage,$log) {
+  function StateCommons($localStorage,$log,utilsService) {
 	$log.debug('INIT localstorage',$localStorage);
 	$log.debug('localstorage',$localStorage.token);
 	$log.debug('localstorage',$localStorage.usuario);
@@ -17,8 +17,14 @@
     
     vm.ls.pedidoSeleccionado; 
 
-    vm.ls.notificacionActiva=false;
+    vm.ls.notificacionActiva;
     
+    vm.isLogued= function(){
+    	console.log("isLogued")
+      console.log(vm.ls.usuario)
+      return !(utilsService.isUndefinedOrNull(vm.ls.usuario) || utilsService.isUndefinedOrNull(vm.ls.usuario.token));
+    }
+
     vm.vendedor = function(){
     	//TODO: pedir al servicio, hacer singleton con el LS
     	var config={};

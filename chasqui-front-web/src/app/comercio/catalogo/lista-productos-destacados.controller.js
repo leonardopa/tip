@@ -18,9 +18,6 @@
 				.then(function(response) {
 					vm.variantes = response.data.productos;
 				})
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
 		}
 
 		findProductos();

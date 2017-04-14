@@ -51,7 +51,6 @@
 			
 			productorService.getProductores()
 		        .then(function(data) {vm.emprendedores=data.data;})
-		        .catch(function(err) {ToastCommons.mensaje(err.data.error);});
 	   }
 	   
 	   

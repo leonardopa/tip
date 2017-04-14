@@ -79,12 +79,12 @@
 		// ///////// llamadas
 
 		vm.callVerUsuario = function() {
-
+		
 			function doOk(response) {
 				$log.debug("callVerUsuario", response);
 				vm.user = response.data;
 			}
-			perfilService.verUsuario().then(doOk)
+			perfilService.verUsuario().then(doOk);
 
 		}
 
@@ -122,20 +122,9 @@
 						user : response.data
 					});
 
-				}
-				function doNoOk(response) {
-					$log.debug("error al guardar usuario", response.data);
-
-					if (response.status == 409) {
-						ToastCommons.mensaje(response.data.error);
-					} else {
-						ToastCommons
-								.mensaje('error inesperado, intente nuevamente');
-					}
-
-				}
+				}				
 				
-				perfilService.singUp(vm.user).then(doOk).catch(doNoOk)
+				perfilService.singUp(vm.user).then(doOk)
 				
 			} else {
 				$log.error("las contrasenas no coinciden");

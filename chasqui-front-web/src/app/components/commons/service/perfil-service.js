@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('chasqui').service('perfilService', perfilService);
-	function perfilService($log,CTE_REST,StateCommons,promiseService ) {
+	function perfilService($log,CTE_REST,StateCommons,promiseService ,ToastCommons ) {
 		var vm = this;		
 
 		vm.verDirecciones = function () {
@@ -59,16 +59,29 @@
 		
 		vm.login = function (user) {
 			$log.debug(" service login ");
-	        return promiseService.doPostPublic(CTE_REST.login,user);
+
+			function doNoOk(response, headers) {
+				ToastCommons
+						.mensaje("Fallo la autenticación, verifique los datos");
+			}
+
+	        return promiseService.doPostPublic(CTE_REST.login,user,doNoOk);
 	    }
 		
 		vm.resetPass = function (user) {
 			$log.debug(" service resetPass ");
-	        return promiseService.doGet(CTE_REST.resetPass(email), {});
+
+			function doNoOk(response) {
+				$log.debug('response reset pass ', response);
+				ToastCommons.mensaje("Error , el mail es correcto ?");
+			}
+
+	        return promiseService.doGet(CTE_REST.resetPass(email), {},doNoOk);
 	    }
 		
 		vm.verUsuario = function () {
 			$log.debug(" service verUsuario ");
+			 
 	        return promiseService.doGetPrivate(CTE_REST.verUsuario, {});
 	    }
 		
@@ -79,7 +92,20 @@
 
 		vm.singUp = function (user) {
 			$log.debug(" service singUp ");
-	        return promiseService.doPostPublic(CTE_REST.singUp, user);
+
+			function doNoOk(response) {
+					$log.debug("error al guardar usuario", response.data);
+
+					if (response.status == 409) {
+						ToastCommons.mensaje(response.data.error);
+					} else {
+						ToastCommons
+								.mensaje('error inesperado, intente nuevamente');
+					}
+
+				}
+
+	        return promiseService.doPostPublic(CTE_REST.singUp, user,doNoOk);
 	    }
 	 
 		///////////////////////////////

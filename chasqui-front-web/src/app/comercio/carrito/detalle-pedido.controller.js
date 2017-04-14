@@ -31,17 +31,12 @@
 				$state.reload();
 			}
 
-			function doNoOk(response) {
-				$log.debug("--- eliminar pedido response ", response.data);
-
-				ToastCommons.mensaje("error");
-			}
 			var params = {};
 			params.idPedido = vm.pedido.id;
 			params.idVariante = vm.productoEliminar.idVariante;
 			params.cantidad = vm.productoEliminar.cantidad;
 
-			productoService.quitarProductoIndividual(params).then(doOk).catch(doNoOk);
+			productoService.quitarProductoIndividual(params).then(doOk)
 		}
 		
 		vm.eliminar = function(item) {
@@ -65,13 +60,7 @@
 				$state.reload();
 			}
 
-			function doNoOk(response) {
-				$log.debug("--- cancelar pedido response ", response.data);
-
-				ToastCommons.mensaje("error");
-			}
-
-			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk).catch(doNoOk);
+			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk);
 		}
 
 		function callConfirmar() {
@@ -83,17 +72,11 @@
 				$state.reload();
 			}
 
-			function doNoOk(response) {
-				$log.debug("--- confirmar pedido response ", response.data);
-
-				ToastCommons.mensaje("error");
-			}
-
 			var params = {};
 			params.idPedido = vm.pedido.id;
 			params.idDireccion = vm.direccionSelected.idDireccion;
 			
-			productoService.confirmarPedidoIndividual(params).then(doOk).catch(doNoOk);
+			productoService.confirmarPedidoIndividual(params).then(doOk)
 		}
 
 		vm.confirmarDomicilio = function() {

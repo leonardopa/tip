@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('chasqui').service('productoService', productoService);
-	function productoService(restProxy, $q,$log,CTE_REST,StateCommons,promiseService ) {
+	function productoService(restProxy, $q,$log,CTE_REST,StateCommons,promiseService,ToastCommons) {
 		var vm = this;		
 		
 		vm.getCategorias = function () {
@@ -50,14 +50,26 @@
 	        return promiseService.doPut(CTE_REST.agregarPedidoIndividual, params);
 	    }
 		
-		vm.crearPedidoIndividual = function (params) {
+		vm.crearPedidoIndividual = function (params,doNoOK) {
 			$log.debug(" service crearPedidoIndividual ");
-	        return promiseService.doPost(CTE_REST.crearPedidoIndividual, params);
+		
+	        return promiseService.doPost(CTE_REST.crearPedidoIndividual, params,doNoOK);
 	    }
 		
 		vm.verPedidoIndividual = function (params) {
-			$log.debug(" service verPedidoIndividual ");			
-	        return promiseService.doGetPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {});
+			$log.debug(" service verPedidoIndividual ");		
+
+			function doNoOk(response) {
+				$log.debug("--- callPedidoIndividual ", response.data);
+
+				if (response.status == 404) {
+					ToastCommons.mensaje("Noy  hay pedidos !");
+				} else {
+					ToastCommons.mensaje("algo fallo !");
+				}
+			}
+
+	        return promiseService.doGetPrivate(CTE_REST.verPedidoIndividual(StateCommons.vendedor().id), {},doNoOk);
 	    }
 		
 		vm.quitarProductoIndividual = function (params) {
