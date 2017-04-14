@@ -22,8 +22,6 @@
     vm.ls.notificacionActiva;
     
     vm.isLogued= function(){
-    	console.log("isLogued")
-      console.log(vm.ls.usuario)
       return !(utilsService.isUndefinedOrNull(vm.ls.usuario) || utilsService.isUndefinedOrNull(vm.ls.usuario.token));
     }
 
