@@ -5,7 +5,7 @@
 
 	/** @ngInject */
 	function LogInController($log, $state, StateCommons,
-			ToastCommons, $rootScope, dialogCommons,perfilService) {
+			ToastCommons, $rootScope, dialogCommons,perfilService,utilsService) {
 
 		$log.debug('controler log in ..... ');
 
@@ -41,8 +41,12 @@
 
 				ToastCommons.mensaje("Bienvenido !");
 				$rootScope.$broadcast('resetHeader', "");
-				$state.go("principal");
 
+				if (utilsService.isUndefinedOrNull(StateCommons.ls.varianteSeleccionada)){
+					$state.go("principal");	
+				}else{
+					$state.go("catalogo");						
+				}
 			}
 
 			perfilService.login(vm.user).then(doOk)

@@ -17,6 +17,8 @@
     
     vm.ls.pedidoSeleccionado; 
 
+    vm.ls.varianteSeleccionada; 
+
     vm.ls.notificacionActiva;
     
     vm.isLogued= function(){

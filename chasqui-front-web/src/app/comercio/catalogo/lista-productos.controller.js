@@ -42,7 +42,7 @@
 		}
 
 		vm.pageChanged = function() {
-			$log.log('Page changed to: ' + vm.bigCurrentPage);
+			$log.debug('Page changed to: ' , vm.bigCurrentPage);
 			findProductos(vm.bigCurrentPage, CANT_ITEMS);
 		};
  
@@ -51,6 +51,9 @@
 				crearPedidoYagregarProducto(variante);
 			}else{
 				ToastCommons.mensaje("TODO not logued");
+				$log.log('not logued" ' , variante);
+				StateCommons.ls.varianteSeleccionada=variante;
+				$state.go('login');
 			}
 		}
 
@@ -203,7 +206,11 @@
 		}
 
 		// findProductos();
-
+		if (! utilsService.isUndefinedOrNull(StateCommons.ls.varianteSeleccionada)){
+			$log.debug("tiene una variante seleccionda" ,StateCommons.ls.varianteSeleccionada )
+			vm.agregar(StateCommons.ls.varianteSeleccionada)
+			StateCommons.ls.varianteSeleccionada=undefined;
+		}
 	}
 
 })();
