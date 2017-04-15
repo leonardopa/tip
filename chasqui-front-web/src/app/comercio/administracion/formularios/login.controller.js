@@ -43,7 +43,7 @@
 				$rootScope.$broadcast('resetHeader', "");
 
 				if (utilsService.isUndefinedOrNull(StateCommons.ls.varianteSeleccionada)){
-					if (utilsService.isUndefinedOrNull($stateParams.toPage)){						
+					if (utilsService.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage==''){						
 						$state.go("principal");			
 					}else{
 						$state.go($stateParams.toPage);	
