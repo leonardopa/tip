@@ -20,32 +20,24 @@
 		vm.otherCtrl = $scope.$parent.$parent.catalogoCtrl.isFiltro1;
 
 		vm.urlBase = CTE_REST.url_base;
-		vm.variantes = [];
-		vm.variantes = callProductosSinFiltro();
+		vm.variantes = [];		
+		vm.ultimoFiltro = {};
+		////////////// PAGINACION
+		vm.currentPage = 0;
+		vm.paging = {
+		        total: 0,
+		        current: 1,
+		        onPageChanged: loadPages,
+		    };
 
-		function callProductosSinFiltro() {
-			var json = {
-				pagina : 1,
-				cantItems : 10,
-				precio : 'Down',
-				idVendedor : StateCommons.vendedor().id
-			}
-			function doOk(response) {
-				vm.variantes = response.data.productos;
-				vm.maxSize = 10;
-				vm.bigTotalItems = response.data.itemsTotal;
-				vm.bigCurrentPage = response.data.paginaActual;
-
-			}
-			productoService.getProductosSinFiltro(json).then(doOk)
-			
+		function loadPages() {
+			console.log('Current page is : ' + vm.paging.current);
+		        // TODO : Load current page Data here
+		        vm.currentPage = vm.paging.current;
+		        findProductos(vm.paging.current,10,vm.ultimoFiltro)
 		}
+		//////////////////////////////
 
-		vm.pageChanged = function() {
-			$log.debug('Page changed to: ' , vm.bigCurrentPage);
-			findProductos(vm.bigCurrentPage, CANT_ITEMS);
-		};
- 
 		vm.agregar = function(variante) {
 			if (StateCommons.isLogued()){
 				crearPedidoYagregarProducto(variante);
@@ -74,7 +66,7 @@
 		});
 
 		function actualizar(arg) {
-			findProductos(1, 1, arg);
+			findProductos(vm.paging.current,10, arg);
 		}
 
 		function crearPedidoYagregarProducto(variante){			
@@ -154,7 +146,25 @@
 			productoService.agregarPedidoIndividual(params).then(doOk)
 
 		}
+/*
+		function callProductosSinFiltro() {
+			var json = {
+				pagina : 1,
+				cantItems : 10,
+				precio : 'Down',
+				idVendedor : StateCommons.vendedor().id
+			}
+			function doOk(response) {
+				vm.variantes = response.data.productos;
+				
+				vm.paging.total = response.data.itemsTotal;
+				vm.paging.current = response.data.paginaActual;
 
+			}
+			productoService.getProductosSinFiltro(json).then(doOk)
+			
+		}
+*/
 		var findProductos = function(pagina, items, filtro) {
 			$log.log('findProductos: ' + pagina + " " + items + " "
 					+ filtro.tipo + " " + filtro.valor);
@@ -162,15 +172,14 @@
 			function doOk(response) {
 				$log.log('findProductos Response ', response);
 				vm.variantes = response.data.productos;
-
-				vm.maxSize = 10;
-				vm.bigTotalItems = response.data.itemsTotal;
-				vm.bigCurrentPage = response.data.paginaActual;
+				
+				vm.paging.total = Math.ceil(response.data.total / 10) ;
+				vm.paging.current = response.data.pagina;
 			}
 
 			var params = {
-				pagina : 1,
-				cantItems : 5,
+				pagina : pagina,
+				cantItems : items,
 				precio : 'Down'
 			// ,idVendedor =CTE_REST.vendedor //TODO: que se dinamico
 			}
@@ -211,6 +220,8 @@
 			vm.agregar(StateCommons.ls.varianteSeleccionada)
 			StateCommons.ls.varianteSeleccionada=undefined;
 		}
+
+		//vm.variantes = findProductos(1,10,{});
 	}
 
 })();

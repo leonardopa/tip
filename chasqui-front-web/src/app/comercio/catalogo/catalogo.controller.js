@@ -15,6 +15,7 @@
 		StateCommons.ls.itemMenuSelect = 'catalogo';
 		var vm = this;
 
+		
 
 		// ///////// Para el selector de Grupos de compra
 		vm.topDirections = ['left', 'up'];
