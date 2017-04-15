@@ -19,7 +19,7 @@
 
     vm.ls.varianteSeleccionada; 
 
-    vm.ls.notificacionActiva;
+    vm.ls.notificacionActiva=false;
     
     vm.isLogued= function(){
       return !(utilsService.isUndefinedOrNull(vm.ls.usuario) || utilsService.isUndefinedOrNull(vm.ls.usuario.token));

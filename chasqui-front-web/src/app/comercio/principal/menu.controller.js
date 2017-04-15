@@ -121,7 +121,7 @@
 
 
 		function initRefreshNotification() {
-			if (vm.isLogued && !StateCommons.ls.notificacionActiva) {
+			if (StateCommons.isLogued() && !StateCommons.ls.notificacionActiva) {
 				$log.debug("interval notifications");
 				
 				llamadoPeriodico = $interval(function() {
