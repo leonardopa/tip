@@ -46,7 +46,7 @@
 		</md-grid-tile>
 	</md-grid-list>
 
-	<section layout="column"  layout-align="end center">
+	<section layout="column"  layout-align="end center" ng-show="listaProductoCtr.variantes.length > 0">
 	 	<cl-paging flex cl-pages="listaProductoCtr.paging.total" cl-steps="6" 
 		 cl-page-changed="listaProductoCtr.paging.onPageChanged()" 
 		 cl-align="start start" cl-current-page="listaProductoCtr.paging.current"></cl-paging>

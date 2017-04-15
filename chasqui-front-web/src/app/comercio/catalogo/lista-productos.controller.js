@@ -34,7 +34,7 @@
 			console.log('Current page is : ' + vm.paging.current);
 		        // TODO : Load current page Data here
 		        vm.currentPage = vm.paging.current;
-		        findProductos(vm.paging.current,10,vm.ultimoFiltro)
+		        findProductos(vm.paging.current,CANT_ITEMS,vm.ultimoFiltro)
 		}
 		//////////////////////////////
 
@@ -62,11 +62,14 @@
 
 		$scope.$on('filterEvent', function(event, arg) {
 			$log.debug("filterEvent", arg);
+			vm.ultimoFiltro=arg;
+			vm.paging.total=0;
+			vm.paging.current=1;
 			actualizar(arg);
 		});
 
 		function actualizar(arg) {
-			findProductos(vm.paging.current,10, arg);
+			findProductos(vm.paging.current,CANT_ITEMS, arg);
 		}
 
 		function crearPedidoYagregarProducto(variante){			
@@ -173,7 +176,7 @@
 				$log.log('findProductos Response ', response);
 				vm.variantes = response.data.productos;
 				
-				vm.paging.total = Math.ceil(response.data.total / 10) ;
+				vm.paging.total = Math.ceil(response.data.total / CANT_ITEMS) ;
 				vm.paging.current = response.data.pagina;
 			}
 
