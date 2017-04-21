@@ -68,8 +68,8 @@
 	        return promiseService.doPostPublic(CTE_REST.login,user,doNoOk);
 	    }
 		
-		vm.resetPass = function (user) {
-			$log.debug(" service resetPass ");
+		vm.resetPass = function (email) {
+			$log.debug(" service resetPass ",email);
 
 			function doNoOk(response) {
 				$log.debug('response reset pass ', response);
