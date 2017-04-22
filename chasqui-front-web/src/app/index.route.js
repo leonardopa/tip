@@ -122,6 +122,12 @@
             controller: 'FooterController',        
             controllerAs: 'footerCtrl'
           })
+          .state('demo', {
+            url: '/demo',
+            templateUrl: 'app/comercio/demo/demo.html',
+            controller: 'DemoController',        
+            controllerAs: 'demoCtrl'
+          })
         .state('error', {
 	        url: '/error/:key',
 	        controller: 'ErrorController as error',
