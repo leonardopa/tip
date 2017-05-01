@@ -10,7 +10,7 @@
 	 * contexto de compra , pero NO la lista de productos la cual se incluye
 	 */
 	function CatalogoController($scope, $log,CTE_REST, $timeout, StateCommons, productorService,
-		productoService, ToastCommons) {
+		productoService, ToastCommons,gccService,utilsService) {
 		$log.debug("CatalogoController ..... ", StateCommons.ls.pedidoSeleccionado);
 		StateCommons.ls.itemMenuSelect = 'catalogo';
 		var vm = this;
@@ -147,26 +147,36 @@
 
 			function doOk(response) {
 
-				vm.pedidos = response.data;
+				//vm.pedidos = response.data;
+				vm.pedidos = [];
+				var pedidosAux = response.data;
 
 
-				angular.forEach(vm.pedidos, function(pedido) {
-					$log.debug(pedido.tipo);
-					pedido.icon = 'people';
-					pedido.icon = pedido.tipo == 'INDIVIDUAL' ? 'person' : pedido.icon;
-					pedido.icon = pedido.tipo == 'NODOS' ? 'people_outline' : pedido.icon;
-
+				angular.forEach(pedidosAux, function(pedido) {
+					//$log.debug(pedido);
+					if (pedido.estado == 'ABIERTO'){
+						// Esto es hasta no tener umagenes que identifiquen a los grupos
+						pedido.aliasGrupo = utilsService.isUndefinedOrNull(pedido.aliasGrupo) ? 'Personal' : pedido.aliasGrupo;	
+						pedido.icon = 'people';
+						pedido.icon = pedido.aliasGrupo == 'Personal' ? 'person' : pedido.icon;
+					//	pedido.icon = pedido.tipo == 'NODOS' ? 'people_outline' : pedido.icon;		
+						//pedido.aliasGrupo = pedido.aliasGrupo == null ? 'Personal' : pedido.aliasGrupo;				
+						vm.pedidos.push(pedido);
+					}	
 				});
-
+				
 				if (vm.carrito != null) {
 					// vm.carrito = vm.pedidos[0];
 					vm.carrito = StateCommons.ls.pedidoSeleccionado;
 				} else {
 					vm.carrito = vm.pedidos[0];
 				}
-			}
+
+
+			}	
+
 			
-			productoService.productosPedidoByUser().then(doOk)
+			gccService.pedidosByUser().then(doOk)
 		}
 
 
@@ -194,7 +204,7 @@
 		}
 
 
-		callLoadGrupos();
+	 	callLoadGrupos();
 		callCategorias();
 		callProductores();
 		callMedallas();

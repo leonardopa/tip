@@ -107,35 +107,6 @@
 
 	        return promiseService.doPostPublic(CTE_REST.singUp, user,doNoOk);
 	    }
-	 
-		///////////////////////////////
-		/////////// MOCKS 
-		vm.gruposByusuario = function () {
-			$log.debug(" service gruposByusuario ");
-	        return promiseService.doGet(CTE_REST.gruposByusuario(StateCommons.vendedor().id),{});
-	    }
-		
-		
-		vm.gruposByusuarioSave = function (id, contacts) {
-			$log.debug(" service gruposByusuario ");
-	        return promiseService.doPost(CTE_REST.gruposByusuario(id),contacts);
-	    }
-		
-		vm.salirGrupo = function (id, idSelect) {
-			$log.debug(" service salirGrupo ");
-	        return promiseService.doGet(CTE_REST.salirGrupo(id,idSelect),{});
-	    }
-		
-		vm.integrantesGrupo = function (id, contacts) {
-			$log.debug(" service integrantesGrupo ");
-	        return promiseService.doGet(CTE_REST.integrantesGrupo(id),contacts);
-	    }
-		
-		vm.direccionGrupo = function (id, direccion) {
-			$log.debug(" service direccionGrupo ");
-	        return promiseService.doPost(CTE_REST.direccionGrupo(id),direccion);
-	    }
-		
-	 
+	
 	}// function
 })();// anonimo

@@ -6,7 +6,7 @@
 
 	/** @ngInject */
 	function ListaPedidosController($log, $state, $scope, StateCommons 
-			,productoService,ToastCommons) {
+			,productoService,ToastCommons,gccService) {
 		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSeleccionado);
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
 		var vm = this;
@@ -42,9 +42,10 @@
 			$log.debug("--- Crear pedido individual----");
 			callCrearPedidoIndividual();
 		}
+		
 
 		///////////////// REST
-
+/*
 		var callLoadPedidos = function() {
 			$log.debug("--- find pedidos --------");
 
@@ -77,11 +78,9 @@
 			//TODO ESTO ES MOCK
 			productoService.productosPedidoByUser().then(doOk);
 
-		}
+		}*/
 
 		function callCrearPedidoIndividual() {
-			
-
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ", response.data);
 
@@ -89,26 +88,23 @@
 				callPedidoIndividual();
 			}
 			var json = {};
-
 			json.idVendedor = StateCommons.vendedor().id;
 
 			productoService.crearPedidoIndividual(json).then(doOk)
 		}
-
+		
 		function callPedidoIndividual() {
 			function doOk(response) {
 				//TODO: ver si lo puede traer el servicio
-				response.data.creador = 'INDIVIDUAL'
-				response.data.nombre = 'INDIVIDUAL'
-				vm.tabs.push(response.data);
-
-			}
-			
-			productoService.verPedidoIndividual().then(doOk);
-			
+		//		response.data.creador = 'INDIVIDUAL'
+		//		response.data.nombre = 'INDIVIDUAL'
+		//		vm.tabs.push(response.data);
+				vm.tabs=response.data;
+			}			
+			gccService.pedidosByUser().then(doOk);			
 		}
-
-		callLoadPedidos()
+	
+	//	callLoadPedidos()
 		callPedidoIndividual()
 	}
 

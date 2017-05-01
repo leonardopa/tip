@@ -1,0 +1,81 @@
+(function() {
+	'use strict';
+
+	angular.module('chasqui').service('gccService', gccService);
+	function gccService($log,CTE_REST,StateCommons,promiseService ,ToastCommons ) {
+		var vm = this;	
+		var idVend=StateCommons.vendedor().id;
+		
+		vm.gruposByusuario = function () {
+			$log.debug(" service gruposByusuario ");
+	        return promiseService.doGetPrivate(CTE_REST.gruposByusuario(StateCommons.vendedor().id),{});
+	    }
+ 
+		vm.nuevoGrupo = function (params) {
+			$log.debug(" service gruposByusuario ");
+	        //return promiseService.doPost(CTE_REST.gruposByusuario(id),contacts);
+			params.idVendedor=idVend;
+			return promiseService.doPost(CTE_REST.nuevoGrupo,params);
+	    }
+		
+		vm.invitarUsuarioAGrupo = function (params) {
+			$log.debug(" service invitarUsuarioAGrupo ");	       
+			return promiseService.doPost(CTE_REST.invitarUsuarioAGrupo,params);
+	    }
+		
+		vm.aceptarInvitacionAGrupo = function (params) {
+			$log.debug(" service aceptarInvitacionAGrupo ");	       
+			return promiseService.doPost(CTE_REST.aceptarInvitacionAGrupo,params);
+	    }
+
+		vm.crearPedidoGrupal = function (params) {
+			$log.debug(" service crearPedidoGrupal ");	       
+			return promiseService.doPost(CTE_REST.crearPedidoGrupal,params);
+	    }
+				
+		vm.pedidosByUser = function () {
+			$log.debug(" service pedidosByUser ");
+	        return promiseService.doGetPrivate(CTE_REST.pedidosByUser(StateCommons.vendedor().id),{});
+	    }
+		
+		vm.quitarMiembro = function (params) {
+			$log.debug(" service quitarMiembro ");	       
+			return promiseService.doPost(CTE_REST.quitarMiembro,params);
+	    }
+		
+		///////////////////////////////
+		/////////// MOCKS 
+		
+		
+		
+		vm.salirGrupo = function (id, idSelect) {
+			$log.debug(" service salirGrupo ");
+	        return promiseService.doGet(CTE_REST.salirGrupo(id,idSelect),{});
+	    }
+		
+		vm.integrantesGrupo = function (id, contacts) {
+			$log.debug(" service integrantesGrupo ");
+	        return promiseService.doGet(CTE_REST.integrantesGrupo(id),contacts);
+	    }
+		
+		vm.direccionGrupo = function (id, direccion) {
+			$log.debug(" service direccionGrupo ");
+	        return promiseService.doPost(CTE_REST.direccionGrupo(id),direccion);
+	    }
+		/////////////////////////////////////////
+		
+		/*
+		  
+
+        	productosDestacadosByVendedor : function(idVendedor){
+        		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
+        	},
+        	
+
+            
+
+            
+            
+	 */
+	}// function
+})();// anonimo

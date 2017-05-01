@@ -90,7 +90,7 @@
 		
 	 	/////////////////////////////////////
 		//////////// M O C K S 
-		
+		/*	
 		vm.productosPedidoByUser = function (params) {
 			$log.debug(" service agregarPedidoIndividual ");
 
@@ -103,7 +103,7 @@
 	        );
 		 	 
 	        return promise;
-	    }
+	    }*/
 	 
 			
 	}// function

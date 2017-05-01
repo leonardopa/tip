@@ -5,7 +5,7 @@
 
 	/** @ngInject . Pantalla de perfil de usuario */
 	function PerfilController($log, $scope,
-			StateCommons, $mdDialog, ToastCommons, $stateParams,perfilService) {
+			StateCommons, $mdDialog, ToastCommons, $stateParams,perfilService,gccService) {
 		$log.debug("Init PerfilController ....");
 
 		StateCommons.ls.itemMenuSelect = 'perfil';
@@ -94,10 +94,22 @@
 			
 		}
 
+		vm.aceptarInvitacion = function(notificacion){
+			function doOk(response) {
+				ToastCommons.mensaje('Aceptado');
+				notificacion.estado = 'Leido';
+			}
+			var params = {};
+			params.idInvitacion = notificacion.id;
+			
+			gccService.aceptarInvitacionAGrupo(params).then(doOk)
+			
+		}
+		
 		function callNotificacionesNoLeidas() {
 
 			function doOk(response) {
-				$log.debug('callObtenerNotificaciones', response);
+				$log.debug('notificacionesNoLeidas', response);
 				vm.notificacionesNoLeidas = response.data;
 			}
 			perfilService.notificacionesNoLeidas().then(doOk);						
@@ -106,7 +118,7 @@
 		function callNotificaciones() {
 
 			function doOk(response) {
-				$log.debug('callObtenerNotificaciones', response);
+				$log.debug('notificacionesLeidas', response);
 				vm.notificaciones = vm.notificaciones.concat(response.data);
 				;
 			}

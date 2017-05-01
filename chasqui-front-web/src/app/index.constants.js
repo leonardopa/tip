@@ -132,28 +132,38 @@
         		return 	URL_REST_BASE+ 'user/pedido/individual/'+id;
         	},
         	
-        	notificacionesNoLeidas: URL_BASE_MOCK + "user/adm/notificacion/noLeidas",
+        	notificacionesNoLeidas: URL_REST_BASE + "user/adm/notificacion/noLeidas",
         	
         	notificacionesLeidas: function(pagina){
-        		return URL_BASE_MOCK + "user/adm/notificacion/"+pagina;
+        		return URL_REST_BASE + "user/adm/notificacion/"+pagina;
         	},
 
         	productosDestacadosByVendedor : function(idVendedor){
         		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
         	},
-        	
-
-
-
-
-                gruposByusuario: function (idUser) {
-                return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
+    
+            gruposByusuario: function (idVendedor) {
+                return URL_REST_BASE +'user/gcc/all/'+idVendedor;
             },
+            
+            aceptarInvitacionAGrupo: URL_REST_BASE   + 'user/gcc/aceptar',
+
+            nuevoGrupo: URL_REST_BASE + "user/gcc/alta/",
+ 
+            crearPedidoGrupal: URL_REST_BASE + "user/gcc/individual",
+
+            pedidosByUser: function (idVendedor) {
+                return URL_REST_BASE + 'user/gcc/pedidos/'+idVendedor;
+            },
+    
+            invitarUsuarioAGrupo: URL_REST_BASE + "user/gcc/invitacion",
+            
+            quitarMiembro: URL_REST_BASE + "user/gcc/quitarMiembro",
 
         	////////////////////////////////////////////////////////
-       
+   /*    
         	productosPedidoByUser : function(idUser){
-        		return URL_BASE_MOCK + "productos/pedidos/usuario/"+idUser;
+        		return URL_BASE_MOCK + "";
         	},
 
 
@@ -174,9 +184,7 @@
 
 
 
-        	salirGrupo: function (idUser,idGrupo){
-        		return URL_BASE_MOCK + "usuarios/"+idUser+"/grupos/"+idGrupo+"/salir";
-        	},
+        	
         	
         	integrantesGrupo :function (idGrupo){
         		return URL_BASE_MOCK + "usuarios/grupos/"+idGrupo+"/integrantes";
@@ -190,7 +198,7 @@
         		return URL_BASE_MOCK + "direccion/usuario/"+idUsuario;
         	},
 
-
+*/
             //////////////////////////////////////////////////////////
             //////////////// OTRAS CONSTANTES 
             ///// mensajes al usuario 

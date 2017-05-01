@@ -62,7 +62,7 @@
 						<div ng-repeat="pedido in catalogoCtrl.pedidos">
 							<md-button class="md-fab md-raised md-mini" ng-click="catalogoCtrl.cambiarContexto(pedido)">
 								<ng-md-icon icon="{{pedido.icon}}" style="fill: black" size="24"></ng-md-icon>
-								<md-tooltip md-direction="left"> {{pedidoooo.nombre}} </md-tooltip>
+								<md-tooltip md-direction="left"> {{pedido.aliasGrupo}} </md-tooltip>
 							</md-button>
 						</div>
 					</md-fab-actions>
@@ -74,7 +74,7 @@
 						</a>
 						</ng-md-icon>
 					</md-button>
-					<md-subheader class="md-primary">{{catalogoCtrl.carrito.nombre}}</md-subheader>
+					<md-subheader class="md-primary"> {{catalogoCtrl.carrito.aliasGrupo}}</md-subheader>
 				</md-card>
 			</div>
 		</div>

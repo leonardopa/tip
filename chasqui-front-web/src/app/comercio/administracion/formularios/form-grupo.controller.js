@@ -7,7 +7,7 @@
 	/**
 	 * @ngInject Formulario para crear un grupo
 	 */
-	function FormGrupoController($log, $state, perfilService) {
+	function FormGrupoController($log, $state, gccService) {
 		$log.debug("controler FormGrupoController");
 		var vm = this;
 
@@ -32,8 +32,7 @@
 
 			}
 		 
-			// TODO : SACAR USUARIO HARCODEADO
-			perfilService.gruposByusuarioSave(1,vm.grupo).then(doOk)
+			gccService.nuevoGrupo(vm.grupo).then(doOk)
 		}
 	}
 

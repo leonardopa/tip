@@ -9,13 +9,13 @@
 	 *           grupo
 	 */
 	function DetalleGruposController($log, $scope, $timeout,
-			ToastCommons, dialogCommons, perfilService) {
+			ToastCommons, dialogCommons, gccService) {
 		$log.debug("controler DetalleGruposController inti grupo ",
-				$scope.idGrupo)
+				$scope.grupo)
 		var vm = this;
 
-		vm.idGrupo = $scope.tab.id;
-		vm.isAdmin = $scope.tab.admin;
+		vm.grupo = $scope.grupo;
+		vm.isAdmin = $scope.grupo.esAdministrador;
 		vm.canAddIntegrante = true;
 
 		/** Detacta si apretaron el boton addIntegrante en el pane de info */
@@ -32,9 +32,9 @@
 		var pendingSearch, cancelSearch = angular.noop;
 		var cachedQuery, lastSearch;
 
-		vm.contacts = [];
+		vm.contacts = vm.grupo.miembros;
 		vm.allContacts;
-		loadContacts();
+	//	loadContacts();
 
 		vm.filterSelected = true;
 		vm.querySearch = querySearch;
@@ -60,17 +60,15 @@
 		}
 
 		vm.quitarMiembro = function(miembro) {
-			$log.debug("quitar miembro", miembro);
-			// TODO: quitar miembro del gupo
-
 			dialogCommons.confirm('Quitar Miembro del grupo',
 					'Estas seguro de quitar a ' + miembro.nombre + ' ?',
 					'Si, lo quito', 'no', function() {
-						ToastCommons.mensaje('TODO: llamar servicio')
+						vm.callQuitarMiembro(miembro);
 					}, function() {
 						$log.debug("se quedo");
 					});
 		}
+		
 		// //////////
 		// //////REST
 
@@ -84,16 +82,31 @@
 				vm.canAddIntegrante = !vm.canAddIntegrante;
 			}
 
-			perfilService.integrantesGrupo(vm.idGrupo, vm.contacts).then(doOk)
+			gccService.integrantesGrupo(vm.idGrupo, vm.contacts).then(doOk)
+
+		}
+		
+		vm.callQuitarMiembro = function(miembro) {
+			function doOk(response) {
+				ToastCommons.mensaje('se quito miembro del grupo')
+			}			
+			var params ={};
+			params.idGrupo=vm.grupo.idGrupo;
+			params.emailCliente=miembro.email;
+			
+			gccService.quitarMiembro(params).then(doOk)
 
 		}
 
+		
+		
 		/**
 		 * Trae la lista de los integrantes del grupo y de los contactos
 		 * podibles
 		 */
 		// TODO : cambiar la lista de contactos por un boton que pida en ingreso
 		// al grupo por mail.
+		/*
 		function loadContacts() {
 
 			function doOk(response) {
@@ -108,8 +121,8 @@
 				});
 			}
 
-			perfilService.integrantesGrupo(vm.idGrupo, {}).then(doOk)
+			gccService.integrantesGrupo(vm.idGrupo, {}).then(doOk)
 
-		}
+		}*/
 	}
 })();

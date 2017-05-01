@@ -12,10 +12,13 @@
 					<md-subheader class="md-accent">Miembros del grupo</md-subheader>
 
 					<md-list-item class="md-2-line contact-item selected" ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
-						<img ng-src="{{contact.urlImagen}}" class="md-avatar" alt="{{contact.nombre}}" />
+					 
+						<img ng-src="http://lorempixel.com/150/150/people/" class="md-avatar" alt="{{contact.nickname}}" />
 						<div class="md-list-item-text compact">
-							<h3>{{contact.nombre}}</h3>
+							<h3>{{contact.nickname}}</h3>
 							<p>{{contact.email}}</p>
+							<p>{{contact.estadoPedido}}</p>
+							<p>{{contact.invitacion}}</p>
 						</div>
 
 						<div ng-if="detalleGrupoCtrl.isAdmin">
@@ -25,6 +28,7 @@
 									Quitar del Grupo </md-tooltip>
 							</md-button>
 						</div>
+					</md-list-item>
 				</div>
 			</div>
 		</div>
