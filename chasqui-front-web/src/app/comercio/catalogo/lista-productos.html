@@ -1,32 +1,31 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
 
-	<span ng-show="listaProductoCtr.variantes.length == 0">Sin
-		productos.</span>
+	<span ng-show="listaProductoCtr.variantes.length == 0">
+		Sin productos.</span>
 
-	<md-grid-list md-cols-sm="5" md-cols-md="6" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="1:1" md-gutter="5px"
-	 md-gutter-gt-sm="8px">
+		<div layout="row">
+		<div ng-repeat="variante in listaProductoCtr.variantes" flex="33">
+			<md-card>
+				<img  src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}" 
+				style="height: 280px;">
 
-		<md-grid-tile ng-repeat="variante in listaProductoCtr.variantes" md-colspan="3" md-rowspan="4">
+		        <md-card-content>
+		        	<span>{{variante.nombreProducto}}</span>
+					<a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a><br>
+					<span>{{variante.nombreVariedad}} </span>
+					<strong>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></strong>					
+				</md-card-content>
 
-			<img class="img" src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}" layout-fill>
-
-			<md-grid-tile-footer layout-padding>
-				<p style="font-family:Andale Mono; ">{{variante.nombreProducto}}</p>
-				<h5 style="font-family:Andale Mono; ">Productor: <a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a></h5>
-				<h5 style="font-family:Andale Mono; ">{{variante.nombreVariedad}}</h5>
-				<strong>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></strong>
-
-				<div layout=row  >
-
-					<md-button style="background: #73584b"  class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
-						<p style="font-family:Andale Mono; "> Agregar</p>
+				<md-card-actions layout="row" layout-align="end center">
+					<md-button class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
+						<p> Agregar</p>
 						<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
 					</md-button>
 
-
 					<div ng-repeat="medalla in variante.medallasProducto">
 						<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-							<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60">
+							<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
+							width="60" height="60">
 							<md-tooltip md-direction="up">
 								{{medalla.nombre}}
 							</md-tooltip>
@@ -35,16 +34,18 @@
 
 					<div ng-repeat="medalla in variante.medallasProductor">
 						<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-							<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" width="60" height="60">
+							<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
+							width="60" height="60">
 							<md-tooltip md-direction="up">
 								{{medalla.nombre}}
 							</md-tooltip>
 						</md-button>
 					</div>
-				</div>
-			</md-grid-tile-footer>
-		</md-grid-tile>
-	</md-grid-list>
+				</md-card-actions>
+			</md-card>
+		</div>
+		</div>
+		
 
 	<section layout="column"  layout-align="end center" ng-show="listaProductoCtr.variantes.length > 0">
 	 	<cl-paging flex cl-pages="listaProductoCtr.paging.total" cl-steps="6" 
@@ -52,7 +53,7 @@
 		 cl-align="start start" cl-current-page="listaProductoCtr.paging.current"></cl-paging>
 	</section>
 </div>
-<style>
+<style>/*
 	.gridListdemoBasicUsage md-grid-list {
 		margin: 8px;
 	}
@@ -113,5 +114,5 @@
 				-o-transform: translate(0px, -100px);
 			}
 		}
-	}
+	}*/
 </style>

@@ -174,8 +174,8 @@
 
 			function doOk(response) {
 				$log.log('findProductos Response ', response);
-				vm.variantes = response.data.productos;
-				
+				vm.variantes = response.data.productos;			 	
+
 				vm.paging.total = Math.ceil(response.data.total / CANT_ITEMS) ;
 				vm.paging.current = response.data.pagina;
 			}

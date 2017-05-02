@@ -1,56 +1,47 @@
-<md-content style="height:100%">
-		<div>
-			<h1 style="font-family:Andale Mono; text-align: center"> Catalogo</h1>
-			<p>&nbsp</p>
-			<p>&nbsp</p>
-			<p>&nbsp</p>
-		</div>
+<md-content>
+		
+		<span class='titulo-pagina'>
+			Catalogo
+		</span>
 		<div>
 			<div>
 				<div layout=row>
-					<div flex="60">
-						<md-card>
-							<md-content layout-padding>
+					<div flex="20"> 
+						<div>
+							<section ng-include="'app/comercio/catalogo/filtros.html'"></section>
+						</div>			
+					</div>
+					<div flex="79">
+						<div layout=row>						  
 								<md-input-container md-no-float>
-									<input ng-model="catalogoCtrl.queryText" type="text" placeholder="Buscar">
+									<input ng-model="catalogoCtrl.queryText" type="text"
+										 placeholder="Buscar">
 								</md-input-container>
 								<md-button ng-click="catalogoCtrl.filtroQuery()">
-									<md-icon md-svg-src="app/components/image/ic_search_black_24px.svg" style="display:inline-block;">
+									<md-icon md-svg-src="app/components/image/ic_search_black_24px.svg"">
 									</md-icon>
 								</md-button>
-							</md-content>
-						</md-card>
-					</div>
-					<div ng-controller="MenuController as menuCtrl">
-						<div ng-show="menuCtrl.isLogued">
-							<md-card>
-								<md-card-title>
-									<h3 style="font-family:Andale Mono;text-align: center "> Estas en pedido: {{catalogoCtrl.carrito.nombre}} </h3>
-								</md-card-title>
-							</md-card>
+						</div>
+
+						<div class="col-md-11 center-block">
+							<section ng-include="'app/comercio/catalogo/lista-productos.html'" ng-init="count = catalogoCtrl.count" ng-cloak></section>
+							<!-- ng-init="paginaProducto = catalogoCtrl.paginaProducto -->
+							<br>
+							<!-- FIX CSSS , sino no se ve el paginador -->
+							<br>
+							<br>
 						</div>
 					</div>
+					<div flex="1">				
+						<section ng-include="'app/comercio/catalogo/catalogo.pedido.context.html'" ng-cloak></section>
+					</div>
 				</div>
-				<div>
-					<section ng-include="'app/comercio/catalogo/filtros.html'"></section>
-				</div>
-				<p>&nbsp</p>
-				<p>&nbsp</p>
-				<p>&nbsp</p> 			
 
-				<div class="col-md-11 center-block">
-					<section ng-include="'app/comercio/catalogo/lista-productos.html'" ng-init="count = catalogoCtrl.count" ng-cloak></section>
-					<!-- ng-init="paginaProducto = catalogoCtrl.paginaProducto -->
-					<br>
-					<!-- FIX CSSS , sino no se ve el paginador -->
-					<br>
-					<br>
-				</div>
 			</div>
 		</div>
 		<!--  Menu de contexto de COMPRA -->
-		<div ng-controller="MenuController as menuCtrl">
-			<div ng-show="menuCtrl.isLogued" class="fixed" ng-cloak>
+ 
+			<div class="fixed" ng-cloak>
 				<md-fab-speed-dial md-open="catalogoCtrl.isOpen" md-direction="{{catalogoCtrl.selectedDirection}}" ng-class="catalogoCtrl.selectedMode">
 					<md-fab-trigger>
 						<md-button aria-label="menu" class="md-fab md-warn">
@@ -76,10 +67,17 @@
 					</md-button>
 					<md-subheader class="md-primary"> {{catalogoCtrl.carrito.aliasGrupo}}</md-subheader>
 				</md-card>
+				<div>
+					<md-button ng-click="catalogoCtrl.toggleLeft()" class="md-raised">
+						Ver pedido
+					</md-button>
+				</div>	
 			</div>
-		</div>
+ 
+
 	</md-content>
 
+	
 
 <style>
 	<!-- -->.fixed {

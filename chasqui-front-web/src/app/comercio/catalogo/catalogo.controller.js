@@ -10,12 +10,19 @@
 	 * contexto de compra , pero NO la lista de productos la cual se incluye
 	 */
 	function CatalogoController($scope, $log,CTE_REST, $timeout, StateCommons, productorService,
-		productoService, ToastCommons,gccService,utilsService) {
+		productoService, ToastCommons,gccService,utilsService,$mdSidenav) {
 		$log.debug("CatalogoController ..... ", StateCommons.ls.pedidoSeleccionado);
 		StateCommons.ls.itemMenuSelect = 'catalogo';
 		var vm = this;
 
-		
+		vm.toggleLeft = buildToggler('left');
+	    vm.toggleRight = buildToggler('right');
+
+	    function buildToggler(componentId) {
+	      return function() {
+	        $mdSidenav(componentId).toggle();
+	      };
+	    }
 
 		// ///////// Para el selector de Grupos de compra
 		vm.topDirections = ['left', 'up'];
