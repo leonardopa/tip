@@ -1,0 +1,22 @@
+
+
+    <md-sidenav class="md-sidenav-right" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
+
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">{{catalogoCtrl.carrito.aliasGrupo}}</h1>
+      </md-toolbar>
+      <md-content layout-margin="">         
+        <md-list-item class="md-3-line" ng-repeat="item in catalogoCtrl.carrito.productosResponse" ng-click="null">
+          <img ng-src="{{catalogoCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ item.nombre }}</h3>
+            <h4>{{item.cantidad}} X  $ {{ item.precio }} = ${{item.cantidad * item.precio }} </h4>
+            <p>{{ item.notes }}</p>
+          </div>
+        </md-list-item>
+
+      </md-content>
+      <md-button ng-click="catalogoCtrl.toggleLeft()" class="md-accent">
+          cerrar
+      </md-button>
+    </md-sidenav>
