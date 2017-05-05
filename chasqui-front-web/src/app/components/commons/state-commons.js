@@ -28,7 +28,7 @@
     vm.vendedor = function(){
     	//TODO: pedir al servicio, hacer singleton con el LS
     	var config={};
-    	config.id=2;
+    	config.id=5;
     	config.imagen="/imagenes/usuarios/adminpds/puentedelsur.png";
     	 
     	

@@ -33,9 +33,9 @@
 			return promiseService.doPost(CTE_REST.crearPedidoGrupal,params);
 	    }
 				
-		vm.pedidosByUser = function () {
+		vm.pedidosByUser = function (doNoOK) {
 			$log.debug(" service pedidosByUser ");
-	        return promiseService.doGetPrivate(CTE_REST.pedidosByUser(StateCommons.vendedor().id),{});
+	        return promiseService.doGetPrivate(CTE_REST.pedidosByUser(StateCommons.vendedor().id),{},doNoOK);
 	    }
 		
 		vm.quitarMiembro = function (params) {

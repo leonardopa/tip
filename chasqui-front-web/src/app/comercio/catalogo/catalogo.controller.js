@@ -181,9 +181,12 @@
 
 
 			}	
+			function doNoOk(response) {
+				$log.debug("---no esta logueado ---");
 
+			}
 			
-			gccService.pedidosByUser().then(doOk)
+			gccService.pedidosByUser(doNoOk).then(doOk)
 		}
 
 

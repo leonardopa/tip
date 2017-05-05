@@ -3,8 +3,8 @@
 	<span ng-show="listaProductoCtr.variantes.length == 0">
 		Sin productos.</span>
 
-		<div layout="row">
-		<div ng-repeat="variante in listaProductoCtr.variantes" flex="33">
+		<div  layout="column" layout-gt-sm="row" layout-wrap> 
+		<div flex="25" flex-gt-sm="25"  ng-repeat="variante in listaProductoCtr.variantes"  >
 			<md-card>
 				<img  src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}" 
 				style="height: 280px;">
@@ -16,31 +16,31 @@
 					<strong>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></strong>					
 				</md-card-content>
 
-				<md-card-actions layout="row" layout-align="end center">
-					<md-button class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
-						<p> Agregar</p>
-						<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
-					</md-button>
+				<md-card-actions layout="column">
+					<div   layout="row"  layout-align="start" layout-wrap> 
+						<div ng-repeat="medalla in variante.medallasProducto">
+						 
+								<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
+								width="50" height="50">
+								 <md-tooltip md-direction="up">
+									{{medalla.nombre}}
+								</md-tooltip>
+						</div>
 
-					<div ng-repeat="medalla in variante.medallasProducto">
-						<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-							<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
-							width="60" height="60">
-							<md-tooltip md-direction="up">
-								{{medalla.nombre}}
-							</md-tooltip>
-						</md-button>
+						<div ng-repeat="medalla in variante.medallasProductor" >						
+								<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
+								width="50" height="50">
+								<md-tooltip md-direction="up">
+									{{medalla.nombre}}
+								</md-tooltip>
+						</div>
 					</div>
-
-					<div ng-repeat="medalla in variante.medallasProductor">
-						<md-button ng-click="listaProductoCtr.verMedalla('TODO_ID_REAL')">
-							<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
-							width="60" height="60">
-							<md-tooltip md-direction="up">
-								{{medalla.nombre}}
-							</md-tooltip>
+					<div layout="row" layout-align="center center">
+						<md-button class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
+							<p> Agregar</p>
+							<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
 						</md-button>
-					</div>
+					</div>					
 				</md-card-actions>
 			</md-card>
 		</div>
