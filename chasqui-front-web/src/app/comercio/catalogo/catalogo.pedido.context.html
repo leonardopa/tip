@@ -1,6 +1,7 @@
 
 
-    <md-sidenav class="md-sidenav-right" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
+    <md-sidenav class="md-sidenav-left" md-component-id="left"
+      md-disable-backdrop md-whiteframe="4"  style="height: 95%;">
 
       <md-toolbar class="md-theme-indigo">
         <h1 class="md-toolbar-tools">{{catalogoCtrl.carrito.aliasGrupo}}</h1>
@@ -16,6 +17,10 @@
         </md-list-item>
 
       </md-content>
+
+      <div>
+        Total $ {{catalogoCtrl.carrito.montoActual}}
+      </div>
       <md-button ng-click="catalogoCtrl.toggleLeft()" class="md-accent">
           cerrar
       </md-button>

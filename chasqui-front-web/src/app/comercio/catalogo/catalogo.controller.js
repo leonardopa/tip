@@ -24,6 +24,8 @@
 	      };
 	    }
 
+	    vm.isLogued=StateCommons.isLogued();
+
 		// ///////// Para el selector de Grupos de compra
 		vm.topDirections = ['left', 'up'];
 		vm.bottomDirections = ['down', 'right'];
@@ -213,8 +215,9 @@
 				})
 		}
 
+		if (vm.isLogued){callLoadGrupos();}
+	 			
 
-	 	callLoadGrupos();
 		callCategorias();
 		callProductores();
 		callMedallas();

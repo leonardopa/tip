@@ -40,7 +40,7 @@
 
 		vm.agregar = function(variante) {
 			if (StateCommons.isLogued()){
-				crearPedidoYagregarProducto(variante);
+				agregarProducto(variante);
 			}else{
 				ToastCommons.mensaje("TODO not logued");
 				$log.log('not logued" ' , variante);
@@ -72,36 +72,44 @@
 			findProductos(vm.paging.current,CANT_ITEMS, arg);
 		}
 
-		function crearPedidoYagregarProducto(variante){			
-
+		function agregarProducto(variante){			
+			if(StateCommons.ls.pedidoSeleccionado.idGrupo==null){
+				agregarProductoIndividual(variante);// es individual
+			}else{
+				agregarProductoDialog(variante);// es grupal			
+			}
+			
+		}
+		/** Tiene la loginca de crear el pedido sino lo tien */
+		function agregarProductoIndividual(variante){
 			function setPedidoYagregarProducto(){
-				function doOkPedido(response){
-					$log.debug("setPedidoYagregarProducto", response);
-					StateCommons.ls.pedidoSeleccionado = response.data;					
+					function doOkPedido(response){
+						$log.debug("setPedidoYagregarProducto", response);
+						StateCommons.ls.pedidoSeleccionado = response.data;					
+					}
+
+					productoService.verPedidoIndividual().then(doOkPedido);
+
+					agregarProductoDialog(variante)				
 				}
 
-				productoService.verPedidoIndividual().then(doOkPedido);
+				function doNoOK(response){			
+					if(utilsService.contieneCadena(response.data.error,CTE_REST.ERROR_YA_TIENE_PEDIDO)){
+						ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
+						setPedidoYagregarProducto();
+					}
+				}
 
-				agregarProductoDialog(variante)				
-			}
-
-			function doNoOK(response){			
-				if(utilsService.contieneCadena(response.data.error,CTE_REST.ERROR_YA_TIENE_PEDIDO)){
-					ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
+				function doOk(){
 					setPedidoYagregarProducto();
 				}
-			}
 
-			function doOk(){
-				setPedidoYagregarProducto();
-			}
+				var json = {};
+				json.idVendedor = StateCommons.vendedor().id;
+				
 
-			var json = {};
-			json.idVendedor = StateCommons.vendedor().id;
-			
-
-			//si falla es poque ya tiene un pedido abierto TODO mejorar
-			productoService.crearPedidoIndividual(json,doNoOK).then(doOk)
+				//si falla es poque ya tiene un pedido abierto TODO mejorar
+				productoService.crearPedidoIndividual(json,doNoOK).then(doOk)
 		}
 
 		function agregarProductoDialog(variante){

@@ -7,9 +7,12 @@
 			<div>
 				<div layout=row>
 					<div flex="20"> 
-						<div>
-							<section ng-include="'app/comercio/catalogo/filtros.html'"></section>
-						</div>			
+						<div layout=column>
+							<div>
+								<section ng-include="'app/comercio/catalogo/filtros.html'"></section>				
+							</div>		
+							<section ng-include="'app/comercio/catalogo/catalogo.pedido.context.html'" ng-cloak></section>
+						</div>
 					</div>
 					<div flex="79">
 						<div layout=row>						  
@@ -23,7 +26,7 @@
 								</md-button>
 						</div>
 
-						<div class="col-md-11 center-block">
+						<div>
 							<section ng-include="'app/comercio/catalogo/lista-productos.html'" ng-init="count = catalogoCtrl.count" ng-cloak></section>
 							<!-- ng-init="paginaProducto = catalogoCtrl.paginaProducto -->
 							<br>
@@ -32,16 +35,14 @@
 							<br>
 						</div>
 					</div>
-					<div flex="1">				
-						<section ng-include="'app/comercio/catalogo/catalogo.pedido.context.html'" ng-cloak></section>
-					</div>
+					
 				</div>
 
 			</div>
 		</div>
 		<!--  Menu de contexto de COMPRA -->
  
-			<div class="fixed" ng-cloak>
+			<div class="fixed" ng-if="catalogoCtrl.isLogued" ng-cloak>
 				<md-fab-speed-dial md-open="catalogoCtrl.isOpen" md-direction="{{catalogoCtrl.selectedDirection}}" ng-class="catalogoCtrl.selectedMode">
 					<md-fab-trigger>
 						<md-button aria-label="menu" class="md-fab md-warn">
@@ -72,6 +73,7 @@
 						Ver pedido
 					</md-button>
 				</div>	
+
 			</div>
  
 
@@ -82,7 +84,7 @@
 <style>
 	<!-- -->.fixed {
 		top: auto;
-		right: 20px;
+		left: 20px;
 		bottom: 20px;
 		left: auto;
 		position: fixed;
