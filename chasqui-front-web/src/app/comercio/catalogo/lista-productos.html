@@ -10,37 +10,58 @@
 				 style="height:222px;width:222px;align-self: center">
 
 		        <md-card-content>
-		        	<span>{{variante.nombreProducto}}</span>
-					<a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a><br>
-					<span>{{variante.nombreVariedad}} </span>
-					<strong>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></strong>					
+		        	<div layout="column" >		
+		        		<div  layout="column"  >	        	
+							<div layout="column"  >
+								<div class="md-title">
+					        		<span>{{variante.nombreProducto}}</span>
+					        	</div>
+					        	<div class="md-subhead">
+									<a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a>
+								</div >
+								<div class="md-subhead">
+									<span>{{variante.nombreVariedad}} </span>
+								</div>													
+							</div>	
+
+							<div layout="row"  layout-align="space-around center"
+
+ >
+								<div>
+									<h1>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></h1>
+								</div>
+								<md-button class="btn-compra" 
+									ng-click="listaProductoCtr.agregar(variante)">
+										<p> Agregar</p>
+										<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
+								</md-button>
+							</div>	
+						</div>
+						
 				</md-card-content>
 
-				<md-card-actions layout="column">
-					<div   layout="row"  layout-align="start" layout-wrap> 
-						<div ng-repeat="medalla in variante.medallasProducto">
-						 
-								<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
-								width="50" height="50">
-								 <md-tooltip md-direction="up">
-									{{medalla.nombre}}
-								</md-tooltip>
-						</div>
+				<md-card-actions >
+			 
+							<div  layout="row" layout-align="space-around center"> 
+								<div ng-repeat="medalla in variante.medallasProducto">								 	<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
+										width="40" height="40">
+										 <md-tooltip md-direction="up">
+											{{medalla.nombre}}
+										</md-tooltip>
+								</div>
 
-						<div ng-repeat="medalla in variante.medallasProductor" >						
-								<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
-								width="50" height="50">
-								<md-tooltip md-direction="up">
-									{{medalla.nombre}}
-								</md-tooltip>
+								<div ng-repeat="medalla in variante.medallasProductor" >						
+										<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
+										width="40" height="40">
+										<md-tooltip md-direction="up">
+											{{medalla.nombre}}
+										</md-tooltip>
+								</div>
+							</div>
+							
 						</div>
-					</div>
-					<div layout="row" layout-align="center center">
-						<md-button class="md-raised md-primary" ng-click="listaProductoCtr.agregar(variante)">
-							<p> Agregar</p>
-							<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
-						</md-button>
-					</div>					
+			 
+									
 				</md-card-actions>
 			</md-card>
 		</div>
