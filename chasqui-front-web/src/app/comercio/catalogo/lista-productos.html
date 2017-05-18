@@ -4,7 +4,7 @@
 		Sin productos.</span>
 
 		<div  layout="column" layout-gt-sm="row" layout-wrap> 
-		<div flex="33" flex-gt-sm="33"  ng-repeat="variante in listaProductoCtr.variantes"  >
+		<div flex="25" flex-gt-sm="25"  ng-repeat="variante in listaProductoCtr.variantes"  >
 			<md-card>
 				<img  src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}" 
 				 style="height:222px;width:222px;align-self: center">
@@ -13,7 +13,7 @@
 		        	<div layout="column" >		
 		        		<div  layout="column"  >	        	
 							<div layout="column"  >
-								<div class="md-title">
+								<div class="md-subhead">
 					        		<span>{{variante.nombreProducto}}</span>
 					        	</div>
 					        	<div class="md-subhead">
@@ -43,7 +43,8 @@
 				<md-card-actions >
 			 
 							<div  layout="row" layout-align="space-around center"> 
-								<div ng-repeat="medalla in variante.medallasProducto">								 	<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
+								<div ng-repeat="medalla in variante.medallasProducto">								 	<img ng-click="listaProductoCtr.showPrerenderedDialog(medalla)"
+									ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
 										width="40" height="40">
 										 <md-tooltip md-direction="up">
 											{{medalla.nombre}}
@@ -51,7 +52,8 @@
 								</div>
 
 								<div ng-repeat="medalla in variante.medallasProductor" >						
-										<img ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
+									<img  ng-click="listaProductoCtr.showPrerenderedDialog(medalla)" 
+										ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
 										width="40" height="40">
 										<md-tooltip md-direction="up">
 											{{medalla.nombre}}
@@ -66,13 +68,36 @@
 			</md-card>
 		</div>
 		</div>
-		
+	 <md-button ng-click="listaProductoCtr.showPrerenderedDialog(1)" >AAAAAAAAAAAAAA</md-button>
+
+	<!-- ********************* paginacion *******************-->
 
 	<section layout="column"  layout-align="end center" ng-show="listaProductoCtr.variantes.length > 0">
 	 	<cl-paging flex cl-pages="listaProductoCtr.paging.total" cl-steps="6" 
 		 cl-page-changed="listaProductoCtr.paging.onPageChanged()" 
 		 cl-align="start start" cl-current-page="listaProductoCtr.paging.current"></cl-paging>
 	</section>
+
+	<!-- ********************* dialogo de medalla *******************-->
+	<div style="visibility: hidden">
+	    <div class="md-dialog-container" id="myDialog">
+	      <md-dialog layout-padding>
+	      	<div  layout="column" layout-align="center center" >
+	        	<md-button ng-click="listaProductoCtr.cerrarDialogoMedalla(1)" >
+		           		<i style="font-size: 36px;" class="material-icons">close</i>
+				</md-button>
+	       
+		         <img ng-src="{{listaProductoCtr.urlBase}}{{listaProductoCtr.medallaSelect.pathImagen}}" 
+		         	width="200" height="200">
+		        
+		         <span class="md-headline">{{listaProductoCtr.medallaSelect.nombre}}</span>
+		          
+		         <div ng-bind-html ="listaProductoCtr.medallaSelect.descripcion" />     	
+		    </div>
+	      </md-dialog>
+    </div>
+  </div>
+
 </div>
 <style>/*
 	.gridListdemoBasicUsage md-grid-list {

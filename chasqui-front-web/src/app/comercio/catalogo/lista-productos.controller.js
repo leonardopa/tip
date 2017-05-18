@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $log, CTE_REST,
-			$state, StateCommons, ToastCommons, dialogCommons,productoService,utilsService) {
+			$state, StateCommons, ToastCommons, dialogCommons,productoService,utilsService,$mdDialog) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -22,6 +22,22 @@
 		vm.urlBase = CTE_REST.url_base;
 		vm.variantes = [];		
 		vm.ultimoFiltro = {};
+		vm.medallaSelect=undefined;
+		//////// dialogo medalla
+		vm.showPrerenderedDialog = function(medalla) {
+			console.log("***********" + medalla)
+			vm.medallaSelect=medalla;
+		    $mdDialog.show({
+		      contentElement: '#myDialog',
+		      parent: angular.element(document.body),
+		      //targetEvent: ev,
+		      clickOutsideToClose: true
+		    });
+		  };
+
+		 vm.cerrarDialogoMedalla=function (){
+		 	$mdDialog.hide();
+		 }
 		////////////// PAGINACION
 		vm.currentPage = 0;
 		vm.paging = {
