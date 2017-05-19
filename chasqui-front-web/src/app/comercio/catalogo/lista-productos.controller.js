@@ -24,8 +24,7 @@
 		vm.ultimoFiltro = {};
 		vm.medallaSelect=undefined;
 		//////// dialogo medalla
-		vm.showPrerenderedDialog = function(medalla) {
-			console.log("***********" + medalla)
+		vm.showPrerenderedDialog = function(medalla) {	
 			vm.medallaSelect=medalla;
 		    $mdDialog.show({
 		      contentElement: '#myDialog',
@@ -37,6 +36,12 @@
 
 		 vm.cerrarDialogoMedalla=function (){
 		 	$mdDialog.hide();
+		 }
+
+		 ////////////// dialogo producto
+
+		 vm.verProducto = function(producto) {
+		 	console.log("***********" + producto)
 		 }
 		////////////// PAGINACION
 		vm.currentPage = 0;
