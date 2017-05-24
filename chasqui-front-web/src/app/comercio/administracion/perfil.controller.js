@@ -105,6 +105,19 @@
 			gccService.aceptarInvitacionAGrupo(params).then(doOk)
 			
 		}
+
+		vm.rechazarInvitacion = function(notificacion){
+			function doOk(response) {
+				ToastCommons.mensaje('Aceptado');
+				notificacion.estado = 'Leido';
+			}
+			var params = {};
+			params.idInvitacion = notificacion.id;
+			
+			gccService.rechazarInvitacionAGrupo(params).then(doOk)
+			
+		}
+		
 		
 		function callNotificacionesNoLeidas() {
 

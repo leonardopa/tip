@@ -39,7 +39,7 @@
 					<!-- <p>{{item.estado}}</p> -->
 				</div>
 
-				<md-button ng-show="item.estado == 'NOTIFICACION_NO_LEIDA'" class="md-secondary"
+				<md-button ng-show="item.estado == 'NOTIFICACION_NO_LEIDA' && item.mensaje != 'Te han invitado a un grupo de compras colectivas'" class="md-secondary"
 				 ng-click="perfilCtrl.marcarLeido(item)">
 					<md-icon> done </md-icon>
 					<md-tooltip md-direction="left">
@@ -51,6 +51,13 @@
 					<md-icon> thumb_up </md-icon>
 					<md-tooltip md-direction="left">
 						Aceptar invitación a grupo </md-tooltip>
+				</md-button>
+
+				<md-button  ng-show="item.mensaje == 'Te han invitado a un grupo de compras colectivas' && item.estado == 'NOTIFICACION_NO_LEIDA'" class="md-secondary" 
+				ng-click="perfilCtrl.rechazarInvitacion(item)">
+					<md-icon> thumb_down </md-icon>
+					<md-tooltip md-direction="left">
+						Rechazar invitación a grupo </md-tooltip>
 				</md-button>
 				<!-- VER cuando se pueda hacer esto
 			<md-button class="md-secondary" ng-click="doSecondaryAction($event)">Aceptar</md-button>
