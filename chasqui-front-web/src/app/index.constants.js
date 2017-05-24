@@ -148,6 +148,8 @@
             
             aceptarInvitacionAGrupo: URL_REST_BASE   + 'user/gcc/aceptar',
 
+            rechazarInvitacionAGrupo: URL_REST_BASE   + 'user/gcc/rechazar',
+
             nuevoGrupo: URL_REST_BASE + "user/gcc/alta/",
  
             crearPedidoGrupal: URL_REST_BASE + "user/gcc/individual",

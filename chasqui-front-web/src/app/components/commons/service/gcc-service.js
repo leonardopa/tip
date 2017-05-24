@@ -28,6 +28,11 @@
 			return promiseService.doPost(CTE_REST.aceptarInvitacionAGrupo,params);
 	    }
 
+	    vm.rechazarInvitacionAGrupo = function (params) {
+			$log.debug(" service aceptarInvitacionAGrupo ");	       
+			return promiseService.doPost(CTE_REST.rechazarInvitacionAGrupo,params);
+	    }
+
 		vm.crearPedidoGrupal = function (params) {
 			$log.debug(" service crearPedidoGrupal ");	       
 			return promiseService.doPost(CTE_REST.crearPedidoGrupal,params);
