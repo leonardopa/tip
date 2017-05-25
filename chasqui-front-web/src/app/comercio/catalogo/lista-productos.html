@@ -3,8 +3,9 @@
 		Sin productos.</span>
 
 		<div  layout="column" layout-gt-sm="row" layout-wrap> 
-		<div flex="25" flex-gt-sm="25"  ng-repeat="variante in listaProductoCtr.variantes"  >
-			<md-card>
+		<div flex="25" flex-gt-sm="25"  ng-repeat="variante in listaProductoCtr.variantes"  
+			style="padding-bottom: 8px" >
+			<md-card  style="height:100%;">
 				<div class="hover01">
 					<div>
 						<figure><img 
@@ -25,9 +26,14 @@
 					        	<div class="md-subhead">
 									<a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a>
 								</div >
+								<!--
 								<div class="md-subhead">
 									<span>{{variante.nombreVariedad}} </span>
-								</div>													
+								</div>	
+								<div class="md-subhead">
+									<div ng-bind-html ="variante.descripcion" />     
+								</div>														
+								-->
 							</div>	
 
 							<div layout="row"  layout-align="space-around center"

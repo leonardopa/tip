@@ -128,6 +128,12 @@
             controller: 'DemoController',        
             controllerAs: 'demoCtrl'
           })
+          .state('dialog', {
+            url: '/dialog',
+            templateUrl: 'app/comercio/demo/dialog1.tmpl.html',
+            controller: 'DemoDialogController',        
+            controllerAs: 'demoDialogCtrl'
+          })
         .state('error', {
 	        url: '/error/:key',
 	        controller: 'ErrorController as error',

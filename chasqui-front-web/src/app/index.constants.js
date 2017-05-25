@@ -78,7 +78,9 @@
         	
         	medallas: URL_REST_BASE +"client/medalla/all", 
 
-          
+            imagenProducto : function (idVariante){
+                return URL_REST_BASE + "client/producto/images/" + idVariante; 
+            },
         	
         	medallasProducto: URL_REST_BASE + "client/medalla/producto/all",
         	

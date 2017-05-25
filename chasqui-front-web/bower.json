@@ -25,7 +25,9 @@
     "svg-morpheus": "^0.3.2",
     "angular-translate-loader-static-files": "^2.11.0",
     "angular-leaflet-directive": "^0.10.0",
-    "angular-loading-bar": "^0.9.0"
+    "angular-loading-bar": "^0.9.0",
+    "dm-angular-carrousel": "^0.1.0",
+    "angular-jk-carousel": "^0.5.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.3"

@@ -86,6 +86,11 @@
 			$log.debug(" service verDirecciones ");			
 	        return promiseService.doGetPrivate(CTE_REST.verDirecciones, {});
 	    }
+		
+		vm.imagenProducto = function (id) {
+			$log.debug(" service verDirecciones ");			
+	        return promiseService.doGet(CTE_REST.imagenProducto(id), {});
+	    }
 	
 		
 	 	/////////////////////////////////////

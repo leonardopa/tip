@@ -1,8 +1,89 @@
 
-
+<md-list>
+		<md-list-item >
+			https://daneden.github.io/animate.css/
+		</md-list-item>
+</md-list>
 
 <p>{{demoCtrl.mensaje}}</p>
 
 <md-button class="md-primary md-raised" ng-click="demoCtrl.showAdvanced($event)">
       Custom Dialog
-    </md-button>
+</md-button>
+
+<md-button class="md-primary md-raised" ng-click="demoCtrl.cambiarClase()">
+cambiarClase
+</md-button>
+
+
+
+<style type="text/css">
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+</style>
+
+
+<div layout="row" layout-wrap >
+  <div flex="30" >
+   <div class="{{demoCtrl.class}}">
+		Para animar
+	</div>
+  </div>
+  <div flex="45">
+    [flex="45"]
+  </div>
+  <div flex="25">
+    [flex="25"]
+  </div>
+  <div flex="33">
+    [flex="33"]
+  </div>
+  <div flex="66">
+    <div class="{{demoCtrl.class}}">
+		Para animar
+	</div>
+  </div>
+  <div flex="50">
+    [flex="50"]
+  </div>
+  <div flex>
+    [flex]
+  </div>
+</div>
+
+<md-button class="md-primary md-raised" ng-click="demoCtrl.cambiarImagen()">
+imagen
+</md-button>
+
+<md-button class="md-primary md-raised" ng-click="demoCtrl.cambiarShow()">
+show
+</md-button>
+
+	
+<div  >
+
+	<img ng-src="http://lorempixel.com/150/150/people/2/"  ng-show="demoCtrl.show1" class="{{demoCtrl.class1}}">
+    <img ng-src="http://lorempixel.com/150/150/people/3/"  ng-show="demoCtrl.show2" class="{{demoCtrl.class2}}">
+	<img ng-src="http://lorempixel.com/150/150/people/4/"  ng-show="demoCtrl.show3" class="{{demoCtrl.class3}}">
+
+</div>
+
+<div layout="column">
+  <img ng-src="http://lorempixel.com/150/150/people/1/">
+  <div layout="row">
+	  <img ng-src="http://lorempixel.com/150/150/people/2/">
+	  <img ng-src="http://lorempixel.com/150/150/people/3/">
+	  <img ng-src="http://lorempixel.com/150/150/people/4/">
+</div>
+</div>
+

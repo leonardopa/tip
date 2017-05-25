@@ -40,8 +40,22 @@
 
 		 ////////////// dialogo producto
 
-		 vm.verProducto = function(producto) {
-		 	console.log("***********" + producto)
+		 vm.verProducto = function(productoParam) {
+		 	 $mdDialog.show({
+		      controller: 'ProductoDialogController as ctrl',
+		      templateUrl: '/app/comercio/catalogo/producto.dialog.html',
+		 //     parent: angular.element(document.body),
+		//      targetEvent: ev,
+		      clickOutsideToClose:true,
+		      fullscreen:false,// Only for -xs, -sm breakpoints.
+			  locals:{parm : productoParam}
+		    })
+		    .then(function(answer) {
+		     //  vm.mensaje = 'You said the information was "' + answer + '".';
+		    }, function() {
+		     //  vm.mensaje = 'You cancelled the dialog.';
+		    });
+
 		 }
 		////////////// PAGINACION
 		vm.currentPage = 0;
