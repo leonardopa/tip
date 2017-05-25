@@ -47,7 +47,16 @@
 		
 		vm.agregarPedidoIndividual = function (params) {
 			$log.debug(" service agregarPedidoIndividual ");
-	        return promiseService.doPut(CTE_REST.agregarPedidoIndividual, params);
+
+			function doNoOk(response) {				
+				if (response.status == 404) {
+					ToastCommons.mensaje( response.data.error);
+				} else {
+					ToastCommons.mensaje("algo fallo !");
+				}
+			}
+
+	        return promiseService.doPut(CTE_REST.agregarPedidoIndividual, params,doNoOk);
 	    }
 		
 		vm.crearPedidoIndividual = function (params,doNoOK) {
