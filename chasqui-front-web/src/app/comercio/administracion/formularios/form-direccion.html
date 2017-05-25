@@ -8,24 +8,23 @@
 							<label>Alias</label>
 							<input ng-model="ctrl.domicilio.alias">
 						</md-input-container>
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>Calle</label>
-							<input ng-model="ctrl.domicilio.calle">
-						</md-input-container>
+						
 					</div>
 
 					<div layout-gt-sm="row">
-
-						<md-input-container class="md-block">
+						<md-input-container class="md-block" flex="40">
+							<label>Calle</label>
+							<input ng-model="ctrl.domicilio.calle">
+						</md-input-container>
+						<md-input-container class="md-block" flex="10">
 							<label>Altura</label>
 							<input ng-model="ctrl.domicilio.altura">
 						</md-input-container>
-						<md-input-container class="md-block">
+						<md-input-container class="md-block" flex="10">
 							<label>Piso / Departamento</label>
 							<input ng-model="ctrl.domicilio.departamento">
 						</md-input-container>
-
-						<md-input-container md-no-float class="md-block">
+						<md-input-container md-no-float class="md-block" flex="40">
 							<label>Localidad </label>
 							<input ng-model="ctrl.domicilio.localidad" placeholder="localidad">
 						</md-input-container>
@@ -35,6 +34,8 @@
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Codigo Postal</label>
 							<input ng-model="ctrl.domicilio.codigoPostal">
+							<md-button class="md-primary" ng-href="http://www.nexo.com.ar/codigosPostales.asp"
+							target="_blank"> no se mi codigo </md-button>
 						</md-input-container>
 						<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> -->
 						<md-input-container class="md-block" flex-gt-sm>

@@ -90,16 +90,6 @@
 			vm.filtrar();
 		}
 
-		vm.filtroQuery = function() {
-			vm.tipoFiltro = 'QUERY';
-
-			vm.categoriaSelect = null;
-			vm.productorSelect = null;
-			vm.medallaSelect = null;
-			vm.sinFiltroSelect = null;
-			doFiltrar(vm.queryText);
-		}
-
 		vm.filtrar = function() {
 			switch (vm.tipoFiltro) {
 				case 'PRODUCTOR':
@@ -122,6 +112,20 @@
 
 		}
 
+		vm.filtroQuery = function() {
+			vm.tipoFiltro = 'QUERY';
+			if ( utilsService.isEmpty( vm.queryText )){	
+				vm.tipoFiltro=undefined;
+				vm.filtroPor(undefined);
+			}
+
+			vm.categoriaSelect = null;
+			vm.productorSelect = null;
+			vm.medallaSelect = null;
+			vm.sinFiltroSelect = null;
+			doFiltrar(vm.queryText);
+		}
+		
 		var doFiltrar = function(valor) {
 			var filtro = {};
 			filtro.tipo = vm.tipoFiltro;

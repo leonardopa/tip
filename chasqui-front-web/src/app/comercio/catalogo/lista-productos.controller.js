@@ -250,7 +250,7 @@
 				productoService.getProductosByQuery(params).then(doOk)				
 				break;
 			default:
-				params.query = filtro.valor;
+			//	params.query = filtro.valor;
 				$log.log('mostrar productos sin filtrar');
 				params.idVendedor = StateCommons.vendedor().id;				
 				productoService.getProductosSinFiltro(params).then(doOk)
