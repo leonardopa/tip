@@ -114,6 +114,8 @@
 
 		vm.verNotificaciones = function() {
 			$log.debug("Ver notificaciones");
+			vm.icon = 'notifications_none';
+			vm.fill = 'white';
 			$state.go('perfil', {
 				index: 1
 			});
@@ -149,8 +151,9 @@
 				}
 
 			}
-
-			perfilService.notificacionesNoLeidas().then(doOk);	
+			//TODO : DEBERIAN SER solo las NO LEIDAS
+			perfilService.notificacionesLeidas(1).then(doOk);	
+			//perfilService.notificacionesNoLeidas().then(doOk);	
 		}
 
 
