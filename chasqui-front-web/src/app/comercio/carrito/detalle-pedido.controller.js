@@ -6,7 +6,7 @@
 
 	/** @ngInject */
 	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog
-			,dialogCommons,productoService,perfilService) {
+			,dialogCommons,productoService,perfilService,gccService) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -71,12 +71,17 @@
 				ToastCommons.mensaje("Pedido Confirmado !");
 				$state.reload();
 			}
-
-			var params = {};
-			params.idPedido = vm.pedido.id;
-			params.idDireccion = vm.direccionSelected.idDireccion;
+		
+			if(vm.pedido.idGrupo==null){
+				var params = {};
+				params.idPedido = vm.pedido.id;
+				params.idDireccion = vm.direccionSelected.idDireccion;
+				// logica por si es pedido grupañ
+				productoService.confirmarPedidoIndividual(params).then(doOk)				
+			}else{
+				gccService.confirmarPedidoColectivo(vm.pedido.idGrupo).then(doOk)	
+			}
 			
-			productoService.confirmarPedidoIndividual(params).then(doOk)
 		}
 
 		vm.confirmarDomicilio = function() {

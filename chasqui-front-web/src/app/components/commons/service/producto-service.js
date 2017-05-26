@@ -101,7 +101,9 @@
 	        return promiseService.doGet(CTE_REST.imagenProducto(id), {});
 	    }
 	
-		
+		vm.confirmarPedidoIndividual=function(params){			
+			return promiseService.doPost(CTE_REST.confirmarPedidoIndividual, params);
+		}
 	 	/////////////////////////////////////
 		//////////// M O C K S 
 		/*	

@@ -47,6 +47,12 @@
 			$log.debug(" service quitarMiembro ");	       
 			return promiseService.doPost(CTE_REST.quitarMiembro,params);
 	    }
+
+	    vm.confirmarPedidoColectivo = function (idGrupo){
+	    	params={};
+	    	params.idGrupo = idGrupo;
+	    	return promiseService.doPost(CTE_REST.confirmarPedidoColectivo,params);	    	
+	    }
 		
 		///////////////////////////////
 		/////////// MOCKS 

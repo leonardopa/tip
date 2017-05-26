@@ -164,6 +164,8 @@
             
             quitarMiembro: URL_REST_BASE + "user/gcc/quitarMiembro",
 
+            confirmarPedidoColectivo : URL_REST_BASE + "user/gcc/confirmar",
+
         	////////////////////////////////////////////////////////
    /*    
         	productosPedidoByUser : function(idUser){
