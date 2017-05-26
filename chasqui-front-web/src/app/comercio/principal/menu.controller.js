@@ -140,9 +140,15 @@
 			function doOk(response) {
 				$log.debug('callObtenerNotificaciones', response);
 
-				vm.notificacionesSinLeer = response.data.length
+				vm.notificacionesSinLeer = 0 ; 
+				// TODO : filtro en el front , deberia ser por BE
+				angular.forEach(response.data, function(value, key){				  
+				  console.log(value.estado)
+			      if(value.estado == "NOTIFICACION_NO_LEIDA")
+			         vm.notificacionesSinLeer = vm.notificacionesSinLeer+1 ; 
+			   });
 
-				if (response.data.length > 0) {
+				if (vm.notificacionesSinLeer > 0) {
 					$log.debug('hay nuevas notificaciones !');
 					addNotificacion();
 					//ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
