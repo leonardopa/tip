@@ -24,8 +24,8 @@
        // var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
 
      
-
-  	   var URL_BASE = "http://168.181.184.203:8080/chasqui/";
+       var URL_BASE = "http://proyectochasqui.com:8080/chasqui-dev-testing/";
+  	   //var URL_BASE = "http://168.181.184.203:8080/chasqui/";
 
 
 
@@ -33,7 +33,7 @@
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 5;
+        var idVendedor = 2;
 
         var nombreVendedor = 'adminpds';
 
