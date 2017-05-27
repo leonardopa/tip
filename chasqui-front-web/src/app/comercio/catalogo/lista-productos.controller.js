@@ -107,12 +107,18 @@
 			findProductos(vm.paging.current,CANT_ITEMS, arg);
 		}
 
-		function agregarProducto(variante){			
-			if(StateCommons.ls.pedidoSeleccionado.idGrupo==null){
-				agregarProductoIndividual(variante);// es individual
+		function agregarProducto(variante){				
+			if(StateCommons.ls.pedidoSeleccionado){
+				if(StateCommons.ls.pedidoSeleccionado.idGrupo==null){
+					agregarProductoIndividual(variante);// es individual
+				}else{
+					agregarProductoDialog(variante);// es grupal			
+				}	
 			}else{
-				agregarProductoDialog(variante);// es grupal			
+				$log.error("se intento agregar una variante pero no hay un pedido seleccionado")
+				StateCommons.ls.pedidoSeleccionado = undefined;
 			}
+			
 			
 		}
 		/** Tiene la loginca de crear el pedido sino lo tien */
