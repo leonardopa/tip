@@ -14,7 +14,7 @@
     vm.ls.token;
     
     vm.ls.usuario ;
-    
+    vm.ls.grupoSelected;
     vm.ls.pedidoSeleccionado; 
 
     vm.ls.varianteSeleccionada; 
@@ -23,6 +23,15 @@
     
     vm.isLogued= function(){
       return !(utilsService.isUndefinedOrNull(vm.ls.usuario) || utilsService.isUndefinedOrNull(vm.ls.usuario.token));
+    }
+
+    vm.logOut=function(){
+      vm.ls.token=undefined;
+      vm.ls.usuario={};
+      vm.ls.grupoSelected=undefined;
+      vm.ls.pedidoSeleccionado=undefined; 
+      vm.ls.varianteSeleccionada=undefined; 
+      vm.ls.notificacionActiva=false;
     }
 
     vm.vendedor = function(){

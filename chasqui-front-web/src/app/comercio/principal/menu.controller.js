@@ -99,11 +99,8 @@
 
 		vm.logOut = function() {
 			$log.debug("Log Out ..... ");
-			StateCommons.ls.usuario = {};
-			StateCommons.ls.token = undefined;
-			StateCommons.ls.pedidoSeleccionado = undefined;
-			StateCommons.ls.notificacionesSinLeer = '';
-
+			StateCommons.logOut();
+			
 			$interval.cancel(llamadoPeriodico);
 
 			initHeader();

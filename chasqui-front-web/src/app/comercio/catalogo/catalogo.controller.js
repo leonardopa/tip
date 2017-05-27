@@ -11,7 +11,7 @@
 	 */
 	function CatalogoController($scope, $log,CTE_REST, $timeout, StateCommons, productorService,
 		productoService, ToastCommons,gccService,utilsService,$mdSidenav) {
-		$log.debug("CatalogoController ..... ", StateCommons.ls.pedidoSeleccionado);
+		$log.debug("CatalogoController ..... ", StateCommons.ls.grupoSelected);
 		StateCommons.ls.itemMenuSelect = 'catalogo';
 		var vm = this;
 
@@ -25,16 +25,7 @@
 	    }
 
 	    vm.isLogued=StateCommons.isLogued();
-
-		// ///////// Para el selector de Grupos de compra
-		vm.topDirections = ['left', 'up'];
-		vm.bottomDirections = ['down', 'right'];
-		vm.isOpen = false;
-		vm.availableModes = ['md-fling', 'md-scale'];
-		vm.selectedMode = 'md-fling'; // /md-scale
-		vm.availableDirections = ['up', 'down', 'left', 'right'];
-		vm.selectedDirection = 'up';
-
+		
 		// vm.categorias = ['categorias 1', 'categorias 2 ', 'categorias 3', 'categorias
 		// 4'];
 		vm.categorias = [];
@@ -42,16 +33,7 @@
 		vm.medallas = [];
 		vm.query = '';
 
-
-		vm.pedidos = {};
-		vm.carrito = StateCommons.ls.pedidoSeleccionado;
-		vm.size = 24;
-		vm.icon = 'shopping_cart';
-		vm.options = {
-			'rotation': 'circ-in',
-			'duration': 1000
-		};
-
+		
 		vm.paginaProducto;
 		vm.tipoFiltro = 'CATEGORIA'; // PRODUCTOR / MEDALLA / QUERY
 		vm.queryText;
@@ -134,67 +116,10 @@
 			// list-producto-controller
 		}
 
-		vm.cambiarContexto = function(pedido) {
-			$log.debug("cambia contexo de carrito ", pedido);
-
-			vm.carrito = pedido;
-			StateCommons.ls.pedidoSeleccionado = vm.carrito;
-
-			vm.icon = pedido.icon;
-			// vm.icon='shopping_cart';
-			$timeout(function() {
-				vm.icon = 'shopping_cart';
-				// /vm.icon=pedido.icon;
-			}, 1500);
-
-		}
-
+		
 		// / CALL REST
 
-		// TODO: cache , para no sobrecargar con grupos
-		// TODO: implemantar cuante este funcionando grupos
-		// TODO : aca se trae los grupos y sus pedidos, pero deberia ser solo 
-		// nombre del grupo y ID-Pedido 
-		function callLoadGrupos() {
-			$log.debug("--- find  pedidos abiertos ---");
-
-			function doOk(response) {
-
-				//vm.pedidos = response.data;
-				vm.pedidos = [];
-				var pedidosAux = response.data;
-
-
-				angular.forEach(pedidosAux, function(pedido) {
-					//$log.debug(pedido);
-					if (pedido.estado == 'ABIERTO'){
-						// Esto es hasta no tener umagenes que identifiquen a los grupos
-						pedido.aliasGrupo = utilsService.isUndefinedOrNull(pedido.aliasGrupo) ? 'Personal' : pedido.aliasGrupo;	
-						pedido.icon = 'people';
-						pedido.icon = pedido.aliasGrupo == 'Personal' ? 'person' : pedido.icon;
-					//	pedido.icon = pedido.tipo == 'NODOS' ? 'people_outline' : pedido.icon;		
-						//pedido.aliasGrupo = pedido.aliasGrupo == null ? 'Personal' : pedido.aliasGrupo;				
-						vm.pedidos.push(pedido);
-					}	
-				});
-				
-				if (vm.carrito != null) {
-					// vm.carrito = vm.pedidos[0];
-					vm.carrito = StateCommons.ls.pedidoSeleccionado;
-				} else {
-					vm.carrito = vm.pedidos[0];
-				}
-
-
-			}	
-			function doNoOk(response) {
-				$log.debug("---no esta logueado ---");
-
-			}
-			
-			gccService.pedidosByUser(doNoOk).then(doOk)
-		}
-
+		
 
 		function callCategorias() {
 			productoService.getCategorias()
@@ -218,10 +143,7 @@
 					vm.medallas = response.data;
 				})
 		}
-
-		if (vm.isLogued){callLoadGrupos();}
-	 			
-
+ 			
 		callCategorias();
 		callProductores();
 		callMedallas();
