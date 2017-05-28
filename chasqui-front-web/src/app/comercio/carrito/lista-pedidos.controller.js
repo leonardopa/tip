@@ -7,7 +7,7 @@
 	/** @ngInject */
 	function ListaPedidosController($log, $state, $scope, StateCommons 
 			,productoService,ToastCommons,gccService) {
-		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSeleccionado);
+		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSelected);
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
 		var vm = this;
 		vm.habilita = false;
@@ -16,7 +16,7 @@
 		vm.selected = null, vm.previous = null;
 		vm.selectedIndex = 1;
 
-		vm.pedidoDelContexto = StateCommons.ls.pedidoSeleccionado;
+		vm.pedidoDelContexto = StateCommons.ls.pedidoSelected;
 
 		$scope.$watch('listaPedidoCtrl.selectedIndex', function(current, old) {
 
@@ -25,7 +25,7 @@
 
 			$log.debug('cambio tab ..... ', vm.selected);
 
-			StateCommons.ls.pedidoSeleccionado = vm.selected;
+			StateCommons.ls.pedidoSelected = vm.selected;
 
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {

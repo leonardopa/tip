@@ -42,7 +42,7 @@
 				ToastCommons.mensaje("Bienvenido !");
 				$rootScope.$broadcast('resetHeader', "");
 
-				if (utilsService.isUndefinedOrNull(StateCommons.ls.varianteSeleccionada)){
+				if (utilsService.isUndefinedOrNull(StateCommons.ls.varianteSelected)){
 					if (utilsService.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage==''){						
 						$state.go("principal");			
 					}else{

@@ -23,6 +23,7 @@
 		vm.variantes = [];		
 		vm.ultimoFiltro = {};
 		vm.medallaSelect=undefined;
+		vm.pedidoSelected=StateCommons.ls.pedidoSelected;
 		//////// dialogo medalla
 		vm.showPrerenderedDialog = function(medalla) {	
 			vm.medallaSelect=medalla;
@@ -79,7 +80,7 @@
 			}else{
 				ToastCommons.mensaje("TODO not logued");
 				$log.log('not logued" ' , variante);
-				StateCommons.ls.varianteSeleccionada=variante;
+				StateCommons.ls.varianteSelected=variante;
 				$state.go('login');
 			}
 		}
@@ -114,14 +115,14 @@
 				ToastCommons.mensaje("TODO agregar al carro pedido grupal");
 			}
 			/*		
-			if(StateCommons.ls.pedidoSeleccionado.idGrupo==null){
+			if(StateCommons.ls.pedidoSelected.idGrupo==null){
 				agregarProductoIndividual(variante);// es individual
 			}else{
-				if(StateCommons.ls.pedidoSeleccionado){
+				if(StateCommons.ls.pedidoSelected){
 					agregarProductoDialog(variante);// es grupal			
 				}else{
 					$log.error("se intento agregar una variante a un gru´p pero no hay un pedido seleccionado")
-					StateCommons.ls.pedidoSeleccionado = undefined;
+					StateCommons.ls.pedidoSelected = undefined;
 				}
 			}*/	
 		}
@@ -130,7 +131,7 @@
 			function setPedidoYagregarProducto(){
 					function doOkPedido(response){
 						$log.debug("setPedidoYagregarProducto", response);
-						StateCommons.ls.pedidoSeleccionado = response.data;					
+						StateCommons.ls.pedidoSelected = response.data;					
 					}
 
 					productoService.verPedidoIndividual().then(doOkPedido);
@@ -185,7 +186,7 @@
 
 		var callAgregarAlCarro = function(variante, cantidad) {
 			$log.debug('callAgregarAlCarro para pedido: ',
-					StateCommons.ls.pedidoSeleccionado);
+					StateCommons.ls.pedidoSelected);
 		 
 			var doOk = function (response) {
 				$log.log('Agregar producto Response ', response);
@@ -194,7 +195,7 @@
 
 			
 			var params = {};
-			params.idPedido = StateCommons.ls.pedidoSeleccionado.id;
+			params.idPedido = StateCommons.ls.pedidoSelected.id;
 			params.idVariante = variante.idVariante;
 			params.cantidad = cantidad;
 
@@ -270,10 +271,10 @@
 		}
 
 		// findProductos();
-		if (! utilsService.isUndefinedOrNull(StateCommons.ls.varianteSeleccionada)){
-			$log.debug("tiene una variante seleccionda" ,StateCommons.ls.varianteSeleccionada )
-			vm.agregar(StateCommons.ls.varianteSeleccionada)
-			StateCommons.ls.varianteSeleccionada=undefined;
+		if (! utilsService.isUndefinedOrNull(StateCommons.ls.varianteSelected)){
+			$log.debug("tiene una variante seleccionda" ,StateCommons.ls.varianteSelected )
+			vm.agregar(StateCommons.ls.varianteSelected)
+			StateCommons.ls.varianteSelected=undefined;
 		}
 
 		//vm.variantes = findProductos(1,10,{});

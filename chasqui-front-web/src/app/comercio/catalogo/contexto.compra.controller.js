@@ -6,8 +6,7 @@
 		.controller('ContextoCompraController', ContextoCompraController);
 
 	/**
-	 * Pagina donde se muestran los productos. Contiene los filtros y el
-	 * contexto de compra , pero NO la lista de productos la cual se incluye
+	 * Lista lateral de productos del pedido seleccionado
 	 */
 	function ContextoCompraController($log,CTE_REST,StateCommons,gccService,utilsService
 		,productoService,$timeout) {	
@@ -55,7 +54,7 @@
 		}*/
 /*
 		function definirGrupoSeleccionado(){
-			//vm.carrito = StateCommons.ls.pedidoSeleccionado;
+			//vm.carrito = StateCommons.ls.pedidoSelected;
 			$log.debug("***** 1 ", StateCommons.ls.grupoSelected);
 			if(utilsService.isUndefinedOrNull(StateCommons.ls.grupoSelected)){	
 				vm.grupoSelected = gIndividualFicticio;

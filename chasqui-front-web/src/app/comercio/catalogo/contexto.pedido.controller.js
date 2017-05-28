@@ -6,8 +6,7 @@
 		.controller('ContextoPedidoController', ContextoPedidoController);
 
 	/**
-	 * Pagina donde se muestran los productos. Contiene los filtros y el
-	 * contexto de compra , pero NO la lista de productos la cual se incluye
+	 *  FAB Button de contexto de compra.
 	 */
 	function ContextoPedidoController($log,CTE_REST,StateCommons,gccService,utilsService
 		,productoService,$timeout) {	
@@ -29,8 +28,6 @@
 				return vm.pedidoSelected.aliasGrupo == null ? 'Personal' : vm.pedidoSelected.aliasGrupo;
 		}
 
-		
-
 		////////////////////
 		///////// llamada a servicios
 
@@ -45,7 +42,10 @@
 		function callPedidoIndividual(){			
 			function doOkPedido(response){					
 				vm.pedidos.push(response.data);	
-				vm.pedidoSelected=response.data;				
+				vm.pedidoSelected=response.data;	
+
+				StateCommons.ls.pedidoSelected=vm.pedidoSelected;
+				/// falta logica para pedidos grupales y si selecciono desde otra pantalla			
 			}
 
 			productoService.verPedidoIndividual().then(doOkPedido);
