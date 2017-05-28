@@ -1,7 +1,9 @@
 	<!--  Menu de contexto de COMPRA --> 
 <div ng-controller="ContextoCompraController as contextoCtrl"> 
+ 
 	<div class="fixed" ng-if="contextoCtrl.isLogued" ng-cloak>
 				<md-fab-speed-dial md-open="contextoCtrl.isOpen" 
+					ng-mouseover="contextoCtrl.hoverIn()" ng-mouseleave="contextoCtrl.hoverOut()"
 					md-direction="{{contextoCtrl.selectedDirection}}" ng-class="contextoCtrl.selectedMode">
 					<md-fab-trigger>
 						<md-button aria-label="menu" class="md-fab md-warn">
@@ -31,11 +33,7 @@
 					</md-button>
 					<md-subheader class="md-primary"> {{contextoCtrl.grupoSelected.alias}}</md-subheader>
 				</md-card>
-				<div>
-					<md-button ng-click="contextoCtrl.toggleLeft()" class="md-raised">
-						Ver pedido
-					</md-button>
-				</div>	
+				
 	</div>
 </div>
 <style>

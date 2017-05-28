@@ -25,6 +25,11 @@
       return !(utilsService.isUndefinedOrNull(vm.ls.usuario) || utilsService.isUndefinedOrNull(vm.ls.usuario.token));
     }
 
+    vm.isPedidoInividualSelected=function(){      
+      return vm.ls.grupoSelected.alias == "Personal"
+    }
+    
+
     vm.logOut=function(){
       vm.ls.token=undefined;
       vm.ls.usuario={};

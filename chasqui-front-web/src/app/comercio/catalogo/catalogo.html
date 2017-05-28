@@ -9,9 +9,16 @@
 					<div flex="20"> 
 						<div layout=column>
 							<div>
-								<section ng-include="'app/comercio/catalogo/filtros.html'"></section>				
+								<section ng-include="'app/comercio/catalogo/filtros.html'">
+								</section>				
 							</div>		
-							<section ng-include="'app/comercio/catalogo/catalogo.pedido.context.html'" ng-cloak></section>
+							<section ng-include="'app/comercio/catalogo/contexto.pedido.html'" ng-cloak>
+								</section>
+							<div>
+								<md-button ng-click="catalogoCtrl.toggleLeft()" class="md-raised">
+									Ver pedido
+								</md-button>
+							</div>
 						</div>
 					</div>
 					<div flex="80">
@@ -40,7 +47,7 @@
 
 			</div>
 		</div>
-
+		
 		<section ng-include="'app/comercio/catalogo/contexto.compra.html'"></section>
 
 </md-content>

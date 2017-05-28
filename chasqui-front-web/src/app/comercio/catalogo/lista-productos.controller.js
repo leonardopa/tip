@@ -107,19 +107,23 @@
 			findProductos(vm.paging.current,CANT_ITEMS, arg);
 		}
 
-		function agregarProducto(variante){				
-			if(StateCommons.ls.pedidoSeleccionado){
-				if(StateCommons.ls.pedidoSeleccionado.idGrupo==null){
-					agregarProductoIndividual(variante);// es individual
-				}else{
-					agregarProductoDialog(variante);// es grupal			
-				}	
+		function agregarProducto(variante){		
+			if (StateCommons.isPedidoInividualSelected()){
+				agregarProductoIndividual(variante);// es individual
 			}else{
-				$log.error("se intento agregar una variante pero no hay un pedido seleccionado")
-				StateCommons.ls.pedidoSeleccionado = undefined;
+				ToastCommons.mensaje("TODO agregar al carro pedido grupal");
 			}
-			
-			
+			/*		
+			if(StateCommons.ls.pedidoSeleccionado.idGrupo==null){
+				agregarProductoIndividual(variante);// es individual
+			}else{
+				if(StateCommons.ls.pedidoSeleccionado){
+					agregarProductoDialog(variante);// es grupal			
+				}else{
+					$log.error("se intento agregar una variante a un gru´p pero no hay un pedido seleccionado")
+					StateCommons.ls.pedidoSeleccionado = undefined;
+				}
+			}*/	
 		}
 		/** Tiene la loginca de crear el pedido sino lo tien */
 		function agregarProductoIndividual(variante){
@@ -148,7 +152,6 @@
 				var json = {};
 				json.idVendedor = StateCommons.vendedor().id;
 				
-
 				//si falla es poque ya tiene un pedido abierto TODO mejorar
 				productoService.crearPedidoIndividual(json,doNoOK).then(doOk)
 		}
