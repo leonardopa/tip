@@ -8,7 +8,7 @@
 	/**
 	 * Lista lateral de productos del pedido seleccionado
 	 */
-	function ContextoCompraController($log,CTE_REST,StateCommons,gccService,utilsService
+	function ContextoCompraController($rootScope,$log,CTE_REST,StateCommons,gccService,utilsService
 		,productoService,$timeout) {	
 		
 		$log.debug("ContextoCompraController ..... ", StateCommons.ls.grupoSelected);
@@ -43,7 +43,8 @@
 		var gIndividualFicticio={}
 		gIndividualFicticio.alias="Personal";
 		gIndividualFicticio.esAdministrador=true;
-
+		gIndividualFicticio.idPedidoIndividual="Personal";
+		
 		vm.isLogued=StateCommons.isLogued();
 		vm.grupos = [gIndividualFicticio];
 		vm.grupoSelected=gIndividualFicticio;
@@ -81,6 +82,8 @@
 */
 		vm.cambiarContexto = function(grupo) {
 			$log.debug("cambia contexo de carrito ", grupo);
+			
+			$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
 
 			vm.grupoSelected = grupo;			
 			StateCommons.ls.grupoSelected = vm.carrito;
@@ -98,8 +101,8 @@
 		///////// llamada a servicios
 
 		function callGrupos(){
-			function doOK(response){				
-				vm.grupos.concat(response.data);
+			function doOK(response){					
+				vm.grupos = vm.grupos.concat(response.data);				
 			}
 
 			gccService.gruposByusuario().then(doOK);

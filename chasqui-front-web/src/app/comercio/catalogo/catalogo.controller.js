@@ -17,7 +17,7 @@
 
 		vm.toggleLeft = buildToggler('left');
 	    vm.toggleRight = buildToggler('right');
-
+	    
 	    function buildToggler(componentId) {
 	      return function() {
 	        $mdSidenav(componentId).toggle();

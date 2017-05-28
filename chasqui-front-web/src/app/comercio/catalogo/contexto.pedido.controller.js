@@ -8,12 +8,12 @@
 	/**
 	 *  FAB Button de contexto de compra.
 	 */
-	function ContextoPedidoController($log,CTE_REST,StateCommons,gccService,utilsService
+	function ContextoPedidoController($rootScope,$log,CTE_REST,StateCommons,gccService,utilsService
 		,productoService,$timeout) {	
-		
+
 		$log.debug("ContextoPedidoController ..... ", StateCommons.ls.grupoSelected);
 		var vm = this;
-		
+		 
 		/////////////////////////////////////////////////
 
 		// Representa el conepto de grupo indivial para el caso de que no tiene un pedido abierto
@@ -26,6 +26,23 @@
 		vm.checkAlias=function(){
 			if (vm.pedidoSelected)
 				return vm.pedidoSelected.aliasGrupo == null ? 'Personal' : vm.pedidoSelected.aliasGrupo;
+		}
+
+		$rootScope.$on('contexto.compra.cambia.grupo', 
+			function(event, grupo) { 
+				vm.pedidoSelected = getPedidoByGrupo(grupo);
+			});
+
+		function getPedidoByGrupo(grupo){		
+			// es algun gcc
+			angular.forEach(vm.pedidos, function(pedido, key) {
+			  if (pedido.idPedidoIndividual ===  grupo.idPedidoIndividual) return pedido;
+			});
+			// si es indivudual
+			angular.forEach(vm.pedidos, function(pedido, key) {
+			  if (pedido.idGrupo ===  null) return pedido;
+			});
+			// o no tiene pedido
 		}
 
 		////////////////////
