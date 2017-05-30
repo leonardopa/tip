@@ -62,24 +62,28 @@
              
         </div>
 
-        <div layout="row" ng-show="! emprendedorCtrl.isVistaUnica">
-            <md-list flex>
-                <md-subheader class="md-no-sticky">Productores</md-subheader>
-                <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.emprendedores" 
-                	ng-click="emprendedorCtrl.verDetalle(item)">                                  
-                            <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" class="md-card-image" 
+        <div layout="row"  ng-show="! emprendedorCtrl.isVistaUnica" layout-wrap >
+         <md-card ng-repeat="item in emprendedorCtrl.emprendedores" >          
+              <md-card-content layout="row"  ng-click="emprendedorCtrl.verDetalle(item)"
+                >             
+                    <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" class="md-card-image" 
                             width="100px" height="auto"  alt="productor">
-
-                            <div class="md-list-item-text" layout="column" style="padding-left: 10px">
-                                <h3>{{ item.nombreProductor }}</h3>
-                                <p>{{ item.descripcionCorta }}</p>
-                            </div>
-
-                </md-list-item>
-                <md-divider ng-if="!$last"></md-divider>
-              
-        </div>
-        
-       
+                    <div layout="column" style="padding-left: 10px">
+                      <h3 ng-click="emprendedorCtrl.verDetalle(item)" >{{ item.nombreProductor }}</h3>
+                      <p>{{ item.descripcionCorta }}</p>
+                    </div>
+                </md-card-content>
+                
+        </md-card> 
+       </div>
 
     </div>
+
+    <style type="text/css">
+      
+      md-card:hover {
+        outline: none;
+        border: 0;
+        background: #FAFAFB;
+     }
+    </style>
