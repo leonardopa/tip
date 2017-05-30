@@ -27,6 +27,8 @@
 			vm.canAddIntegrante = newValue
 		});
 
+		
+
 		// // componente Chips
 
 		var pendingSearch, cancelSearch = angular.noop;
@@ -60,8 +62,9 @@
 		}
 
 		vm.quitarMiembro = function(miembro) {
+			var nombre = miembro.nickname  == null ? miembro.email : miembro.nickname ;
 			dialogCommons.confirm('Quitar Miembro del grupo',
-					'Estas seguro de quitar a ' + miembro.nombre + ' ?',
+					'Estas seguro de quitar a ' + nombre + ' ?',
 					'Si, lo quito', 'no', function() {
 						vm.callQuitarMiembro(miembro);
 					}, function() {
@@ -89,6 +92,7 @@
 		vm.callQuitarMiembro = function(miembro) {
 			function doOk(response) {
 				ToastCommons.mensaje('se quito miembro del grupo')
+				$scope.$emit("quito-miembro-grupo");
 			}			
 			var params ={};
 			params.idGrupo=vm.grupo.idGrupo;

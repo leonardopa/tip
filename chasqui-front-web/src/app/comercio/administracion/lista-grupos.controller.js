@@ -32,6 +32,12 @@
 				}
 		});
 
+		
+		$scope.$on('quito-miembro-grupo', 
+			function(event) {	
+				callLoadGrupos();		
+		});
+
 		/** Editar datos del grupo */
 		// TODO: IMPLEMENTAR
 		vm.edit = function() {
@@ -109,6 +115,7 @@
 			var doOk = function (response) {
 				$log.log('Se enviará un email a la direcciónn ', response);
 				ToastCommons.mensaje("Se enviará un mail a la dirección");	
+				callLoadGrupos();
 			}
 
 			var params = {};
@@ -130,7 +137,7 @@
 					grupo.canAddIntegrante = false;
 				});
 
-				vm.selected = vm.tabs[0];
+			//	vm.selected = vm.tabs[selectedIndex];
 			}
 
 			gccService.gruposByusuario().then(doOk)
