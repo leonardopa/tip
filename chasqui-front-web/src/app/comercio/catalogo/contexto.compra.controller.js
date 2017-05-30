@@ -82,12 +82,12 @@
 */
 		vm.cambiarContexto = function(grupo) {
 			$log.debug("cambia contexo de carrito ", grupo);
-			
+
 			$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
 
 			vm.grupoSelected = grupo;			
-			StateCommons.ls.grupoSelected = vm.carrito;
-
+			StateCommons.ls.grupoSelected = grupo;
+							
 			vm.icon = 'person';
 			// vm.icon='shopping_cart';
 			$timeout(function() {

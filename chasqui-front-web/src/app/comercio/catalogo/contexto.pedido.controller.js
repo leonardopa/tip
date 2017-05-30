@@ -29,20 +29,40 @@
 		}
 
 		$rootScope.$on('contexto.compra.cambia.grupo', 
-			function(event, grupo) { 
+			function(event, grupo) {				
+				console.log(getPedidoByGrupo(grupo)) ;
 				vm.pedidoSelected = getPedidoByGrupo(grupo);
+				StateCommons.ls.pedidoSelected=vm.pedidoSelected;
+				console.log(vm.pedidoSelected);
+				console.log(StateCommons.ls.pedidoSelected);
 			});
+
+		//actualiza la lista de productos
+		$rootScope.$on('lista-producto-agrego-producto', 
+			function(event) {			
+				callPedidoIndividual();			
+				callGccPedidos();
+			});
+		
 
 		function getPedidoByGrupo(grupo){		
 			// es algun gcc
+			var pedidoCurrent=undefined;// o no tiene pedido
+
 			angular.forEach(vm.pedidos, function(pedido, key) {
-			  if (pedido.idPedidoIndividual ===  grupo.idPedidoIndividual) return pedido;
+			  if (pedido.idPedidoIndividual ===  grupo.idPedidoIndividual) 
+			  	pedidoCurrent=pedido;
 			});
 			// si es indivudual
-			angular.forEach(vm.pedidos, function(pedido, key) {
-			  if (pedido.idGrupo ===  null) return pedido;
-			});
-			// o no tiene pedido
+			if(grupo.alias=='Personal'){				
+				angular.forEach(vm.pedidos, function(pedido, key) {								
+			  		if (utilsService.isUndefinedOrNull(pedido.idGrupo))
+			  			pedidoCurrent = pedido;
+				});	
+			}			
+			
+			return pedidoCurrent;
+			
 		}
 
 		////////////////////

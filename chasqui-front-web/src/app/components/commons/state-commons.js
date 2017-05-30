@@ -22,6 +22,9 @@
       return !(utilsService.isUndefinedOrNull(vm.ls.usuario) || utilsService.isUndefinedOrNull(vm.ls.usuario.token));
     }
 
+    vm.isGrupoIndividualSelected=function(){
+        return vm.ls.grupoSelected.alias =='Personal';
+    }
     vm.isPedidoInividualSelected=function(){         
         return vm.ls.pedidoSelected.idGrupo == null;
     }

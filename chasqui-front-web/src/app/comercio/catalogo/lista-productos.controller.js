@@ -7,8 +7,9 @@
 	/**
 	 * @ngInject Lista de productos.
 	 */
-	function ListaProductosController($scope, $log, CTE_REST,
-			$state, StateCommons, ToastCommons, dialogCommons,productoService,utilsService,$mdDialog) {
+	function ListaProductosController($scope,$rootScope, $log, CTE_REST,
+			$state, StateCommons, ToastCommons, dialogCommons,productoService,utilsService,
+			gccService ,$mdDialog) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -23,7 +24,8 @@
 		vm.variantes = [];		
 		vm.ultimoFiltro = {};
 		vm.medallaSelect=undefined;
-		vm.pedidoSelected=StateCommons.ls.pedidoSelected;
+		vm.pedidoSelected=undefined;
+		vm.grupoSelected=undefined;
 		//////// dialogo medalla
 		vm.showPrerenderedDialog = function(medalla) {	
 			vm.medallaSelect=medalla;
@@ -75,10 +77,13 @@
 		//////////////////////////////
 
 		vm.agregar = function(variante) {
+			vm.grupoSelected=StateCommons.ls.grupoSelected;
+			vm.pedidoSelected=StateCommons.ls.pedidoSelected;
+			
 			if (StateCommons.isLogued()){
 				agregarProducto(variante);
 			}else{
-				ToastCommons.mensaje("TODO not logued");
+				ToastCommons.mensaje("Te invitamos a ingresar !");
 				$log.log('not logued" ' , variante);
 				StateCommons.ls.varianteSelected=variante;
 				$state.go('login');
@@ -109,26 +114,22 @@
 		}
 
 		function agregarProducto(variante){		
-			if (StateCommons.isPedidoInividualSelected()){
+			if (StateCommons.isGrupoIndividualSelected()){
 				agregarProductoIndividual(variante);// es individual
 			}else{
-				ToastCommons.mensaje("TODO agregar al carro pedido grupal");
-			}
-			/*		
-			if(StateCommons.ls.pedidoSelected.idGrupo==null){
-				agregarProductoIndividual(variante);// es individual
-			}else{
-				if(StateCommons.ls.pedidoSelected){
-					agregarProductoDialog(variante);// es grupal			
+				ToastCommons.mensaje("error CROSS DOMANIN / entidad duplicada DCC/individual");
+				/*
+				if(StateCommons.ls.pedidoSelected){					
+					agregarProductoDialog(variante);
 				}else{
-					$log.error("se intento agregar una variante a un gru´p pero no hay un pedido seleccionado")
-					StateCommons.ls.pedidoSelected = undefined;
-				}
-			}*/	
+					//$log.error("se intento agregar una variante a un gru´p pero no hay un pedido seleccionado")
+					callCrearPedidoGrupal(variante);
+				}*/
+			}
 		}
 		/** Tiene la loginca de crear el pedido sino lo tien */
 		function agregarProductoIndividual(variante){
-			function setPedidoYagregarProducto(){
+				function setPedidoYagregarProducto(){
 					function doOkPedido(response){
 						$log.debug("setPedidoYagregarProducto", response);
 						StateCommons.ls.pedidoSelected = response.data;					
@@ -180,7 +181,7 @@
 					'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
 		}
 
-		
+				
 
 		// /////////// REST
 
@@ -191,6 +192,7 @@
 			var doOk = function (response) {
 				$log.log('Agregar producto Response ', response);
 				ToastCommons.mensaje("Producto agregado !");
+				$rootScope.$emit('lista-producto-agrego-producto');
 			}
 
 			
@@ -268,6 +270,22 @@
 			}
 			
 			
+		}
+
+		function callCrearPedidoGrupal(variante){
+
+			function doOK(response) {
+				$log.debug("************** callCrearPedidoGrupal", response);
+				StateCommons.ls.pedidoSelected = response.data;		
+
+				agregarProductoDialog(variante)	
+			}
+
+			var params = {}
+			params.idGrupo = StateCommons.ls.grupoSelected.idGrupo; 
+			params.idVendedor = StateCommons.vendedor().id;
+
+			gccService.crearPedidoGrupal(params).then(doOK);
 		}
 
 		// findProductos();
