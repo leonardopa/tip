@@ -29,7 +29,8 @@
 		}
 
 		$rootScope.$on('contexto.compra.cambia.grupo', 
-			function(event, grupo) {				
+			function(event, grupo) {		
+				console.log((grupo)) 		
 				console.log(getPedidoByGrupo(grupo)) ;
 				vm.pedidoSelected = getPedidoByGrupo(grupo);
 				StateCommons.ls.pedidoSelected=vm.pedidoSelected;
@@ -50,7 +51,7 @@
 			var pedidoCurrent=undefined;// o no tiene pedido
 
 			angular.forEach(vm.pedidos, function(pedido, key) {
-			  if (pedido.idPedidoIndividual ===  grupo.idPedidoIndividual) 
+			  if (pedido.id ===  grupo.idPedidoIndividual) 
 			  	pedidoCurrent=pedido;
 			});
 			// si es indivudual
@@ -70,7 +71,7 @@
 
 		function callGccPedidos(){			
 			function doOkPedido(response){	
-				vm.pedidos.concat(response.data);				
+				vm.pedidos=vm.pedidos.concat(response.data);				
 			}
 
 			gccService.pedidosByUser().then(doOkPedido);

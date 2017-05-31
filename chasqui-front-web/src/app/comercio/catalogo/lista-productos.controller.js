@@ -117,14 +117,15 @@
 			if (StateCommons.isGrupoIndividualSelected()){
 				agregarProductoIndividual(variante);// es individual
 			}else{
-				ToastCommons.mensaje("error CROSS DOMANIN / entidad duplicada DCC/individual");
-				/*
-				if(StateCommons.ls.pedidoSelected){					
+			//	ToastCommons.mensaje("error CROSS DOMANIN / entidad duplicada DCC/individual");
+			
+				if(StateCommons.ls.pedidoSelected){		
+					//ToastCommons.mensaje(" selected ");
 					agregarProductoDialog(variante);
-				}else{
+				}else{ToastCommons.mensaje("not selected ");
 					//$log.error("se intento agregar una variante a un gru´p pero no hay un pedido seleccionado")
 					callCrearPedidoGrupal(variante);
-				}*/
+				}
 			}
 		}
 		/** Tiene la loginca de crear el pedido sino lo tien */
