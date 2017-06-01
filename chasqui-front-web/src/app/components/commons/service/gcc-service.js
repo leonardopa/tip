@@ -49,7 +49,7 @@
 	    }
 
 	    vm.confirmarPedidoColectivo = function (idGrupo){
-	    	params={};
+	    	var params={};
 	    	params.idGrupo = idGrupo;
 	    	return promiseService.doPost(CTE_REST.confirmarPedidoColectivo,params);	    	
 	    }

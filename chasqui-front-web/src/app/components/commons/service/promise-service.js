@@ -88,19 +88,25 @@
 		 }
 		 
 		  /** En caso de no ser un respues exitosa va a la pantalla de error generica */
-		    var doNoOkDefault = function(response) {
-		      $log.error("error al llamar a un servicio", response);
+		 var doNoOkDefault = function(response) {
+		    $log.error("error al llamar a un servicio", response);
 		      
-		      if (response.status==401){
-		    	  ToastCommons.mensaje("Por favor vuelva a loguarse");
-		    	  $state.go('login');
-		      }else if (response.status==406) 
-		    	  ToastCommons.mensaje("Parametros incorrectos");
-		      else{
-		    	  $state.go('error', {
-		    		  key: 'GENERIC_ERROR'
-		    	  });    	  
-		      }
+		    if (response.status==401){
+		    	ToastCommons.mensaje("Por favor vuelva a loguarse");
+		    	$state.go('login');
+		    }else {
+		        $log.error("error al llamar a un servicio data", response.data);
+		        $log.error("error al llamar a un servicio data.error", response.data.error);
+		        $log.error("error al llamar a un servicio data.error", response.data.error == undefined);
+		        if(response.data.error == undefined){        
+		          $state.go('error', {
+		            key: 'GENERIC_ERROR'
+		          });  
+		        }else{
+		          ToastCommons.mensaje(response.data.error);
+		        }
+		        
+		    }
 		      
 		    }
 			

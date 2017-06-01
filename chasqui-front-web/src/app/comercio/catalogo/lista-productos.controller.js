@@ -278,7 +278,7 @@
 			function doOK(response) {
 				$log.debug("************** callCrearPedidoGrupal", response);
 				StateCommons.ls.pedidoSelected = response.data;		
-
+				vm.pedidoSelected = response.data;		
 				agregarProductoDialog(variante)	
 			}
 
