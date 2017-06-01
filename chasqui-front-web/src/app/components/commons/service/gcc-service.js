@@ -54,6 +54,11 @@
 	    	return promiseService.doPost(CTE_REST.confirmarPedidoColectivo,params);	    	
 	    }
 		
+		vm.confirmarPedidoIndividualGcc = function (idPedido){
+			var params={};
+	    	params.idPedido = idPedido;
+	    	return promiseService.doPost(CTE_REST.confirmarPedidoIndividualGcc,params);	    		
+		}
 		///////////////////////////////
 		/////////// MOCKS 
 		

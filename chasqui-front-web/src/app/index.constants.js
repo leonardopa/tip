@@ -166,6 +166,8 @@
 
             confirmarPedidoColectivo : URL_REST_BASE + "user/gcc/confirmar",
 
+            confirmarPedidoIndividualGcc : URL_REST_BASE + "user/pedido/individualEnGrupo/confirmar",
+
         	////////////////////////////////////////////////////////
    /*    
         	productosPedidoByUser : function(idUser){

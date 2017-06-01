@@ -35,7 +35,13 @@
 		<md-card-actions layout="row" layout-align="end center">
 
 			<md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>
-			<md-button ng-click="detallePedidoCtrl.confirmar()" class="md-primary"> Confirmar </md-button>
+			
+			<md-button ng-click="detallePedidoCtrl.confirmar()" 
+				class="md-primary"> Cerrar </md-button>
+
+			<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" 
+				class="md-primary"> Confirmar individual gcc </md-button>
+
 			<md-button ng-click="detallePedidoCtrl.comprar($event)">
 				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>
 				<md-tooltip md-direction="left">

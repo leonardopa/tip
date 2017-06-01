@@ -62,6 +62,19 @@
 
 			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk);
 		}
+		/// confirmacion individual de GCC
+		vm.confirmarPedidoIndividualGcc = function (){
+			function doOk(response) {			
+				ToastCommons.mensaje("Pedido Confirmado !");
+				$state.reload();
+			}
+		
+			if(vm.pedido.idGrupo==null){
+				ToastCommons.mensaje("funcionalidad para GCC !");			
+			}else{
+				gccService.confirmarPedidoIndividualGcc(vm.pedido.id).then(doOk)	
+			}			
+		}
 
 		function callConfirmar() {
 			$log.debug('callConfirmar   ', $scope.pedido);
