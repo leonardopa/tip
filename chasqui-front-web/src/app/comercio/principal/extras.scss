@@ -1,5 +1,13 @@
 .body{
-		background: linear-gradient(#F7F7F7,#D7D7D7) !important;
+		//background: linear-gradient(#F7F7F7,#D7D7D7) !important;
+		//background-color: #462342 !important;
+}
+.menu  {
+  //background: linear-gradient(#F7F7F7, #D7D7D7) !important;
+  background-color: #462342;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, .3);
+  color: #ffffff !important;
+  
 }
 
 .titulo-pagina{
@@ -8,7 +16,8 @@
 
 .bg-white{
 	/*background: #C7C7CC !important;*/
-	background: linear-gradient(#F7F7F7,#D7D7D7) !important;
+	//background: linear-gradient(#462342,#D7D7D7) !important;
+	background-color: #462342 !important;
 }
 
 .btn-compra{
@@ -16,53 +25,47 @@
 	color:white;
 }
 
-/*
-.md-toolbar-tools {
-	background: #32373F !important;
-	height: 40em !important;
-	padding: 2.5em 0 !important;
+/*.menu{
+	background-color: #462342 !important;
+	color: #462342;
+}*/
+
+.md-accent{
+	color: #468385 !important;
 }
 
-.menu  {
-  background: #bdcbcd !important;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, .3);
-  color-font: #ffffff !important;
-}
-//.md-button{
-// 	color: #fff !important;
-// 	font-size: 1.1em !important;
-//}
-.md-button:hover{
-	color: #fff !important;
-	text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+.md-active{
+	color: #468385 !important;
 }
 
-.menu .md-accent{
-	color: #fff !important;
-	text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+.md-ink-bar{
+	color: #468385 !important;
+	background: #468385 !important;
+}
+md-tabs.md-default-theme .md-ink-bar, md-tabs md-ink-bar {
+    color: #468385 !important;
+    background-color: #468385 !important;
 }
 
-.md-title {
-  color-font: #ffffff !important;
-}
-
-.md-raised {
-  color-font: #ffffff !important;
-}
-
-.medallas{
-	margin: 1.3em !important;
-}
-
-.pchasqui{
-	text-align: justify;
-}
-
-.wrapper{
-	margin: 4em auto;
-	max-width: 1024px;
+.md-theme-indigo{
+	h1{
+		color: #462342 !important;
+	}
+	color: #462342 !important;
+    background-color: #468385 !important;
 }
 
 
-*/
+.footer{
+	background-color: #2F3539 !important;
+	padding: 2rem;
+}
 
+.chq-color-toolbar{
+	background-color: #468385;
+	color: #462342;
+}
+
+.chq-paginador{
+	padding-top: 6rem !important;
+}
