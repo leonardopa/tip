@@ -1,7 +1,7 @@
-<md-dialog style="width:60%;">
+<md-dialog style="width:50%; margin-top: 10rem;">
     <form ng-cloak>
         <md-toolbar>
-            <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools chq-color-toolbar">
                 <h2> {{ctrl.producto.nombreProducto}} </h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
@@ -15,8 +15,8 @@
             <!--
             <img src="{{ctrl.urlBase}}{{ctrl.producto.imagenPrincipal}}" style="height:340px;width:200px">
             -->
-                <img src="{{ctrl.imagenSelect.path}}" style="height:340px;width:200px"
-                     flex="50" class="image-preview"  >
+                <img src="{{ctrl.imagenSelect.path}}" style="width:80%;"
+                     flex="60" class="image-preview"  >
 
                 <div layout="column"  flex="50"  >
                      <md-card>

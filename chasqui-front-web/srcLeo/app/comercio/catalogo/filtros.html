@@ -1,0 +1,36 @@
+<!-- incluido en catalogo.html -->
+<div layout="column">
+	<md-card>
+		<md-card-title>
+			</br> Buscar por </br>
+		</md-card-title>
+		<md-card-content>
+			<div>
+				<md-input-container class="md-block" flex-gt-sm> <label>Categoria</label>
+					<md-select ng-change="catalogoCtrl.filtroPor('CATEGORIA')" ng-model="catalogoCtrl.categoriaSelect">
+						<md-option ng-repeat="categoria in catalogoCtrl.categorias" value="{{categoria.idCategoria}}"> {{categoria.nombre}} </md-option>
+					</md-select>
+				</md-input-container>
+
+			</div>
+			<div flex>
+				<md-input-container class="md-block" flex-gt-sm> <label>Productor</label>
+					<md-select ng-change="catalogoCtrl.filtroPor('PRODUCTOR')" ng-model="catalogoCtrl.productorSelect">
+						<md-option ng-repeat="productor in catalogoCtrl.productores" value="{{productor.idProductor}}"> {{productor.nombreProductor}} </md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div flex>
+				<md-input-container class="md-block" flex-gt-sm> <label>Medalla</label>
+					<md-select ng-change="catalogoCtrl.filtroPor('MEDALLA')" ng-model="catalogoCtrl.medallaSelect">
+						<md-option ng-repeat="medalla in catalogoCtrl.medallas" value="{{medalla.idMedalla}}">
+							<img ng-src="{{catalogoCtrl.urlBase}}{{medalla.pathImagen}}" class="md-avatar" width="40" height="40"> {{medalla.nombre}}
+							</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+		</md-card-content>
+
+	</md-card>
+
+</div>

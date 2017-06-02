@@ -1,0 +1,133 @@
+<div ng-controller="ListaProductosController as listaProductoCtr">
+{{listaProductoCtr.pedidoSelected}}
+	<span ng-show="listaProductoCtr.variantes.length == 0">
+		Sin productos.</span>
+
+		<div  layout="column" layout-gt-sm="row" layout-wrap> 
+		<div flex="25" flex-gt-sm="25"  ng-repeat="variante in listaProductoCtr.variantes"  
+			style="padding-bottom: 8px" >
+			<md-card  style="height:100%;">
+				<div class="hover01">
+					<div>
+						<figure><img 
+							 src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}" 
+							 ng-click="listaProductoCtr.verProducto(variante)"
+							 style="height:170px;width:100%">
+						</figure>
+					</div>
+				</div>
+		 
+		        <md-card-content>
+		        	<div layout="column" >		
+		        		<div  layout="column"  >	        	
+							<div layout="column"  >
+								<div class="md-subhead">
+					        		<span>{{variante.nombreProducto}}</span>
+					        	</div>
+					        	<div class="md-subhead">
+									<a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a>
+								</div >
+								<!--
+								<div class="md-subhead">
+									<span>{{variante.nombreVariedad}} </span>
+								</div>	
+								<div class="md-subhead">
+									<div ng-bind-html ="variante.descripcion" />     
+								</div>														
+								-->
+							</div>	
+
+							<div layout="row"  layout-align="space-around center"
+
+ >
+								<div>
+									<h1>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></h1>
+								</div>
+								<md-button class="btn-compra" 
+									ng-click="listaProductoCtr.agregar(variante)">
+										<p> Agregar</p>
+										<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
+								</md-button>
+							</div>	
+						</div>
+						
+				</md-card-content>
+
+				<md-card-actions >
+			 
+							<div  layout="row" layout-align="space-around center"> 
+								<div ng-repeat="medalla in variante.medallasProducto">								 	<img ng-click="listaProductoCtr.showPrerenderedDialog(medalla)"
+									ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
+										width="40" height="40">
+										 <md-tooltip md-direction="up">
+											{{medalla.nombre}}
+										</md-tooltip>
+								</div>
+
+								<div ng-repeat="medalla in variante.medallasProductor" >						
+									<img  ng-click="listaProductoCtr.showPrerenderedDialog(medalla)" 
+										ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}" 
+										width="40" height="40">
+										<md-tooltip md-direction="up">
+											{{medalla.nombre}}
+										</md-tooltip>
+								</div>
+							</div>
+							
+						</div>
+			 
+									
+				</md-card-actions>
+			</md-card>
+		</div>
+		</div>
+
+	<!-- ********************* paginacion *******************-->
+
+	<section layout="column"  layout-align="end center" ng-show="listaProductoCtr.variantes.length > 0">
+	 	<cl-paging flex cl-pages="listaProductoCtr.paging.total" cl-steps="6" 
+		 cl-page-changed="listaProductoCtr.paging.onPageChanged()" 
+		 cl-align="start start" cl-current-page="listaProductoCtr.paging.current"></cl-paging>
+	</section>
+
+	<!-- ********************* dialogo de medalla *******************-->
+	<div style="visibility: hidden">
+	    <div class="md-dialog-container" id="myDialog">
+	      <md-dialog layout-padding  style="width:40%;">
+	      	<div  layout="column" layout-align="center center">
+	        	<md-button ng-click="listaProductoCtr.cerrarDialogoMedalla(1)" >
+		           		<i style="font-size: 36px;" class="material-icons">close</i>
+				</md-button>
+	       
+		         <img ng-src="{{listaProductoCtr.urlBase}}{{listaProductoCtr.medallaSelect.pathImagen}}" 
+		         	width="200" height="200">
+		        
+		         <span class="md-headline">{{listaProductoCtr.medallaSelect.nombre}}</span>
+		          
+		         <div ng-bind-html ="listaProductoCtr.medallaSelect.descripcion" />     	
+		    </div>
+	      </md-dialog>
+    </div>
+  </div>
+
+</div>
+<style>/* Zoom In #1 */
+.hover01 figure img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hover01 figure:hover img {
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+figure {
+	/* width: 222px;
+	height: 222px;*/
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	overflow: hidden;
+}
+</style>

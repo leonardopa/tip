@@ -1,0 +1,89 @@
+    <div class="container-fluid">
+
+        <div layout="row" ng-show="emprendedorCtrl.isVistaUnica">
+            <div flex="70">
+                <md-card>
+                    <img ng-src="{{emprendedorCtrl.urlBase}}{{emprendedorCtrl.emprendedor.pathImagen}}" class="md-card-image" 	alt="productor">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{emprendedorCtrl.emprendedor.nombreProductor}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <span>{{emprendedorCtrl.emprendedor.descripcionCorta}}</span>
+
+                        <div ng-bind-html="emprendedorCtrl.emprendedor.descripcionLarga"></div>
+                        <span>		        
+		          {{emprendedorCtrl.emprendedor.direccion.pais}}
+		          {{emprendedorCtrl.emprendedor.direccion.provincia}}
+		          {{emprendedorCtrl.emprendedor.direccion.localidad}}
+		          {{emprendedorCtrl.emprendedor.direccion.calle}}
+		          {{emprendedorCtrl.emprendedor.direccion.altura}}</span>
+                    </md-card-content>
+                  </md-card>
+                  
+                  <md-button md-no-ink class="md-primary"
+              		ng-click="emprendedorCtrl.verMas()">conocer m&aacute;s productores</md-button>
+              		
+            </div>
+            <div flex="30">
+			     <!--
+                <md-list flex  ng-show="emprendedorCtrl.medallas.length > 0">
+                    <md-subheader class="md-no-sticky">Medallas del productor</md-subheader>
+                    
+                    <md-list-item class="md-3-line" ng-repeat="item in emprendedorCtrl.medallas">               
+                        <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" 
+                          alt="{{ item.nombre }}" width="60" height="60">
+
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ item.nombre }}</h3>
+                            <div ng-bind-html="item.descripcion"></div>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                -->
+                 <md-card ng-repeat="item in emprendedorCtrl.medallas">
+                    <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" 
+                         alt="{{ item.nombre }}" width="60px" height="60px">
+                   
+                     <md-card-title>
+                      <md-card-title-text>
+                        <span class="md-headline">{{ item.nombre }}</span>
+                      </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                      <p>
+                         <div ng-bind-html="item.descripcion"></div>
+                      </p>
+                    </md-card-content>
+                </md-card>
+
+            </div>
+             
+        </div>
+
+        <div layout="row"  ng-show="! emprendedorCtrl.isVistaUnica" layout-wrap >
+         <md-card ng-repeat="item in emprendedorCtrl.emprendedores" >          
+              <md-card-content layout="row"  ng-click="emprendedorCtrl.verDetalle(item)"
+                >             
+                    <img ng-src="{{emprendedorCtrl.urlBase}}{{item.pathImagen}}" class="md-card-image" 
+                            width="100px" height="auto"  alt="productor">
+                    <div layout="column" style="padding-left: 10px">
+                      <h3 ng-click="emprendedorCtrl.verDetalle(item)" >{{ item.nombreProductor }}</h3>
+                      <p>{{ item.descripcionCorta }}</p>
+                    </div>
+                </md-card-content>
+                
+        </md-card> 
+       </div>
+
+    </div>
+
+    <style type="text/css">
+      
+      md-card:hover {
+        outline: none;
+        border: 0;
+        background: linear-gradient(#F7F7F7,#D7D7D7) !important;
+     }
+    </style>
