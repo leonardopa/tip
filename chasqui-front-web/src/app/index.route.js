@@ -49,7 +49,8 @@
           url: '/lista-grupos',
           templateUrl: 'app/comercio/administracion/lista-grupos.html',
           controller: 'ListaGruposController',
-          controllerAs: 'listaGruposCtrl'
+          controllerAs: 'listaGruposCtrl',
+          auth : true
         })
          .state('detalle-grupos', {
           url: '/detalle-grupos',
@@ -70,7 +71,7 @@
           controller: 'FormGrupoController'        
         })
          .state('login', {
-          url: '/login',
+          url: '/login/:toPage',
           templateUrl: 'app/comercio/administracion/formularios/login.html',
           controller: 'LogInController',
           controllerAs: 'loginCtrl'
@@ -87,7 +88,8 @@
           url: '/lista-pedidos',
           templateUrl: 'app/comercio/carrito/lista-pedidos.html',
           controller: 'ListaPedidosController',
-          controllerAs: 'listaPedidoCtrl'
+          controllerAs: 'listaPedidoCtrl',
+          auth : true
         })
          .state('detalle-pedido', {
           url: '/detalle-pedido',
@@ -105,7 +107,8 @@
           templateUrl: 'app/comercio/administracion/perfil.html',
           controller: 'PerfilController',        
           controllerAs: 'perfilCtrl',
-          params:{index:null}
+          params:{index:null},
+          auth : true
         })
         .state('registro', {
             url: '/registro',
@@ -118,6 +121,18 @@
             templateUrl: 'app/comercio/varios/footer.html',
             controller: 'FooterController',        
             controllerAs: 'footerCtrl'
+          })
+          .state('demo', {
+            url: '/demo',
+            templateUrl: 'app/comercio/demo/demo.html',
+            controller: 'DemoController',        
+            controllerAs: 'demoCtrl'
+          })
+          .state('dialog', {
+            url: '/dialog',
+            templateUrl: 'app/comercio/demo/dialog1.tmpl.html',
+            controller: 'DemoDialogController',        
+            controllerAs: 'demoDialogCtrl'
           })
         .state('error', {
 	        url: '/error/:key',

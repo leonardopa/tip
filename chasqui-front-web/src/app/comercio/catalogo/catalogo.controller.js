@@ -10,21 +10,22 @@
 	 * contexto de compra , pero NO la lista de productos la cual se incluye
 	 */
 	function CatalogoController($scope, $log,CTE_REST, $timeout, StateCommons, productorService,
-		productoService, ToastCommons) {
-		$log.debug("CatalogoController ..... ", StateCommons.ls.pedidoSeleccionado);
+		productoService, ToastCommons,gccService,utilsService,$mdSidenav) {
+		$log.debug("CatalogoController ..... ", StateCommons.ls.grupoSelected);
 		StateCommons.ls.itemMenuSelect = 'catalogo';
 		var vm = this;
 
+		vm.toggleLeft = buildToggler('left');
+	    vm.toggleRight = buildToggler('right');
+	    
+	    function buildToggler(componentId) {
+	      return function() {
+	        $mdSidenav(componentId).toggle();
+	      };
+	    }
 
-		// ///////// Para el selector de Grupos de compra
-		vm.topDirections = ['left', 'up'];
-		vm.bottomDirections = ['down', 'right'];
-		vm.isOpen = false;
-		vm.availableModes = ['md-fling', 'md-scale'];
-		vm.selectedMode = 'md-fling'; // /md-scale
-		vm.availableDirections = ['up', 'down', 'left', 'right'];
-		vm.selectedDirection = 'up';
-
+	    vm.isLogued=StateCommons.isLogued();
+		
 		// vm.categorias = ['categorias 1', 'categorias 2 ', 'categorias 3', 'categorias
 		// 4'];
 		vm.categorias = [];
@@ -32,16 +33,7 @@
 		vm.medallas = [];
 		vm.query = '';
 
-
-		vm.pedidos = {};
-		vm.carrito = StateCommons.ls.pedidoSeleccionado;
-		vm.size = 24;
-		vm.icon = 'shopping_cart';
-		vm.options = {
-			'rotation': 'circ-in',
-			'duration': 1000
-		};
-
+		
 		vm.paginaProducto;
 		vm.tipoFiltro = 'CATEGORIA'; // PRODUCTOR / MEDALLA / QUERY
 		vm.queryText;
@@ -80,16 +72,6 @@
 			vm.filtrar();
 		}
 
-		vm.filtroQuery = function() {
-			vm.tipoFiltro = 'QUERY';
-
-			vm.categoriaSelect = null;
-			vm.productorSelect = null;
-			vm.medallaSelect = null;
-			vm.sinFiltroSelect = null;
-			doFiltrar(vm.queryText);
-		}
-
 		vm.filtrar = function() {
 			switch (vm.tipoFiltro) {
 				case 'PRODUCTOR':
@@ -112,6 +94,20 @@
 
 		}
 
+		vm.filtroQuery = function() {
+			vm.tipoFiltro = 'QUERY';
+			if ( utilsService.isEmpty( vm.queryText )){	
+				vm.tipoFiltro=undefined;
+				vm.filtroPor(undefined);
+			}
+
+			vm.categoriaSelect = null;
+			vm.productorSelect = null;
+			vm.medallaSelect = null;
+			vm.sinFiltroSelect = null;
+			doFiltrar(vm.queryText);
+		}
+		
 		var doFiltrar = function(valor) {
 			var filtro = {};
 			filtro.tipo = vm.tipoFiltro;
@@ -120,58 +116,10 @@
 			// list-producto-controller
 		}
 
-		vm.cambiarContexto = function(pedido) {
-			$log.debug("cambia contexo de carrito ", pedido);
-
-			vm.carrito = pedido;
-			StateCommons.ls.pedidoSeleccionado = vm.carrito;
-
-			vm.icon = pedido.icon;
-			// vm.icon='shopping_cart';
-			$timeout(function() {
-				vm.icon = 'shopping_cart';
-				// /vm.icon=pedido.icon;
-			}, 1500);
-
-		}
-
+		
 		// / CALL REST
 
-		// TODO: cache , para no sobrecargar con grupos
-		// TODO: implemantar cuante este funcionando grupos
-		// TODO : aca se trae los grupos y sus pedidos, pero deberia ser solo 
-		// nombre del grupo y ID-Pedido 
-		function callLoadGrupos() {
-			$log.debug("--- find  pedidos abiertos ---");
-
-			function doOk(response) {
-
-				vm.pedidos = response.data;
-
-
-				angular.forEach(vm.pedidos, function(pedido) {
-					$log.debug(pedido.tipo);
-					pedido.icon = 'people';
-					pedido.icon = pedido.tipo == 'INDIVIDUAL' ? 'person' : pedido.icon;
-					pedido.icon = pedido.tipo == 'NODOS' ? 'people_outline' : pedido.icon;
-
-				});
-
-				if (vm.carrito != null) {
-					// vm.carrito = vm.pedidos[0];
-					vm.carrito = StateCommons.ls.pedidoSeleccionado;
-				} else {
-					vm.carrito = vm.pedidos[0];
-				}
-			}
-			
-			productoService.productosPedidoByUser()
-				.then(doOk)
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
-		}
-
+		
 
 		function callCategorias() {
 			productoService.getCategorias()
@@ -179,9 +127,6 @@
 					vm.categorias = response.data;
 					vm.categoriaSelect = vm.categorias[0];
 				})
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
 
 		}
 
@@ -190,9 +135,6 @@
 				.then(function(response) {
 					vm.productores = response.data;
 				})
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
 		}
 
 		function callMedallas() {
@@ -200,14 +142,8 @@
 				.then(function(response) {
 					vm.medallas = response.data;
 				})
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
-
 		}
-
-
-		callLoadGrupos();
+ 			
 		callCategorias();
 		callProductores();
 		callMedallas();

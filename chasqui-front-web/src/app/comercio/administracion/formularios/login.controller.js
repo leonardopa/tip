@@ -4,10 +4,10 @@
 	angular.module('chasqui').controller('LogInController', LogInController);
 
 	/** @ngInject */
-	function LogInController($log, CTE_REST, restProxy, $state, StateCommons,
-			ToastCommons, $rootScope, dialogCommons) {
+	function LogInController($log, $state, StateCommons,
+			ToastCommons, $rootScope, dialogCommons,perfilService,utilsService,$stateParams) {
 
-		$log.debug('controler log in ..... ');
+		$log.debug('controler log in ..... debe volver a ',$stateParams.toPage);
 
 		var vm = this
 		vm.user = {};
@@ -41,17 +41,19 @@
 
 				ToastCommons.mensaje("Bienvenido !");
 				$rootScope.$broadcast('resetHeader', "");
-				$state.go("principal");
 
+				if (utilsService.isUndefinedOrNull(StateCommons.ls.varianteSelected)){
+					if (utilsService.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage==''){						
+						$state.go("principal");			
+					}else{
+						$state.go($stateParams.toPage);	
+					}									
+				}else{
+					$state.go("catalogo");						
+				}
 			}
 
-			function doNoOk(response, headers) {
-				ToastCommons
-						.mensaje("Fallo la autenticación, <br>verifique los datos");
-			}
-
-			restProxy.postPublic(CTE_REST.login, vm.user, doOk, doNoOk);
-
+			perfilService.login(vm.user).then(doOk)
 		}
 
 		vm.callReset = function(email) {
@@ -60,13 +62,7 @@
 				ToastCommons.mensaje("Revisa tu correo !");
 			}
 
-			function doNoOk(response) {
-				$log.debug('response reset pass ', response);
-				ToastCommons.mensaje("Error , el mail es correcto ?");
-			}
-
-			restProxy.get(CTE_REST.resetPass(email), {}, doOk, doNoOk);
-
+			perfilService.resetPass(email).then(doOk)
 		}
 
 	}

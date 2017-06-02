@@ -6,7 +6,7 @@
     .controller('EmprenController',EmprenController);
 
   /** @ngInject */
-  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons,productorService,ToastCommons
+  function EmprenController( $log,$stateParams, CTE_REST,$state,StateCommons,productorService,ToastCommons
 		  ,utilsService) {
 	  $log.debug('EmprenController ..... ',$stateParams.id); 
 	  StateCommons.ls.itemMenuSelect = 'emprendedores'; 
@@ -20,14 +20,15 @@
 	   vm.emprendedores;
 	   vm.isVistaUnica=false;
 	   
-	   ///////////////// Eventos
+	   // /////////////// Eventos
 	   
 	   vm.verDetalle=function (item){
 		   vm.emprendedor= item;
 		   console.log(item.medalla)
 		   console.log(angular.isUndefined(item.medalla))
 		   if (!utilsService.isUndefinedOrNull(item.medalla)){
-			   vm.medallas=[item.medalla];//Por alguna razon mandan una sola medalla			  
+			   vm.medallas=[item.medalla];// Por alguna razon mandan una sola
+											// medalla
 		   }
 		   vm.isVistaUnica=true;
 	   }
@@ -41,7 +42,7 @@
 		   vm.isVistaUnica=false;
 	   }
 	   
-	   /////////////////
+	   // ///////////////
 	   
 	  
 	   
@@ -50,7 +51,6 @@
 			
 			productorService.getProductores()
 		        .then(function(data) {vm.emprendedores=data.data;})
-		        .catch(function(err) {ToastCommons.mensaje(err.data.error);});
 	   }
 	   
 	   

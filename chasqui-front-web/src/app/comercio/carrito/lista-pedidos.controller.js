@@ -6,8 +6,8 @@
 
 	/** @ngInject */
 	function ListaPedidosController($log, $state, $scope, StateCommons 
-			,productoService,ToastCommons) {
-		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSeleccionado);
+			,productoService,ToastCommons,gccService) {
+		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSelected);
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
 		var vm = this;
 		vm.habilita = false;
@@ -16,7 +16,7 @@
 		vm.selected = null, vm.previous = null;
 		vm.selectedIndex = 1;
 
-		vm.pedidoDelContexto = StateCommons.ls.pedidoSeleccionado;
+		vm.pedidoDelContexto = StateCommons.ls.pedidoSelected;
 
 		$scope.$watch('listaPedidoCtrl.selectedIndex', function(current, old) {
 
@@ -25,7 +25,7 @@
 
 			$log.debug('cambio tab ..... ', vm.selected);
 
-			StateCommons.ls.pedidoSeleccionado = vm.selected;
+			StateCommons.ls.pedidoSelected = vm.selected;
 
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
@@ -42,9 +42,10 @@
 			$log.debug("--- Crear pedido individual----");
 			callCrearPedidoIndividual();
 		}
+		
 
 		///////////////// REST
-
+/*
 		var callLoadPedidos = function() {
 			$log.debug("--- find pedidos --------");
 
@@ -75,21 +76,11 @@
 			}
 
 			//TODO ESTO ES MOCK
-			productoService.productosPedidoByUser().then(doOk)
-				.catch(function(err) {
-					ToastCommons.mensaje(err.data.error);
-				});
+			productoService.productosPedidoByUser().then(doOk);
 
-		}
+		}*/
 
 		function callCrearPedidoIndividual() {
-			function doNoOk(response) {
-				$log.debug("--- callPedidoIndividual  response", response.data.error);
-
-				ToastCommons.mensaje(response.data.error);
-
-			}
-
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ", response.data);
 
@@ -97,40 +88,23 @@
 				callPedidoIndividual();
 			}
 			var json = {};
-
 			json.idVendedor = StateCommons.vendedor().id;
 
-			productoService.crearPedidoIndividual(json)
-				.then(doOk)
-				.catch(doNoOk);
+			productoService.crearPedidoIndividual(json).then(doOk)
 		}
-
+		
 		function callPedidoIndividual() {
 			function doOk(response) {
 				//TODO: ver si lo puede traer el servicio
-				response.data.creador = 'INDIVIDUAL'
-				response.data.nombre = 'INDIVIDUAL'
-				vm.tabs.push(response.data);
-
-			}
-
-			function doNoOk(response) {
-				$log.debug("--- callPedidoIndividual ", response.data);
-
-				if (response.status == 404) {
-					ToastCommons.mensaje("Noy  hay pedidos !");
-				} else {
-					ToastCommons.mensaje("algo fallo !");
-				}
-			}
-			
-			productoService.verPedidoIndividual()
-				.then(doOk)
-				.catch(doNoOk);
-			
+		//		response.data.creador = 'INDIVIDUAL'
+		//		response.data.nombre = 'INDIVIDUAL'
+		//		vm.tabs.push(response.data);
+				vm.tabs=response.data;
+			}			
+			gccService.pedidosByUser().then(doOk);			
 		}
-
-		callLoadPedidos()
+	
+	//	callLoadPedidos()
 		callPedidoIndividual()
 	}
 

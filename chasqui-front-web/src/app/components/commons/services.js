@@ -21,14 +21,27 @@
       if (response.status==401){
     	  ToastCommons.mensaje("Por favor vuelva a loguarse");
     	  $state.go('login');
-      }else if (response.status==406) 
+      }else {
+         
+        if(response.data.error == undefined){        
+          $state.go('error', {
+            key: 'GENERIC_ERROR'
+          });  
+        }else{
+          ToastCommons.mensaje(response.data.error);
+        }
+        
+      }
+
+      /*
+      if (response.status==406) 
     	  ToastCommons.mensaje("Parametros incorrectos");
       else{
     	  $state.go('error', {
     		  key: 'GENERIC_ERROR'
     	  });    	  
       }
-      
+      */
     }
 
     var createHeader = function (){

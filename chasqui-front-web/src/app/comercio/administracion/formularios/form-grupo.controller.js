@@ -7,7 +7,7 @@
 	/**
 	 * @ngInject Formulario para crear un grupo
 	 */
-	function FormGrupoController($log, $state, restProxy, CTE_REST) {
+	function FormGrupoController($log, $state, gccService) {
 		$log.debug("controler FormGrupoController");
 		var vm = this;
 
@@ -31,10 +31,8 @@
 				}
 
 			}
-			;
-			// TODO : SACAR USUARIO HARCODEADO
-			restProxy.post(CTE_REST.gruposByusuario(1), vm.grupo, doOk);
-
+		 
+			gccService.nuevoGrupo(vm.grupo).then(doOk)
 		}
 	}
 

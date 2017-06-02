@@ -6,7 +6,8 @@
 		.controller('MenuController', MenuController);
 
 	/** @ngInject */
-	function MenuController($scope, $log, $state, StateCommons, CTE_REST, $interval, restProxy, ToastCommons) {
+	function MenuController($scope, $log, $state, StateCommons, CTE_REST, $interval, ToastCommons,
+			perfilService) {
 		$log.debug("MenuController ..... ");
 		$log.debug(StateCommons.ls.usuario);
 
@@ -22,7 +23,7 @@
 		function initHeader() {
 			vm.categorias = [];
 			vm.usuario = StateCommons.ls.usuario;
-			vm.isLogued = !angular.equals(StateCommons.ls.usuario, {});
+			vm.isLogued = StateCommons.isLogued();
 
 			initRefreshNotification();
 			resetNotificacion();
@@ -98,11 +99,8 @@
 
 		vm.logOut = function() {
 			$log.debug("Log Out ..... ");
-			StateCommons.ls.usuario = {};
-			StateCommons.ls.token = null;
-			StateCommons.ls.pedidoSeleccionado = null;
-			StateCommons.ls.notificacionesSinLeer = '';
-
+			StateCommons.logOut();
+			
 			$interval.cancel(llamadoPeriodico);
 
 			initHeader();
@@ -113,6 +111,8 @@
 
 		vm.verNotificaciones = function() {
 			$log.debug("Ver notificaciones");
+			vm.icon = 'notifications_none';
+			vm.fill = 'white';
 			$state.go('perfil', {
 				index: 1
 			});
@@ -120,12 +120,15 @@
 
 
 		function initRefreshNotification() {
-			if (vm.isLogued) {
+			if (StateCommons.isLogued() && !StateCommons.ls.notificacionActiva) {
 				$log.debug("interval notifications");
+				
 				llamadoPeriodico = $interval(function() {
 					$log.debug("call notificaciones nuevas?");
 					callNotificacionesNoLeidas();
 				}, CTE_REST.INTERVALO_NOTIFICACION_MIN);
+				
+				StateCommons.ls.notificacionActiva=true;
 			}
 		}
 
@@ -134,9 +137,15 @@
 			function doOk(response) {
 				$log.debug('callObtenerNotificaciones', response);
 
-				vm.notificacionesSinLeer = response.data.length
+				vm.notificacionesSinLeer = 0 ; 
+				// TODO : filtro en el front , deberia ser por BE
+				angular.forEach(response.data, function(value, key){				  
+				  console.log(value.estado)
+			      if(value.estado == "NOTIFICACION_NO_LEIDA")
+			         vm.notificacionesSinLeer = vm.notificacionesSinLeer+1 ; 
+			   });
 
-				if (response.data.length > 0) {
+				if (vm.notificacionesSinLeer > 0) {
 					$log.debug('hay nuevas notificaciones !');
 					addNotificacion();
 					//ToastCommons.mensaje("Hay notificaciones "+ response.data.length +" nuevas !");
@@ -145,8 +154,9 @@
 				}
 
 			}
-
-			restProxy.get(CTE_REST.notificacionesNoLeidas, {}, doOk);
+			//TODO : DEBERIAN SER solo las NO LEIDAS
+			perfilService.notificacionesLeidas(1).then(doOk);	
+			//perfilService.notificacionesNoLeidas().then(doOk);	
 		}
 
 

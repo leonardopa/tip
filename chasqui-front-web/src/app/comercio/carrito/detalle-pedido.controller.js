@@ -5,8 +5,8 @@
 		DetallePedidoController);
 
 	/** @ngInject */
-	function DetallePedidoController($http, $log, $state, $scope, restProxy, CTE_REST, ToastCommons, $mdDialog
-			,dialogCommons) {
+	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog
+			,dialogCommons,productoService,perfilService,gccService) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -27,21 +27,16 @@
 
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ", response.data);
-
 				ToastCommons.mensaje("Eliminado !");
+				$state.reload();
 			}
 
-			function doNoOk(response) {
-				$log.debug("--- eliminar pedido response ", response.data);
-
-				ToastCommons.mensaje("error");
-			}
 			var params = {};
 			params.idPedido = vm.pedido.id;
 			params.idVariante = vm.productoEliminar.idVariante;
 			params.cantidad = vm.productoEliminar.cantidad;
 
-			restProxy.put(CTE_REST.quitarProductoIndividual, params, doOk, doNoOk);
+			productoService.quitarProductoIndividual(params).then(doOk)
 		}
 		
 		vm.eliminar = function(item) {
@@ -61,17 +56,24 @@
 
 			function doOk(response) {
 				$log.debug("--- cancelar pedido response ", response.data);
-
 				ToastCommons.mensaje("Cancelado !");
+				$state.reload();
 			}
 
-			function doNoOk(response) {
-				$log.debug("--- cancelar pedido response ", response.data);
-
-				ToastCommons.mensaje("error");
+			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk);
+		}
+		/// confirmacion individual de GCC
+		vm.confirmarPedidoIndividualGcc = function (){
+			function doOk(response) {			
+				ToastCommons.mensaje("Pedido Confirmado !");
+				$state.reload();
 			}
-
-			restProxy.delete(CTE_REST.cancelarPedidoIndividual(vm.pedido.id), {}, doOk, doNoOk);
+		
+			if(vm.pedido.idGrupo==null){
+				ToastCommons.mensaje("funcionalidad para GCC !");			
+			}else{
+				gccService.confirmarPedidoIndividualGcc(vm.pedido.id).then(doOk)	
+			}			
 		}
 
 		function callConfirmar() {
@@ -79,22 +81,20 @@
 
 			function doOk(response) {
 				$log.debug("--- confirmar pedido response ", response.data);
-
 				ToastCommons.mensaje("Pedido Confirmado !");
+				$state.reload();
 			}
-
-			function doNoOk(response) {
-				$log.debug("--- confirmar pedido response ", response.data);
-
-				ToastCommons.mensaje("error");
+		
+			if(vm.pedido.idGrupo==null){
+				var params = {};
+				params.idPedido = vm.pedido.id;
+				params.idDireccion = vm.direccionSelected.idDireccion;
+				// logica por si es pedido grupañ
+				productoService.confirmarPedidoIndividual(params).then(doOk)				
+			}else{
+				gccService.confirmarPedidoColectivo(vm.pedido.idGrupo).then(doOk)	
 			}
-
-			var params = {};
-			params.idPedido = vm.pedido.id;
-			params.idDireccion = vm.direccionSelected.idDireccion;
-
-			restProxy.post(CTE_REST.confirmarPedidoIndividual, params, doOk, doNoOk);
-
+			
 		}
 
 		vm.confirmarDomicilio = function() {
@@ -115,9 +115,8 @@
 				vm.direcciones = response.data;
 				// abre pop
 			}
-
-			restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
-
+			
+			perfilService.verDirecciones().then(doOk);
 		}
 
 		function popUpElegirDireccion(ev) {

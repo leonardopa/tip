@@ -20,20 +20,20 @@
 				<div ng-controller="ListaGruposController as listaGruposCtrl" class="sample" layout="column" ng-cloak>
 					<md-content class="md-padding">
 						<md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
-							<md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.nombre}}">
+							<md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.alias}}">
 
 								<md-content class="md-padding">
 
 									<md-card>
 										<md-card-title>
 											<md-card-title-text>
-
-												<span class="md-headline">{{tab.nombre}}</span>
-
+												<span class="md-headline">{{tab.descripcion}}</span>
+												 
 												<md-divider></md-divider>
-												<span class="md-subhead">{{tab.descripcion}}</span>
+											
+												<span class="md-subhead">{{tab.emailAdministrador}}</span>
 												<span class="md-subhead">{{tab.domicilio}}</span>
-
+													
 											</md-card-title-text>
 											<md-card-title-media>
 												<div class="md-media-sm card-media">
@@ -43,11 +43,17 @@
 										</md-card-title>
 										<md-card-actions layout="row" layout-align="end center">
 
-											<div ng-if="tab.admin">
+											<div ng-if="tab.esAdministrador">
 												<!-- 
 								          <md-button ng-click="tab.canAddIntegrante != tab.canAddIntegrante">
 								          -->
-												<md-button ng-click="listaGruposCtrl.habilitar()">
+								          		<md-button ng-click="listaGruposCtrl.crearPedidoGrupal(tab)">
+														<md-icon> add_circle_outline </md-icon>														 
+														<md-tooltip md-direction="left">
+															Nuevo pedido grupal
+														</md-tooltip>
+												</md-button>
+												<md-button ng-click="listaGruposCtrl.invitarUsuario(tab)">
 													<md-icon> group add </md-icon>
 													<md-tooltip md-direction="left">
 														puedes agregar miembros al grupo
@@ -63,7 +69,7 @@
 
 											</div>
 											<div ng-if="!tab.admin">
-												<md-button ng-click="listaGruposCtrl.salir($event)">
+												<md-button ng-click="listaGruposCtrl.salir(tab)">
 													<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
 													<md-tooltip md-direction="left">
 														puedes SALIR del grupo
@@ -73,7 +79,7 @@
 
 										</md-card-actions>
 									</md-card>
-									<div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="idGrupo = tab" />
+									<div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = tab" />
 								</md-content>
 							</md-tab>
 						</md-tabs>

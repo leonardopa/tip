@@ -24,7 +24,7 @@
        // var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
 
      
-
+       //var URL_BASE = "http://proyectochasqui.com:8080/chasqui-dev-testing/";
   	   //var URL_BASE = "http://168.181.184.203:8080/chasqui/";
 
 
@@ -78,7 +78,9 @@
         	
         	medallas: URL_REST_BASE +"client/medalla/all", 
 
-          
+            imagenProducto : function (idVariante){
+                return URL_REST_BASE + "client/producto/images/" + idVariante; 
+            },
         	
         	medallasProducto: URL_REST_BASE + "client/medalla/producto/all",
         	
@@ -132,28 +134,44 @@
         		return 	URL_REST_BASE+ 'user/pedido/individual/'+id;
         	},
         	
-        	notificacionesNoLeidas: URL_BASE_MOCK + "user/adm/notificacion/noLeidas",
+        	notificacionesNoLeidas: URL_REST_BASE + "user/adm/notificacion/noLeidas",
         	
         	notificacionesLeidas: function(pagina){
-        		return URL_BASE_MOCK + "user/adm/notificacion/"+pagina;
+        		return URL_REST_BASE + "user/adm/notificacion/"+pagina;
         	},
 
         	productosDestacadosByVendedor : function(idVendedor){
         		return URL_REST_BASE +"client/producto/destacados/"+idVendedor;
         	},
-        	
-
-
-
-
-                gruposByusuario: function (idUser) {
-                return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
+    
+            gruposByusuario: function (idVendedor) {
+                return URL_REST_BASE +'user/gcc/all/'+idVendedor;
             },
+            
+            aceptarInvitacionAGrupo: URL_REST_BASE   + 'user/gcc/aceptar',
+
+            rechazarInvitacionAGrupo: URL_REST_BASE   + 'user/gcc/rechazar',
+
+            nuevoGrupo: URL_REST_BASE + "user/gcc/alta/",
+ 
+            crearPedidoGrupal: URL_REST_BASE + "user/gcc/individual",
+
+            pedidosByUser: function (idVendedor) {
+                return URL_REST_BASE + 'user/gcc/pedidos/'+idVendedor;
+            },
+    
+            invitarUsuarioAGrupo: URL_REST_BASE + "user/gcc/invitacion",
+            
+            quitarMiembro: URL_REST_BASE + "user/gcc/quitarMiembro",
+
+            confirmarPedidoColectivo : URL_REST_BASE + "user/gcc/confirmar",
+
+            confirmarPedidoIndividualGcc : URL_REST_BASE + "user/pedido/individualEnGrupo/confirmar",
 
         	////////////////////////////////////////////////////////
-       
+   /*    
         	productosPedidoByUser : function(idUser){
-        		return URL_BASE_MOCK + "productos/pedidos/usuario/"+idUser;
+        		return URL_BASE_MOCK + "";
         	},
 
 
@@ -174,9 +192,7 @@
 
 
 
-        	salirGrupo: function (idUser,idGrupo){
-        		return URL_BASE_MOCK + "usuarios/"+idUser+"/grupos/"+idGrupo+"/salir";
-        	},
+        	
         	
         	integrantesGrupo :function (idGrupo){
         		return URL_BASE_MOCK + "usuarios/grupos/"+idGrupo+"/integrantes";
@@ -188,7 +204,16 @@
         	
         	direccionUsuario : function (idUsuario){
         		return URL_BASE_MOCK + "direccion/usuario/"+idUsuario;
-        	}
+        	},
+
+*/
+            //////////////////////////////////////////////////////////
+            //////////////// OTRAS CONSTANTES 
+            ///// mensajes al usuario 
+
+            AGREAR_EN_PEDIDO_EXISTENTE :"el producto se agregara el pedido existente",
+            ///// contantes de mensajes de errores conocidos
+            ERROR_YA_TIENE_PEDIDO : "ya posee un pedido vigente"
         }
     
     }()

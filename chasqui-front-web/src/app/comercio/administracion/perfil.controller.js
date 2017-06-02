@@ -4,8 +4,8 @@
 	angular.module('chasqui').controller('PerfilController', PerfilController);
 
 	/** @ngInject . Pantalla de perfil de usuario */
-	function PerfilController($log, $scope, CTE_REST, restProxy,
-			StateCommons, $mdDialog, ToastCommons, $stateParams) {
+	function PerfilController($log, $scope,
+			StateCommons, $mdDialog, ToastCommons, $stateParams,perfilService,gccService) {
 		$log.debug("Init PerfilController ....");
 
 		StateCommons.ls.itemMenuSelect = 'perfil';
@@ -43,8 +43,8 @@
 				$log.debug('call direcciones response ', response);
 				vm.direcciones = response.data;
 			}
-
-			restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
+			
+			perfilService.verDirecciones().then(doOk);			
 
 		}
 
@@ -81,11 +81,8 @@
 			function doNoOk(response) {
 				ToastCommons.mensaje(response.data);
 			}
-
-			var params = {};
-			params.password = vm.pass1;
-			restProxy.put(CTE_REST.editUsuario, params, doOk);
-
+		
+			perfilService.cambiarPass( vm.pass1).then(doOk);
 		}
 
 		vm.marcarLeido = function(notificacion) {
@@ -93,30 +90,53 @@
 				ToastCommons.mensaje('Leido');
 				notificacion.estado = 'Leido';
 			}
-
-			restProxy.post(CTE_REST.notificacionesLeidas(notificacion.id), {},
-					doOk);
+			perfilService.marcarComoLeido(notificacion.id).then(doOk);
+			
 		}
 
+		vm.aceptarInvitacion = function(notificacion){
+			function doOk(response) {
+				ToastCommons.mensaje('Aceptado');
+				notificacion.estado = 'Leido';
+			}
+			var params = {};
+			params.idInvitacion = notificacion.id;
+			
+			gccService.aceptarInvitacionAGrupo(params).then(doOk)
+			
+		}
+
+		vm.rechazarInvitacion = function(notificacion){
+			function doOk(response) {
+				ToastCommons.mensaje('Aceptado');
+				notificacion.estado = 'Leido';
+			}
+			var params = {};
+			params.idInvitacion = notificacion.id;
+			
+			gccService.rechazarInvitacionAGrupo(params).then(doOk)
+			
+		}
+		
+		
 		function callNotificacionesNoLeidas() {
 
 			function doOk(response) {
-				$log.debug('callObtenerNotificaciones', response);
+				$log.debug('notificacionesNoLeidas', response);
 				vm.notificacionesNoLeidas = response.data;
 			}
-
-			restProxy.get(CTE_REST.notificacionesNoLeidas, {}, doOk);
+			perfilService.notificacionesNoLeidas().then(doOk);						
 		}
 
 		function callNotificaciones() {
 
 			function doOk(response) {
-				$log.debug('callObtenerNotificaciones', response);
+				$log.debug('notificacionesLeidas', response);
 				vm.notificaciones = vm.notificaciones.concat(response.data);
 				;
 			}
-
-			restProxy.get(CTE_REST.notificacionesLeidas(vm.count), {}, doOk);
+			perfilService.notificacionesLeidas(vm.count).then(doOk);		
+			
 		}
 
 		vm.verMas = function() {
