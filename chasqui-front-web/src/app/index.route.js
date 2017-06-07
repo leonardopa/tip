@@ -68,7 +68,9 @@
         .state('form-grupo', {
           url: '/form-grupo',
           templateUrl: 'app/comercio/administracion/formularios/form-grupo.html',
-          controller: 'FormGrupoController'        
+          controller: 'FormGrupoController',
+          controllerAs: 'formGrupoCtrl',
+          params:{ "grupo" : null}
         })
          .state('login', {
           url: '/login/:toPage',

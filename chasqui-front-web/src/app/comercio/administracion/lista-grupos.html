@@ -3,9 +3,9 @@
 	<div class="row">
 		<div layout="row" layout-align="center center">
 
-			<div flex="90"><span class="md-headline">Mis grupos de compras</span></div>
+			<div flex="50"><span class="md-headline">Mis grupos de compras</span></div>
 
-			<div flex="10">
+			<div flex="50">
 				<md-button ng-click="listaGruposCtrl.crearGrupo($event)">
 					<md-icon> group </md-icon>
 					<md-tooltip md-direction="left">
@@ -18,68 +18,22 @@
 		<div ng-cloak>
 			<md-content>
 				<div ng-controller="ListaGruposController as listaGruposCtrl" class="sample" layout="column" ng-cloak>
+					<p ng-show=listaGruposCtrl.tabs.length==0>
+						Aún no hay grupos
+					</p>
+					
 					<md-content class="md-padding">
 						<md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
 							<md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.alias}}">
-
 								<md-content class="md-padding">
-
-									<md-card>
-										<md-card-title>
-											<md-card-title-text>
-												<span class="md-headline">{{tab.descripcion}}</span>
-												 
-												<md-divider></md-divider>
-											
-												<span class="md-subhead">{{tab.emailAdministrador}}</span>
-												<span class="md-subhead">{{tab.domicilio}}</span>
-													
-											</md-card-title-text>
-											<md-card-title-media>
-												<div class="md-media-sm card-media">
-													<img ng-src="{{tab.urlImagen}}" class="md-card-image" alt="Washed Out">
-												</div>
-											</md-card-title-media>
-										</md-card-title>
-										<md-card-actions layout="row" layout-align="end center">
-
-											<div ng-if="tab.esAdministrador">
-												<!-- 
-								          <md-button ng-click="tab.canAddIntegrante != tab.canAddIntegrante">
-								          -->
-								          		<md-button ng-click="listaGruposCtrl.crearPedidoGrupal(tab)">
-														<md-icon> add_circle_outline </md-icon>														 
-														<md-tooltip md-direction="left">
-															Nuevo pedido grupal
-														</md-tooltip>
-												</md-button>
-												<md-button ng-click="listaGruposCtrl.invitarUsuario(tab)">
-													<md-icon> group add </md-icon>
-													<md-tooltip md-direction="left">
-														puedes agregar miembros al grupo
-													</md-tooltip>
-												</md-button>
-
-												<md-button ng-click="listaGruposCtrl.edit()">
-													<md-icon> edit </md-icon>
-													<md-tooltip md-direction="left">
-														puedes editar los datos del grupo
-													</md-tooltip>
-												</md-button>
-
-											</div>
-											<div ng-if="!tab.admin">
-												<md-button ng-click="listaGruposCtrl.salir(tab)">
-													<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
-													<md-tooltip md-direction="left">
-														puedes SALIR del grupo
-													</md-tooltip>
-												</md-button>
-											</div>
-
-										</md-card-actions>
-									</md-card>
-									<div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = tab" />
+									<div layout=row>
+										<div flex="40" layout=column >
+											<div  ng-include="'app/comercio/administracion/lista-grupos-detalle.html'" />
+		 				
+											<div  ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = tab" />
+										</div >									
+										<div flex="60" ng-include="'app/comercio/administracion/pedido-grupos.html'" ng-init="grupo = tab" />					
+									</div>		
 								</md-content>
 							</md-tab>
 						</md-tabs>

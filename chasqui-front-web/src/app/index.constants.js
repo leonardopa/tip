@@ -33,7 +33,7 @@
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 2;
+        var idVendedor = 3;
 
         var nombreVendedor = 'adminpds';
 
@@ -153,7 +153,11 @@
             rechazarInvitacionAGrupo: URL_REST_BASE   + 'user/gcc/rechazar',
 
             nuevoGrupo: URL_REST_BASE + "user/gcc/alta/",
- 
+
+            editarGrupo: function(idGrupo){
+              return URL_REST_BASE + "user/gcc/editarGCC/"+idGrupo;  
+            } ,
+
             crearPedidoGrupal: URL_REST_BASE + "user/gcc/individual",
 
             pedidosByUser: function (idVendedor) {

@@ -1,0 +1,25 @@
+<md-card>
+	<md-card-content>
+	<md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+      <md-tab ng-repeat="miembro in tab.miembros"             
+              label="{{miembro.nickname}}">
+
+       <md-list class="md-dense" flex>
+        <md-subheader class="md-no-sticky">Productos de {{miembro.nickname}}</md-subheader>
+        <md-list-item class="md-3-line"
+        	ng-repeat="item in miembro.pedido.productosResponse">
+        	<img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" 
+         		alt="{{item.nombre}}" />
+	        <div class="md-list-item-text" layout="column">
+	            <h4>{{ item.nombre }}</h4>
+	            <p>{{item.cantidad}} X  $ {{ item.precio }} = ${{item.cantidad * item.precio }} </p>
+	         </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+       </md-list>       
+        
+      </md-tab>
+    </md-tabs>
+
+	</md-card-content>
+</md-card>
