@@ -1,0 +1,54 @@
+<md-content>
+		
+		<span class='titulo-pagina'>
+			Catalogo
+		</span>
+		<div>
+			<div>
+				<div layout=row>
+					<div flex="20"> 
+						<div layout=column>
+							<div>
+								<section ng-include="'app/comercio/catalogo/filtros.html'">
+								</section>				
+							</div>		
+							<section ng-include="'app/comercio/catalogo/contexto.pedido.html'" ng-cloak>
+								</section>
+							<div>
+								<md-button ng-click="catalogoCtrl.toggleLeft()" class="md-raised">
+									Ver pedido
+								</md-button>
+							</div>
+						</div>
+					</div>
+					<div flex="80">
+						<div layout=row>						  
+								<md-input-container >
+									<input ng-model="catalogoCtrl.queryText" type="text"
+										 placeholder="Buscar">
+								</md-input-container>
+								<md-button ng-click="catalogoCtrl.filtroQuery()">
+									<md-icon md-svg-src="app/components/image/ic_search_black_24px.svg"">
+									</md-icon>
+								</md-button>
+						</div>
+
+						<div>
+							<section ng-include="'app/comercio/catalogo/lista-productos.html'" ng-init="count = catalogoCtrl.count" ng-cloak></section>
+							<!-- ng-init="paginaProducto = catalogoCtrl.paginaProducto -->
+							<br>
+							<!-- FIX CSSS , sino no se ve el paginador -->
+							<br>
+							<br>
+						</div>
+					</div>
+					
+				</div>
+
+			</div>
+		</div>
+		
+		<section ng-include="'app/comercio/catalogo/contexto.compra.html'"></section>
+
+</md-content>
+
