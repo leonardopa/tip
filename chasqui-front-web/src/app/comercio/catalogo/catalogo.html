@@ -10,8 +10,8 @@
 							</div>		
 							<section ng-include="'app/comercio/catalogo/contexto.pedido.html'" ng-cloak>
 								</section>
-							<div>
-								<md-button ng-click="catalogoCtrl.toggleLeft()" class="md-raised">
+							<div> 
+								<md-button ng-click="catalogoCtrl.toggleLeft()"  class="md-raised"  ng-controller="MenuController as menuCtlr" ng-show="menuCtlr.isLogued">
 									Ver pedido
 								</md-button>
 							</div>

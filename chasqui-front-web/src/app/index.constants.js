@@ -15,7 +15,7 @@
         //Servidor LOCAL
 
 
-	var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
+	   var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
 
         var URL_BASE = "http://localhost:8081/chasqui/";
         
