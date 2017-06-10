@@ -17,7 +17,8 @@
 	vm.urlBase = CTE_REST.url_base;
 	vm.producto = parm;
 	vm.imagenes =[];
-	vm.imagenSelect={nombre : "1",path :"http://lorempixel.com/400/200/abstract/1"}
+	//vm.imagenSelect={nombre : "1",path :"http://lorempixel.com/400/200/abstract/1"}
+	vm.imagenSelect={};
 	vm.class="";
 
 	vm.cerrariDalogo=function(){
@@ -36,13 +37,14 @@
 	
 	function doOkPedido(response){
 		$log.debug("imagenProducto", response);
-		//vm.imagenes = response.data;	
+		vm.imagenes = response.data;	
 
-		//TODO : SACAR imagenes de prueba /*
+		//TODO : SACAR imagenes de prueba 
+		/*
 		vm.imagenes.push({nombre : "1",path :"http://lorempixel.com/400/200/abstract/1"})
 		vm.imagenes.push({nombre : "1",path :"http://lorempixel.com/400/200/abstract/2"})
 		vm.imagenes.push({nombre : "1",path :"http://lorempixel.com/400/200/abstract/3"})
-
+		*/
 
 	}
 
