@@ -1,20 +1,19 @@
 <md-card>
     <md-card-title>
         <md-card-title-text>
-            <span class="md-subhead">{{tab.descripcion}}</span>
-
+            <span class="md-headline">{{tab.alias}}</span>
             <md-divider></md-divider>
+            <span class="md-body-2">Descripción :    
+                        <strong>{{tab.descripcion}} </strong>     </span>
 
-            <span class="md-subhead">Contacto : {{tab.emailAdministrador}}</span>
+            <span class="md-body-2">Contacto :    
+                        <strong>{{tab.emailAdministrador}} </strong>     </span>
 
-            <md-divider></md-divider>
+            <span class="md-body-2">Domicilio :    
+                        <strong>{{tab.domicilio}} </strong>     </span>
 
-            <span class="md-subhead">Domicilio : {{tab.domicilio}}</span>
-
-            <md-divider></md-divider>
-            
             <md-subheader class="md-accent"  ng-if="tab.esAdministrador">
-            Tu eres el administrador del Grupo !            
+                Tu eres el administrador del Grupo !            
             </md-subheader>
         </md-card-title-text>
         <!--

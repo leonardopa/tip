@@ -28,31 +28,50 @@
 
 				</md-card-title-text>
 			</md-card-title>
-			<md-card-content layout="column" layout-align="space-between">
-				<span class="md-subhead">Número :        {{detallePedidoCtrl.pedido.id}}  </span>
-				<span class="md-subhead">Creado el  :    {{detallePedidoCtrl.pedido.fechaCreacion}}  </span>
-				<span class="md-subhead">Monto actual : ${{detallePedidoCtrl.pedido.montoActual}} </span>
-				<span class="md-subhead">Monto minimo : ${{detallePedidoCtrl.pedido.montoMinimo}}</span>
-				<span class="md-subhead">Estado :        {{detallePedidoCtrl.pedido.estado}}  </span>
+			<md-card-content layout="row">
+				<div layout="column" layout-align="space-between">
+					<span class="md-body-2">Número :    
+						<strong>{{detallePedidoCtrl.pedido.id}} </strong>     </span>
+
+					<span class="md-body-2">Creado el  : 
+						<strong>{{detallePedidoCtrl.pedido.fechaCreacion}} </strong></span>
+
+					<span class="md-body-2">Monto actual : 
+						<strong> ${{detallePedidoCtrl.pedido.montoActual}} </strong></span>
+
+					<span class="md-body-2">Monto minimo : 
+						<strong> ${{detallePedidoCtrl.pedido.montoMinimo}} </strong></span>
+
+					<span class="md-body-2">Estado : 
+						<strong>{{detallePedidoCtrl.pedido.estado}} </strong></span>
+
+				</div>
 			</md-card-content>
 			<md-card-actions layout="row" layout-align="end center">
 
 				<md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>
 				
 				<md-button ng-click="detallePedidoCtrl.confirmar()" 
-					class="md-primary"> Cerrar </md-button>
+					class="md-primary"> Confirmar </md-button>
 			 
 				<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" 
 					class="md-primary"> Confirmar individual gcc </md-button>
 
-				<md-button ng-click="detallePedidoCtrl.comprar($event)">
-					<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>
-					<md-tooltip md-direction="left">
-						puedes seguir comprando para el pedido {{detallePedidoCtrl.pedido.nombre}}
-					</md-tooltip>
-				</md-button>
+				
 			</md-card-actions>
 		</md-card>
+
+		<div layout="row">		
+			<md-button ng-click="detallePedidoCtrl.comprar($event)">
+				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>
+				<md-tooltip md-direction="left">
+					ir a catalogo
+				</md-tooltip>
+			</md-button>
+			<md-subheader class="md-no-sticky">
+			Podes seguir agregando productos al chango
+			</md-subheader>
+		</div>
 	</div>
 	<!--  SACAR ESTO
 	<section ng-include="'app/comercio/carrito/lista-productos-pedido.html'"
@@ -61,7 +80,7 @@
 	</section>
  -->
 	<div>
-		<md-subheader class="md-no-sticky"> Productos en el carro </md-subheader>
+		<span class="md-title"> Productos en el carro </span>
 
 		<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" >
 			<div layout="row" layout-align="space-between center">
