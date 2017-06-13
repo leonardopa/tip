@@ -2,19 +2,25 @@
 			<md-card>
 				<md-card-title>
 					<md-card-title-text>
-						<span class="md-headline"> Grupo </span> </md-card-title-text>
+						<span class="md-title"
+						ng-show="{{ ! formGrupoCtrl.isEdit}}">Nuevo Grupo </span> 
+
+						<span class="md-title"
+						ng-show="{{formGrupoCtrl.isEdit}}">Modificar Grupo </span> 
+
+					</md-card-title-text>
 				</md-card-title>
 				<md-card-content>
 					<md-content layout-padding>
 						<div>
-							<form name="grupoForm">
+							 	<!--
 								<div layout-gt-xs="row">
 									<md-input-container class="md-block" flex-gt-xs>
 										<label>{{formGrupoCtrl.user.nickname}}</label>
 										<input ng-model="usuario" disabled>
 									</md-input-container>
-								</div>
-								<div layout-gt-sm="row">
+								</div>-->
+								<div layout-gt-sm="column">
 									<md-input-container class="md-block" flex-gt-sm>
 										<label>Alias</label> 
 										<input ng-model="formGrupoCtrl.grupo.alias">
@@ -35,7 +41,7 @@
 										</div>
 									</md-switch>
 								</div>
-							</form>
+							 
 						</div>
 					</md-content>
 				</md-card-content>
