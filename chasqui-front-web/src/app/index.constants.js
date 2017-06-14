@@ -97,6 +97,8 @@
         	productosByProductor: URL_REST_BASE + "client/producto/byProductor",
         	
         	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
+
+            productosByMedallaProductor: URL_REST_BASE+"client/producto/byMedallaProductor",
         	
         	productosByQuery : URL_REST_BASE + "client/producto/byQuery",
           	

@@ -140,13 +140,26 @@
 		function callMedallas() {
 			productoService.getMedallas()
 				.then(function(response) {
-					vm.medallas = response.data;
+					vm.medallas = vm.medallas.concat(response.data);
+				})
+		}
+
+		function callMedallasProductores() {
+			productorService.getMedallas()
+				.then(function(response) {
+					vm.medallasProductores = response.data;
+					angular.forEach(response.data, function(medalla, key) {
+						//para que no repita ID con la de producto, ademas para diferenciarlas despes
+						medalla.idMedalla=medalla.idMedalla + 10000 ; 
+						vm.medallas.push(medalla) ;
+					});
 				})
 		}
  			
 		callCategorias();
 		callProductores();
 		callMedallas();
+		callMedallasProductores();
 
 	}
 })();
