@@ -98,7 +98,8 @@
         	
         	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
 
-            productosByMedallaProductor: URL_REST_BASE+"client/producto/byMedallaProductor",
+            //productosByMedallaProductor: URL_REST_BASE+"client/producto/byMedallaProductor",
+            productosByMedallaProductor: URL_REST_BASE+"client/producto/productosPorMedalla",
         	
         	productosByQuery : URL_REST_BASE + "client/producto/byQuery",
           	

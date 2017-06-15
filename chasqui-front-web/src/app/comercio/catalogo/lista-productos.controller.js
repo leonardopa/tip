@@ -276,9 +276,8 @@
 				params.idVendedor = StateCommons.vendedor().id;
 				
 				if (params.idMedalla>10000){
-					ToastCommons.mensaje("TODO: falta servicio . https://trello.com/c/vDG4FZQ9/85-few-filtro-por-medallas-de-productor")
-				//	params.idMedalla = params.idMedalla - 10000;
-				//	productoService.getProductosByMedallaProductor(params).then(doOk);
+					params.idMedalla = params.idMedalla - 10000;
+					productoService.getProductosByMedallaProductor(params).then(doOk);
 				}else{
 					productoService.getProductosByMedalla(params).then(doOk);
 				}
