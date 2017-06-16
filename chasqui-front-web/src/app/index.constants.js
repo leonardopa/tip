@@ -33,7 +33,7 @@
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 3;
+        var idVendedor = 2;
 
         var nombreVendedor = 'adminpds';
 

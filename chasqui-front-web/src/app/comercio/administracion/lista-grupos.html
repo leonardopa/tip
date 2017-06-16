@@ -1,13 +1,14 @@
 <!-- Tabs de grupos con el panel de info y botones de acciones -->
-
-<div class="row">
+ 
+<div class="row ch-content">
     <div layout="row" layout-align="center center">
 
         <div flex="50"><span class="md-headline">Mis grupos de compras</span></div>
 
         <div flex="50">
-            <md-button ng-click="listaGruposCtrl.crearGrupo($event)">
-                <md-icon> group </md-icon>
+            <md-button ng-click="listaGruposCtrl.crearGrupo($event)" class="btn-crear">
+                Crear Grupo
+                <md-icon style="color:white"> group </md-icon>
                 <md-tooltip md-direction="left">
                     puedes crear un grupo nuevo
                 </md-tooltip>

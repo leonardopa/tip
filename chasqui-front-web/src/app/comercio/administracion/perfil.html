@@ -1,5 +1,5 @@
 <!-- Pantalla de perfil de usuario -->
-<div class="container-fluid" class="md-padding" id="popupContainer" ng-cloak>
+<div class="container-fluid ch-content" class="md-padding" id="popupContainer" ng-cloak>
 	<div class="row">
 		<div class="col-md-2"></div>
 
@@ -15,13 +15,18 @@
 								<md-card>
 									<md-card-title>
 										<md-card-title-text>
+											<div>
 											<span class="md-headline">Direcciones </span>
 
-											<md-button ng-click="perfilCtrl.addDireccion()">
-												<md-icon> add_circle_outline </md-icon>
+											<md-button ng-click="perfilCtrl.addDireccion()"
+											class="btn-crear">
+												Nueva
+												<md-icon style="color:white"> add_circle_outline </md-icon>
 												<md-tooltip md-direction="left">
 													agregar una dirección
 												</md-tooltip>
+											</md-button>
+											</div>
 										</md-card-title-text>
 									</md-card-title>
 
