@@ -1,0 +1,48 @@
+ <div ng-controller="DetalleGruposController as detalleGrupoCtrl" layout="column" ng-cloak>
+		<md-card>
+			<md-card-title>
+				<md-card-title-text>
+					<div ng-if="detalleGrupoCtrl.isAdmin">
+						<md-subheader class="md-accent">
+							<h3>Tu eres el administrador del Grupo !</h3>
+						</md-subheader>
+					</div>
+				</md-card-title-text>
+			</md-card-title>
+
+		<md-card-content>
+			<div ng-if="detalleGrupoCtrl.contacts.length !=0">
+				<div flex>
+						<md-list-item class="contact-item selected" ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
+							<md-card flex="100">	
+								<md-card-content layout="column">
+									
+									<div class="md-list-item-text compact">
+									<div layout="row" layout-align="space-between center">
+									<!-- TODO: cargar avatar dinamicamente -->
+									<img ng-src="http://lorempixel.com/150/150/people/" class="md-avatar" alt="{{contact.nickname}}" />
+									<h4>{{contact.nickname}}</h4>
+									<p>{{contact.email}}</p>
+									</div>
+										<div ng-repeat="item in contact.pedido.productosResponse" md-theme-watch layout="column" >
+										<div layout="row" layout-align="space-between center">
+											<span class="md-headline">{{ item.nombre }}</span>
+											<span class="md-headline">{{ item.variante }}</span>
+										
+												
+										
+												
+								            	<h1><strong>$ {{ item.precio * item.cantidad }}</strong></h1> $ {{ item.precio }} x  {{ item.cantidad }} 										
+											
+										</div>
+									</div>
+									</div>
+								</md-card-content>
+							</md-card>
+						</md-list-item>
+					</div> 
+				</div> 
+			</md-card-content>	
+	</md-card> 
+</div>	
+			

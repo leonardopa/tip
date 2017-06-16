@@ -17,7 +17,7 @@
 
 	   var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
 
-        var URL_BASE = "http://localhost:8019/chasqui/";
+        var URL_BASE = "http://localhost:8081/chasqui/";
         
         //Servidor REMOTOs
 
@@ -33,7 +33,7 @@
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 2;
+        var idVendedor = 3;
 
         var nombreVendedor = 'adminpds';
 
@@ -188,25 +188,25 @@
         	// gruposByusuario: function (idUser) {
         	// 	return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
         	// },
-        
+            
 
 
 
         	
         	
         	integrantesGrupo :function (idGrupo){
-        		return URL_BASE_MOCK + "usuarios/grupos/"+idGrupo+"/integrantes";
+        		return URL_BASE + "usuario/grupos/"+idGrupo+"/integrantes";// DESMOCKEADO POR FAVIO 13-6
         	}, 
         	
         	direccionGrupo : function (idGrupo){
-        		return URL_BASE_MOCK + "direccion/grupo/"+idGrupo +"/";
+        		return URL_BASE + "direccion/grupo/"+idGrupo +"/";// DESMOCKEADO POR FAVIO 13-6
         	},      
         	
         	direccionUsuario : function (idUsuario){
-        		return URL_BASE_MOCK + "direccion/usuario/"+idUsuario;
+        		return URL_BASE + "direccion/usuario/"+idUsuario;// DESMOCKEADO POR FAVIO 13-6
         	},
-
-*/
+        
+            */
             //////////////////////////////////////////////////////////
             //////////////// OTRAS CONSTANTES 
             ///// mensajes al usuario 

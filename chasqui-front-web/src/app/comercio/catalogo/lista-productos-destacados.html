@@ -8,7 +8,7 @@
 				<md-grid-list md-cols-sm="5" md-cols-md="6" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="1:1" md-gutter="5px"
 				 md-gutter-gt-sm="8px">
 					<md-grid-tile ng-repeat="variante in ctrl.variantes" md-colspan="2" md-rowspan="3">
-						<img class="img" src="{{ctrl.urlbase}}{{variante.imagenPrincipal}}" alt="{{variante.descripcion}}" layout-fill>
+						<img class="img" src="{{ctrl.urlbase}}{{variante.imagenPrincipal}}" alt="{{variante.descripcion}}" layout-fill >
 						<md-grid-tile-footer>
 							<h3>{{variante.nombreProducto}}</h3>
 							{{variante.nombreVariedad}}

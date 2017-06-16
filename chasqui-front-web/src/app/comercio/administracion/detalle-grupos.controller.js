@@ -110,7 +110,9 @@
 		 */
 		// TODO : cambiar la lista de contactos por un boton que pida en ingreso
 		// al grupo por mail.
-		/*
+		// 
+		// ----------- DESCOMENTADOS Y DESMOCKEADOS EN index.constants.js por FAVIO 13-6
+		
 		function loadContacts() {
 
 			function doOk(response) {
@@ -127,6 +129,6 @@
 
 			gccService.integrantesGrupo(vm.idGrupo, {}).then(doOk)
 
-		}*/
+		}
 	}
 })();

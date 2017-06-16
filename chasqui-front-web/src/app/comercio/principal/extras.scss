@@ -38,12 +38,15 @@ $colorDos: #468385;
 }
 
 .md-ink-bar{
-	color: $colorDos !important;
+	color: $colorUno !important;
 	background: $colorDos !important;
 }
 md-tabs.md-default-theme .md-ink-bar, md-tabs md-ink-bar {
-    color: $colorDos !important;
+    color: $colorUno !important;
     background-color: $colorDos !important;
+}
+.btn-compra{
+	padding: 0 0.5em !important;
 }
 
 .md-theme-indigo{

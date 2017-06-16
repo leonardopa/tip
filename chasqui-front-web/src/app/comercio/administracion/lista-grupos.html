@@ -37,7 +37,8 @@
 											</md-card-title-text>
 											<md-card-title-media>
 												<div class="md-media-sm card-media">
-													<img ng-src="{{tab.urlImagen}}" class="md-card-image" alt="Washed Out">
+												<!-- TODO: cargar avatar dinamicamente -->
+													<img ng-src="http://lorempixel.com/150/150/people/" class="md-card-image" alt="Washed Out">
 												</div>
 											</md-card-title-media>
 										</md-card-title>
@@ -78,8 +79,28 @@
 											</div>
 
 										</md-card-actions>
+										<!-- PRUEBA DE FAVIO 13-6  -->
+										<div ng-controller="ListaGruposController as listaGruposCtrl" class="sample" layout="column" ng-cloak>
+											<md-content class="md-padding">
+											<md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+											<md-tab  ng-disabled="tab.disabled" label="Miembros"> 
+											<md-card>
+												<div ng-include="'app/comercio/administracion/detalle-grupos-user.html'" ng-init="grupo = tab" />
+											</md-card>
+											</md-tab> 
+										
+											<md-tab  ng-disabled="tab.disabled" label="Pedidos"> 
+												<div ng-include="'app/comercio/administracion/detalle-grupos-pedidos.html'" ng-init="grupo = tab" />
+											</md-tab>
+												</md-tabs>
+											</md-content>
+											</div>
+										</md-content>
+										</div>
+									<!-- FIN DE PRUEBA DE FAVIO 13-6 -->
 									</md-card>
-									<div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = tab" />
+									<!--
+									 <div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = tab" /> <!--( Comentado por Favio 13-6)-->
 								</md-content>
 							</md-tab>
 						</md-tabs>
