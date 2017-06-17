@@ -15,9 +15,9 @@
         //Servidor LOCAL
 
 
-	var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
+	   //var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
 
-        //var URL_BASE = "http://localhost:8081/chasqui/";
+       // var URL_BASE = "http://localhost:8081/chasqui/";
         
         //Servidor REMOTOs
 
@@ -98,9 +98,8 @@
         	
         	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
 
-            //productosByMedallaProductor: URL_REST_BASE+"client/producto/byMedallaProductor",
-            productosByMedallaProductor: URL_REST_BASE+"client/producto/productosPorMedalla",
-        	
+            productosByMedallaProductor: URL_REST_BASE+"client/producto/byMedallaProductor",
+            
         	productosByQuery : URL_REST_BASE + "client/producto/byQuery",
           	
         	verUsuario : URL_REST_BASE + "user/adm/read",
@@ -195,25 +194,25 @@
         	// gruposByusuario: function (idUser) {
         	// 	return URL_BASE_MOCK + "usuarios/" +idUser + "/grupos/";
         	// },
-        
+            
 
 
 
         	
         	
         	integrantesGrupo :function (idGrupo){
-        		return URL_BASE_MOCK + "usuarios/grupos/"+idGrupo+"/integrantes";
+        		return URL_BASE + "usuario/grupos/"+idGrupo+"/integrantes";// DESMOCKEADO POR FAVIO 13-6
         	}, 
         	
         	direccionGrupo : function (idGrupo){
-        		return URL_BASE_MOCK + "direccion/grupo/"+idGrupo +"/";
+        		return URL_BASE + "direccion/grupo/"+idGrupo +"/";// DESMOCKEADO POR FAVIO 13-6
         	},      
         	
         	direccionUsuario : function (idUsuario){
-        		return URL_BASE_MOCK + "direccion/usuario/"+idUsuario;
+        		return URL_BASE + "direccion/usuario/"+idUsuario;// DESMOCKEADO POR FAVIO 13-6
         	},
-
-*/
+        
+            */
             //////////////////////////////////////////////////////////
             //////////////// OTRAS CONSTANTES 
             ///// mensajes al usuario 

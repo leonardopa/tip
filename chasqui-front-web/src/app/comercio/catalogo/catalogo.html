@@ -10,15 +10,15 @@
 							</div>		
 							<section ng-include="'app/comercio/catalogo/contexto.pedido.html'" ng-cloak>
 								</section>
-							<div>
-								<md-button ng-click="catalogoCtrl.toggleLeft()" class="md-raised">
+							<div> 
+								<md-button ng-click="catalogoCtrl.toggleLeft()"  class="md-raised"  ng-controller="MenuController as menuCtlr" ng-show="menuCtlr.isLogued">
 									Ver pedido
 								</md-button>
 							</div>
 						</div>
 					</div>
 					<div flex="80">
-						<div layout=row>						  
+						<div layout=row layout-align="center center">						  
 								<md-input-container >
 									<input ng-model="catalogoCtrl.queryText" type="text"
 										 placeholder="Buscar">

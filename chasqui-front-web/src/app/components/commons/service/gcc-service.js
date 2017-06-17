@@ -67,7 +67,7 @@
 		///////////////////////////////
 		/////////// MOCKS 
 		
-		
+		//---- DESCOMENTADOS Y DESMOCKEADOS EN index.constants.js por FAVIO 13-6
 		
 		vm.salirGrupo = function (id, idSelect) {
 			$log.debug(" service salirGrupo ");
@@ -83,6 +83,8 @@
 			$log.debug(" service direccionGrupo ");
 	        return promiseService.doPost(CTE_REST.direccionGrupo(id),direccion);
 	    }
+
+	    //-------- DESCOMENTADOS Y DESMOCKEADOS EN index.constants.js por FAVIO 13-6
 		/////////////////////////////////////////
 		
 		/*

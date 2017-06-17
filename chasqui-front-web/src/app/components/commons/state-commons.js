@@ -23,7 +23,7 @@
     }
 
     vm.isGrupoIndividualSelected=function(){
-        return vm.ls.grupoSelected.alias =='Personal';
+        return utilsService.isUndefinedOrNull(vm.ls.grupoSelected)  || vm.ls.grupoSelected.alias =='Personal';
     }
     vm.isPedidoInividualSelected=function(){         
         return vm.ls.pedidoSelected.idGrupo == null;

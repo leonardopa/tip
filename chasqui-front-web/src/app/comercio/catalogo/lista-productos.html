@@ -1,18 +1,17 @@
 <div ng-controller="ListaProductosController as listaProductoCtr">
-{{listaProductoCtr.pedidoSelected}}
 	<span ng-show="listaProductoCtr.variantes.length == 0">
 		Sin productos.</span>
 
 		<div  layout="column" layout-gt-sm="row" layout-wrap> 
 		<div flex="25" flex-gt-sm="25"  ng-repeat="variante in listaProductoCtr.variantes"  
 			style="padding-bottom: 8px" >
-			<md-card  style="height:100%;">
+			<md-card >
 				<div class="hover01">
 					<div>
 						<figure><img 
 							 src="{{listaProductoCtr.urlBase}}{{variante.imagenPrincipal}}" 
 							 ng-click="listaProductoCtr.verProducto(variante)"
-							 style="height:170px;width:100%">
+							 style="width:100%;">
 						</figure>
 					</div>
 				</div>
@@ -41,14 +40,12 @@
 								-->
 							</div>	
 
-							<div layout="row"  layout-align="space-around center"
-
- >
+							<div layout="row"  layout-align="space-around center">
 								<div>
 									<h1>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></h1>
 								</div>
 								<md-button class="btn-compra" 
-									ng-click="listaProductoCtr.agregar(variante)">
+									ng-click="listaProductoCtr.agregar(variante)" >
 										<p> Agregar</p>
 										<md-tooltip md-direction="left"> Agregar al Changuito </md-tooltip>
 								</md-button>
@@ -88,7 +85,7 @@
 
 	<!-- ********************* paginacion *******************-->
 
-	<section layout="column"  layout-align="end center" ng-show="listaProductoCtr.variantes.length > 0">
+	<section layout="column" class="chq-paginador" layout-align="end center" ng-show="listaProductoCtr.variantes.length > 0">
 	 	<cl-paging flex cl-pages="listaProductoCtr.paging.total" cl-steps="6" 
 		 cl-page-changed="listaProductoCtr.paging.onPageChanged()" 
 		 cl-align="start start" cl-current-page="listaProductoCtr.paging.current"></cl-paging>
