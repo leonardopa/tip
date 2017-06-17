@@ -1,7 +1,7 @@
 $colorUno: #462342;
 $colorDos: #468385;
-
-
+$colorConfirmar: #43a047;
+// https://www.materialpalette.com/colors
 .body{
 		//background: linear-gradient(#F7F7F7,#D7D7D7) !important;
 		//background-color: #462342 !important;
@@ -25,8 +25,18 @@ $colorDos: #468385;
 }
 
 .btn-compra{
-	background: linear-gradient(#1e88e5,#1e88e5) !important;
+	background: #1e88e5 !important;
 	color:white;
+}
+
+.btn-agregar{
+	background: $colorDos !important;
+	color:white;	
+}
+
+.btn-confirmar{
+	background: $colorConfirmar !important;
+	color:white;	
 }
 
 .md-accent{

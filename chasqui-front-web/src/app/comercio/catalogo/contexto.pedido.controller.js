@@ -22,20 +22,20 @@
 	
 		vm.pedidos= [];
 		vm.pedidoSelected;
+		vm.hayProductos=false;
 
 		vm.checkAlias=function(){
-			if (vm.pedidoSelected)
+			if (vm.pedidoSelected){
 				return vm.pedidoSelected.aliasGrupo == null ? 'Personal' : vm.pedidoSelected.aliasGrupo;
+			}else{
+				return 'Personal'
+			}
 		}
 
 		$rootScope.$on('contexto.compra.cambia.grupo', 
-			function(event, grupo) {		
-				console.log((grupo)) 		
-				console.log(getPedidoByGrupo(grupo)) ;
+			function(event, grupo) {					
 				vm.pedidoSelected = getPedidoByGrupo(grupo);
-				StateCommons.ls.pedidoSelected=vm.pedidoSelected;
-				console.log(vm.pedidoSelected);
-				console.log(StateCommons.ls.pedidoSelected);
+				StateCommons.ls.pedidoSelected=vm.pedidoSelected;				
 			});
 
 		//actualiza la lista de productos

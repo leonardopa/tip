@@ -53,8 +53,8 @@
 				</md-content>
 			</md-card-content>
 			<md-card-actions layout="row" layout-align="end center">
-				<md-button ng-click="ctrl.actualizar()" ng-show="! ctrl.isAlta && ctrl.isModoEdit">
-					<md-icon> done </md-icon>
+				<md-button class="btn-confirmar" ng-click="ctrl.actualizar()" ng-show="! ctrl.isAlta && ctrl.isModoEdit">
+					<md-icon style="color:white"> done </md-icon>
 					<md-tooltip md-direction="left">
 						aceptar cambios de datos de usuario
 					</md-tooltip>
@@ -72,9 +72,9 @@
 					</md-tooltip>
 				</md-button>
 
-				<md-button ng-show="! usuarioForm.$invalid && ctrl.isAlta" ng-click="ctrl.guardar()"> Registrarme </md-button>
+				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ctrl.isAlta" ng-click="ctrl.guardar()"> Registrarme </md-button>
 
-				<md-button ng-show="! usuarioForm.$invalid && ! ctrl.isAlta" ng-click="ctrl.actualizar()"> Actualizar </md-button>
+				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ! ctrl.isAlta" ng-click="ctrl.actualizar()"> Actualizar </md-button>
 			</md-card-actions>
 		</md-card>
 	</form>

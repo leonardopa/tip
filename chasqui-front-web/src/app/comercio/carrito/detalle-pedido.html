@@ -21,15 +21,17 @@
 <div layout="row"  >
 	<div>
 		<md-card >
+
 			<md-card-title>
 				<md-card-title-text>
-					<span class="md-headline">{{detallePedidoCtrl.pedido.aliasGrupo}}</span>
+					<span class="md-headline">
+						{{detallePedidoCtrl.pedido.aliasGrupo == "" ? detallePedidoCtrl.pedido.aliasGrupo : "Personal"}}</span>
 					<md-divider></md-divider>
 
 				</md-card-title-text>
 			</md-card-title>
 			<md-card-content layout="row">
-				<div layout="column" layout-align="space-between">
+				<div layout="column" >
 					<span class="md-body-2">Número :    
 						<strong>{{detallePedidoCtrl.pedido.id}} </strong>     </span>
 
@@ -60,18 +62,19 @@
 				
 			</md-card-actions>
 		</md-card>
-
+		<md-card>
 		<div layout="row">		
 			<md-button ng-click="detallePedidoCtrl.comprar($event)">
-				<i style="font-size: 48px;" class="material-icons">add_shopping_cart</i>
+				<i style="font-size: 48px;color:#468385" class="material-icons">add_shopping_cart</i>
 				<md-tooltip md-direction="left">
 					ir a catalogo
 				</md-tooltip>
 			</md-button>
-			<md-subheader class="md-no-sticky">
+			<md-subheader>
 			Podes seguir agregando productos al chango
 			</md-subheader>
 		</div>
+		</md-card>
 	</div>
 	<!--  SACAR ESTO
 	<section ng-include="'app/comercio/carrito/lista-productos-pedido.html'"
@@ -80,7 +83,8 @@
 	</section>
  -->
 	<div>
-		<span class="md-title"> Productos en el carro </span>
+		
+		<md-subheader> Productos en el carro  </md-subheader>
 
 		<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" >
 			<div layout="row" layout-align="space-between center">

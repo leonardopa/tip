@@ -15,18 +15,21 @@
 								<md-card>
 									<md-card-title>
 										<md-card-title-text>
-											<div>
-											<span class="md-headline">Direcciones </span>
-
-											<md-button ng-click="perfilCtrl.addDireccion()"
-											class="btn-crear">
-												Nueva
-												<md-icon style="color:white"> add_circle_outline </md-icon>
-												<md-tooltip md-direction="left">
-													agregar una dirección
-												</md-tooltip>
-											</md-button>
-											</div>
+											<div layout=row layout-align="space-between end">
+												<div>
+												<span class="md-headline">Direcciones </span>
+												</div>
+												<div>
+												<md-button ng-click="perfilCtrl.addDireccion()"
+												class="btn-agregar">
+													Nueva
+													<md-icon style="color:white"> add_circle_outline </md-icon>
+													<md-tooltip md-direction="left">
+														agregar una dirección
+													</md-tooltip>
+												</md-button>
+												</div>
+												</div>
 										</md-card-title-text>
 									</md-card-title>
 

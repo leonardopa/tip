@@ -10,11 +10,11 @@
 				<md-card-content>
 					<md-content>
 						<div  layout="column" layout-align="center center">
-							<md-input-container>
+							<md-input-container ng-keyup="$event.keyCode == 13 && loginCtrl.login()">
 								<label>Email</label>
 								<input ng-model="loginCtrl.user.email" type="email">
 							</md-input-container>
-							<md-input-container>
+							<md-input-container ng-keyup="$event.keyCode == 13 && loginCtrl.login()">
 								<label>Contrasea</label>
 								<input ng-model="loginCtrl.user.password" type="password">
 							</md-input-container>
@@ -29,7 +29,7 @@
 
 					<md-button md-no-ink class="md-primary" ng-click="loginCtrl.recuperar()">Olvide mi Contrasea</md-button>
 
-					<md-button class="md-raised md-primary" ng-click="loginCtrl.login()">Ingresar</md-button>
+					<md-button class="btn-confirmar" ng-click="loginCtrl.login()">Ingresar</md-button>
 				</md-card-actions>
 			</md-card>
 		</div>
