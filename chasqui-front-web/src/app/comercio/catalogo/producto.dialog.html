@@ -4,10 +4,12 @@
             <div class="md-toolbar-tools chq-color-toolbar">
                 <h2> {{ctrl.producto.nombreProducto}} </h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                
+                <md-button ng-click="ctrl.cerrariDalogo()" >
+                        <i style="font-size: 36px;" class="material-icons">close</i>
                 </md-button>
             </div>
+
         </md-toolbar>
 
         <md-dialog-content>
@@ -59,11 +61,7 @@
             </div>
         </md-dialog-content>
 
-        <md-dialog-actions layout="row">
-             <md-button ng-click="ctrl.cerrariDalogo()" >
-                        <i style="font-size: 36px;" class="material-icons">close</i>
-            </md-button>
-        </md-dialog-actions>
+         
     </form>
 </md-dialog>
 

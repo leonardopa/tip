@@ -48,7 +48,7 @@
 			});		
 
 			$mdDialog.show({
-		      contentElement: '#productorServiceDialog',
+		      contentElement: '#productorDialog',
 		      parent: angular.element(document.body),
 		      //targetEvent: ev,
 		      clickOutsideToClose: true
