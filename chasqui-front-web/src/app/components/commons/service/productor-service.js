@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('chasqui').service('productorService', productorService);
-	function productorService(restProxy, $q,$log,CTE_REST,StateCommons ) {
+	function productorService(restProxy, $q,$log,CTE_REST,StateCommons,promiseService ) {
 		var vm = this;
 				
 		vm.getProductores = function () {
@@ -18,7 +18,11 @@
 		 	 
 	        return promise;
 	    }
-			
+		
+		vm.getMedallas = function () {
+			$log.debug(" service getMedallas productores ");
+	        return promiseService.doGet(CTE_REST.medallasProductor,{});
+	    }
 		
 	}// function
 })();// anonimo

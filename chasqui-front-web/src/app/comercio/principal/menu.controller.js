@@ -32,7 +32,7 @@
 		function resetNotificacion() {
 			vm.callNotificaciones = false;
 			vm.icon = 'notifications_none';
-			vm.fill = 'white';
+			vm.fill = 'black';
 		}
 
 		function addNotificacion() {
@@ -112,7 +112,7 @@
 		vm.verNotificaciones = function() {
 			$log.debug("Ver notificaciones");
 			vm.icon = 'notifications_none';
-			vm.fill = 'white';
+			vm.fill = 'black';
 			$state.go('perfil', {
 				index: 1
 			});

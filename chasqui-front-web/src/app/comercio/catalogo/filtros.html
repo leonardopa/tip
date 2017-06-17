@@ -24,7 +24,7 @@
 				<md-input-container class="md-block" flex-gt-sm> <label>Medalla</label>
 					<md-select ng-change="catalogoCtrl.filtroPor('MEDALLA')" ng-model="catalogoCtrl.medallaSelect">
 						<md-option ng-repeat="medalla in catalogoCtrl.medallas" value="{{medalla.idMedalla}}">
-							<img ng-src="{{catalogoCtrl.urlBase}}{{medalla.pathImagen}}" class="md-avatar" width="40" height="40"> {{medalla.nombre}}
+							<img ng-src="{{catalogoCtrl.urlBase}}{{medalla.pathImagen}}" class="md-avatar" width="40" height="40"> {{medalla.id}} {{medalla.nombre}}
 							</md-option>
 					</md-select>
 				</md-input-container>

@@ -9,7 +9,7 @@
 	 */
 	function ListaProductosController($scope,$rootScope, $log, CTE_REST,
 			$state, StateCommons, ToastCommons, dialogCommons,productoService,utilsService,
-			gccService ,$mdDialog) {
+			gccService ,$mdDialog,productorService) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -26,6 +26,9 @@
 		vm.medallaSelect=undefined;
 		vm.pedidoSelected=undefined;
 		vm.grupoSelected=undefined;
+		vm.emprendedores=[];
+		vm.emprendedorSelect={};
+
 		//////// dialogo medalla
 		vm.showPrerenderedDialog = function(medalla) {	
 			vm.medallaSelect=medalla;
@@ -36,6 +39,22 @@
 		      clickOutsideToClose: true
 		    });
 		  };
+
+		 vm.showPrerenderedDialogProductor=function (id){
+		 	
+		 	angular.forEach(vm.emprendedores, function(empr, key) {
+				if (empr.idProductor === id) 
+					vm.emprendedorSelect = empr;
+			});		
+
+			$mdDialog.show({
+		      contentElement: '#productorServiceDialog',
+		      parent: angular.element(document.body),
+		      //targetEvent: ev,
+		      clickOutsideToClose: true
+		    }); 	
+
+		 }
 
 		 vm.cerrarDialogoMedalla=function (){
 		 	$mdDialog.hide();
@@ -255,7 +274,14 @@
 			case 'MEDALLA':
 				params.idMedalla = filtro.valor;
 				params.idVendedor = StateCommons.vendedor().id;
-				productoService.getProductosByMedalla(params).then(doOk)
+				
+				if (params.idMedalla>10000){
+					params.idMedalla = params.idMedalla - 10000;
+					productoService.getProductosByMedallaProductor(params).then(doOk);
+				}else{
+					productoService.getProductosByMedalla(params).then(doOk);
+				}
+							
 				break;
 			case 'QUERY':
 				params.query = filtro.valor;
@@ -289,6 +315,13 @@
 			gccService.crearPedidoGrupal(params).then(doOK);
 		}
 
+		function callEmprendedores() {
+			$log.debug("---callEmprendedor ---");
+			
+			productorService.getProductores()
+		        .then(function(data) {vm.emprendedores=data.data;})
+	   	}
+
 		// findProductos();
 		if (! utilsService.isUndefinedOrNull(StateCommons.ls.varianteSelected)){
 			$log.debug("tiene una variante seleccionda" ,StateCommons.ls.varianteSelected )
@@ -297,6 +330,7 @@
 		}
 
 		//vm.variantes = findProductos(1,10,{});
+		callEmprendedores();
 	}
 
 })();

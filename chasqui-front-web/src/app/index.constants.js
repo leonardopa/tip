@@ -15,16 +15,16 @@
         //Servidor LOCAL
 
 
-	   var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
+	   //var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
 
-        var URL_BASE = "http://localhost:8081/chasqui/";
+       // var URL_BASE = "http://localhost:8081/chasqui/";
         
         //Servidor REMOTOs
 
        // var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
 
      
-       //var URL_BASE = "http://proyectochasqui.com:8080/chasqui-dev-testing/";
+       var URL_BASE = "http://proyectochasqui.com:8080/chasqui-dev-testing/";
   	   //var URL_BASE = "http://168.181.184.203:8080/chasqui/";
 
 
@@ -33,7 +33,7 @@
         
         var PRODUCTO = URL_REST_BASE + "productos/";
         
-        var idVendedor = 3;
+        var idVendedor = 2;
 
         var nombreVendedor = 'adminpds';
 
@@ -97,7 +97,9 @@
         	productosByProductor: URL_REST_BASE + "client/producto/byProductor",
         	
         	productosByMedalla: URL_REST_BASE+"client/producto/byMedalla",
-        	
+
+            productosByMedallaProductor: URL_REST_BASE+"client/producto/byMedallaProductor",
+            
         	productosByQuery : URL_REST_BASE + "client/producto/byQuery",
           	
         	verUsuario : URL_REST_BASE + "user/adm/read",
@@ -153,7 +155,11 @@
             rechazarInvitacionAGrupo: URL_REST_BASE   + 'user/gcc/rechazar',
 
             nuevoGrupo: URL_REST_BASE + "user/gcc/alta/",
- 
+
+            editarGrupo: function(idGrupo){
+              return URL_REST_BASE + "user/gcc/editarGCC/"+idGrupo;  
+            } ,
+
             crearPedidoGrupal: URL_REST_BASE + "user/gcc/individual",
 
             pedidosByUser: function (idVendedor) {

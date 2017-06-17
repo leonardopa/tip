@@ -17,6 +17,11 @@
 			params.idVendedor=idVend;
 			return promiseService.doPost(CTE_REST.nuevoGrupo,params);
 	    }
+
+	    vm.editarGrupo = function (params) {
+			$log.debug(" service editarGrupo ",params);	    
+			return promiseService.doPut(CTE_REST.editarGrupo(params.idGrupo),params);
+	    }
 		
 		vm.invitarUsuarioAGrupo = function (params) {
 			$log.debug(" service invitarUsuarioAGrupo ");	       

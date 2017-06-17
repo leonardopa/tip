@@ -3,7 +3,7 @@
 		Sin productos.</span>
 
 		<div  layout="column" layout-gt-sm="row" layout-wrap> 
-		<div flex="20" flex-gt-sm="20"  ng-repeat="variante in listaProductoCtr.variantes"  
+		<div flex="25" flex-gt-sm="25"  ng-repeat="variante in listaProductoCtr.variantes"  
 			style="padding-bottom: 8px" >
 			<md-card >
 				<div class="hover01">
@@ -23,9 +23,13 @@
 								<div class="md-subhead">
 					        		<span>{{variante.nombreProducto}}</span>
 					        	</div>
+					        	<md-button  
+					        	ng-click="listaProductoCtr.showPrerenderedDialogProductor(variante.idFabricante)"
+					        	>{{variante.nombreFabricante}}</md-button>
+					        	<!--
 					        	<div class="md-subhead">
 									<a href="http://localhost:3000/#/emprendedores/{{variante.idFabricante}}"> {{variante.nombreFabricante}}</a>
-								</div >
+								</div >-->
 								<!--
 								<div class="md-subhead">
 									<span>{{variante.nombreVariedad}} </span>
@@ -91,17 +95,37 @@
 	<div style="visibility: hidden">
 	    <div class="md-dialog-container" id="myDialog">
 	      <md-dialog layout-padding  style="width:40%;">
-	      	<div  layout="column" layout-align="center center">
-	        	<md-button ng-click="listaProductoCtr.cerrarDialogoMedalla(1)" >
-		           		<i style="font-size: 36px;" class="material-icons">close</i>
-				</md-button>
-	       
-		         <img ng-src="{{listaProductoCtr.urlBase}}{{listaProductoCtr.medallaSelect.pathImagen}}" 
+	      	<div  layout="column" layout-align="center center">	        		      
+		       <img ng-src="{{listaProductoCtr.urlBase}}{{listaProductoCtr.medallaSelect.pathImagen}}" 
 		         	width="200" height="200">
 		        
-		         <span class="md-headline">{{listaProductoCtr.medallaSelect.nombre}}</span>
+		        <span class="md-headline">{{listaProductoCtr.medallaSelect.nombre}}</span>
 		          
-		         <div ng-bind-html ="listaProductoCtr.medallaSelect.descripcion" />     	
+		        <div ng-bind-html ="listaProductoCtr.medallaSelect.descripcion" />     	
+
+		        <div ng-click="listaProductoCtr.cerrarDialogoMedalla(1)" >
+		           		<i style="font-size: 36px;" class="material-icons">close</i>
+				</div>
+
+		    </div>
+	      </md-dialog>
+    </div>
+
+    <!-- ********************* dialogo de productor *******************-->
+	<div style="visibility: hidden">
+	    <div class="md-dialog-container" id="productorDialog">
+	      <md-dialog layout-padding  style="width:40%;">
+
+	      	<div  layout="column" layout-align="center center">	        		       
+		         <img ng-src="{{listaProductoCtr.urlBase}}{{listaProductoCtr.emprendedorSelect.pathImagen}}" 
+		         	width="200" height="200">
+		        
+		         <span class="md-headline">{{listaProductoCtr.emprendedorSelect.nombreProductor}}</span>
+		          
+		         <div ng-bind-html ="listaProductoCtr.emprendedorSelect.descripcionCorta" />     	
+		         <div ng-click="listaProductoCtr.cerrarDialogoMedalla(1)" >
+		           		<i style="font-size: 36px;" class="material-icons">close</i>
+				</div>
 		    </div>
 	      </md-dialog>
     </div>

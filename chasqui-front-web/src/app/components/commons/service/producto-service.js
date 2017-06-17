@@ -38,8 +38,13 @@
 		vm.getProductosByMedalla = function (params) {
 			$log.debug(" service getProductosSinFiltro ");
 	        return promiseService.doPostPublic(CTE_REST.productosByMedalla, params);		 	 	       
+	    }		
+
+		vm.getProductosByMedallaProductor = function (params) {
+			$log.debug(" service getProductosSinFiltro ");
+	        return promiseService.doPostPublic(CTE_REST.productosByMedallaProductor, params);		 	 	       
 	    }
-		
+
 		vm.getProductosByQuery = function (params) {
 			$log.debug(" service getProductosSinFiltro ");       
 	        return promiseService.doPostPublic(CTE_REST.productosByQuery, params);

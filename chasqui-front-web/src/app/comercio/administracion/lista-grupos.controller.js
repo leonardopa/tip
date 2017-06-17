@@ -6,7 +6,7 @@
 
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
 	function ListaGruposController($log, $scope, $state,
-			StateCommons, dialogCommons, ToastCommons,perfilService,gccService) {
+			StateCommons, dialogCommons, ToastCommons,perfilService,gccService,CTE_REST) {
 
 		$log.debug("controler ListaGruposController");
 		StateCommons.ls.itemMenuSelect = 'lista-grupos';
@@ -16,6 +16,7 @@
 		vm.tabs = [];
 		vm.selected = null, vm.previous = null;
 		vm.selectedIndex = 1;
+		vm.urlBase = CTE_REST.url_base;
 
 		/** Control de cambio de tabs */
 		$scope.$watch('selectedIndex', function(current, old) {
@@ -38,14 +39,9 @@
 				callLoadGrupos();		
 		});
 
-		/** Editar datos del grupo */
-		// TODO: IMPLEMENTAR
-		vm.edit = function() {
-			angular.forEach(vm.tabs, function(grupo) {
-				$log.debug(grupo.canAddIntegrante);
-			});
-			$log.debug(vm.habilita);
-			vm.count++;
+	
+		vm.edit = function(grupo) {			
+			$state.go("form-grupo",{ "grupo" : grupo});			
 		}
 
 		/** habilita el panel para agregar integrantes. */

@@ -12,13 +12,14 @@
 
         <md-dialog-content>
             <div layout="row">
-            <!--
-            <img src="{{ctrl.urlBase}}{{ctrl.producto.imagenPrincipal}}" style="height:340px;width:200px">
-            -->
-                <img src="{{ctrl.imagenSelect.path}}" style="width:80%;"
-                     flex="60" class="image-preview"  >
+                   <md-card>
+                        <md-card-content>
+                            <img src="{{ctrl.urlBase}}{{ctrl.producto.imagenPrincipal}}" 
+                            style="max-height:200px;">
+                        </md-card-content>
+                    </md-card>
 
-                <div layout="column"  flex="50"  >
+  
                      <md-card>
                         <md-card-content>
                         <div layout="column">                     
@@ -39,7 +40,7 @@
                             </div>
                         </div>
                     </md-card-content>
-                </div>
+           
             </div>
 
             <md-divider md-inset></md-divider>
@@ -47,11 +48,12 @@
             <div  layout="row">
                 <div ng-repeat="imagen in ctrl.imagenes"
                     class="image-mini-preview" >      
-                    <!-- este es que va
-                     <img src="{{ctrl.urlBase}}{{imagen.path}}" style="height:50px;width:50px">-->
-                        
-                        <img src="{{imagen.path}}" style="height:70px;width:70px"
-                        ng-click="ctrl.cambiarImagen(imagen)">
+                    
+                     <img src="{{ctrl.urlBase}}{{imagen.path}}" 
+                        style="height:100px;">
+                         <!--
+                    <img src="{{imagen.path}}" style="height:70px;width:70px"
+                        ng-click="ctrl.cambiarImagen(imagen)">-->
                  
                 </div>
             </div>
@@ -78,5 +80,6 @@
 div.image-mini-preview:hover {
     border: 1px solid #777;
 }
+
 
 </style>

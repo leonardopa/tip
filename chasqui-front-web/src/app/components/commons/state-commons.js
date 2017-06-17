@@ -23,7 +23,7 @@
     }
 
     vm.isGrupoIndividualSelected=function(){
-        return vm.ls.grupoSelected.alias =='Personal';
+        return utilsService.isUndefinedOrNull(vm.ls.grupoSelected)  || vm.ls.grupoSelected.alias =='Personal';
     }
     vm.isPedidoInividualSelected=function(){         
         return vm.ls.pedidoSelected.idGrupo == null;
@@ -42,7 +42,7 @@
     vm.vendedor = function(){
     	//TODO: pedir al servicio, hacer singleton con el LS
     	var config={};
-    	config.id=3;
+    	config.id=2;
     	config.imagen="/imagenes/usuarios/adminpds/puentedelsur.png";
     	 
     	
