@@ -18,9 +18,9 @@
 			return promiseService.doPost(CTE_REST.nuevoGrupo,params);
 	    }
 
-	    vm.editarGrupo = function (params) {
+	    vm.editarGrupo = function (idGrupo,params) {
 			$log.debug(" service editarGrupo ",params);	    
-			return promiseService.doPut(CTE_REST.editarGrupo(params.idGrupo),params);
+			return promiseService.doPut(CTE_REST.editarGrupo(idGrupo),params);
 	    }
 		
 		vm.invitarUsuarioAGrupo = function (params) {

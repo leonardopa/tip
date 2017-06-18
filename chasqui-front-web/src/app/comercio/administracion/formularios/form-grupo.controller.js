@@ -59,11 +59,10 @@
 				$state.go("lista-grupos");								
 			}
 		 	//alias, idDomicilio, telefono, calle, numero, codigoPostal, localidad, provincia , token 
-		 	var params = {}
-		 	params.idGrupo=vm.grupo.idGrupo
+		 	var params = {}		 	
 		 	params.alias = vm.grupo.alias
 		 	params.descripcion = vm.grupo.descripcion
-			gccService.editarGrupo(params).then(doOk)
+			gccService.editarGrupo(vm.grupo.idGrupo,params).then(doOk)
 		}
 	}
 

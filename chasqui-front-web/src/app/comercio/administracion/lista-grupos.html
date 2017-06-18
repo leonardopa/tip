@@ -22,18 +22,18 @@
                     Aún no hay grupos
                 </p></md-content></md-card>
 
-        <div style="width:75%;align-self: center">  
+        <div>  
             <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
                 <md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.alias}}">
                 	
     	                <md-content class="md-padding">
     	                    <div layout=row  >
-    	                        <div flex="40" layout=column >
+    	                        <div flex="50" layout=column >
     	                            <div ng-include="'app/comercio/administracion/lista-grupos-detalle.html'" ></div>
 
     	                            <div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = tab" ></div>
     	                        </div>
-    	                        <div flex="60" ng-include="'app/comercio/administracion/pedido-grupos.html'" ng-init="grupo = tab" ></div>                       
+    	                        <div flex="50" ng-include="'app/comercio/administracion/pedido-grupos.html'" ng-init="grupo = tab" ></div>                       
     	                    </div>
     	                </md-content>
                    
