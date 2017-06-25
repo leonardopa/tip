@@ -2,7 +2,8 @@
 	'use strict';
 
 	angular.module('chasqui').service('promiseService', promiseService);
-	function promiseService($q,restProxy,utilsService,$log,$state,ToastCommons) {
+	function promiseService($q,restProxy,utilsService,$log,$state,ToastCommons
+		,$rootScope) {
 		var vm = this;		
 
 		vm.doGet = function (url,params,noOkFuctionParam) {		
@@ -93,6 +94,7 @@
 		      
 		    if (response.status==401){
 		    	ToastCommons.mensaje("Por favor vuelva a loguarse");
+		    	$rootScope.$broadcast('logout', "");
 		    	$state.go('login');
 		    }else {
 		        $log.error("error al llamar a un servicio data", response.data);

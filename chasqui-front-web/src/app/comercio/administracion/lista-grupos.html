@@ -1,5 +1,6 @@
 <!-- Tabs de grupos con el panel de info y botones de acciones -->
 <div class="row ch-content">
+
     <div layout="row" layout-align="space-between center">
 
         <div  ><span class="md-headline">Mis grupos de compras</span></div>
@@ -15,7 +16,7 @@
         </div>
     </div>
 
-    <div ng-controller="ListaGruposController as listaGruposCtrl" class="sample" layout="column" ng-cloak>
+    <div layout="column" ng-cloak>
         <md-card ng-show="listaGruposCtrl.tabs.length==0">
             <md-content flex layout-padding >
                 <p >
@@ -23,7 +24,7 @@
                 </p></md-content></md-card>
 
         <div>  
-            <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+            <md-tabs md-selected="listaGruposCtrl.selectedIndex" md-dynamic-height md-border-bottom>
                 <md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.alias}}">
                 	
     	                <md-content class="md-padding">

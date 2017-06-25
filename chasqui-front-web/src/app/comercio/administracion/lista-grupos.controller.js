@@ -6,7 +6,8 @@
 
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
 	function ListaGruposController($log, $scope, $state,
-			StateCommons, dialogCommons, ToastCommons,perfilService,gccService,CTE_REST) {
+			StateCommons, dialogCommons, ToastCommons,perfilService,gccService,CTE_REST
+			,contextoCompraService) {
 
 		$log.debug("controler ListaGruposController");
 		StateCommons.ls.itemMenuSelect = 'lista-grupos';
@@ -25,20 +26,41 @@
 
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
-					$log.debug('Goodbye ' + vm.previous.nombre + '!');
+					$log.debug('Goodbye ' + vm.previous.alias + '!');
 				}
 			if (current + 1)
 				if (!angular.isUndefined(vm.selected)) {
-					$log.debug('Hello ' + vm.selected.nombre + '!');
+					$log.debug('Hello ' + vm.selected.alias + '!');
 				}
 		});
 
+		function setTabSeleccionado(grupo){
+			$log.debug("setTabSeleccionado 1");
+			var i = 0
+			var indexSelect = 0;
+			var existe = false;
+			angular.forEach(vm.tabs, function(tab) {
+				$log.debug("setTabSeleccionado", tab.idGrupo + " " + tab.alias);
+				if ((grupo != undefined) && (tab.idGrupo == grupo.idGrupo)) {
+					$log.debug("****** " + tab.idGrupo);
+					indexSelect = i;
+					existe=true;
+				}
+
+				i++;
+			});
+			
+			if (existe){
+				vm.selected = vm.tabs[indexSelect];
+				vm.selectedIndex = indexSelect;
+			}
+			
+		}
 		
 		$scope.$on('quito-miembro-grupo', 
 			function(event) {	
 				callLoadGrupos();		
 		});
-
 	
 		vm.edit = function(grupo) {			
 			$state.go("form-grupo",{ "grupo" : grupo});			
@@ -68,7 +90,7 @@
 		/** Salir del grupo. Manejo del popUP */
 		vm.salir = function(tab) {
 			dialogCommons.confirm('Salir', 'Seguro quieres salir del grupo '
-					+ vm.selected.nombre, 'Si, me voy', 'Cancelar', function(
+					+ vm.selected.alias, 'Si, me voy', 'Cancelar', function(
 					result) {
 				callQuitarMiembro(tab);
 			}, function() {
@@ -124,19 +146,21 @@
 		function callLoadGrupos() {
 			$log.debug("--- find grupos--------");
 
-			function doOk(response) {
-				$log.debug("--- find grupos respuesta", response.data);
-				vm.tabs = response.data;
-				vm.disabled = false;
+			function doOk(data) {
+				$log.debug("--- find grupos respuesta", data);
+				vm.tabs = data;
+			
 
 				angular.forEach(vm.tabs, function(grupo) {
 					grupo.canAddIntegrante = false;
 				});
 
-			//	vm.selected = vm.tabs[selectedIndex];
+				setTabSeleccionado(contextoCompraService.ls.grupoSelected)
+			
 			}
 
-			gccService.gruposByusuario().then(doOk)
+			// gccService.gruposByusuario().then(doOk)
+			contextoCompraService.getGrupos().then(doOk);
 		}
 
 		function callQuitarMiembro (miembro) {

@@ -46,6 +46,11 @@
 			initHeader();
 		});
 
+		$scope.$on('logout', function(event, msg) {
+			vm.logOut();
+		});
+		
+
 		vm.ir = function(page) {
 			$log.debug("ir a ..... ", page);
 

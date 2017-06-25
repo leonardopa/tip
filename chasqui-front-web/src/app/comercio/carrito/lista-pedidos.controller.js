@@ -6,8 +6,8 @@
 
 	/** @ngInject */
 	function ListaPedidosController($log, $state, $scope, StateCommons 
-			,productoService,ToastCommons,gccService) {
-		$log.debug('ListaPedidosController ..... ', StateCommons.ls.pedidoSelected);
+			,productoService,ToastCommons,gccService,contextoCompraService) {
+		$log.debug('ListaPedidosController ..... ');
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
 		var vm = this;
 		vm.habilita = false;
@@ -16,8 +16,6 @@
 		vm.selected = null, vm.previous = null;
 		vm.selectedIndex = 1;
 
-		vm.pedidoDelContexto = StateCommons.ls.pedidoSelected;
-
 		$scope.$watch('listaPedidoCtrl.selectedIndex', function(current, old) {
 
 			vm.previous = vm.selected;
@@ -25,7 +23,7 @@
 
 			$log.debug('cambio tab ..... ', vm.selected);
 
-			StateCommons.ls.pedidoSelected = vm.selected;
+		//	contextoCompraService.ls.pedidoSelected = vm.selected;
 
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
@@ -44,6 +42,23 @@
 		}
 		
 
+		function setTabSeleccionado(pedido){
+			$log.debug("setTabSeleccionado 1");
+			var i = 0
+			var indexSelect = 0;
+			angular.forEach(vm.tabs, function(tab) {
+				$log.debug("setTabSeleccionado", tab.id + " " + tab.aliasGrupo);
+				if ((pedido != undefined) && (tab.id == pedido.id)) {
+					$log.debug("****** " + tab.id);
+					indexSelect = i;
+				}
+
+				i++;
+			});
+			
+			vm.selected = vm.tabs[indexSelect];
+			vm.selectedIndex = indexSelect;
+		}
 		///////////////// REST
 /*
 		var callLoadPedidos = function() {
@@ -93,19 +108,10 @@
 			productoService.crearPedidoIndividual(json).then(doOk)
 		}
 		
-		function callPedidoIndividual() {
-			function doOk(response) {
-				//TODO: ver si lo puede traer el servicio
-		//		response.data.creador = 'INDIVIDUAL'
-		//		response.data.nombre = 'INDIVIDUAL'
-		//		vm.tabs.push(response.data);
-				vm.tabs=response.data;
-			}			
-			gccService.pedidosByUser().then(doOk);			
-		}
-	
-	//	callLoadPedidos()
-		callPedidoIndividual()
+		contextoCompraService.getPedidos().then(function(data){
+			vm.tabs=data
+			setTabSeleccionado(contextoCompraService.ls.pedidoSelected);});
+				
 	}
 
 })();

@@ -8,10 +8,10 @@
 	/**
 	 * Lista lateral de productos del pedido seleccionado
 	 */
-	function ContextoCompraController($rootScope,$log,CTE_REST,StateCommons,gccService,utilsService
-		,productoService,$timeout) {	
+	function ContextoCompraController($rootScope,$log,$timeout,StateCommons,contextoCompraService) {	
 		
-		$log.debug("ContextoCompraController ..... ", StateCommons.ls.grupoSelected);
+		$log.debug("ContextoCompraController ..... ");
+		
 		var vm = this;
 		
 	
@@ -38,56 +38,23 @@
 		    vm.isOpen = false;
 		};
 		/////////////////////////////////////////////////
-
-		// Representa el conepto de grupo indivial para el caso de que no tiene un pedido abierto
-		var gIndividualFicticio={}
-		gIndividualFicticio.alias="Personal";
-		gIndividualFicticio.esAdministrador=true;
-		gIndividualFicticio.idPedidoIndividual="Personal";
 		
 		vm.isLogued=StateCommons.isLogued();
-		vm.grupos = [gIndividualFicticio];
-		vm.grupoSelected=gIndividualFicticio;
-	/*
-		vm.checkAlias=function(){
-			if (vm.grupos)
-				return vm.pedidoSelected.aliasGrupo == null ? 'Personal' : vm.pedidoSelected.aliasGrupo;
-		}*/
-/*
-		function definirGrupoSeleccionado(){
-			//vm.carrito = StateCommons.ls.pedidoSelected;
-			$log.debug("***** 1 ", StateCommons.ls.grupoSelected);
-			if(utilsService.isUndefinedOrNull(StateCommons.ls.grupoSelected)){	
-				vm.grupoSelected = gIndividualFicticio;
-			}else{			
-				var individual;
-				$log.debug("***** 2 ",vm.grupos);
-				angular.forEach(vm.grupos, function(value, key){
+		//vm.grupos = contextoCompraService.ls.grupos;
+		contextoCompraService.getGrupos().then(
+			function(response){
+				vm.grupos = response;
+		})
+		
+		vm.grupoSelected=contextoCompraService.ls.grupoSelected;
 
-				     if (value.idGrupo == null) 
-				     	individual = value;
-				});
-
-				if (individual){
-					vm.grupoSelected = individual;
-				}else{
-					vm.grupoSelected=gIndividualFicticio;		
-				}
-
-				StateCommons.ls.grupoSelected=vm.grupoSelected;
-			}
-
-			//vm.grupos.push(gIndividualFicticio);
-		}
-*/
+	
 		vm.cambiarContexto = function(grupo) {
 			$log.debug("cambia contexo de carrito ", grupo);
 
-			$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
-
 			vm.grupoSelected = grupo;			
-			StateCommons.ls.grupoSelected = grupo;
-							
+			contextoCompraService.setContextoByGrupo(grupo);
+						
 			vm.icon = 'person';
 			// vm.icon='shopping_cart';
 			$timeout(function() {
@@ -97,25 +64,6 @@
 
 		}
 
-		////////////////////
-		///////// llamada a servicios
-
-		function callGrupos(){
-			function doOK(response){					
-				vm.grupos = vm.grupos.concat(response.data);				
-			}
-
-			gccService.gruposByusuario().then(doOK);
-		}
-
-	
-		///////////////////////////// fin call service 
-
-		/////// inti
-
-		if (vm.isLogued){			
-			callGrupos();
-		}
 		
 
 	}

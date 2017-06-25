@@ -6,7 +6,7 @@
 
 	/** @ngInject */
 	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog
-			,dialogCommons,productoService,perfilService,gccService) {
+			,dialogCommons,productoService,perfilService,gccService,StateCommons,contextoCompraService ) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -16,8 +16,8 @@
 		vm.direccionSelected;
 		vm.productoEliminar;
 		
-		vm.comprar = function(event) {
-			$log.debug('DetallePedidoController , modo comprar ', $scope.pedido);
+		vm.comprar = function(event) {			
+			contextoCompraService.setContextoByPedido($scope.pedido);				
 			$state.go('catalogo')
 		}
 

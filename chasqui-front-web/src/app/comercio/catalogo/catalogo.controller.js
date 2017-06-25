@@ -10,8 +10,9 @@
 	 * contexto de compra , pero NO la lista de productos la cual se incluye
 	 */
 	function CatalogoController($scope, $log,CTE_REST, $timeout, StateCommons, productorService,
-		productoService, ToastCommons,gccService,utilsService,$mdSidenav) {
-		$log.debug("CatalogoController ..... ", StateCommons.ls.grupoSelected);
+		productoService, ToastCommons,gccService,utilsService,$mdSidenav,$state) {
+		$log.debug("CatalogoController ..... grupoSelected", StateCommons.ls.grupoSelected);
+		
 		StateCommons.ls.itemMenuSelect = 'catalogo';
 		var vm = this;
 

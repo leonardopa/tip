@@ -24,8 +24,9 @@
 
 			<md-card-title>
 				<md-card-title-text>
+			
 					<span class="md-headline">
-						{{detallePedidoCtrl.pedido.aliasGrupo == "" ? detallePedidoCtrl.pedido.aliasGrupo : "Personal"}}</span>
+						{{detallePedidoCtrl.pedido.aliasGrupo == null ? "Personal" : detallePedidoCtrl.pedido.aliasGrupo}}</span>
 					<md-divider></md-divider>
 
 				</md-card-title-text>
@@ -86,11 +87,12 @@
 		
 		<md-subheader> Productos en el carro  </md-subheader>
 
-		<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" >
+		<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" ng-cloak >
+
 			<div layout="row" layout-align="space-between center">
 				<div layout="row" layout-align="start center">
 					<div >
-		    			<img src="{{detallePedidoCtrl.urlBase}}/{{item.imagen}}" style="height: 100px;">
+		    			<img src="{{detallePedidoCtrl.urlBase}}{{item.imagen}}" style="height: 100px;">
 		    		</div>
 
 		    		<div  layout="column"  style="padding: 10px" >

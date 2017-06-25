@@ -9,9 +9,11 @@
 	 *  FAB Button de contexto de compra.
 	 */
 	function ContextoPedidoController($rootScope,$log,CTE_REST,StateCommons,gccService,utilsService
-		,productoService,$timeout) {	
+		,productoService,$timeout,contextoCompraService) {	
 
-		$log.debug("ContextoPedidoController ..... ", StateCommons.ls.grupoSelected);
+		$log.debug("ContextoPedidoController ..... grupo", StateCommons.ls.grupoSelected);
+		
+
 		var vm = this;
 		 
 		/////////////////////////////////////////////////
@@ -21,8 +23,9 @@
 		vm.isLogued=StateCommons.isLogued();
 	
 		vm.pedidos= [];
-		vm.pedidoSelected;
-		vm.hayProductos=false;
+		vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
+		vm.grupoSelected=contextoCompraService.ls.grupoSelected;
+		//vm.hayProductos=false;
 
 		vm.checkAlias=function(){
 			if (vm.pedidoSelected){
@@ -34,66 +37,18 @@
 
 		$rootScope.$on('contexto.compra.cambia.grupo', 
 			function(event, grupo) {					
-				vm.pedidoSelected = getPedidoByGrupo(grupo);
-				StateCommons.ls.pedidoSelected=vm.pedidoSelected;				
+				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
+				//StateCommons.ls.pedidoSelected=vm.pedidoSelected;				
 			});
 
 		//actualiza la lista de productos
 		$rootScope.$on('lista-producto-agrego-producto', 
 			function(event) {			
-				callPedidoIndividual();			
-				callGccPedidos();
+				contextoCompraService.refresh();
+				/// TODO tiene que ser con callback / promise
+				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
 			});
-		
-
-		function getPedidoByGrupo(grupo){		
-			// es algun gcc
-			var pedidoCurrent=undefined;// o no tiene pedido
-
-			angular.forEach(vm.pedidos, function(pedido, key) {
-			  if (pedido.id ===  grupo.idPedidoIndividual) 
-			  	pedidoCurrent=pedido;
-			});
-			// si es indivudual
-			if(grupo.alias=='Personal'){				
-				angular.forEach(vm.pedidos, function(pedido, key) {								
-			  		if (utilsService.isUndefinedOrNull(pedido.idGrupo))
-			  			pedidoCurrent = pedido;
-				});	
-			}			
-			
-			return pedidoCurrent;
-			
-		}
-
-		////////////////////
-		///////// llamada a servicios
-
-		function callGccPedidos(){			
-			function doOkPedido(response){	
-				vm.pedidos=vm.pedidos.concat(response.data);				
-			}
-
-			gccService.pedidosByUser().then(doOkPedido);
-		}
-
-		function callPedidoIndividual(){			
-			function doOkPedido(response){					
-				vm.pedidos.push(response.data);	
-				vm.pedidoSelected=response.data;	
-
-				StateCommons.ls.pedidoSelected=vm.pedidoSelected;
-				/// falta logica para pedidos grupales y si selecciono desde otra pantalla			
-			}
-
-			productoService.verPedidoIndividual().then(doOkPedido);
-		}
-	
-		if (vm.isLogued){
-			callPedidoIndividual();			
-			callGccPedidos();
-		}
-		
+	 
 
 	}
 })();
