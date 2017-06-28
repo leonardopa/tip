@@ -9,7 +9,7 @@
 	 *           grupo
 	 */
 	function DetalleGruposController($log, $scope, $timeout,
-			ToastCommons, dialogCommons, gccService) {
+			ToastCommons, dialogCommons, gccService, StateCommons) {
 		$log.debug("controler DetalleGruposController inti grupo ",
 				$scope.grupo)
 		var vm = this;
@@ -34,7 +34,11 @@
 		var pendingSearch, cancelSearch = angular.noop;
 		var cachedQuery, lastSearch;
 
-		vm.contacts = vm.grupo.miembros;
+		vm.contacts = vm.grupo.miembros.map(m => (m.email == StateCommons.ls.usuario.email)? 
+                                                    {nickname: "Yo",
+                                                     email: m.email
+                                                    }: m );
+        
 		vm.allContacts;
 	//	loadContacts();
 
