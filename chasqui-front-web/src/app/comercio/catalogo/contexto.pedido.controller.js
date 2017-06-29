@@ -44,9 +44,11 @@
 		//actualiza la lista de productos
 		$rootScope.$on('lista-producto-agrego-producto', 
 			function(event) {			
-				contextoCompraService.refresh();
+				
 				/// TODO tiene que ser con callback / promise
 				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
+
+				contextoCompraService.refresh();
 			});
 	 
 

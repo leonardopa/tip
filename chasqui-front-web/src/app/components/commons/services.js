@@ -45,9 +45,14 @@
     }
 
     var createHeader = function (){
-    	$log.debug('crear header ' + StateCommons.ls.usuario.email );
-    	$log.debug( StateCommons.ls.usuario );
-    	return 'Basic ' + btoa(StateCommons.ls.usuario.email + ':' + StateCommons.ls.usuario.token); 
+      if (StateCommons.ls.usuario){
+        $log.debug('crear header ' + StateCommons.ls.usuario.email );
+        $log.debug( StateCommons.ls.usuario );
+        return 'Basic ' + btoa(StateCommons.ls.usuario.email + ':' + StateCommons.ls.usuario.token);   
+      }else{
+        return "";
+      }
+    	
     }
     
     var get = function(url,header, params, doOk, noOk){

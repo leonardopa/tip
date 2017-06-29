@@ -97,9 +97,9 @@
 		    	$rootScope.$broadcast('logout', "");
 		    	$state.go('login');
 		    }else {
-		        $log.error("error al llamar a un servicio data", response.data);
-		        $log.error("error al llamar a un servicio data.error", response.data.error);
-		        $log.error("error al llamar a un servicio data.error", response.data.error == undefined);
+		    //    $log.error("error al llamar a un servicio data", response.data);
+		    //    $log.error("error al llamar a un servicio data.error", response.data.error);
+		    //    $log.error("error al llamar a un servicio data.error", response.data.error == undefined);
 		        if(response.data.error == undefined){        
 		          $state.go('error', {
 		            key: 'GENERIC_ERROR'
