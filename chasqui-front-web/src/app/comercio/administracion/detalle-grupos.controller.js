@@ -33,12 +33,9 @@
 
 		var pendingSearch, cancelSearch = angular.noop;
 		var cachedQuery, lastSearch;
-
-		vm.contacts = vm.grupo.miembros.map(m => (m.email == StateCommons.ls.usuario.email)? 
-                                                    {nickname: "Yo",
-                                                     email: m.email
-                                                    }: m );
-        
+                
+        vm.contacts = vm.grupo.miembros;
+                        
 		vm.allContacts;
 	//	loadContacts();
 

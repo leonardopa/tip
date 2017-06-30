@@ -35,10 +35,10 @@
 		});
 
 		function setTabSeleccionado(grupo){
-			$log.debug("setTabSeleccionado 1");
 			var i = 0
 			var indexSelect = 0;
 			var existe = false;
+            $log.debug("Tabs: ", vm.tabs);
 			angular.forEach(vm.tabs, function(tab) {
 				$log.debug("setTabSeleccionado", tab.idGrupo + " " + tab.alias);
 				if ((grupo != undefined) && (tab.idGrupo == grupo.idGrupo)) {
@@ -149,6 +149,7 @@
 			function doOk(data) {
 				$log.debug("--- find grupos respuesta", data);
 				vm.tabs = data;
+                $log.debug("tabs: ", vm.tabs);
 			
 
 				angular.forEach(vm.tabs, function(grupo) {
@@ -176,7 +177,8 @@
 			gccService.quitarMiembro(params).then(doOk)
 
 		}
-
+        
+        
 		// // INIT
 		callLoadGrupos();
 
