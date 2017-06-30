@@ -1,24 +1,25 @@
-<md-card ng-show="tab.miembros">
-    <md-card-content>
-        <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
-            <md-tab ng-repeat="miembro in tab.miembros" label="{{miembro.nickname}}">
+<div ng-controller="PedidoGruposController as pedidoGrupoCtrl" ng-cloak>
+    <md-card ng-show="pedidoGrupoCtrl.grupo.miembros">
+        <md-card-content>
+            <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+                <md-tab ng-repeat="miembro in pedidoGrupoCtrl.grupo.miembros" label="{{miembro.nickname}}">
 
-                <md-list class="md-dense" flex>
-                    <md-subheader>Productos de {{miembro.nickname}}</md-subheader>
-                    <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
-                        Todavia no agrego productos </p>
-                    <md-list-item class="md-3-line" ng-repeat="item in miembro.pedido.productosResponse">
-                        <img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
-                        <div class="md-list-item-text" layout="column">
-                            <h4>{{ item.nombre }}</h4>
-                            <p>{{item.cantidad}} X $ {{ item.precio }} = ${{item.cantidad * item.precio }} </p>
-                        </div>
-                    </md-list-item>
+                    <md-list class="md-dense" flex>
+                        <md-subheader>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</md-subheader>
+                        <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
+                            Todavia no agrego productos </p>
+                        <md-list-item class="md-3-line" ng-repeat="item in miembro.pedido.productosResponse">
+                            <img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
+                            <div class="md-list-item-text" layout="column">
+                                <h4>{{ item.nombre }}</h4>
+                                <p>{{item.cantidad}} X $ {{ item.precio }} = ${{item.cantidad * item.precio }} </p>
+                            </div>
+                        </md-list-item>
 
-                </md-list>
+                    </md-list>
 
-            </md-tab>
-        </md-tabs>
+                </md-tab>
+            </md-tabs>
 
-    </md-card-content>
-</md-card>
+        </md-card-content>
+    </md-card>

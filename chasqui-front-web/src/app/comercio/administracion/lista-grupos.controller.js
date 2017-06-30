@@ -148,8 +148,7 @@
 
 			function doOk(data) {
 				$log.debug("--- find grupos respuesta", data);
-				vm.tabs = data;
-                $log.debug("tabs: ", vm.tabs);
+				vm.tabs = crearSelfsEnTabs(data);
 			
 
 				angular.forEach(vm.tabs, function(grupo) {
@@ -177,6 +176,38 @@
 			gccService.quitarMiembro(params).then(doOk)
 
 		}
+        
+        /*
+            PROP: Hace una copia superficial del objeto
+        */
+        function clone(obj) {
+            var copy = {};
+            for (var attr in obj) {
+                copy[attr] = obj[attr];
+            }
+            return copy;
+        }
+        
+        
+        /*
+            PROP: Crea la modificación del self del usuario logeado
+        */
+        function crearSelfUsuarioLogeado(grupo){
+            if(grupo.miembros){
+                grupo.miembros = grupo.miembros.map(function(m){
+                    m.nickname = (m.email == StateCommons.ls.usuario.email) ? m.nickname + "(Tú)"  : m.nickname;
+                    return m;
+                });
+            }            
+            return grupo;
+        }
+        
+        /*
+            PROP: Crea los selfs para todos los grupos
+        */
+        function crearSelfsEnTabs(grupos){
+           return grupos.map(crearSelfUsuarioLogeado);
+        }
         
         
 		// // INIT

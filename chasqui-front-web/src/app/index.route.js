@@ -58,6 +58,12 @@
           controller: 'DetalleGruposController',
           controllerAs: 'detalleGruposController'
         })
+        .state('pedido-grupos', {
+          url: '/pedido-grupos',
+          templateUrl: 'app/comercio/administracion/pedido-grupos.html',
+          controller: 'PedidoGruposController',
+          controllerAs: 'pedidoGruposController'
+        })
          .state('form-domicilio', {
           url: '/form-domicilio',
           templateUrl: 'app/comercio/administracion/formularios/form-direccion.html',
