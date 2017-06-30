@@ -94,6 +94,7 @@
 			function doOk(response) {
 				ToastCommons.mensaje('se quito miembro del grupo')
 				$scope.$emit("quito-miembro-grupo");
+                vm.contacts.splice(vm.contacts.indexOf(miembro), 1);
 			}			
 			var params ={};
 			params.idGrupo=vm.grupo.idGrupo;
