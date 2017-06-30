@@ -7,7 +7,7 @@
 
 	/** @ngInject */
 	function MenuController($scope, $log, $state, StateCommons, CTE_REST, $interval, ToastCommons,
-			perfilService) {
+			perfilService,contextoCompraService) {
 		$log.debug("MenuController ..... ");
 		$log.debug(StateCommons.ls.usuario);
 
@@ -166,5 +166,7 @@
 
 
 		initHeader();
+
+		if (vm.isLogued) contextoCompraService.refresh();
 	}
 })();

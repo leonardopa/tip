@@ -1,4 +1,4 @@
-<md-card>
+<md-card ng-show="tab.miembros">
     <md-card-content>
         <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
             <md-tab ng-repeat="miembro in tab.miembros" label="{{miembro.nickname}}">

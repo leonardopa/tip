@@ -38,9 +38,9 @@
 			return promiseService.doPost(CTE_REST.rechazarInvitacionAGrupo,params);
 	    }
 
-		vm.crearPedidoGrupal = function (params) {
+		vm.crearPedidoGrupal = function (params,doNoOK) {
 			$log.debug(" service crearPedidoGrupal ");	       
-			return promiseService.doPost(CTE_REST.crearPedidoGrupal,params);
+			return promiseService.doPost(CTE_REST.crearPedidoGrupal,params,doNoOK);
 	    }
 				
 		vm.pedidosByUser = function (doNoOK) {

@@ -1,6 +1,6 @@
 <div ng-controller="DetalleGruposController as detalleGrupoCtrl" layout="column" ng-cloak>
-    <md-card>
-        <md-subheader ng-if="detalleGrupoCtrl.contacts.length !=0">Miembros del grupo</md-subheader>
+    <md-card ng-if="detalleGrupoCtrl.contacts && detalleGrupoCtrl.contacts.length !=0">    	
+        <md-subheader >Miembros del grupo</md-subheader>
         <md-divider>
             <md-list class="fixedRows">
                 <md-list-item class="md-2-line contact-item selected" ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">

@@ -8,17 +8,19 @@
 		//alert("contextoCompraService")
 		vm.ls = $localStorage;
 
-		vm.ls.grupoSelected;
+		// Representa el conepto de grupo indivial para el caso de que no tiene un pedido abierto
+		var gIndividualFicticio={}
+		gIndividualFicticio.alias="Personal";
+		gIndividualFicticio.esAdministrador=false;
+		gIndividualFicticio.idPedidoIndividual=-1;
+
+		vm.ls.grupoSelected=gIndividualFicticio;
 	    vm.ls.pedidoSelected; 
 	    vm.ls.varianteSelected; 
 	    vm.ls.pedidos=undefined;
 	    vm.ls.grupos=undefined;
 	    var tieneEnChache=false;
-	    // Representa el conepto de grupo indivial para el caso de que no tiene un pedido abierto
-		var gIndividualFicticio={}
-		gIndividualFicticio.alias="Personal";
-		gIndividualFicticio.esAdministrador=true;
-		gIndividualFicticio.idPedidoIndividual=-1;
+	    
 		
 
 		vm.getGrupos = function () {		
@@ -30,7 +32,7 @@
 				defered.resolve(vm.ls.grupos);
 	        }else{
 	        	function doOK(response){
-	        		$log.debug("NO tiene grupos en cache, fue a buscar",vm.ls.grupos)	
+	        		$log.debug("NO tiene grupos en cache, fue a buscar",response.data)	
 	        		vm.ls.grupos = [gIndividualFicticio];				
 					vm.ls.grupos = vm.ls.grupos.concat(response.data);						
 					defered.resolve(vm.ls.grupos);	
@@ -51,7 +53,7 @@
 	        }else{
 	        
 					function doOkPedido(response){	
-						$log.debug("NO tiene pedidos en cache, fue a buscar",vm.ls.pedidos)
+						$log.debug("NO tiene pedidos en cache, fue a buscar",response.data)
 						vm.ls.pedidos=response.data;
 						defered.resolve(vm.ls.pedidos);	
 					}

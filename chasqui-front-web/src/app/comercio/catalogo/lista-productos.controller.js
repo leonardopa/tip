@@ -9,7 +9,7 @@
 	 */
 	function ListaProductosController($scope,$rootScope, $log, CTE_REST,
 			$state, StateCommons, ToastCommons, dialogCommons,productoService,utilsService,
-			gccService ,$mdDialog,productorService) {
+			gccService ,$mdDialog,productorService,contextoCompraService) {
 
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
@@ -96,15 +96,15 @@
 		//////////////////////////////
 
 		vm.agregar = function(variante) {
-			vm.grupoSelected=StateCommons.ls.grupoSelected;
-			vm.pedidoSelected=StateCommons.ls.pedidoSelected;
+			vm.grupoSelected=contextoCompraService.ls.grupoSelected;
+			vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
 			
 			if (StateCommons.isLogued()){
 				agregarProducto(variante);
 			}else{
 				ToastCommons.mensaje("Te invitamos a ingresar !");
 				$log.log('not logued" ' , variante);
-				StateCommons.ls.varianteSelected=variante;
+				contextoCompraService.ls.varianteSelected=variante;
 				$state.go('login');
 			}
 		}
@@ -133,15 +133,15 @@
 		}
 
 		function agregarProducto(variante){		
-			if (StateCommons.isGrupoIndividualSelected()){
+			if (contextoCompraService.isGrupoIndividualSelected()){
 				agregarProductoIndividual(variante);// es individual
 			}else{
 			//	ToastCommons.mensaje("error CROSS DOMANIN / entidad duplicada DCC/individual");
 			
-				if(StateCommons.ls.pedidoSelected){		
+				if(contextoCompraService.ls.pedidoSelected){		
 					//ToastCommons.mensaje(" selected ");
 					agregarProductoDialog(variante);
-				}else{ToastCommons.mensaje("not selected ");
+				}else{//ToastCommons.mensaje("not selected ");
 					//$log.error("se intento agregar una variante a un gru´p pero no hay un pedido seleccionado")
 					callCrearPedidoGrupal(variante);
 				}
@@ -152,7 +152,7 @@
 				function setPedidoYagregarProducto(){
 					function doOkPedido(response){
 						$log.debug("setPedidoYagregarProducto", response);
-						StateCommons.ls.pedidoSelected = response.data;					
+						contextoCompraService.ls.pedidoSelected = response.data;					
 					}
 
 					productoService.verPedidoIndividual().then(doOkPedido);
@@ -207,22 +207,25 @@
 
 		var callAgregarAlCarro = function(variante, cantidad) {
 			$log.debug('callAgregarAlCarro para pedido: ',
-					StateCommons.ls.pedidoSelected);
+					contextoCompraService.ls.pedidoSelected);
 		 
 			var doOk = function (response) {
 				$log.log('Agregar producto Response ', response);
+
 				ToastCommons.mensaje("Producto agregado !");
 				$rootScope.$emit('lista-producto-agrego-producto');
+
 			}
 
-			
+			$log.debug(contextoCompraService.ls.pedidoSelected)
 			var params = {};
-			params.idPedido = StateCommons.ls.pedidoSelected.id;
+			params.idPedido = contextoCompraService.ls.pedidoSelected.id;
 			params.idVariante = variante.idVariante;
 			params.cantidad = cantidad;
 
-			productoService.agregarPedidoIndividual(params).then(doOk)
 
+			productoService.agregarPedidoIndividual(params).then(doOk)
+//		$log.debug(contextoCompraService.ls.pedidoSelected)
 		}
 /*
 		function callProductosSinFiltro() {
@@ -302,17 +305,28 @@
 		function callCrearPedidoGrupal(variante){
 
 			function doOK(response) {
-				$log.debug("************** callCrearPedidoGrupal", response);
-				StateCommons.ls.pedidoSelected = response.data;		
+				$log.debug("callCrearPedidoGrupal", response);
+				contextoCompraService.refresh();
+				contextoCompraService.ls.pedidoSelected = response.data;		
 				vm.pedidoSelected = response.data;		
 				agregarProductoDialog(variante)	
 			}
 
+			function doNoOK(response) {
+				
+				if (response.data.error.includes("existe un pedido vigent")){
+					$log.debug("ya tenia un pedido vigente");									
+					agregarProductoDialog(variante)		
+				}
+				
+			}
+
+			
 			var params = {}
-			params.idGrupo = StateCommons.ls.grupoSelected.idGrupo; 
+			params.idGrupo = contextoCompraService.ls.grupoSelected.idGrupo; 
 			params.idVendedor = StateCommons.vendedor().id;
 
-			gccService.crearPedidoGrupal(params).then(doOK);
+			gccService.crearPedidoGrupal(params,doNoOK).then(doOK);
 		}
 
 		function callEmprendedores() {
@@ -323,10 +337,10 @@
 	   	}
 
 		// findProductos();
-		if (! utilsService.isUndefinedOrNull(StateCommons.ls.varianteSelected)){
-			$log.debug("tiene una variante seleccionda" ,StateCommons.ls.varianteSelected )
-			vm.agregar(StateCommons.ls.varianteSelected)
-			StateCommons.ls.varianteSelected=undefined;
+		if (! utilsService.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)){
+			$log.debug("tiene una variante seleccionda" ,contextoCompraService.ls.varianteSelected )
+			vm.agregar(contextoCompraService.ls.varianteSelected)
+			contextoCompraService.ls.varianteSelected=undefined;
 		}
 
 		//vm.variantes = findProductos(1,10,{});

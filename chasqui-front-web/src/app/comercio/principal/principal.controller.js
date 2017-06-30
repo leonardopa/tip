@@ -8,7 +8,7 @@
   /** @ngInject */
   function PrincipalController( $scope,$log,StateCommons) {
 	  $log.debug("PrincipalController ..... ");
-	  StateCommons.ls.itemMenuSelect = 'principal'; 
+	  StateCommons.ls.itemMenuSelect = 'bienvenido'; 
 	  var vm = this;
     
   }
