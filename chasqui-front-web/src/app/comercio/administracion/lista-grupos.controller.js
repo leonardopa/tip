@@ -136,10 +136,10 @@
 				callLoadGrupos();
 			}
 
-			var params = {};
-			params.idGrupo = grupo.idGrupo;
-			params.emailInvitado = emailClienteInvitado;
-			
+			var params = {
+                idGrupo:        grupo.idGrupo,
+                emailInvitado:  emailClienteInvitado
+            };
 			gccService.invitarUsuarioAGrupo(params).then(doOk);
 		}
 		
@@ -148,7 +148,7 @@
 
 			function doOk(data) {
 				$log.debug("--- find grupos respuesta", data);
-				vm.tabs = crearSelfsEnTabs(data);
+				vm.tabs = data;
 			
 
 				angular.forEach(vm.tabs, function(grupo) {
@@ -177,39 +177,7 @@
 
 		}
         
-        /*
-            PROP: Hace una copia superficial del objeto
-        */
-        function clone(obj) {
-            var copy = {};
-            for (var attr in obj) {
-                copy[attr] = obj[attr];
-            }
-            return copy;
-        }
-        
-        
-        /*
-            PROP: Crea la modificación del self del usuario logeado
-        */
-        function crearSelfUsuarioLogeado(grupo){
-            if(grupo.miembros){
-                grupo.miembros = grupo.miembros.map(function(m){
-                    m.nickname = (m.email == StateCommons.ls.usuario.email) ? m.nickname + "(Tú)"  : m.nickname;
-                    return m;
-                });
-            }            
-            return grupo;
-        }
-        
-        /*
-            PROP: Crea los selfs para todos los grupos
-        */
-        function crearSelfsEnTabs(grupos){
-           return grupos.map(crearSelfUsuarioLogeado);
-        }
-        
-        
+                
 		// // INIT
 		callLoadGrupos();
 

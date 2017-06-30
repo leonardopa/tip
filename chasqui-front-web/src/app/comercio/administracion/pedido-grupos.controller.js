@@ -13,7 +13,10 @@
 		var vm = this;
 
 		vm.grupo = $scope.grupo;
-
+        
+        vm.selfPara = function(miembro){
+            return (miembro.email == StateCommons.ls.usuario.email) ? miembro.nickname + "(Tú)"  : miembro.nickname;
+        }
         
         vm.vocativoPara = function(miembro){
             return (miembro.email == StateCommons.ls.usuario.email)?

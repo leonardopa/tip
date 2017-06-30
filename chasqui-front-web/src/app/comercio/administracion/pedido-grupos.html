@@ -2,7 +2,7 @@
     <md-card ng-show="pedidoGrupoCtrl.grupo.miembros">
         <md-card-content>
             <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
-                <md-tab ng-repeat="miembro in pedidoGrupoCtrl.grupo.miembros" label="{{miembro.nickname}}">
+                <md-tab ng-repeat="miembro in pedidoGrupoCtrl.grupo.miembros" label="{{pedidoGrupoCtrl.selfPara(miembro)}}">
 
                     <md-list class="md-dense" flex>
                         <md-subheader>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</md-subheader>

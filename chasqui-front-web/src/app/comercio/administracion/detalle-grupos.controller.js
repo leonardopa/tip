@@ -131,5 +131,9 @@
 			gccService.integrantesGrupo(vm.idGrupo, {}).then(doOk)
 
 		}
+        
+        vm.selfPara = function(miembro){
+            return (miembro.email == StateCommons.ls.usuario.email) ? miembro.nickname + "(Tú)"  : miembro.nickname;
+        }
 	}
 })();
