@@ -27,6 +27,7 @@
 
 			initRefreshNotification();
 			resetNotificacion();
+			contextoCompraService.refresh();
 		}
 
 		function resetNotificacion() {
@@ -48,6 +49,7 @@
 
 		$scope.$on('logout', function(event, msg) {
 			vm.logOut();
+			contextoCompraService.refresh();
 		});
 		
 

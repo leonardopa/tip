@@ -56,7 +56,7 @@
 
 			perfilService.login(vm.user).then(doOk)
 		}
-		vm.submit=function(){alert("puto")}
+		
 		vm.callReset = function(email) {
 
 			function doOk(response) {
