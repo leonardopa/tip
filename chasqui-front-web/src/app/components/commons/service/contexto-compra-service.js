@@ -66,6 +66,14 @@
 	        return promise;
 	    }
  
+	    vm.reset = function(){
+	    	vm.ls.grupoSelected=gIndividualFicticio;
+		    vm.ls.pedidoSelected=undefined; 
+		    vm.ls.varianteSelected=undefined; 
+		    vm.ls.pedidos=undefined;
+		    vm.ls.grupos=undefined;
+		    var tieneEnChache=false;
+	    }
 
 	    vm.refresh = function (){
 	    	vm.ls.pedidos=undefined;

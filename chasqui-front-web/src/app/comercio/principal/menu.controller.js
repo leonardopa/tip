@@ -27,7 +27,7 @@
 
 			initRefreshNotification();
 			resetNotificacion();
-			contextoCompraService.refresh();
+		    contextoCompraService.reset();
 		}
 
 		function resetNotificacion() {
