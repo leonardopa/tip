@@ -72,7 +72,7 @@
 		    vm.ls.varianteSelected=undefined; 
 		    vm.ls.pedidos=undefined;
 		    vm.ls.grupos=undefined;
-		    var tieneEnChache=false;
+		    tieneEnChache=false;
 	    }
 
 	    vm.refresh = function (){

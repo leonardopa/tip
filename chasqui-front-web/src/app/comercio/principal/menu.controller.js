@@ -48,8 +48,7 @@
 		});
 
 		$scope.$on('logout', function(event, msg) {
-			vm.logOut();
-			contextoCompraService.refresh();
+			vm.logOut();			
 		});
 		
 
@@ -106,8 +105,10 @@
 
 		vm.logOut = function() {
 			$log.debug("Log Out ..... ");
-			StateCommons.logOut();
 			
+			StateCommons.logOut();
+			contextoCompraService.reset();
+
 			$interval.cancel(llamadoPeriodico);
 
 			initHeader();
