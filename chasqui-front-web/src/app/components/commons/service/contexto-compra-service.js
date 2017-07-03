@@ -55,6 +55,7 @@
 					function doOkPedido(response){	
 						$log.debug("NO tiene pedidos en cache, fue a buscar",response.data)
 						vm.ls.pedidos=response.data;
+						$rootScope.$emit('contexto.pedido.actualizar');
 						defered.resolve(vm.ls.pedidos);	
 					}
 
@@ -65,7 +66,18 @@
  
 	        return promise;
 	    }
- 
+ 		
+
+ 		vm.tienePedidoInividual=function(){
+ 			
+ 			angular.forEach(vm.ls.pedidos, function(pedido, key) {
+			  if (utilsService.isUndefinedOrNull(pedido.aliasGrupo)) 
+			  	return true;
+			});
+
+ 			return false;
+ 		}
+
 	    vm.reset = function(){
 	    	vm.ls.grupoSelected=gIndividualFicticio;
 		    vm.ls.pedidoSelected=undefined; 
@@ -76,13 +88,18 @@
 	    }
 
 	    vm.refresh = function (){
-	    	vm.ls.pedidos=undefined;
-	   		vm.ls.grupos=undefined;
-	    	vm.getPedidos();
+	    	vm.refreshPedidos();
+	    	vm.refreshGrupos();
+	    }
+
+	    vm.refreshPedidos=function(){
+	    	vm.ls.pedidos=undefined;	   		
+	    	vm.getPedidos();	    	
+	    }
+
+	    vm.refreshGrupos=function(){
+	    	vm.ls.grupos=undefined;
 	    	vm.getGrupos();	
-	    //	callPedidoIndividual();
-	    //	callGccPedidos();
-	   // 	callGrupos();
 	    }
 
 	    vm.setContextoByPedido = function (pedido){	    	

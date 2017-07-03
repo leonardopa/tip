@@ -148,11 +148,14 @@
 			}
 		}
 		/** Tiene la loginca de crear el pedido sino lo tien */
+		/*
 		function agregarProductoIndividual(variante){
 				function setPedidoYagregarProducto(){
 					function doOkPedido(response){
 						$log.debug("setPedidoYagregarProducto", response);
-						contextoCompraService.ls.pedidoSelected = response.data;					
+						contextoCompraService.setContextoByPedido(response.data);					
+						contextoCompraService.refreshPedidos();
+						
 					}
 
 					productoService.verPedidoIndividual().then(doOkPedido);
@@ -176,6 +179,44 @@
 				
 				//si falla es poque ya tiene un pedido abierto TODO mejorar
 				productoService.crearPedidoIndividual(json,doNoOK).then(doOk)
+		}*/
+		/** v2 sin ir al servicio*/ 
+		function agregarProductoIndividual(variante){
+
+			function actualizarPedidoIndividual(){
+				function doOkPedido(response){
+					$log.debug("setPedidoYagregarProducto", response);
+					contextoCompraService.setContextoByPedido(response.data);					
+					//contextoCompraService.refresh();
+					agregarProductoDialog(variante);
+				}
+
+				productoService.verPedidoIndividual().then(doOkPedido);
+			}
+
+			if (contextoCompraService.tienePedidoInividual()){
+				agregarProductoDialog(variante);
+			}else{
+				// crear pedido y dialog
+				function doNoOK(response){			
+					if(utilsService.contieneCadena(response.data.error,CTE_REST.ERROR_YA_TIENE_PEDIDO)){
+						ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
+						agregarProductoDialog(variante);
+					}
+				}
+
+				function doOk(response){
+					actualizarPedidoIndividual();					
+				}
+
+				var json = {};
+				json.idVendedor = StateCommons.vendedor().id;
+				
+				//si falla es poque ya tiene un pedido abierto TODO mejorar
+				productoService.crearPedidoIndividual(json,doNoOK).then(doOk)
+
+			}
+			
 		}
 
 		function agregarProductoDialog(variante){
@@ -218,6 +259,7 @@
 			}
 
 			$log.debug(contextoCompraService.ls.pedidoSelected)
+
 			var params = {};
 			params.idPedido = contextoCompraService.ls.pedidoSelected.id;
 			params.idVariante = variante.idVariante;

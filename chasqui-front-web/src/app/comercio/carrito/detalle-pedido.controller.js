@@ -28,6 +28,7 @@
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ", response.data);
 				ToastCommons.mensaje("Eliminado !");
+				contextoCompraService.refreshPedido();
 				$state.reload();
 			}
 

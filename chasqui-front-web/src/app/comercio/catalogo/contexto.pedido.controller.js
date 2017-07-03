@@ -35,6 +35,12 @@
 			}
 		}
 
+		$rootScope.$on('contexto.pedido.actualizar', 
+			function(event, grupo) {					
+				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
+				//StateCommons.ls.pedidoSelected=vm.pedidoSelected;				
+			});
+
 		$rootScope.$on('contexto.compra.cambia.grupo', 
 			function(event, grupo) {					
 				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
