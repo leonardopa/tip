@@ -148,11 +148,10 @@
 
 			function doOk(data) {
 				$log.debug("--- find grupos respuesta", data);
-				vm.tabs = data;
-			
-
-				angular.forEach(vm.tabs, function(grupo) {
+				vm.tabs = [];		
+				angular.forEach(data, function(grupo) {
 					grupo.canAddIntegrante = false;
+					if (grupo.alias!='Personal') vm.tabs.push(grupo);
 				});
 
 				setTabSeleccionado(contextoCompraService.ls.grupoSelected)
