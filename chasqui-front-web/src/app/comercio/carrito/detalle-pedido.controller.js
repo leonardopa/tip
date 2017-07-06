@@ -6,7 +6,8 @@
 
 	/** @ngInject */
 	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog
-			,dialogCommons,productoService,perfilService,gccService,StateCommons,contextoCompraService ) {
+			,dialogCommons,productoService,perfilService,gccService,StateCommons,
+			contextoCompraService ) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -58,7 +59,12 @@
 			function doOk(response) {
 				$log.debug("--- cancelar pedido response ", response.data);
 				ToastCommons.mensaje("Cancelado !");
-				$state.reload();
+				contextoCompraService.refreshPedidos().then(
+					function(){
+						alert('modifico-pedido 1')
+						$scope.$emit('modifico-pedido');
+					});
+				
 			}
 
 			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk);

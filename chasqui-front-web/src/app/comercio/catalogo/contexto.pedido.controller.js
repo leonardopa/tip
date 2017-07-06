@@ -31,7 +31,7 @@
 			if (vm.pedidoSelected){
 				return vm.pedidoSelected.aliasGrupo == null ? 'Personal' : vm.pedidoSelected.aliasGrupo;
 			}else{
-				return 'Personal'
+				return ''
 			}
 		}
 /*

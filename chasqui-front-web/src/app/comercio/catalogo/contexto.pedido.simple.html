@@ -20,7 +20,8 @@
 
           
         </div>
-        <md-subheader  ng-show="contextoPedidoCtrl.pedidoSelected == undefined ">
+        <md-subheader  ng-show="contextoPedidoCtrl.pedidoSelected == undefined 
+        || contextoPedidoCtrl.pedidoSelected.productosResponse.length == 0">
           <p> {{contextoPedidoCtrl.checkAlias()}} sin productos</p>
         </md-subheader>       
 </md-card>

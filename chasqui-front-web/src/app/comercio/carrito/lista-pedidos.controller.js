@@ -108,10 +108,19 @@
 			productoService.crearPedidoIndividual(json).then(doOk)
 		}
 		
-		contextoCompraService.getPedidos().then(function(data){
+		$scope.$on('modifico-pedido', 
+			function(event, arg) {
+				alert('modifico-pedido')
+				load();
+			});
+
+		function load(){
+			contextoCompraService.getPedidos().then(function(data){
 			vm.tabs=data
 			setTabSeleccionado(contextoCompraService.ls.pedidoSelected);});
+		}
 				
+		load();
 	}
 
 })();

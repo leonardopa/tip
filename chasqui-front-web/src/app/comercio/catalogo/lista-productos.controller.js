@@ -348,10 +348,16 @@
 
 			function doOK(response) {
 				$log.debug("callCrearPedidoGrupal", response);
-				contextoCompraService.refresh();
-				contextoCompraService.ls.pedidoSelected = response.data;		
-				vm.pedidoSelected = response.data;		
-				agregarProductoDialog(variante)	
+				contextoCompraService.refreshPedidos().then(
+						function(pedido){
+							//contextoCompraService.ls.pedidoSelected = response.data;		
+							//vm.pedidoSelected = response.data;		
+							vm.pedidoSelected = contextoCompraService.ls.pedidoSelected;		
+							agregarProductoDialog(variante)	
+						}
+					)
+				
+				
 			}
 
 			function doNoOK(response) {
