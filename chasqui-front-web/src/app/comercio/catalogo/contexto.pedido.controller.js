@@ -11,7 +11,7 @@
 	function ContextoPedidoController($rootScope,$log,CTE_REST,StateCommons,gccService,utilsService
 		,productoService,$timeout,contextoCompraService) {	
 
-		$log.debug("ContextoPedidoController ..... grupo", StateCommons.ls.grupoSelected);
+		$log.debug("ContextoPedidoController .....");
 		
 
 		var vm = this;
@@ -24,7 +24,7 @@
 	
 		vm.pedidos= [];
 		vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
-		vm.grupoSelected=contextoCompraService.ls.grupoSelected;
+	//	vm.grupoSelected=contextoCompraService.ls.grupoSelected;
 		//vm.hayProductos=false;
 
 		vm.checkAlias=function(){
@@ -34,13 +34,13 @@
 				return 'Personal'
 			}
 		}
-
+/*
 		$rootScope.$on('contexto.pedido.actualizar', 
 			function(event, grupo) {					
 				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
 				//StateCommons.ls.pedidoSelected=vm.pedidoSelected;				
 			});
-
+*/
 		$rootScope.$on('contexto.compra.cambia.grupo', 
 			function(event, grupo) {					
 				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
@@ -50,11 +50,12 @@
 		//actualiza la lista de productos
 		$rootScope.$on('lista-producto-agrego-producto', 
 			function(event) {			
-				
-				/// TODO tiene que ser con callback / promise
-				vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
-
-				contextoCompraService.refresh();
+				contextoCompraService.refreshPedidos().then(
+					function(pedidos){
+						vm.pedidos = pedidos;
+					 	vm.pedidoSelected=contextoCompraService.ls.pedidoSelected;
+					 	$log.debug("lista-producto-agrego-producto",vm.pedidoSelected);
+					});
 			});
 	 
 

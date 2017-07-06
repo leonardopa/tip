@@ -18,7 +18,7 @@
 		</md-dialog>
 	</script>
 
-<div layout="row"  >
+<div layout="row"  layout-align="space-between start">
 	<div>
 		<md-card >
 
@@ -87,29 +87,28 @@
 		
 		<md-subheader> Productos en el carro  </md-subheader>
 
-		<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" ng-cloak >
-
+		<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse"
+		style="width: 100%" ng-cloak >
 			<div layout="row" layout-align="space-between center">
-				<div layout="row" layout-align="start center">
-					<div >
-		    			<img src="{{detallePedidoCtrl.urlBase}}{{item.imagen}}" style="height: 100px;">
-		    		</div>
-
-		    		<div  layout="column"  style="padding: 10px" >
+				<div >
+		    		<img src="{{detallePedidoCtrl.urlBase}}{{item.imagen}}" 
+		    		style="height: 100px;">
+		    	</div>
+		    	<div layout="row" layout-align="end center">
+		    		<div layout="column"   layout-align="end end" >
 						<span  >{{ item.nombre }}</span>
 						<span class="md-subhead">
 		            		$ {{ item.precio }} x  {{ item.cantidad }} </span>
 		            	<strong>$ {{ item.precio * item.cantidad }}</strong>
-					</div>
-				</div>
-
-				<div >
-					<md-button ng-click="detallePedidoCtrl.eliminar(item)"
-					>
+					</div>			
+					<div >
+						<md-button
+						 ng-click="detallePedidoCtrl.eliminar(item)">
 						<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
 						<md-tooltip md-direction="left">
 								Quitar producto del carro </md-tooltip>
-					</md-button>				
+						</md-button>				
+					</div>
 				</div>
 			</div>
 	    </md-card>

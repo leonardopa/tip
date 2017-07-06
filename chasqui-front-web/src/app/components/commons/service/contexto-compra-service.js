@@ -55,7 +55,8 @@
 					function doOkPedido(response){	
 						$log.debug("NO tiene pedidos en cache, fue a buscar",response.data)
 						vm.ls.pedidos=response.data;
-						$rootScope.$emit('contexto.pedido.actualizar');
+						vm.setContextoByGrupo(vm.ls.grupoSelected);
+						//$rootScope.$emit('contexto.pedido.actualizar');
 						defered.resolve(vm.ls.pedidos);	
 					}
 
@@ -94,12 +95,12 @@
 
 	    vm.refreshPedidos=function(){
 	    	vm.ls.pedidos=undefined;	   		
-	    	vm.getPedidos();	    	
+	    	return vm.getPedidos();	    	
 	    }
 
 	    vm.refreshGrupos=function(){
 	    	vm.ls.grupos=undefined;
-	    	vm.getGrupos();	
+	    	return vm.getGrupos();	
 	    }
 
 	    vm.setContextoByPedido = function (pedido){	    	
