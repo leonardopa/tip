@@ -102,7 +102,7 @@
 			if (StateCommons.isLogued()){
 				agregarProducto(variante);
 			}else{
-				ToastCommons.mensaje("Te invitamos a ingresar !");
+				ToastCommons.mensaje("Te invitamos a ingresar!");
 				$log.log('not logued" ' , variante);
 				contextoCompraService.ls.varianteSelected=variante;
 				$state.go('login');
@@ -238,7 +238,7 @@
 				$log.debug("Cancelo Agregar")
 			}
 
-			dialogCommons.prompt('Agregar al changuito', 'Cuantos '+variante.nombreProducto + ' mecesitas ?',
+			dialogCommons.prompt('Agregar al changuito', 'Cuantos '+variante.nombreProducto + ' necesitas ?',
 					'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
 		}
 
@@ -253,7 +253,7 @@
 			var doOk = function (response) {
 				$log.log('Agregar producto Response ', response);
 
-				ToastCommons.mensaje("Producto agregado !");
+				ToastCommons.mensaje("¡Producto agregado!");
 				$rootScope.$emit('lista-producto-agrego-producto');
 
 			}
@@ -380,7 +380,7 @@
 
 		// findProductos();
 		if (! utilsService.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)){
-			$log.debug("tiene una variante seleccionda" ,contextoCompraService.ls.varianteSelected )
+			$log.debug("tiene una variante seleccionada" ,contextoCompraService.ls.varianteSelected )
 			vm.agregar(contextoCompraService.ls.varianteSelected)
 			contextoCompraService.ls.varianteSelected=undefined;
 		}
