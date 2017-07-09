@@ -60,8 +60,7 @@
 				$log.debug("--- cancelar pedido response ", response.data);
 				ToastCommons.mensaje("Cancelado !");
 				contextoCompraService.refreshPedidos().then(
-					function(){
-						alert('modifico-pedido 1')
+					function(){					
 						$scope.$emit('modifico-pedido');
 					});
 				

@@ -109,8 +109,7 @@
 		}
 		
 		$scope.$on('modifico-pedido', 
-			function(event, arg) {
-				alert('modifico-pedido')
+			function(event, arg) {			
 				load();
 			});
 
