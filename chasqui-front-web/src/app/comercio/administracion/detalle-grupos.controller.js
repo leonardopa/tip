@@ -136,5 +136,9 @@
         vm.selfPara = function(miembro){
             return (miembro.email == StateCommons.ls.usuario.email) ? miembro.nickname + "(Tú)"  : miembro.nickname;
         }
+
+        vm.isSelf = function(miembro){
+            return (miembro.email == StateCommons.ls.usuario.email);
+        }
 	}
 })();

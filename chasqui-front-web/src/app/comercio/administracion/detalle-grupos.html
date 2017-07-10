@@ -12,6 +12,17 @@
                     </div>
 
                     <div layout="row" layout-align="end center">
+                    	<div >
+	                        <md-button 
+	                        ng-if="detalleGrupoCtrl.isAdmin  && 
+	                    	!detalleGrupoCtrl.isSelf(contact)" 
+	                        ng-click="detalleGrupoCtrl.quitarMiembro(contact)">
+	                            <ng-md-icon icon="remove_circle_outline" style="fill: red"></ng-md-icon>
+	                            <md-tooltip md-direction="right">
+	                                Quitar del Grupo </md-tooltip>
+	                        </md-button>
+	                    </div>
+
 	                    <div ng-if="contact.invitacion == 'NOTIFICACION_ACEPTADA'">	
 	                        <ng-md-icon icon="done" style="fill: green"
 	                        class="md-list-item-text compact"></ng-md-icon>
@@ -26,15 +37,8 @@
 	                        <md-tooltip md-direction="right">
 	                            Invitación en espera
 	                        </md-tooltip>
-	                    </div>
+	                    </div>	                   
 
-	                    <div ng-if="detalleGrupoCtrl.isAdmin" >
-	                        <md-button ng-click="detalleGrupoCtrl.quitarMiembro(contact)">
-	                            <ng-md-icon icon="remove_circle_outline" style="fill: red"></ng-md-icon>
-	                            <md-tooltip md-direction="right">
-	                                Quitar del Grupo </md-tooltip>
-	                        </md-button>
-	                    </div>
                     </div>
                     <md-divider md-inset ng-if="!$last">
                 </md-list-item>
