@@ -258,13 +258,12 @@
 
 			}
 
-			$log.debug(contextoCompraService.ls.pedidoSelected)
-
 			var params = {};
 			params.idPedido = contextoCompraService.ls.pedidoSelected.id;
 			params.idVariante = variante.idVariante;
 			params.cantidad = cantidad;
 
+			$log.debug(params)
 
 			productoService.agregarPedidoIndividual(params).then(doOk)
 //		$log.debug(contextoCompraService.ls.pedidoSelected)

@@ -50,6 +50,12 @@
 
 				</div>
 			</md-card-content>
+
+			<!-- oculta las acciones sobre el pedido si no esta abierto. 
+			DESCOMENTAR cuendo terminen pruebas
+			<md-card-actions layout="row" layout-align="end center"
+			ng-show="{{detallePedidoCtrl.pedido.estado=='ABIERTO'}}"> -->
+
 			<md-card-actions layout="row" layout-align="end center">
 
 				<md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>

@@ -16,7 +16,8 @@
 		vm.direcciones;
 		vm.direccionSelected;
 		vm.productoEliminar;
-		
+		vm.isIndividual = vm.pedido.idGrupo==null;
+
 		vm.comprar = function(event) {			
 			contextoCompraService.setContextoByPedido($scope.pedido);				
 			$state.go('catalogo')
