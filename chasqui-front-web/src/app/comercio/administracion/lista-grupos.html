@@ -25,9 +25,8 @@
 
         <div>  
             <md-tabs md-selected="listaGruposCtrl.selectedIndex" md-dynamic-height md-border-bottom>
-                <md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.alias}}">
-                	
-    	                <md-content class="md-padding">
+                <md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.alias}}"  >               
+                        <md-content class="md-padding"  >
     	                    <div layout=row  >
     	                        <div flex="50" layout=column >
     	                            <div ng-include="'app/comercio/administracion/lista-grupos-detalle.html'" ></div>
