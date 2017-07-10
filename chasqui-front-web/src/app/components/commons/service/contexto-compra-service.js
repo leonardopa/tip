@@ -126,6 +126,20 @@
 	        return vm.ls.pedidoSelected.idGrupo == null;
 	    }
 
+	    vm.isAdmin=function (pedidoParam){	  
+	    	var result= false;  	
+	    	angular.forEach(vm.ls.grupos, function(grupo, key) {
+	    		if (grupo.esAdministrador){
+		    		angular.forEach(grupo.miembros, function(miembro, key) {
+				  		if (miembro.pedido.id === pedidoParam.id){
+				  			result = true;
+				  		};
+					});	
+	    		}
+			});
+
+			return result;
+	    }
 
 	    ////////////
 	    /// privados 

@@ -7,7 +7,7 @@
 	/** @ngInject */
 	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog
 			,dialogCommons,productoService,perfilService,gccService,StateCommons,
-			contextoCompraService ) {
+			contextoCompraService) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -17,6 +17,7 @@
 		vm.direccionSelected;
 		vm.productoEliminar;
 		vm.isIndividual = vm.pedido.idGrupo==null;
+		vm.isAdmin = contextoCompraService.isAdmin(vm.pedido);
 
 		vm.comprar = function(event) {			
 			contextoCompraService.setContextoByPedido($scope.pedido);				

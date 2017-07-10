@@ -58,13 +58,18 @@
 
 			<md-card-actions layout="row" layout-align="end center">
 
-				<md-button ng-click="detallePedidoCtrl.cancelar()"> Cancelar </md-button>
+				<md-button ng-click="detallePedidoCtrl.cancelar()" style="color:red"> 
+				Cancelar </md-button>
 				
 				<md-button ng-click="detallePedidoCtrl.confirmar()" 
-					class="md-primary"> Confirmar </md-button>
+				ng-show="{{! detallePedidoCtrl.isIndividual && detallePedidoCtrl.isAdmin}}"	class="md-primary"> 
+				Cerrar </md-button>
+
+				<md-button ng-click="detallePedidoCtrl.confirmar()" 
+				 ng-show="{{detallePedidoCtrl.isIndividual}}"	class="md-primary"> Confirmar </md-button>
 			 
 				<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" 
-					class="md-primary"> Confirmar individual gcc </md-button>
+					class="md-primary" ng-show="{{! detallePedidoCtrl.isIndividual}}"> Confirmar</md-button>
 
 				
 			</md-card-actions>
