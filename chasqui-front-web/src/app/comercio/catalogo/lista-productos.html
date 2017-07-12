@@ -42,7 +42,7 @@
 
 							<div layout="row"  layout-align="space-around center">
 								<div>
-									<h1>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></h1>
+									<h1>$ {{variante.precioParteEntera}} <sup>{{listaProductoCtr.mostrarDecimales(variante.precioParteDecimal)}}</sup></h1>
 								</div>
 								<md-button class="btn-compra" 
 									ng-click="listaProductoCtr.agregar(variante)" >
