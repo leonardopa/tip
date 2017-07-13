@@ -3,27 +3,27 @@
         <md-subheader >Miembros del grupo</md-subheader>
         <md-divider>
             <md-list class="fixedRows">
-                <md-list-item class="md-2-line contact-item selected" ng-repeat="(index, contact) in detalleGrupoCtrl.contacts">
-                    <img ng-src="http://lorempixel.com/150/150/people/" class="md-avatar" alt="	{{contact.nickname}}" />
+                <md-list-item class="md-2-line contact-item selected" ng-repeat="(index, member) in detalleGrupoCtrl.miembrosVisiblesParaUsuarioLogeado()">
+                    <img ng-src="http://lorempixel.com/150/150/people/" class="md-avatar" alt="	{{member.nickname}}" />
                     
                     <div class="md-list-item-text compact">
-                        <h4>{{detalleGrupoCtrl.selfPara(contact)}}</h4>
-                        <p>{{contact.email}}</p>
+                        <h4>{{detalleGrupoCtrl.selfPara(member)}}</h4>
+                        <p>{{member.email}}</p>
                     </div>
 
                     <div layout="row" layout-align="end center">
                     	<div >
 	                        <md-button 
 	                        ng-if="detalleGrupoCtrl.isAdmin  && 
-	                    	!detalleGrupoCtrl.isSelf(contact)" 
-	                        ng-click="detalleGrupoCtrl.quitarMiembro(contact)">
+	                    	!detalleGrupoCtrl.isSelf(member)" 
+	                        ng-click="detalleGrupoCtrl.quitarMiembro(member)">
 	                            <ng-md-icon icon="remove_circle_outline" style="fill: red"></ng-md-icon>
 	                            <md-tooltip md-direction="right">
 	                                Quitar del Grupo </md-tooltip>
 	                        </md-button>
 	                    </div>
 
-	                    <div ng-if="contact.invitacion == 'NOTIFICACION_ACEPTADA'">	
+	                    <div ng-if="member.invitacion == 'NOTIFICACION_ACEPTADA'">	
 	                        <ng-md-icon icon="done" style="fill: green"
 	                        class="md-list-item-text compact"></ng-md-icon>
 	                        <md-tooltip md-direction="right">
@@ -31,7 +31,7 @@
 	                        </md-tooltip>
 	                    </div>
 
-	                    <div ng-if="contact.invitacion == 'NOTIFICACION_NO_LEIDA'" 
+	                    <div ng-if="member.invitacion == 'NOTIFICACION_NO_LEIDA'" 
 	                    class="md-list-item-text compact" >
 	                        <md-icon> restore </md-icon>
 	                        <md-tooltip md-direction="right">

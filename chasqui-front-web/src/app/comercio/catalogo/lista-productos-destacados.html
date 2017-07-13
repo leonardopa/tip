@@ -13,7 +13,7 @@
 						<md-grid-tile-footer>
 							<h3>{{variante.nombreProducto}}</h3>
 							{{variante.nombreVariedad}}
-							<strong class="md-headline">$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
+							<strong class="md-headline">$ {{variante.precioParteEntera}}<sup>{{ctrl.mostrarDecimales(variante.precioParteDecimal)}}</sup></strong>
 						</md-grid-tile-footer>
 					</md-grid-tile>
 				</md-grid-list>

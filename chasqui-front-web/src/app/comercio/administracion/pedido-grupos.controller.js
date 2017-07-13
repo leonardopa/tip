@@ -23,5 +23,9 @@
                     "tuyos":
                     "de " + miembro.nickname;
         }
+        
+        vm.miembrosActivosDelGrupo = function(){
+            return vm.grupo.miembros.filter(function(m){return m.invitacion == 'NOTIFICACION_ACEPTADA'});
+        }
 	}
 })();
