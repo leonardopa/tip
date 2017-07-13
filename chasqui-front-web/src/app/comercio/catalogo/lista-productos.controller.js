@@ -116,6 +116,12 @@
 				'idMedalla' : medalla
 			});
 		}
+        
+        vm.mostrarDecimales = function(parteDecimal){
+            var res = Number(parteDecimal).toFixed(0).toString();      
+            if(res.length == 1) res+= "0";
+            return res;
+        }
 
 		// ///////////////////////
 		// / Recive el evento de filtrado

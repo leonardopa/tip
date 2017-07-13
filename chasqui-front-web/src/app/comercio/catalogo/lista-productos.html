@@ -42,7 +42,7 @@
 
 							<div layout="row"  layout-align="space-around center">
 								<div>
-									<h1>$ {{variante.precioParteEntera}} <sup>{{variante.precioParteDecimal}}</sup></h1>
+									<h1>$ {{variante.precioParteEntera}} <sup>{{listaProductoCtr.mostrarDecimales(variante.precioParteDecimal)}}</sup></h1>
 								</div>
 								<md-button class="btn-compra" 
 									ng-click="listaProductoCtr.agregar(variante)" >
@@ -56,7 +56,7 @@
 
 				<md-card-actions >
 			 
-							<div  layout="row" layout-align="space-around center"> 
+							<div  layout="row" layout-align="start center"> 
 								<div ng-repeat="medalla in variante.medallasProducto">								 	<img ng-click="listaProductoCtr.showPrerenderedDialog(medalla)"
 									ng-src="{{listaProductoCtr.urlBase}}{{medalla.pathImagen}}"
 										width="40" height="40">
