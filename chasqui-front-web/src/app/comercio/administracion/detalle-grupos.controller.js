@@ -152,5 +152,8 @@
             return vm.contacts; 
         }
         
+        vm.showRemoveGroupsMember = function(member){
+            return (vm.isAdmin  && !vm.isSelf(member) ) || ( !vm.isAdmin  && vm.isSelf(member) );
+        }
 	}
 })();

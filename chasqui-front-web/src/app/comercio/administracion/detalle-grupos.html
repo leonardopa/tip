@@ -14,8 +14,7 @@
                     <div layout="row" layout-align="end center">
                     	<div >
 	                        <md-button 
-	                        ng-if="detalleGrupoCtrl.isAdmin  && 
-	                    	!detalleGrupoCtrl.isSelf(member)" 
+	                        ng-if="detalleGrupoCtrl.showRemoveGroupsMember(member)" 
 	                        ng-click="detalleGrupoCtrl.quitarMiembro(member)">
 	                            <ng-md-icon icon="remove_circle_outline" style="fill: red"></ng-md-icon>
 	                            <md-tooltip md-direction="right">
