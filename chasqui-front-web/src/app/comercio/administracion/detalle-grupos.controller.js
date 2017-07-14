@@ -63,14 +63,26 @@
 		}
 
 		vm.quitarMiembro = function(miembro) {
-			var nombre = miembro.nickname  == null ? miembro.email : miembro.nickname ;
-			dialogCommons.confirm('Quitar Miembro del grupo',
-					'Estas seguro de quitar a ' + nombre + ' ?',
-					'Si, lo quito', 'no', function() {
-						vm.callQuitarMiembro(miembro);
-					}, function() {
-						$log.debug("se quedo");
-					});
+			var nombre = miembro.nickname  == null ? miembro.email : miembro.nickname ;  
+            // Esto es un resabio de la forma de cargar miembros que pronto va a ser modificado. 
+            
+            if(vm.isLoggedMember(miembro)){
+                var pregunta = "de salir del grupo";
+                var confirmacion = 'salir';          
+                var fallo = 'No pudo salir del grupo de compra';
+            }else{
+                var pregunta =  'quitar a ' + nombre;
+                var confirmacion = 'quitarlo';
+                var fallo = 'No se pudo quitar a ' + nombre + ' del grupo de compra';
+            }
+            
+            dialogCommons.confirm('Salir del grupo',
+                    '¿Estas seguro de ' + pregunta + '?',
+                    'Si, quiero ' + confirmacion, 'No', function() {
+                        vm.callQuitarMiembro(miembro);
+                    }, function() {
+                        $log.debug(fallo);
+            }); 
 		}
 		
 		// //////////
@@ -142,7 +154,7 @@
             return (condicion) ? "(" + tag + ")" : "";
         }
 
-        vm.isLogged = function(miembro){
+        vm.isLoggedMember = function(miembro){
             return (miembro.email == StateCommons.ls.usuario.email);
         }
         
@@ -157,7 +169,7 @@
         }
         
         vm.showRemoveGroupsMember = function(member){
-            return (vm.isAdmin  && !vm.isLogged(member) ) || ( !vm.isAdmin  && vm.isLogged(member) );
+            return (vm.isAdmin  && !vm.isLoggedMember(member) ) || ( !vm.isAdmin  && vm.isLoggedMember(member) );
         }
 	}
 })();

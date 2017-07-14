@@ -18,7 +18,7 @@
 	                        ng-click="detalleGrupoCtrl.quitarMiembro(member)">
 	                            <ng-md-icon icon="remove_circle_outline" style="fill: red"></ng-md-icon>
 	                            <md-tooltip md-direction="right">
-	                                {{(detalleGrupoCtrl.isLogged(member)? "Salir del grupo" : "Quitar del Grupo")}}</md-tooltip>
+	                                {{(detalleGrupoCtrl.isLoggedMember(member)? "Salir del grupo" : "Quitar del Grupo")}}</md-tooltip>
 	                        </md-button>
 	                    </div>
 
