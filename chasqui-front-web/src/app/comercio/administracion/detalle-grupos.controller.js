@@ -34,7 +34,6 @@
 		var pendingSearch, cancelSearch = angular.noop;
 		var cachedQuery, lastSearch;
                 
-        vm.contacts = vm.grupo.miembros;
                         
 		vm.allContacts;
 	//	loadContacts();
@@ -98,15 +97,15 @@
 				vm.canAddIntegrante = !vm.canAddIntegrante;
 			}
 
-			gccService.integrantesGrupo(vm.idGrupo, vm.contacts).then(doOk)
+			gccService.integrantesGrupo(vm.idGrupo, vm.grupo.miembros).then(doOk)
 
 		}
 		
 		vm.callQuitarMiembro = function(miembro) {
 			function doOk(response) {
-				ToastCommons.mensaje('se quito miembro del grupo')
+				ToastCommons.mensaje('Se quito miembro del grupo')
 				$scope.$emit("quito-miembro-grupo");
-                vm.contacts.splice(vm.contacts.indexOf(miembro), 1);
+                vm.grupo.miembros.splice(vm.grupo.miembros.indexOf(miembro), 1);
 			}			
 			var params ={};
 			params.idGrupo=vm.grupo.idGrupo;
@@ -136,7 +135,7 @@
 				angular.forEach(vm.allContacts, function(integrante) {
 					integrante._lowername = integrante.nombre.toLowerCase();
 					if (integrante.isEnGrupo) {
-						vm.contacts.push(integrante);
+						vm.grupo.miembros.push(integrante);
 					}
 				});
 			}
@@ -160,12 +159,12 @@
         
         
         vm.miembrosVisiblesParaUsuarioLogeado = function(){
-            if(vm.contacts.reduce(function(r,c){
+            if(vm.grupo.miembros.reduce(function(r,c){
                 return r || (c.email == StateCommons.ls.usuario.email && c.invitacion != 'NOTIFICACION_ACEPTADA')
             },false)){
-                return vm.contacts.filter(function(c){return c.invitacion == "NOTIFICACION_ACEPTADA"})
+                return vm.grupo.miembros.filter(function(c){return c.invitacion == "NOTIFICACION_ACEPTADA"})
             }
-            return vm.contacts; 
+            return vm.grupo.miembros; 
         }
         
         vm.showRemoveGroupsMember = function(member){
