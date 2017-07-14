@@ -21,7 +21,7 @@
 		vm.otherCtrl = $scope.$parent.$parent.catalogoCtrl.isFiltro1;
 
 		vm.urlBase = CTE_REST.url_base;
-		vm.variantes = [];		
+		vm.productos = [];		
 		vm.ultimoFiltro = {};
 		vm.medallaSelect=undefined;
 		vm.pedidoSelected=undefined;
@@ -123,6 +123,11 @@
             return res;
         }
 
+        vm.identificadorProducto = function(producto){
+            return producto.nombreProducto + " - " + producto.nombreVariedad;
+        }
+        
+        
 		// ///////////////////////
 		// / Recive el evento de filtrado
 
@@ -283,7 +288,7 @@
 				idVendedor : StateCommons.vendedor().id
 			}
 			function doOk(response) {
-				vm.variantes = response.data.productos;
+				vm.productos = response.data.productos;
 				
 				vm.paging.total = response.data.itemsTotal;
 				vm.paging.current = response.data.paginaActual;
@@ -299,7 +304,7 @@
 
 			function doOk(response) {
 				$log.log('findProductos Response ', response);
-				vm.variantes = response.data.productos;			 	
+				vm.productos = response.data.productos;			 	
 
 				vm.paging.total = Math.ceil(response.data.total / CANT_ITEMS) ;
 				vm.paging.current = response.data.pagina;
@@ -396,7 +401,7 @@
 			contextoCompraService.ls.varianteSelected=undefined;
 		}
 
-		//vm.variantes = findProductos(1,10,{});
+		//vm.productos = findProductos(1,10,{});
 		callEmprendedores();
 	}
 
