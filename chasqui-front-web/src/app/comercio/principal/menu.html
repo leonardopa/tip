@@ -39,15 +39,25 @@
 			<span>|</span> -->
 			<md-button class="{{menuCtrl.classFor('catalogo')}}" ng-click="menuCtrl.ir('catalogo')">
 				<b>catalogo</b> </md-button>
-			<span ng-show="menuCtrl.isLogued">|</span>
-			<md-button class="{{menuCtrl.classFor('lista-pedidos')}}" ng-click="menuCtrl.ir('lista-pedidos')" ng-show="menuCtrl.isLogued">
-				<b>Mis pedidos</b> </md-button>
-			<span ng-show="menuCtrl.isLogued">|</span>
-			<md-button class="{{menuCtrl.classFor('lista-grupos')}}" ng-click="menuCtrl.ir('lista-grupos')" ng-show="menuCtrl.isLogued">
-				<b>Mis Grupos</b></md-button>
-			<span ng-show="menuCtrl.isLogued">|</span>
-			<md-button class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')" ng-show="menuCtrl.isLogued">
-				<b>Perfil</b></md-button>
+            <div ng-show="menuCtrl.isLogued">
+                <span>|</span>
+                
+                <md-button class="{{menuCtrl.classFor('lista-pedidos')}}" ng-click="menuCtrl.ir('lista-pedidos')">
+                    <b>Mis pedidos</b> 
+                </md-button>
+                
+                <span>|</span>
+                
+                <md-button class="{{menuCtrl.classFor('lista-grupos')}}" ng-click="menuCtrl.ir('lista-grupos')">
+                    <b>Mis Grupos</b>
+                </md-button>
+                
+                <span>|</span>
+                
+                <md-button class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')">
+                    <b>Perfil</b>
+                </md-button>            
+            </div>
 		</div>
 		<md-divider></md-divider>
 	</div>

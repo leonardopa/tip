@@ -17,7 +17,7 @@
     </div>
 
     <div layout="column" ng-cloak>
-        <md-card ng-show="listaGruposCtrl.tabs.length==0">
+        <md-card ng-show="listaGruposCtrl.groups.length==0">
             <md-content flex layout-padding >
                 <p >
                     Aún no hay grupos
@@ -25,15 +25,15 @@
 
         <div>  
             <md-tabs md-selected="listaGruposCtrl.selectedIndex" md-dynamic-height md-border-bottom>
-                <md-tab ng-repeat="tab in listaGruposCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.alias}}"  >               
+                <md-tab ng-repeat="group in listaGruposCtrl.groups" ng-disabled="group.disabled" label="{{group.alias}}"  >               
                         <md-content class="md-padding"  >
     	                    <div layout=row  >
     	                        <div flex="50" layout=column >
     	                            <div ng-include="'app/comercio/administracion/lista-grupos-detalle.html'" ></div>
 
-    	                            <div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = tab" ></div>
+    	                            <div ng-include="'app/comercio/administracion/detalle-grupos.html'" ng-init="grupo = group" ></div>
     	                        </div>
-    	                        <div flex="50" ng-include="'app/comercio/administracion/pedido-grupos.html'" ng-init="grupo = tab" ></div>                       
+    	                        <div flex="50" ng-include="'app/comercio/administracion/pedido-grupos.html'" ng-init="grupo = group" ></div>                       
     	                    </div>
     	                </md-content>
                    
