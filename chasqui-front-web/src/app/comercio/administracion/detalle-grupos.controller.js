@@ -146,7 +146,7 @@
         
         vm.selfPara = function(miembro){
             return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, "Administrador") 
-                                    + tagSelf(miembro.email == StateCommons.ls.usuario.email, "Tú");
+                                    + tagSelf(vm.isLoggedMember(miembro), "Tú");
         }
         
         function tagSelf(condicion, tag){
@@ -159,10 +159,10 @@
         
         
         vm.miembrosVisiblesParaUsuarioLogeado = function(){
-            if(vm.grupo.miembros.reduce(function(r,c){
-                return r || (c.email == StateCommons.ls.usuario.email && c.invitacion != 'NOTIFICACION_ACEPTADA')
+            if(vm.grupo.miembros.reduce(function(r, m){
+                return r || (vm.isLoggedMember(m) && m.invitacion != 'NOTIFICACION_ACEPTADA')
             },false)){
-                return vm.grupo.miembros.filter(function(c){return c.invitacion == "NOTIFICACION_ACEPTADA"})
+                return vm.grupo.miembros.filter(function(m) {return m.invitacion == "NOTIFICACION_ACEPTADA"})
             }
             return vm.grupo.miembros; 
         }
