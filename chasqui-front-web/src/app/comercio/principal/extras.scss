@@ -25,8 +25,12 @@ $colorConfirmar: #43a047;
 }
 
 .btn-compra{
-	background: #1e88e5 !important;
+	background: $colorConfirmar !important;
 	color:white;
+    p{
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .btn-agregar{
@@ -81,3 +85,10 @@ md-tabs.md-default-theme .md-ink-bar, md-tabs md-ink-bar {
 .chq-paginador{
 	padding-top: 6rem !important;
 }
+
+.img{
+    width: 100%;
+}
+
+// =============== Agregado por favio 13-7 ==========================
+
