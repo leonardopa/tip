@@ -14,7 +14,7 @@
 						<md-grid-tile-footer style="color: #468385; padding-right: 1rem; padding-left: 1rem;">
 							<h2 style="font-size: 1.3rem;">{{variante.nombreProducto}}</h2>
 							<span style="text-align: center;">{{variante.nombreVariedad}}</span>
-							<strong class="md-headline">$ {{variante.precioParteEntera}}<sup>{{variante.precioParteDecimal}}</sup></strong>
+							<strong class="md-headline">$ {{variante.precioParteEntera}}<sup>{{ctrl.mostrarDecimales(variante.precioParteDecimal)}}</sup></strong>
 
 						</md-grid-tile-footer>
 					</md-grid-tile>

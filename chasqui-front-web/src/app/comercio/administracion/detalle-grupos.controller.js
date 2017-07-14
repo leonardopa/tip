@@ -137,7 +137,7 @@
             return (miembro.email == StateCommons.ls.usuario.email) ? miembro.nickname + "(Tú)"  : miembro.nickname;
         }
 
-        vm.isSelf = function(miembro){
+        vm.isLogged = function(miembro){
             return (miembro.email == StateCommons.ls.usuario.email);
         }
         
@@ -153,7 +153,7 @@
         }
         
         vm.showRemoveGroupsMember = function(member){
-            return (vm.isAdmin  && !vm.isSelf(member) ) || ( !vm.isAdmin  && vm.isSelf(member) );
+            return (vm.isAdmin  && !vm.isLogged(member) ) || ( !vm.isAdmin  && vm.isLogged(member) );
         }
 	}
 })();
