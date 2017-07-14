@@ -12,19 +12,26 @@
   
     .constant('CTE_REST',  function() {
 
+      switch (3) {      
+              
         //    Servidor LOCAL
-
-
-	   // var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
-
-       // var URL_BASE = "http://localhost:8081/chasqui/";
-        
+          case 0:
+              var URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
+          case 1:
+              var URL_BASE = "http://localhost:8081/chasqui/";
+              
         //    Servidores REMOTOS
-
-       // var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
-     
-       var URL_BASE = "http://proyectochasqui.com:8080/chasqui-dev-testing/";
-  	   //var URL_BASE = "http://168.181.184.203:8080/chasqui/";
+          case 2:
+              var URL_BASE_MOCK = "http://168.181.184.203:8080/chasqui-mock/rest/";
+          case 3:
+              var URL_BASE = "http://proyectochasqui.com:8080/chasqui-dev-testing/";
+          case 4:
+  	          var URL_BASE = "http://168.181.184.203:8080/chasqui/";
+        
+      }
+      
+       
+        
 
 
 
