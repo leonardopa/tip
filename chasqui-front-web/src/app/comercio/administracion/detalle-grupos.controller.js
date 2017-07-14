@@ -140,5 +140,20 @@
         vm.isSelf = function(miembro){
             return (miembro.email == StateCommons.ls.usuario.email);
         }
+        
+        
+        vm.miembrosVisiblesParaUsuarioLogeado = function(){
+            var res = [];
+            if(vm.contacts.reduce(function(r,c){
+                return r || (c.email == StateCommons.ls.usuario.email && c.invitacion != 'NOTIFICACION_ACEPTADA')
+            },false)){
+                return vm.contacts.filter(function(c){return c.invitacion == "NOTIFICACION_ACEPTADA"})
+            }
+            return vm.contacts; 
+        }
+        
+        vm.showRemoveGroupsMember = function(member){
+            return (vm.isAdmin  && !vm.isSelf(member) ) || ( !vm.isAdmin  && vm.isSelf(member) );
+        }
 	}
 })();

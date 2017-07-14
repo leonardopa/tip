@@ -165,7 +165,7 @@
 		function callQuitarMiembro (miembro) {
 			$log.debug("quitar",miembro)
 			function doOk(response) {
-				ToastCommons.mensaje('te fuiste del grupo')
+				ToastCommons.mensaje('Te fuiste del grupo')
 				callLoadGrupos();
 			}			
 			var params ={};
