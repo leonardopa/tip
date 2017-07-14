@@ -14,7 +14,7 @@
 		var vm = this;
 		vm.habilita = false;
 		vm.count = 0;
-		vm.tabs = [];
+		vm.groups = [];
 		vm.selected = null, vm.previous = null;
 		vm.selectedIndex = 1;
 		vm.urlBase = CTE_REST.url_base;
@@ -22,7 +22,7 @@
 		/** Control de cambio de tabs */
 		$scope.$watch('selectedIndex', function(current, old) {
 			vm.previous = vm.selected;
-			vm.selected = vm.tabs[current];
+			vm.selected = vm.groups[current];
 
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
@@ -38,8 +38,8 @@
 			var i = 0
 			var indexSelect = 0;
 			var existe = false;
-            $log.debug("Tabs: ", vm.tabs);
-			angular.forEach(vm.tabs, function(tab) {
+            $log.debug("Tabs: ", vm.groups);
+			angular.forEach(vm.groups, function(tab) {
 				$log.debug("setTabSeleccionado", tab.idGrupo + " " + tab.alias);
 				if ((grupo != undefined) && (tab.idGrupo == grupo.idGrupo)) {
 					$log.debug("****** " + tab.idGrupo);
@@ -51,7 +51,7 @@
 			});
 			
 			if (existe){
-				vm.selected = vm.tabs[indexSelect];
+				vm.selected = vm.groups[indexSelect];
 				vm.selectedIndex = indexSelect;
 			}
 			
@@ -148,10 +148,10 @@
 
 			function doOk(data) {
 				$log.debug("--- find grupos respuesta", data);
-				vm.tabs = [];		
+				vm.groups = [];		
 				angular.forEach(data, function(grupo) {
 					grupo.canAddIntegrante = false;
-					if (grupo.alias!='Personal') vm.tabs.push(grupo);
+					if (grupo.alias!='Personal') vm.groups.push(grupo);
 				});
 
 				setTabSeleccionado(contextoCompraService.ls.grupoSelected)

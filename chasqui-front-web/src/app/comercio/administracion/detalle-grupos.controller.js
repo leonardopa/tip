@@ -10,10 +10,10 @@
 	 */
 	function DetalleGruposController($log, $scope, $timeout,
 			ToastCommons, dialogCommons, gccService, StateCommons) {
-		$log.debug("controler DetalleGruposController inti grupo ",
+		$log.debug("controler DetalleGruposController init grupo ",
 				$scope.grupo)
 		var vm = this;
-
+        
 		vm.grupo = $scope.grupo;
 		vm.isAdmin = $scope.grupo.esAdministrador;
 		vm.canAddIntegrante = true;
@@ -34,7 +34,6 @@
 		var pendingSearch, cancelSearch = angular.noop;
 		var cachedQuery, lastSearch;
                 
-        vm.contacts = vm.grupo.miembros;
                         
 		vm.allContacts;
 	//	loadContacts();
@@ -63,14 +62,26 @@
 		}
 
 		vm.quitarMiembro = function(miembro) {
-			var nombre = miembro.nickname  == null ? miembro.email : miembro.nickname ;
-			dialogCommons.confirm('Quitar Miembro del grupo',
-					'Estas seguro de quitar a ' + nombre + ' ?',
-					'Si, lo quito', 'no', function() {
-						vm.callQuitarMiembro(miembro);
-					}, function() {
-						$log.debug("se quedo");
-					});
+			var nombre = miembro.nickname  == null ? miembro.email : miembro.nickname ;  
+            // Esto es un resabio de la forma de cargar miembros que pronto va a ser modificado. 
+            
+            if(vm.isLoggedMember(miembro)){
+                var pregunta = "de salir del grupo";
+                var confirmacion = 'salir';          
+                var fallo = 'No pudo salir del grupo de compra';
+            }else{
+                var pregunta =  'quitar a ' + nombre;
+                var confirmacion = 'quitarlo';
+                var fallo = 'No se pudo quitar a ' + nombre + ' del grupo de compra';
+            }
+            
+            dialogCommons.confirm('Salir del grupo',
+                    '¿Estas seguro de ' + pregunta + '?',
+                    'Si, quiero ' + confirmacion, 'No', function() {
+                        vm.callQuitarMiembro(miembro);
+                    }, function() {
+                        $log.debug(fallo);
+            }); 
 		}
 		
 		// //////////
@@ -86,15 +97,15 @@
 				vm.canAddIntegrante = !vm.canAddIntegrante;
 			}
 
-			gccService.integrantesGrupo(vm.idGrupo, vm.contacts).then(doOk)
+			gccService.integrantesGrupo(vm.idGrupo, vm.grupo.miembros).then(doOk)
 
 		}
 		
 		vm.callQuitarMiembro = function(miembro) {
 			function doOk(response) {
-				ToastCommons.mensaje('se quito miembro del grupo')
+				ToastCommons.mensaje('Se quito miembro del grupo')
 				$scope.$emit("quito-miembro-grupo");
-                vm.contacts.splice(vm.contacts.indexOf(miembro), 1);
+                vm.grupo.miembros.splice(vm.grupo.miembros.indexOf(miembro), 1);
 			}			
 			var params ={};
 			params.idGrupo=vm.grupo.idGrupo;
@@ -124,7 +135,7 @@
 				angular.forEach(vm.allContacts, function(integrante) {
 					integrante._lowername = integrante.nombre.toLowerCase();
 					if (integrante.isEnGrupo) {
-						vm.contacts.push(integrante);
+						vm.grupo.miembros.push(integrante);
 					}
 				});
 			}
@@ -134,26 +145,30 @@
 		}
         
         vm.selfPara = function(miembro){
-            return (miembro.email == StateCommons.ls.usuario.email) ? miembro.nickname + "(Tú)"  : miembro.nickname;
+            return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, "Administrador") 
+                                    + tagSelf(vm.isLoggedMember(miembro), "Tú");
+        }
+        
+        function tagSelf(condicion, tag){
+            return (condicion) ? "(" + tag + ")" : "";
         }
 
-        vm.isSelf = function(miembro){
+        vm.isLoggedMember = function(miembro){
             return (miembro.email == StateCommons.ls.usuario.email);
         }
         
         
         vm.miembrosVisiblesParaUsuarioLogeado = function(){
-            var res = [];
-            if(vm.contacts.reduce(function(r,c){
-                return r || (c.email == StateCommons.ls.usuario.email && c.invitacion != 'NOTIFICACION_ACEPTADA')
+            if(vm.grupo.miembros.reduce(function(r, m){
+                return r || (vm.isLoggedMember(m) && m.invitacion != 'NOTIFICACION_ACEPTADA')
             },false)){
-                return vm.contacts.filter(function(c){return c.invitacion == "NOTIFICACION_ACEPTADA"})
+                return vm.grupo.miembros.filter(function(m) {return m.invitacion == "NOTIFICACION_ACEPTADA"})
             }
-            return vm.contacts; 
+            return vm.grupo.miembros; 
         }
         
         vm.showRemoveGroupsMember = function(member){
-            return (vm.isAdmin  && !vm.isSelf(member) ) || ( !vm.isAdmin  && vm.isSelf(member) );
+            return (vm.isAdmin  && !vm.isLoggedMember(member) ) || ( !vm.isAdmin  && vm.isLoggedMember(member) );
         }
 	}
 })();
