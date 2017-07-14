@@ -4,8 +4,8 @@
 
 		<div  layout="column" layout-gt-sm="row" layout-wrap> 
 		<div flex="25" flex-gt-sm="25"  ng-repeat="producto in listaProductosCtrl.productos"  
-			style="padding-bottom: 8px" >
-			<md-card >
+			style="padding-bottom: 8px">
+			<md-card class="alt-catalogo">
 				<div class="hover01">
 					<div>
 						<figure><img 
@@ -17,9 +17,9 @@
 				</div>
 		 
 		        <md-card-content>
-		        	<div layout="column" >		
+		        	<div layout="column">		
 		        		<div  layout="column"  >	        	
-							<div layout="column"  >
+							<div layout="column" style="min-height: 96px;" layout-align="space-between">
 								<div class="md-subhead">
 					        		<span>{{listaProductosCtrl.identificadorProducto(producto)}}</span>
 					        	</div>
@@ -40,7 +40,7 @@
 								-->
 							</div>	
 
-							<div layout="row"  layout-align="space-around center">
+							<div layout="row"  layout-align="space-between center">
 								<div>
 									<h1>$ {{producto.precioParteEntera}} <sup>{{listaProductosCtrl.mostrarDecimales(producto.precioParteDecimal)}}</sup></h1>
 								</div>
