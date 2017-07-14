@@ -10,10 +10,10 @@
 	 */
 	function DetalleGruposController($log, $scope, $timeout,
 			ToastCommons, dialogCommons, gccService, StateCommons) {
-		$log.debug("controler DetalleGruposController inti grupo ",
+		$log.debug("controler DetalleGruposController init grupo ",
 				$scope.grupo)
 		var vm = this;
-
+        
 		vm.grupo = $scope.grupo;
 		vm.isAdmin = $scope.grupo.esAdministrador;
 		vm.canAddIntegrante = true;
@@ -134,7 +134,12 @@
 		}
         
         vm.selfPara = function(miembro){
-            return (miembro.email == StateCommons.ls.usuario.email) ? miembro.nickname + "(Tú)"  : miembro.nickname;
+            return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, "Administrador") 
+                                    + tagSelf(miembro.email == StateCommons.ls.usuario.email, "Tú");
+        }
+        
+        function tagSelf(condicion, tag){
+            return (condicion) ? "(" + tag + ")" : "";
         }
 
         vm.isLogged = function(miembro){
@@ -143,7 +148,6 @@
         
         
         vm.miembrosVisiblesParaUsuarioLogeado = function(){
-            var res = [];
             if(vm.contacts.reduce(function(r,c){
                 return r || (c.email == StateCommons.ls.usuario.email && c.invitacion != 'NOTIFICACION_ACEPTADA')
             },false)){
