@@ -14,7 +14,7 @@
 		$log.debug('ListaProductosController',
 				$scope.$parent.$parent.catalogoCtrl.isFiltro1);
 
-		var CANT_ITEMS = 10; // TODO : pasar a constante
+		var CANT_ITEMS = CTE_REST.PRODUCTOS_X_PAG; // TODO : pasar a constante
 
 		var vm = this;
 
@@ -65,7 +65,7 @@
 		 vm.verProducto = function(productoParam) {
 		 	 $mdDialog.show({
 		      controller: 'ProductoDialogController as ctrl',
-		      templateUrl: '/app/comercio/catalogo/producto.dialog.html',
+		      templateUrl: 'app/comercio/catalogo/producto.dialog.html',
 		 //     parent: angular.element(document.body),
 		//      targetEvent: ev,
 		      clickOutsideToClose:true,
