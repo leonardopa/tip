@@ -49,6 +49,8 @@
 
         
         return {
+            PRODUCTOS_X_PAG : 10,
+
         	INTERVALO_NOTIFICACION_MIN : 60000,
         	
             defaultLogo: "imagenes/logo_ch_login.png",
