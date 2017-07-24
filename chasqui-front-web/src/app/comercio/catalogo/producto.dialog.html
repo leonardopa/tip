@@ -4,31 +4,29 @@
             <div class="md-toolbar-tools chq-color-toolbar">
                 <h2> {{ctrl.producto.nombreProducto}} </h2>
                 <span flex></span>
-                
-                <md-button ng-click="ctrl.cerrariDalogo()" >
-                        <i style="font-size: 36px;" class="material-icons"><a href="#">close</a></i>
-                </md-button>
+
+                <div ng-click="ctrl.cerrariDalogo()">
+                    <i style="font-size: 36px;" class="material-icons">close</i>
+                </div>
             </div>
 
         </md-toolbar>
 
         <md-dialog-content>
             <div layout="row" layout-align="space-between center">
-                    <div flex>
-                         
-                            <img src="{{ctrl.urlBase}}{{ctrl.producto.imagenPrincipal}}" 
-                            style="max-height:200px;padding: 10px;">
-                         
-                    </div>
+                <div flex>
 
-  
-                     <md-card flex="50">
-                        <md-card-content>
-                        <div layout="column">                     
+                    <img src="{{ctrl.urlBase}}{{ctrl.producto.imagenPrincipal}}" style="max-height:200px;padding: 10px;">
+
+                </div>
+
+                <md-card flex="50">
+                    <md-card-content>
+                        <div layout="column">
                             <div class="md-subhead">
                                 <span>{{ctrl.producto.nombreVariedad}} </span>
                             </div>
-                            <div class="md-subhead"> 
+                            <div class="md-subhead">
                                 {{ctrl.producto.nombreFabricante}}
                             </div>
                             <div class="md-subhead">
@@ -42,42 +40,36 @@
                             </div>
                         </div>
                     </md-card-content>
-           
+
             </div>
 
             <md-divider md-inset></md-divider>
 
-            <div  layout="row">
-                <div ng-repeat="imagen in ctrl.imagenes"
-                    class="image-mini-preview" >      
-                    
-                     <img src="{{ctrl.urlBase}}{{imagen.path}}" 
-                        style="height:100px;">
-                         <!--
+            <div layout="row">
+                <div ng-repeat="imagen in ctrl.imagenes" class="image-mini-preview">
+
+                    <img src="{{ctrl.urlBase}}{{imagen.path}}" style="height:100px;">
+                    <!--
                     <img src="{{imagen.path}}" style="height:70px;width:70px"
                         ng-click="ctrl.cambiarImagen(imagen)">-->
-                 
+
                 </div>
             </div>
         </md-dialog-content>
 
-         
     </form>
 </md-dialog>
 
 <style type="text/css">
-
-.image-preview {
-    padding: 15px 15px 15px 15px;
-}
-
-.image-mini-preview {
-    padding: 15px 15px 15px 15px;
-}
-
-div.image-mini-preview:hover {
-    border: 1px solid #777;
-}
-
-
+    .image-preview {
+        padding: 15px 15px 15px 15px;
+    }
+    
+    .image-mini-preview {
+        padding: 15px 15px 15px 15px;
+    }
+    
+    div.image-mini-preview:hover {
+        border: 1px solid #777;
+    }
 </style>
