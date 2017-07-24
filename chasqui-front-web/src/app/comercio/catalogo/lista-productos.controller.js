@@ -65,7 +65,7 @@
 		 vm.verProducto = function(productoParam) {
 		 	 $mdDialog.show({
 		      controller: 'ProductoDialogController as ctrl',
-		      templateUrl: '/app/comercio/catalogo/producto.dialog.html',
+		      templateUrl: 'app/comercio/catalogo/producto.dialog.html',
 		 //     parent: angular.element(document.body),
 		//      targetEvent: ev,
 		      clickOutsideToClose:true,
