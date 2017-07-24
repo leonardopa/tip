@@ -1,6 +1,6 @@
 <div ng-controller="ListaProductosController as listaProductosCtrl">
     <span ng-show="listaProductosCtrl.productos.length == 0">
-		Sin productos.</span>
+        Sin productos.</span>
 
     <div layout="column" layout-gt-sm="row" layout-wrap>
         <div flex="25" flex-gt-sm="25" ng-repeat="producto in listaProductosCtrl.productos" style="padding-bottom: 8px">
@@ -21,17 +21,17 @@
                                 </div>
                                 <md-button ng-click="listaProductosCtrl.showPrerenderedDialogProductor(producto.idFabricante)">{{producto.nombreFabricante}}</md-button>
                                 <!--
-					        	<div class="md-subhead">
-									<a href="http://localhost:3000/#/emprendedores/{{producto.idFabricante}}"> {{producto.nombreFabricante}}</a>
-								</div >-->
+                                <div class="md-subhead">
+                                    <a href="http://localhost:3000/#/emprendedores/{{producto.idFabricante}}"> {{producto.nombreFabricante}}</a>
+                                </div >-->
                                 <!--
-								<div class="md-subhead">
-									<span>{{producto.nombreVariedad}} </span>
-								</div>	
-								<div class="md-subhead">
-									<div ng-bind-html ="producto.descripcion" />     
-								</div>														
-								-->
+                                <div class="md-subhead">
+                                    <span>{{producto.nombreVariedad}} </span>
+                                </div>  
+                                <div class="md-subhead">
+                                    <div ng-bind-html ="producto.descripcion" />     
+                                </div>                                                      
+                                -->
                             </div>
 
                             <div layout="row" layout-align="space-between center">
@@ -65,19 +65,16 @@
                         </div>
                     </div>
 
-                    </div>
-
                 </md-card-actions>
             </md-card>
         </div>
-
-        <!-- ********************* paginacion *******************-->
-
-        <section layout="column" class="chq-paginador" layout-align="end center" ng-show="listaProductosCtrl.productos.length > 0">
-            <cl-paging flex cl-pages="listaProductosCtrl.paging.total" cl-steps="6" cl-page-changed="listaProductosCtrl.paging.onPageChanged()" cl-align="start start" cl-current-page="listaProductosCtrl.paging.current"></cl-paging>
-        </section>
     </div>
-</div>
+    <!-- ********************* paginacion *******************-->
+
+    <section layout="column" class="chq-paginador" layout-align="end center" ng-show="listaProductosCtrl.productos.length > 0">
+        <cl-paging flex cl-pages="listaProductosCtrl.paging.total" cl-steps="6" cl-page-changed="listaProductosCtrl.paging.onPageChanged()" cl-align="start start" cl-current-page="listaProductosCtrl.paging.current"></cl-paging>
+    </section>
+
     <!-- ********************* dialogo de medalla *******************-->
     <div style="visibility: hidden">
         <div class="md-dialog-container" id="myDialog">
@@ -119,27 +116,28 @@
         </div>
 
     </div>
-    <style>
-        /* Zoom In #1 */
-        
-        .hover01 figure img {
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
-        }
-        
-        .hover01 figure:hover img {
-            -webkit-transform: scale(1.3);
-            transform: scale(1.3);
-        }
-        
-        figure {
-            /* width: 222px;
-	height: 222px;*/
-            margin: 0;
-            padding: 0;
-            background: #fff;
-            overflow: hidden;
-        }
-    </style>
+</div>
+<style>
+    /* Zoom In #1 */
+    
+    .hover01 figure img {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+    
+    .hover01 figure:hover img {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+    
+    figure {
+        /* width: 222px;
+    height: 222px;*/
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        overflow: hidden;
+    }
+</style>
