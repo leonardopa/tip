@@ -22,7 +22,7 @@
 	vm.class="";
 
 	vm.cerrariDalogo=function(){
-		//$mdDialog.hide();
+		$mdDialog.hide();
 	}
 
 	vm.cambiarImagen=function(imagen){	   
