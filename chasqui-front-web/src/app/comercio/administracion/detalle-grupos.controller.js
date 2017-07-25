@@ -9,7 +9,7 @@
 	 *           grupo
 	 */
 	function DetalleGruposController($log, $scope, $timeout,
-			ToastCommons, dialogCommons, gccService, StateCommons) {
+			ToastCommons, dialogCommons, gccService, StateCommons,utilsService) {
 		$log.debug("controler DetalleGruposController init grupo ",
 				$scope.grupo)
 		var vm = this;
@@ -145,6 +145,7 @@
 		}
         
         vm.selfPara = function(miembro){
+        	if (utilsService.isUndefinedOrNull(miembro.nickname)) return "";
             return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, "Administrador") 
                                     + tagSelf(vm.isLoggedMember(miembro), "Tú");
         }
