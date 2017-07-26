@@ -55,8 +55,8 @@
          .state('detalle-grupos', {
           url: '/detalle-grupos',
           templateUrl: 'app/comercio/administracion/detalle-grupos.html',
-          controller: 'DetalleGruposController',
-          controllerAs: 'detalleGruposController'
+          controller: 'GrupoController',
+          controllerAs: 'grupoController'
         })
         .state('pedido-grupos', {
           url: '/pedido-grupos',

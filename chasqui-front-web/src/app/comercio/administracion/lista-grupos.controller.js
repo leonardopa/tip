@@ -16,11 +16,11 @@
 		vm.count = 0;
 		vm.groups = [];
 		vm.selected = null, vm.previous = null;
-		vm.selectedIndex = 1;
+		vm.selectedTabIndex = 0;  
 		vm.urlBase = CTE_REST.url_base;
 
 		/** Control de cambio de tabs */
-		$scope.$watch('selectedIndex', function(current, old) {
+		$scope.$watch('selectedTabIndex', function(current, old) {
 			vm.previous = vm.selected;
 			vm.selected = vm.groups[current];
 
@@ -52,98 +52,18 @@
 			
 			if (existe){
 				vm.selected = vm.groups[indexSelect];
-				vm.selectedIndex = indexSelect;
+				vm.selectedTabIndex = indexSelect;
 			}
 			
 		}
 		
-		$scope.$on('quito-miembro-grupo', 
-			function(event) {	
-				callLoadGrupos();		
-		});
-	
-		vm.edit = function(grupo) {			
-			$state.go("form-grupo",{ "grupo" : grupo});			
-		}
-
-		/** habilita el panel para agregar integrantes. */
-		vm.invitarUsuario = function(grupo) {
-			$log.debug("Invitar miembro al grupo");
-
-			function doOk(response) {
-				$log.debug("Se seleccionó Invitar a usuario con mail", response);
-				callInvitarUsuario(response, grupo);	
-				
-			};
-
-			function doNoOk() {
-				$log.debug("Se seleccionó Cancelar");
-			};
-
-
-			dialogCommons.prompt('Invitar miembro al Grupo',
-					'Ingrese una direccion de correo electrónico', 'correo@correo.com',
-					'Invitar', 'Cancelar', doOk, doNoOk);
-			
-		}
-
-		/** Salir del grupo. Manejo del popUP */
-		vm.salir = function(tab) {
-			dialogCommons.confirm('Salir', 'Seguro quieres salir del grupo '
-					+ vm.selected.alias, 'Si, me voy', 'Cancelar', function(
-					result) {
-				callQuitarMiembro(tab);
-			}, function() {
-				$log.debug("se quedo");
-			});
-		}
-
+		
 		/** Redirecciona al formulario crear grupo */
 		vm.crearGrupo = function(ev) {
 			$state.go('form-grupo');
 		};
 
-
-		vm.crearPedidoGrupal = function(grupo){
-			$log.debug("--- Crear pedido grupal----",grupo);
-		    callCrearPedidoGrupal(grupo);	
-		}
-
-		
-		// ///////////
-		// ///// REST
-		
-		function callCrearPedidoGrupal(grupo){
-			function doOk(response){
-				$log.debug('Crear pedido en el grupo');
-				ToastCommons.mensaje("Se ha creado un pedido en el grupo");
-			}
-		
-			var params = {};
-			params.idGrupo = grupo.idGrupo;
-			params.idVendedor = StateCommons.vendedor().id;
-
-			gccService.crearPedidoGrupal(params).then(doOk);
-		}
-		
-		function callInvitarUsuario(emailClienteInvitado, grupo){
-			$log.debug('callInvitarUsuario con email: ', emailClienteInvitado);
-
-
-			var doOk = function (response) {
-				$log.log('Se enviará un email a la direcciónn ', response);
-				ToastCommons.mensaje("Se enviará un mail a la dirección");	
-				callLoadGrupos();
-			}
-
-			var params = {
-                idGrupo:        grupo.idGrupo,
-                emailInvitado:  emailClienteInvitado
-            };
-			gccService.invitarUsuarioAGrupo(params).then(doOk);
-		}
-		
-		function callLoadGrupos() {
+        function callLoadGrupos() {
 			$log.debug("--- find grupos--------");
 
 			function doOk(data) {
@@ -161,22 +81,8 @@
 			// gccService.gruposByusuario().then(doOk)
 			contextoCompraService.getGrupos().then(doOk);
 		}
-
-		function callQuitarMiembro (miembro) {
-			$log.debug("quitar",miembro)
-			function doOk(response) {
-				ToastCommons.mensaje('Te fuiste del grupo')
-				callLoadGrupos();
-			}			
-			var params ={};
-			params.idGrupo=miembro.idGrupo;
-			params.emailCliente=StateCommons.ls.usuario.email;
-			
-			gccService.quitarMiembro(params).then(doOk)
-
-		}
         
-                
+        
 		// // INIT
 		callLoadGrupos();
 
