@@ -156,7 +156,6 @@
         	},
     
             gruposByusuario: function (idVendedor) {
-                console.log("Id vendedor: ", idVendedor);
                 return URL_REST_BASE +'user/gcc/all/'+idVendedor;
             },
             
