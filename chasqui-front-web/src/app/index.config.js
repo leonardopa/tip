@@ -19,14 +19,14 @@
     cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Cargando ...</div>';
     
     ////////////// TRADUCCIONES
-   /* TODO: VER por que no anda,  se dispara el proceso
+   /* TODO: VER por que no anda,  se dispara el proceso*/
     var langMap = {
     	      'en_AU': 'en',
     	      'en_CA': 'en',
     	      'en_NZ': 'en',
     	      'en_PH': 'en',
     	      'en_UK': 'en',
-    	      'en_US': 'es',
+    	      'en_US': 'en',
     	      'es_AR': 'es',
     	      'es_BO': 'es',
     	      'es_CL': 'es',
@@ -59,7 +59,7 @@
     
     $translateProvider.useSanitizeValueStrategy(null).useStaticFilesLoader({ files: translationEntries })
     .registerAvailableLanguageKeys(['en', 'es'], langMap).determinePreferredLanguage().fallbackLanguage(['en']);
-   */
+    
   }
 
 })();
