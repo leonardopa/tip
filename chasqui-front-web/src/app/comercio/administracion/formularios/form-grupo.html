@@ -3,10 +3,12 @@
 				<md-card-title>
 					<md-card-title-text>
 						<span class="md-title"
-						ng-show="{{ ! formGrupoCtrl.isEdit}}">Nuevo Grupo </span> 
+						ng-show="{{ ! formGrupoCtrl.isEdit}}"
+						translate> NUEVO_GRUPO </span> 
 
 						<span class="md-title"
-						ng-show="{{formGrupoCtrl.isEdit}}">Modificar Grupo </span> 
+						ng-show="{{formGrupoCtrl.isEdit}}"
+						translate>MOD_GRUPO</span> 
 
 					</md-card-title-text>
 				</md-card-title>
@@ -22,22 +24,24 @@
 								</div>-->
 								<div layout-gt-sm="column">
 									<md-input-container class="md-block" flex-gt-sm>
-										<label>Alias</label> 
+										<label translate>ALIAS</label> 
 										<input ng-model="formGrupoCtrl.grupo.alias">
 									</md-input-container>
 
 									<md-input-container class="md-block" flex-gt-sm>
-										<label>Descripción</label> <input ng-model="formGrupoCtrl.grupo.descripcion">
+										<label translate>DESC</label> <input ng-model="formGrupoCtrl.grupo.descripcion">
 									</md-input-container>
 									
 								</div>
 								<div layout-gt-sm="row">
 									<md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-model="formGrupoCtrl.isDireccionUsuario">
-										<div ng-show="formGrupoCtrl.isDireccionUsuario">
-											Quiero que el pedido del grupo llegue a mi domicilio
+										<div ng-show="formGrupoCtrl.isDireccionUsuario"
+										translate>
+											PEDIDO_A_CASA
 										</div>
-										<div ng-show="! formGrupoCtrl.isDireccionUsuario">
-											Quiero elegir otro domicilio
+										<div ng-show="! formGrupoCtrl.isDireccionUsuario"
+										translate>
+											OTRO_DOM
 										</div>
 									</md-switch>
 								</div>
@@ -46,7 +50,7 @@
 					</md-content>
 				</md-card-content>
 				<md-card-actions layout="row" layout-align="end center">
-					<md-button ng-click="formGrupoCtrl.guardar()"> Guardar </md-button>
+					<md-button ng-click="formGrupoCtrl.guardar()" translate="GUARDAR">  </md-button>
 				</md-card-actions>
 			</md-card>
 		</div>

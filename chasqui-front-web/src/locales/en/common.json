@@ -1,5 +1,6 @@
 {
-  "INFO": "Information",
-  "GENERIC_ERROR": "Unexpected error occurred. Please try again or contact support.",
-  "TRANS_EXA" : "This is an example of a translated text"
+  "INFO": "Información",
+  "GENERIC_ERROR": " ups ! , estamos trabajando para usted",
+  "TRANS_EXA" : "esto es un ejemplo de una texto traducido",
+  "GUARDAR" : "Save"
 }

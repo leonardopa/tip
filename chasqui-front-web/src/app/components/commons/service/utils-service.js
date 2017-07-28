@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('chasqui').service('utilsService', utilsService);
-	function utilsService() {
+	function utilsService(i18nService) {
 		var vm = this;
 
 		vm.isUndefinedOrNull = function(val) {
@@ -15,6 +15,10 @@
 
 		vm.contieneCadena=function (stringA,stringB){
 			return stringA.indexOf(stringB) != -1;
+		}
+
+		vm.translate=function(key){
+			return i18nService.get(key);
 		}
 
 	}// function
