@@ -50,7 +50,8 @@
     
     var translationEntries = [];
     var files = [
-      'common.json'
+      'common.json',
+      'forms.json'
     ];
     
     angular.forEach(files, function (file) {
