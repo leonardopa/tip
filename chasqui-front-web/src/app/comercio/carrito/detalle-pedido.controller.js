@@ -5,9 +5,8 @@
 		DetallePedidoController);
 
 	/** @ngInject */
-	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog
-			,dialogCommons,productoService,perfilService,gccService,StateCommons,
-			contextoCompraService) {
+	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog, dialogCommons, productoService, perfilService, gccService, StateCommons,
+		contextoCompraService) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -16,16 +15,16 @@
 		vm.direcciones;
 		vm.direccionSelected;
 		vm.productoEliminar;
-		vm.isIndividual = vm.pedido.idGrupo==null;
+		vm.isIndividual = vm.pedido.idGrupo == null;
 		vm.isAdmin = contextoCompraService.isAdmin(vm.pedido);
 
-		vm.comprar = function(event) {			
-			contextoCompraService.setContextoByPedido($scope.pedido);				
+		vm.comprar = function(event) {
+			contextoCompraService.setContextoByPedido($scope.pedido);
 			$state.go('catalogo')
 		}
 
-		
-		function doEliminar(){
+
+		function doEliminar() {
 			$log.debug('DetallePedidoController , eliminar ', vm.productoEliminar);
 
 			function doOk(response) {
@@ -42,17 +41,17 @@
 
 			productoService.quitarProductoIndividual(params).then(doOk)
 		}
-		
+
 		vm.eliminar = function(item) {
-			vm.productoEliminar=item;
-			
+			vm.productoEliminar = item;
+
 			dialogCommons.confirm('Quitar producto del Changuito',
-					'Esta seguro queres sacar el producto del changuito ?',					
-					'SI',
-					'no',
-					doEliminar,
-					function(){}
-					);			
+				'Esta seguro queres sacar el producto del changuito ?',
+				'SI',
+				'no',
+				doEliminar,
+				function() {}
+			);
 		}
 
 		vm.cancelar = function(event) {
@@ -62,26 +61,26 @@
 				$log.debug("--- cancelar pedido response ", response.data);
 				ToastCommons.mensaje("Cancelado !");
 				contextoCompraService.refreshPedidos().then(
-					function(){					
+					function() {
 						$scope.$emit('modifico-pedido');
 					});
-				
+
 			}
 
 			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk);
 		}
 		/// confirmacion individual de GCC
-		vm.confirmarPedidoIndividualGcc = function (){
-			function doOk(response) {			
+		vm.confirmarPedidoIndividualGcc = function() {
+			function doOk(response) {
 				ToastCommons.mensaje("Pedido Confirmado !");
 				$state.reload();
 			}
-		
-			if(vm.pedido.idGrupo==null){
-				ToastCommons.mensaje("funcionalidad para GCC !");			
-			}else{
-				gccService.confirmarPedidoIndividualGcc(vm.pedido.id).then(doOk)	
-			}			
+
+			if (vm.pedido.idGrupo == null) {
+				ToastCommons.mensaje("funcionalidad para GCC !");
+			} else {
+				gccService.confirmarPedidoIndividualGcc(vm.pedido.id).then(doOk)
+			}
 		}
 
 		function callConfirmar() {
@@ -92,17 +91,17 @@
 				ToastCommons.mensaje("Pedido Confirmado !");
 				$state.reload();
 			}
-		
-			if(vm.pedido.idGrupo==null){
+
+			if (vm.pedido.idGrupo == null) {
 				var params = {};
 				params.idPedido = vm.pedido.id;
 				params.idDireccion = vm.direccionSelected.idDireccion;
 				// logica por si es pedido grupañ
-				productoService.confirmarPedidoIndividual(params).then(doOk)				
-			}else{
-				gccService.confirmarPedidoColectivo(vm.pedido.idGrupo).then(doOk)	
+				productoService.confirmarPedidoIndividual(params).then(doOk)
+			} else {
+				gccService.confirmarPedidoColectivo(vm.pedido.idGrupo).then(doOk)
 			}
-			
+
 		}
 
 		vm.confirmarDomicilio = function() {
@@ -123,7 +122,7 @@
 				vm.direcciones = response.data;
 				// abre pop
 			}
-			
+
 			perfilService.verDirecciones().then(doOk);
 		}
 

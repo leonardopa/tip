@@ -5,10 +5,9 @@
 
 	/** @ngInject */
 	function LogInController($log, $state, StateCommons,
-			ToastCommons, $rootScope, dialogCommons,perfilService,utilsService,$stateParams
-			,contextoCompraService) {
+		ToastCommons, $rootScope, dialogCommons, perfilService, utilsService, $stateParams, contextoCompraService) {
 
-		$log.debug('controler log in ..... debe volver a ',$stateParams.toPage);
+		$log.debug('controler log in ..... debe volver a ', $stateParams.toPage);
 
 		var vm = this
 		vm.user = {};
@@ -21,13 +20,14 @@
 		}
 		vm.recuperar = function(ev) {
 			dialogCommons.prompt('Recuperar contraseña',
-					'Enviaremos instrucciones a tu correo',
-					'correo@correo.com', 'Enviar', 'Cancelar',
-					function(result) {
-						vm.callReset(result)
-					}, function() {
-						$log.debug('Cancelo correo')
-					});
+				'Enviaremos instrucciones a tu correo',
+				'correo@correo.com', 'Enviar', 'Cancelar',
+				function(result) {
+					vm.callReset(result)
+				},
+				function() {
+					$log.debug('Cancelo correo')
+				});
 		};
 
 		// ///// REST
@@ -43,20 +43,20 @@
 				ToastCommons.mensaje("Bienvenido !");
 				$rootScope.$broadcast('resetHeader', "");
 
-				if (utilsService.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)){
-					if (utilsService.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage==''){						
-						$state.go("principal");			
-					}else{
-						$state.go($stateParams.toPage);	
-					}									
-				}else{
-					$state.go("catalogo");						
+				if (utilsService.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
+					if (utilsService.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage == '') {
+						$state.go("principal");
+					} else {
+						$state.go($stateParams.toPage);
+					}
+				} else {
+					$state.go("catalogo");
 				}
 			}
 
 			perfilService.login(vm.user).then(doOk)
 		}
-		
+
 		vm.callReset = function(email) {
 
 			function doOk(response) {

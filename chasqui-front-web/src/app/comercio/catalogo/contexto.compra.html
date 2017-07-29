@@ -1,55 +1,49 @@
-	<!--  Menu de contexto de COMPRA --> 
-<div ng-controller="ContextoCompraController as contextoCtrl"> 
+<!--  Menu de contexto de COMPRA -->
+<div ng-controller="ContextoCompraController as contextoCtrl">
 	<div class="fixed" ng-if="contextoCtrl.isLogued" ng-cloak>
-				<md-fab-speed-dial md-open="contextoCtrl.isOpen" 
-					ng-mouseover="contextoCtrl.hoverIn()" ng-mouseleave="contextoCtrl.hoverOut()"
-					md-direction="{{contextoCtrl.selectedDirection}}" ng-class="contextoCtrl.selectedMode">
-					<md-fab-trigger>
-						<md-button aria-label="menu" class="md-fab md-warn">
-							<ng-md-icon icon="compare_arrows" style="fill: black" size="24"></ng-md-icon>
-							<md-tooltip md-direction="left"> Cambiar de Changuito </md-tooltip>
-						</md-button>
-					</md-fab-trigger>
-					<md-fab-actions>
-						<div ng-repeat="grupo in contextoCtrl.grupos">
-							<md-button class="md-fab md-raised md-mini" 
-								ng-click="contextoCtrl.cambiarContexto(grupo)">
-								<ng-md-icon icon="{{grupo.alias == 'Personal' ? 'person' : 'people_outline'}}"
-									 style="fill: black" size="24"></ng-md-icon>
-								<md-tooltip md-direction="left"> 
-									{{grupo.alias}} </md-tooltip>
-							</md-button>
-						</div>
-					</md-fab-actions>
-				</md-fab-speed-dial>
-				<md-card>
-					<md-button>
-						<a ui-sref="lista-pedidos">
-							<ng-md-icon id="icon" icon="{{contextoCtrl.icon}}" style="fill: black" 
-							size="{{contextoCtrl.size}}" options="{{contextoCtrl.options}}">
-						</a>
-						</ng-md-icon>
+		<md-fab-speed-dial md-open="contextoCtrl.isOpen" ng-mouseover="contextoCtrl.hoverIn()" ng-mouseleave="contextoCtrl.hoverOut()" md-direction="{{contextoCtrl.selectedDirection}}" ng-class="contextoCtrl.selectedMode">
+			<md-fab-trigger>
+				<md-button aria-label="menu" class="md-fab md-warn">
+					<ng-md-icon icon="compare_arrows" style="fill: black" size="24"></ng-md-icon>
+					<md-tooltip md-direction="left"> Cambiar de Changuito </md-tooltip>
+				</md-button>
+			</md-fab-trigger>
+			<md-fab-actions>
+				<div ng-repeat="grupo in contextoCtrl.grupos">
+					<md-button class="md-fab md-raised md-mini" ng-click="contextoCtrl.cambiarContexto(grupo)">
+						<ng-md-icon icon="{{grupo.alias == 'Personal' ? 'person' : 'people_outline'}}" style="fill: black" size="24"></ng-md-icon>
+						<md-tooltip md-direction="left">
+							{{grupo.alias}} </md-tooltip>
 					</md-button>
-					<md-subheader class="md-primary"> {{contextoCtrl.grupoSelected.alias}}</md-subheader>
-				</md-card>
-				 
+				</div>
+			</md-fab-actions>
+		</md-fab-speed-dial>
+		<md-card>
+			<md-button>
+				<a ui-sref="lista-pedidos">
+					<ng-md-icon id="icon" icon="{{contextoCtrl.icon}}" style="fill: black" size="{{contextoCtrl.size}}" options="{{contextoCtrl.options}}">
+				</a>
+				</ng-md-icon>
+			</md-button>
+			<md-subheader class="md-primary"> {{contextoCtrl.grupoSelected.alias}}</md-subheader>
+		</md-card>
 	</div>
-
 </div>
 <style>
-	<!-- -->.fixed {
-		top: auto;
-		left: calc(20% - 7.5em);
-		bottom: 10%;
-	
-		position: fixed;
-	}
-	
-	.contexto {
-		padding: 1em;
-		background: rgb(244, 81, 30);
-		border: 1px solid red;
-		text-align: center;
-		box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
-	}
+<!-- -->.fixed {
+	top: auto;
+	left: calc(20% - 7.5em);
+	bottom: 10%;
+
+	position: fixed;
+}
+
+.contexto {
+	padding: 1em;
+	background: rgb(244, 81, 30);
+	border: 1px solid red;
+	text-align: center;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
 </style>

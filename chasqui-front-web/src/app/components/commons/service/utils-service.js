@@ -2,6 +2,7 @@
 	'use strict';
 
 	angular.module('chasqui').service('utilsService', utilsService);
+
 	function utilsService(i18nService) {
 		var vm = this;
 
@@ -10,16 +11,16 @@
 		}
 
 		vm.isEmpty = function(val) {
-			return angular.isUndefined(val) || val === null ||  val.trim().length === 0;
+			return angular.isUndefined(val) || val === null || val.trim().length === 0;
 		}
 
-		vm.contieneCadena=function (stringA,stringB){
+		vm.contieneCadena = function(stringA, stringB) {
 			return stringA.indexOf(stringB) != -1;
 		}
 
-		vm.translate=function(key){
+		vm.translate = function(key) {
 			return i18nService.get(key);
 		}
 
-	}// function
-})();// anonimo
+	} // function
+})(); // anonimo

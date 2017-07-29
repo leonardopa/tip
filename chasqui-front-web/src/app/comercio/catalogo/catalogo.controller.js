@@ -9,24 +9,24 @@
 	 * Pagina donde se muestran los productos. Contiene los filtros y el
 	 * contexto de compra , pero NO la lista de productos la cual se incluye
 	 */
-	function CatalogoController($scope, $log,CTE_REST, $timeout, StateCommons, productorService,
-		productoService, ToastCommons,gccService,utilsService,$mdSidenav,$state) {
+	function CatalogoController($scope, $log, CTE_REST, $timeout, StateCommons, productorService,
+		productoService, ToastCommons, gccService, utilsService, $mdSidenav, $state) {
 		$log.debug("CatalogoController ..... grupoSelected", StateCommons.ls.grupoSelected);
-		
+
 		StateCommons.ls.itemMenuSelect = 'catalogo';
 		var vm = this;
 
 		vm.toggleLeft = buildToggler('left');
-	    vm.toggleRight = buildToggler('right');
-	    
-	    function buildToggler(componentId) {
-	      return function() {
-	        $mdSidenav(componentId).toggle();
-	      };
-	    }
+		vm.toggleRight = buildToggler('right');
 
-	    vm.isLogued=StateCommons.isLogued();
-		
+		function buildToggler(componentId) {
+			return function() {
+				$mdSidenav(componentId).toggle();
+			};
+		}
+
+		vm.isLogued = StateCommons.isLogued();
+
 		// vm.categorias = ['categorias 1', 'categorias 2 ', 'categorias 3', 'categorias
 		// 4'];
 		vm.categorias = [];
@@ -34,7 +34,7 @@
 		vm.medallas = [];
 		vm.query = '';
 
-		
+
 		vm.paginaProducto;
 		vm.tipoFiltro = 'CATEGORIA'; // PRODUCTOR / MEDALLA / QUERY
 		vm.queryText;
@@ -97,8 +97,8 @@
 
 		vm.filtroQuery = function() {
 			vm.tipoFiltro = 'QUERY';
-			if ( utilsService.isEmpty( vm.queryText )){	
-				vm.tipoFiltro=undefined;
+			if (utilsService.isEmpty(vm.queryText)) {
+				vm.tipoFiltro = undefined;
 				vm.filtroPor(undefined);
 			}
 
@@ -108,7 +108,7 @@
 			vm.sinFiltroSelect = null;
 			doFiltrar(vm.queryText);
 		}
-		
+
 		var doFiltrar = function(valor) {
 			var filtro = {};
 			filtro.tipo = vm.tipoFiltro;
@@ -117,10 +117,10 @@
 			// list-producto-controller
 		}
 
-		
+
 		// / CALL REST
 
-		
+
 
 		function callCategorias() {
 			productoService.getCategorias()
@@ -151,12 +151,12 @@
 					vm.medallasProductores = response.data;
 					angular.forEach(response.data, function(medalla, key) {
 						//para que no repita ID con la de producto, ademas para diferenciarlas despes
-						medalla.idMedalla=medalla.idMedalla + 10000 ; 
-						vm.medallas.push(medalla) ;
+						medalla.idMedalla = medalla.idMedalla + 10000;
+						vm.medallas.push(medalla);
 					});
 				})
 		}
- 			
+
 		callCategorias();
 		callProductores();
 		callMedallas();

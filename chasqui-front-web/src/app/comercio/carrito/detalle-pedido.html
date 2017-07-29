@@ -1,15 +1,11 @@
- <div ng-controller="DetallePedidoController as detallePedidoCtrl" ng-cloak  >
-  
+<div ng-controller="DetallePedidoController as detallePedidoCtrl" ng-cloak>
 	<script type="text/ng-template" id="dialog-direccion.html">
 		<md-dialog aria-label="options dialog">
 			<md-dialog-content layout-padding>
 				<h2 class="md-title">Elige un Domicilio</h2>
-
-				<md-select placeholder="Domicilio" ng-model="detallePedidoCtrl.direccionSelected" md-on-open="detallePedidoCtrl.callDirecciones()"
-				 style="min-width: 200px;">
+				<md-select placeholder="Domicilio" ng-model="detallePedidoCtrl.direccionSelected" md-on-open="detallePedidoCtrl.callDirecciones()" style="min-width: 200px;">
 					<md-option ng-value="dire" ng-repeat="dire in detallePedidoCtrl.direcciones">{{dire.alias}}</md-option>
 				</md-select>
-
 			</md-dialog-content>
 			<md-dialog-actions>
 				<span flex></span>
@@ -17,118 +13,86 @@
 			</md-dialog-actions>
 		</md-dialog>
 	</script>
-
-<div layout="row"  layout-align="space-between start">
-	<div>
-		<md-card >
-
-			<md-card-title>
-				<md-card-title-text>
-			
-					<span class="md-headline">
+	<div layout="row" layout-align="space-between start">
+		<div>
+			<md-card>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">
 						{{detallePedidoCtrl.pedido.aliasGrupo == null ? "Personal" : detallePedidoCtrl.pedido.aliasGrupo}}</span>
-					<md-divider></md-divider>
-
-				</md-card-title-text>
-			</md-card-title>
-			<md-card-content layout="row">
-				<div layout="column" >
-                    
-					<span class="md-body-2">Creado el  : 
+						<md-divider></md-divider>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content layout="row">
+					<div layout="column">
+						<span class="md-body-2">Creado el  : 
 						<strong>{{detallePedidoCtrl.pedido.fechaCreacion}} </strong></span>
-
-					<span class="md-body-2">Monto actual : 
+						<span class="md-body-2">Monto actual : 
 						<strong> ${{detallePedidoCtrl.pedido.montoActual}} </strong></span>
-
-					<span class="md-body-2">Monto minimo : 
+						<span class="md-body-2">Monto minimo : 
 						<strong> ${{detallePedidoCtrl.pedido.montoMinimo}} </strong></span>
-
-					<span class="md-body-2">Estado : 
+						<span class="md-body-2">Estado : 
 						<strong>{{detallePedidoCtrl.pedido.estado}} </strong></span>
-
-				</div>
-			</md-card-content>
-
-			<!-- oculta las acciones sobre el pedido si no esta abierto. 
+					</div>
+				</md-card-content>
+				<!-- oculta las acciones sobre el pedido si no esta abierto. 
 			DESCOMENTAR cuendo terminen pruebas
 			<md-card-actions layout="row" layout-align="end center"
 			ng-show="{{detallePedidoCtrl.pedido.estado=='ABIERTO'}}"> -->
-
-			<md-card-actions layout="row" layout-align="end center">
-
-				<md-button ng-click="detallePedidoCtrl.cancelar()" style="color:red"> 
-				Cancelar </md-button>
-				
-				<md-button ng-click="detallePedidoCtrl.confirmar()" 
-				ng-show="{{! detallePedidoCtrl.isIndividual && detallePedidoCtrl.isAdmin}}"	class="md-primary"> 
-				Cerrar </md-button>
-
-				<md-button ng-click="detallePedidoCtrl.confirmar()" 
-				 ng-show="{{detallePedidoCtrl.isIndividual}}"	class="md-primary"> Confirmar </md-button>
-			 
-				<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" 
-					class="md-primary" ng-show="{{! detallePedidoCtrl.isIndividual}}"> Confirmar</md-button>
-
-				
-			</md-card-actions>
-		</md-card>
-		<md-card>
-		<div layout="row">		
-			<md-button ng-click="detallePedidoCtrl.comprar($event)">
-				<i style="font-size: 48px;color:#468385" class="material-icons">add_shopping_cart</i>
-				<md-tooltip md-direction="left">
-					ir a catalogo
-				</md-tooltip>
-			</md-button>
-			<md-subheader>
-			Podes seguir agregando productos al chango
-			</md-subheader>
+				<md-card-actions layout="row" layout-align="end center">
+					<md-button ng-click="detallePedidoCtrl.cancelar()" style="color:red">
+						Cancelar </md-button>
+					<md-button ng-click="detallePedidoCtrl.confirmar()" ng-show="{{! detallePedidoCtrl.isIndividual && detallePedidoCtrl.isAdmin}}" class="md-primary">
+						Cerrar </md-button>
+					<md-button ng-click="detallePedidoCtrl.confirmar()" ng-show="{{detallePedidoCtrl.isIndividual}}" class="md-primary"> Confirmar </md-button>
+					<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" class="md-primary" ng-show="{{! detallePedidoCtrl.isIndividual}}"> Confirmar</md-button>
+				</md-card-actions>
+			</md-card>
+			<md-card>
+				<div layout="row">
+					<md-button ng-click="detallePedidoCtrl.comprar($event)">
+						<i style="font-size: 48px;color:#468385" class="material-icons">add_shopping_cart</i>
+						<md-tooltip md-direction="left">
+							ir a catalogo
+						</md-tooltip>
+					</md-button>
+					<md-subheader>
+						Podes seguir agregando productos al chango
+					</md-subheader>
+				</div>
+			</md-card>
 		</div>
-		</md-card>
-	</div>
-	<!--  SACAR ESTO
+		<!--  SACAR ESTO
 	<section ng-include="'app/comercio/carrito/lista-productos-pedido.html'"
 	ng-init="pedido = detallePedidoCtrl.pedido">
 	
 	</section>
  -->
-	<div>
-		
-		<md-subheader> Productos en el carro  </md-subheader>
-
-		<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse"
-		style="width: 100%" ng-cloak >
-			<div layout="row" layout-align="space-between center">
-				<div >
-		    		<img src="{{detallePedidoCtrl.urlBase}}{{item.imagen}}" 
-		    		style="height: 100px;">
-		    	</div>
-		    	<div layout="row" layout-align="end center">
-		    		<div layout="column"   layout-align="end end" >
-						<span  >{{ item.nombre }}</span>
-						<span class="md-subhead">
+		<div>
+			<md-subheader> Productos en el carro </md-subheader>
+			<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" style="width: 100%" ng-cloak>
+				<div layout="row" layout-align="space-between center">
+					<div>
+						<img src="{{detallePedidoCtrl.urlBase}}{{item.imagen}}" style="height: 100px;">
+					</div>
+					<div layout="row" layout-align="end center">
+						<div layout="column" layout-align="end end">
+							<span>{{ item.nombre }}</span>
+							<span class="md-subhead">
 		            		$ {{ item.precio }} x  {{ item.cantidad }} </span>
-		            	<strong>$ {{ item.precio * item.cantidad }}</strong>
-					</div>			
-					<div >
-						<md-button
-						 ng-click="detallePedidoCtrl.eliminar(item)">
-						<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
-						<md-tooltip md-direction="left">
-								Quitar producto del carro </md-tooltip>
-						</md-button>				
+							<strong>$ {{ item.precio * item.cantidad }}</strong>
+						</div>
+						<div>
+							<md-button ng-click="detallePedidoCtrl.eliminar(item)">
+								<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
+								<md-tooltip md-direction="left">
+									Quitar producto del carro </md-tooltip>
+							</md-button>
+						</div>
 					</div>
 				</div>
-			</div>
-	    </md-card>
-	</div>	
-
+			</md-card>
+		</div>
+	</div>
 </div>
-
-</div>
-
-
 </style>
-
- 
- 

@@ -1,71 +1,70 @@
 (function() {
-	'use strict';
+  'use strict';
 
-	angular.module('chasqui').controller('FormGrupoController',
-			FormGrupoController);
+  angular.module('chasqui').controller('FormGrupoController',
+    FormGrupoController);
 
-	/**
-	 * @ngInject Formulario para crear un grupo
-	 */
-	function FormGrupoController($log, $scope,$state, gccService,StateCommons,utilsService
-		,contextoCompraService ) {
-		$log.debug("controler FormGrupoController",$state.params);
-		var vm = this;
-		
-		vm.grupo;
-		vm.user=StateCommons.ls.usuario;
-		// la direccion del grupo es la misma que la del usuairio que lo
-		// administra
-		vm.isDireccionUsuario = true;
+  /**
+   * @ngInject Formulario para crear un grupo
+   */
+  function FormGrupoController($log, $scope, $state, gccService, StateCommons, utilsService, contextoCompraService) {
+    $log.debug("controler FormGrupoController", $state.params);
+    var vm = this;
 
-		if (utilsService.isUndefinedOrNull($state.params.grupo)){
-			vm.isEdit=false;
-		}else{
-			vm.isEdit=true;	
-			vm.grupo=$state.params.grupo;		
-		}
+    vm.grupo;
+    vm.user = StateCommons.ls.usuario;
+    // la direccion del grupo es la misma que la del usuairio que lo
+    // administra
+    vm.isDireccionUsuario = true;
 
-		vm.guardar = function() {
-			if (vm.isEdit){
-				callEditarGrupo();	
-			}else{
-				callGuardarGrupo();
-			}
-			
-		}
 
-		var callGuardarGrupo = function() {
-			$log.debug("guardar grupo", vm.grupo);
+    if (utilsService.isUndefinedOrNull($state.params.grupo)) {
+      vm.isEdit = false;
+    } else {
+      vm.isEdit = true;
+      vm.grupo = $state.params.grupo;
+    }
 
-			function doOk(response) {
-				$log.debug("respuesta guardar grupo ", response);
-				contextoCompraService.refresh();
-				// TODO: guardar el id del grupo creado
+    vm.guardar = function() {
+      if (vm.isEdit) {
+        callEditarGrupo();
+      } else {
+        callGuardarGrupo();
+      }
+    }
 
-				if (vm.isDireccionUsuario) {
-					$state.go("lista-grupos");
-				} else {
-					$state.go("form-domicilio");
-				}
+    var callGuardarGrupo = function() {
+      $log.debug("guardar grupo", vm.grupo);
 
-			}
-		 
-			gccService.nuevoGrupo(vm.grupo).then(doOk)
-		}
+      function doOk(response) {
+        $log.debug("respuesta guardar grupo ", response);
+        contextoCompraService.refresh();
+        // TODO: guardar el id del grupo creado
 
-		var callEditarGrupo = function() {
-			$log.debug("editar grupo", vm.grupo);
+        if (vm.isDireccionUsuario) {
+          $state.go("lista-grupos");
+        } else {
+          $state.go("form-domicilio");
+        }
 
-			function doOk(response) {			
-				contextoCompraService.refresh();	
-				$state.go("lista-grupos");								
-			}
-		 	//alias, idDomicilio, telefono, calle, numero, codigoPostal, localidad, provincia , token 
-		 	var params = {}		 	
-		 	params.alias = vm.grupo.alias
-		 	params.descripcion = vm.grupo.descripcion
-			gccService.editarGrupo(vm.grupo.idGrupo,params).then(doOk)
-		}
-	}
+      }
+
+      gccService.nuevoGrupo(vm.grupo).then(doOk)
+    }
+
+    var callEditarGrupo = function() {
+      $log.debug("editar grupo", vm.grupo);
+
+      function doOk(response) {
+        contextoCompraService.refresh();
+        $state.go("lista-grupos");
+      }
+      //alias, idDomicilio, telefono, calle, numero, codigoPostal, localidad, provincia , token 
+      var params = {}
+      params.alias = vm.grupo.alias
+      params.descripcion = vm.grupo.descripcion
+      gccService.editarGrupo(vm.grupo.idGrupo, params).then(doOk)
+    }
+  }
 
 })();

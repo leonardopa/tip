@@ -2,13 +2,13 @@
 	'use strict';
 
 	angular.module('chasqui').controller('FormUsuarioController',
-			FormUsuarioController);
+		FormUsuarioController);
 
 	/**
 	 * @ngInject Formulario para crear un grupo
 	 */
 	function FormUsuarioController($log, $state,
-			ToastCommons, StateCommons, $scope, $timeout, perfilService) {
+		ToastCommons, StateCommons, $scope, $timeout, perfilService) {
 		$log.debug("controler FormUsuarioController", $scope.perfil);
 
 		var vm = this;
@@ -17,10 +17,10 @@
 		vm.passVerificacion;
 
 		vm.isAlta = $scope.perfil != true; // si crea un usuario nuevo o es un
-											// update. Si viene de perfil es
-											// UPDATE
+		// update. Si viene de perfil es
+		// UPDATE
 		vm.readOnly = !vm.isAlta; // si es alta siempre false, sino depende el
-									// modo.
+		// modo.
 		vm.isModoEdit = false;
 
 		function mostrarMensajesDeBienvenida() {
@@ -33,11 +33,10 @@
 				ToastCommons.mensaje('Ahora podes ingresar a CHASQUI !');
 			}, 10000);
 
-			$timeout(
-					function() {
-						ToastCommons
-								.mensaje('Reciviras un mensaje de bienvenida por correo !');
-					}, 15000);
+			$timeout(function() {
+				ToastCommons.mensaje('Reciviras un mensaje de ' +
+					'bienvenida por correo !');
+			}, 15000);
 
 			$timeout(function() {
 				ToastCommons.mensaje('Podes seguir completando tu perfil !');
@@ -79,7 +78,7 @@
 		// ///////// llamadas
 
 		vm.callVerUsuario = function() {
-		
+
 			function doOk(response) {
 				$log.debug("callVerUsuario", response);
 				vm.user = response.data;
@@ -119,13 +118,13 @@
 					// $rootScope.$broadcast("creo-usuario-nuevo", { user:
 					// response.data });
 					$scope.$emit("creo-usuario-nuevo", {
-						user : response.data
+						user: response.data
 					});
 
-				}				
-				
+				}
+
 				perfilService.singUp(vm.user).then(doOk)
-				
+
 			} else {
 				$log.error("las contrasenas no coinciden");
 				// TODO: enviar mensaje

@@ -5,7 +5,7 @@
 
 	/** @ngInject . Pantalla de perfil de usuario */
 	function PerfilController($log, $scope,
-			StateCommons, $mdDialog, ToastCommons, $stateParams,perfilService,gccService) {
+		StateCommons, $mdDialog, ToastCommons, $stateParams, perfilService, gccService) {
 		$log.debug("Init PerfilController ....");
 
 		StateCommons.ls.itemMenuSelect = 'perfil';
@@ -43,18 +43,18 @@
 				$log.debug('call direcciones response ', response);
 				vm.direcciones = response.data;
 			}
-			
-			perfilService.verDirecciones().then(doOk);			
+
+			perfilService.verDirecciones().then(doOk);
 
 		}
 
 		var showPrerenderedDialog = function(ev) {
 			$mdDialog.show({
-				controller : PerfilController,
-				contentElement : '#changePassDialogId',
-				parent : angular.element(document.body),
-				targetEvent : ev,
-				clickOutsideToClose : true
+				controller: PerfilController,
+				contentElement: '#changePassDialogId',
+				parent: angular.element(document.body),
+				targetEvent: ev,
+				clickOutsideToClose: true
 			});
 		};
 
@@ -81,8 +81,8 @@
 			function doNoOk(response) {
 				ToastCommons.mensaje(response.data);
 			}
-		
-			perfilService.cambiarPass( vm.pass1).then(doOk);
+
+			perfilService.cambiarPass(vm.pass1).then(doOk);
 		}
 
 		vm.marcarLeido = function(notificacion) {
@@ -91,52 +91,51 @@
 				notificacion.estado = 'Leido';
 			}
 			perfilService.marcarComoLeido(notificacion.id).then(doOk);
-			
+
 		}
 
-		vm.aceptarInvitacion = function(notificacion){
+		vm.aceptarInvitacion = function(notificacion) {
 			function doOk(response) {
 				ToastCommons.mensaje('Aceptado');
 				notificacion.estado = 'Leido';
 			}
 			var params = {};
 			params.idInvitacion = notificacion.id;
-			
+
 			gccService.aceptarInvitacionAGrupo(params).then(doOk)
-			
+
 		}
 
-		vm.rechazarInvitacion = function(notificacion){
+		vm.rechazarInvitacion = function(notificacion) {
 			function doOk(response) {
 				ToastCommons.mensaje('Aceptado');
 				notificacion.estado = 'Leido';
 			}
 			var params = {};
 			params.idInvitacion = notificacion.id;
-			
+
 			gccService.rechazarInvitacionAGrupo(params).then(doOk)
-			
+
 		}
-		
-		
+
+
 		function callNotificacionesNoLeidas() {
 
 			function doOk(response) {
 				$log.debug('notificacionesNoLeidas', response);
 				vm.notificacionesNoLeidas = response.data;
 			}
-			perfilService.notificacionesNoLeidas().then(doOk);						
+			perfilService.notificacionesNoLeidas().then(doOk);
 		}
 
 		function callNotificaciones() {
 
 			function doOk(response) {
 				$log.debug('notificacionesLeidas', response);
-				vm.notificaciones = vm.notificaciones.concat(response.data);
-				;
+				vm.notificaciones = vm.notificaciones.concat(response.data);;
 			}
-			perfilService.notificacionesLeidas(vm.count).then(doOk);		
-			
+			perfilService.notificacionesLeidas(vm.count).then(doOk);
+
 		}
 
 		vm.verMas = function() {

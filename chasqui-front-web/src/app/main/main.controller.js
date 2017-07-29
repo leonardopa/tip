@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr,$http) {
+  function MainController($timeout, webDevTec, toastr, $http) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -35,20 +35,20 @@
         awesomeThing.rank = Math.random();
       });
     }
-    
-    vm.respuestaRest="??????????";    
 
-    function sendName(){
-    	console.log("-----------");
-    	
-    	$http.get("http://localhost:8081/chasqui-mock/ejemplo/api/producto/"+vm.nombre)
+    vm.respuestaRest = "??????????";
+
+    function sendName() {
+      console.log("-----------");
+
+      $http.get("http://localhost:8081/chasqui-mock/ejemplo/api/producto/" + vm.nombre)
         .then(getContributorsComplete)
-        
-        function getContributorsComplete(response) {
-    		vm.respuestaRest=response.data;
-    		return response.data;
-    	}
-    	
+
+      function getContributorsComplete(response) {
+        vm.respuestaRest = response.data;
+        return response.data;
+      }
+
     }
   }
 })();
