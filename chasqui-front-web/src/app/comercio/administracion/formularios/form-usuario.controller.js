@@ -9,7 +9,7 @@
 	 */
 	function FormUsuarioController($log, $state,
 		ToastCommons, StateCommons, $scope, $timeout, perfilService,
-		utilsService) {
+		us) {
 		$log.debug("controler FormUsuarioController", $scope.perfil);
 
 		var vm = this;
@@ -27,19 +27,19 @@
 		function mostrarMensajesDeBienvenida() {
 
 			$timeout(function() {
-				ToastCommons.mensaje(utilsService.tratranslate('BIENVENIDO'));
+				ToastCommons.mensaje(us.tratranslate('BIENVENIDO'));
 			}, 3000);
 
 			$timeout(function() {
-				ToastCommons.mensaje(utilsService.tratranslate('INGRESA_MSG'));
+				ToastCommons.mensaje(us.tratranslate('INGRESA_MSG'));
 			}, 10000);
 
 			$timeout(function() {
-				ToastCommons.mensaje(utilsService.tratranslate('CORREO_MSG'));
+				ToastCommons.mensaje(us.tratranslate('CORREO_MSG'));
 			}, 15000);
 
 			$timeout(function() {
-				ToastCommons.mensaje(utilsService.tratranslate('COMPL_PERFIL_MSG'));
+				ToastCommons.mensaje(us.tratranslate('COMPL_PERFIL_MSG'));
 			}, 30000);
 		}
 
@@ -90,7 +90,7 @@
 		vm.callActualizarUsuario = function() {
 
 			function doOk(response) {
-				ToastCommons.mensaje(utilsService.tratranslate('ACTUALIZO_PERFIL_MSG'));
+				ToastCommons.mensaje(us.tratranslate('ACTUALIZO_PERFIL_MSG'));
 			}
 			delete vm.user['direccion'];
 			delete vm.user['email'];
@@ -128,7 +128,7 @@
 			} else {
 				$log.error("las contrasenas no coinciden");
 				// TODO: enviar mensaje
-				ToastCommons.mensaje(utilsService.tratranslate('PASS_INCORRECTO_MSG'))
+				ToastCommons.mensaje(us.tratranslate('PASS_INCORRECTO_MSG'))
 			}
 		}
 

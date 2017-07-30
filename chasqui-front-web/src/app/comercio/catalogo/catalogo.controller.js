@@ -10,7 +10,7 @@
 	 * contexto de compra , pero NO la lista de productos la cual se incluye
 	 */
 	function CatalogoController($scope, $log, CTE_REST, $timeout, StateCommons, productorService,
-		productoService, ToastCommons, gccService, utilsService, $mdSidenav, $state) {
+		productoService, ToastCommons, gccService, us, $mdSidenav, $state) {
 		$log.debug("CatalogoController ..... grupoSelected", StateCommons.ls.grupoSelected);
 
 		StateCommons.ls.itemMenuSelect = 'catalogo';
@@ -97,7 +97,7 @@
 
 		vm.filtroQuery = function() {
 			vm.tipoFiltro = 'QUERY';
-			if (utilsService.isEmpty(vm.queryText)) {
+			if (us.isEmpty(vm.queryText)) {
 				vm.tipoFiltro = undefined;
 				vm.filtroPor(undefined);
 			}

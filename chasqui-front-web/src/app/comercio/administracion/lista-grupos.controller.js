@@ -79,16 +79,16 @@
 			};
 
 
-			dialogCommons.prompt(utilsService.translate('INV_MIEMBRO'),
-				utilsService.translate('INGRESAR_CORREO'), 'correo@correo.com',
-				utilsService.translate('INVITAR'), utilsService.translate('CANCELAR'), doOk, doNoOk);
+			dialogCommons.prompt(us.translate('INV_MIEMBRO'),
+				us.translate('INGRESAR_CORREO'), 'correo@correo.com',
+				us.translate('INVITAR'), us.translate('CANCELAR'), doOk, doNoOk);
 
 		}
 
 		/** Salir del grupo. Manejo del popUP */
 		vm.salir = function(tab) {
-			dialogCommons.confirm(utilsService.translate('SALIR'), utilsService.translate('SEGURO_SALIR') +
-				vm.selected.alias, utilsService.translate('SI_MEVOY'), utilsService.translate('CANCELAR'),
+			dialogCommons.confirm(us.translate('SALIR'), us.translate('SEGURO_SALIR') +
+				vm.selected.alias, us.translate('SI_MEVOY'), us.translate('CANCELAR'),
 				function(
 					result) {
 					callQuitarMiembro(tab);
@@ -116,7 +116,7 @@
 		function callCrearPedidoGrupal(grupo) {
 			function doOk(response) {
 				$log.debug('Crear pedido en el grupo');
-				ToastCommons.mensaje(utilsService.translate('NUEVO_PEDIDO'));
+				ToastCommons.mensaje(us.translate('NUEVO_PEDIDO'));
 			}
 
 			var params = {};
@@ -132,7 +132,7 @@
 
 			var doOk = function(response) {
 				$log.log('Se enviará un email a la direcciónn ', response);
-				ToastCommons.mensaje(utilsService.translate('ENVIARA_MAIL'));
+				ToastCommons.mensaje(us.translate('ENVIARA_MAIL'));
 				callLoadGrupos();
 			}
 
@@ -166,7 +166,7 @@
 			$log.debug("quitar", miembro)
 
 			function doOk(response) {
-				ToastCommons.mensaje(utilsService.translate('TE_FUISTE_GRUPO'))
+				ToastCommons.mensaje(us.translate('TE_FUISTE_GRUPO'))
 				callLoadGrupos();
 			}
 			var params = {};

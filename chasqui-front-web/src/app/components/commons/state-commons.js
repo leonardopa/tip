@@ -3,7 +3,7 @@
 
   angular.module('chasqui').service('StateCommons', StateCommons);
 
-  function StateCommons($localStorage, $log, utilsService) {
+  function StateCommons($localStorage, $log, us) {
     $log.debug('INIT localstorage', $localStorage);
     $log.debug('localstorage', $localStorage.token);
     $log.debug('localstorage', $localStorage.usuario);
@@ -18,7 +18,7 @@
     vm.ls.notificacionActiva = false;
 
     vm.isLogued = function() {
-      return !(utilsService.isUndefinedOrNull(vm.ls.usuario) || utilsService.isUndefinedOrNull(vm.ls.usuario.token));
+      return !(us.isUndefinedOrNull(vm.ls.usuario) || us.isUndefinedOrNull(vm.ls.usuario.token));
     }
 
     vm.logOut = function() {

@@ -8,7 +8,7 @@
 	 * @ngInject Lista de productos.
 	 */
 	function ListaProductosController($scope, $rootScope, $log, CTE_REST,
-		$state, StateCommons, ToastCommons, dialogCommons, productoService, utilsService,
+		$state, StateCommons, ToastCommons, dialogCommons, productoService, us,
 		gccService, $mdDialog, productorService, contextoCompraService) {
 
 		$log.debug('ListaProductosController',
@@ -175,7 +175,7 @@
 				}
 
 				function doNoOK(response){			
-					if(utilsService.contieneCadena(response.data.error,CTE_REST.ERROR_YA_TIENE_PEDIDO)){
+					if(us.contieneCadena(response.data.error,CTE_REST.ERROR_YA_TIENE_PEDIDO)){
 						ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
 						setPedidoYagregarProducto();
 					}
@@ -210,7 +210,7 @@
 			} else {
 				// crear pedido y dialog
 				function doNoOK(response) {
-					if (utilsService.contieneCadena(response.data.error, CTE_REST.ERROR_YA_TIENE_PEDIDO)) {
+					if (us.contieneCadena(response.data.error, CTE_REST.ERROR_YA_TIENE_PEDIDO)) {
 						ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
 						agregarProductoDialog(variante);
 					}
@@ -395,7 +395,7 @@
 		}
 
 		// findProductos();
-		if (!utilsService.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
+		if (!us.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
 			$log.debug("tiene una variante seleccionda", contextoCompraService.ls.varianteSelected)
 			vm.agregar(contextoCompraService.ls.varianteSelected)
 			contextoCompraService.ls.varianteSelected = undefined;

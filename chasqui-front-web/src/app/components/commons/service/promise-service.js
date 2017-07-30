@@ -3,7 +3,7 @@
 
 	angular.module('chasqui').service('promiseService', promiseService);
 
-	function promiseService($q, restProxy, utilsService, $log, $state, ToastCommons, $rootScope) {
+	function promiseService($q, restProxy, us, $log, $state, ToastCommons, $rootScope) {
 		var vm = this;
 
 		vm.doGet = function(url, params, noOkFuctionParam) {
@@ -80,7 +80,7 @@
 
 
 		var getNoOkFuction = function(noOkFuctionParam) {
-			if (utilsService.isUndefinedOrNull(noOkFuctionParam)) {
+			if (us.isUndefinedOrNull(noOkFuctionParam)) {
 				return doNoOkDefault;
 			} else {
 				return noOkFuctionParam;

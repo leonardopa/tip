@@ -7,7 +7,7 @@
   /**
    * @ngInject Formulario para crear un grupo
    */
-  function FormGrupoController($log, $scope, $state, gccService, StateCommons, utilsService, contextoCompraService) {
+  function FormGrupoController($log, $scope, $state, gccService, StateCommons, us, contextoCompraService) {
     $log.debug("controler FormGrupoController", $state.params);
     var vm = this;
 
@@ -18,7 +18,7 @@
     vm.isDireccionUsuario = true;
 
 
-    if (utilsService.isUndefinedOrNull($state.params.grupo)) {
+    if (us.isUndefinedOrNull($state.params.grupo)) {
       vm.isEdit = false;
     } else {
       vm.isEdit = true;

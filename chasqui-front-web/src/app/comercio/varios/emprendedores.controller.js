@@ -6,7 +6,7 @@
 		.controller('EmprenController', EmprenController);
 
 	/** @ngInject */
-	function EmprenController($log, $stateParams, CTE_REST, $state, StateCommons, productorService, ToastCommons, utilsService) {
+	function EmprenController($log, $stateParams, CTE_REST, $state, StateCommons, productorService, ToastCommons, us) {
 		$log.debug('EmprenController ..... ', $stateParams.id);
 		StateCommons.ls.itemMenuSelect = 'emprendedores';
 		var vm = this
@@ -25,7 +25,7 @@
 			vm.emprendedor = item;
 			console.log(item.medalla)
 			console.log(angular.isUndefined(item.medalla))
-			if (!utilsService.isUndefinedOrNull(item.medalla)) {
+			if (!us.isUndefinedOrNull(item.medalla)) {
 				vm.medallas = [item.medalla]; // Por alguna razon mandan una sola
 				// medalla
 			}

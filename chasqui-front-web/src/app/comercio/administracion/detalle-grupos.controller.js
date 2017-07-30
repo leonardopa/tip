@@ -9,7 +9,7 @@
 	 *           grupo
 	 */
 	function DetalleGruposController($log, $scope, $timeout,
-		ToastCommons, dialogCommons, gccService, StateCommons, utilsService) {
+		ToastCommons, dialogCommons, gccService, StateCommons, us) {
 		$log.debug("controler DetalleGruposController init grupo ",
 			$scope.grupo)
 		var vm = this;
@@ -61,18 +61,18 @@
 			// Esto es un resabio de la forma de cargar miembros que pronto va a ser modificado. 
 
 			if (vm.isLoggedMember(miembro)) {
-				var pregunta = utilsService.translate('SALIR_GRUPO');
-				var confirmacion = utilsService.translate('SALIR');
+				var pregunta = us.translate('SALIR_GRUPO');
+				var confirmacion = us.translate('SALIR');
 				var fallo = 'No pudo salir del grupo de compra';
 			} else {
-				var pregunta = utilsService.translate('QUITAR_A') + nombre;
-				var confirmacion = utilsService.translate('QUITARLO');
+				var pregunta = us.translate('QUITAR_A') + nombre;
+				var confirmacion = us.translate('QUITARLO');
 				var fallo = 'No se pudo quitar a ' + nombre + ' del grupo de compra';
 			}
 
-			dialogCommons.confirm(utilsService.translate('SALIR_GRUPO_TITULO'),
-				utilsService.translate('ESTAS_SEGURO_DE') + pregunta + '?',
-				utilsService.translate('SI_QUIERO') + confirmacion, utilsService.translate('NO'),
+			dialogCommons.confirm(us.translate('SALIR_GRUPO_TITULO'),
+				us.translate('ESTAS_SEGURO_DE') + pregunta + '?',
+				us.translate('SI_QUIERO') + confirmacion, us.translate('NO'),
 				function() {
 					vm.callQuitarMiembro(miembro);
 				},
@@ -100,7 +100,7 @@
 
 		vm.callQuitarMiembro = function(miembro) {
 			function doOk(response) {
-				ToastCommons.mensaje(utilsService.translate('SE_QUITO_MIEMBRO'));
+				ToastCommons.mensaje(us.translate('SE_QUITO_MIEMBRO'));
 				$scope.$emit("quito-miembro-grupo");
 				vm.grupo.miembros.splice(vm.grupo.miembros.indexOf(miembro), 1);
 			}
@@ -140,9 +140,9 @@
 		}
 
 		vm.selfPara = function(miembro) {
-			if (utilsService.isUndefinedOrNull(miembro.nickname)) return "";
-			return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, utilsService.translate('ADMIN')) +
-				tagSelf(vm.isLoggedMember(miembro),utilsService.translate('TU'));
+			if (us.isUndefinedOrNull(miembro.nickname)) return "";
+			return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, us.translate('ADMIN')) +
+				tagSelf(vm.isLoggedMember(miembro),us.translate('TU'));
 		}
 
 		function tagSelf(condicion, tag) {

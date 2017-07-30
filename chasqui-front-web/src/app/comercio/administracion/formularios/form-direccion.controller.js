@@ -7,7 +7,7 @@
 	/**
 	 * @ngInject Formulario para direccion
 	 */
-	function FormDireccionController($log, $state, $scope, ToastCommons, perfilService, utilsService) {
+	function FormDireccionController($log, $state, $scope, ToastCommons, perfilService, us) {
 
 		$log.debug("FormDireccionController", $scope.direccionParam);
 
@@ -41,7 +41,7 @@
 			function doOk(response) {
 				$log.debug("respuesta marcar como predeterminado ", response);
 				vm.domicilio.predeterminada = true;
-				ToastCommons.mensaje(utilsService.translate('PREDETERMINADO'));
+				ToastCommons.mensaje(us.translate('PREDETERMINADO'));
 			}
 
 			vm.domicilioParam = vm.domicilio;
@@ -56,7 +56,7 @@
 			function doOk(response) {
 				$log.debug("respuesta eliminar direccion ", response);
 
-				ToastCommons.mensaje(utilsService.translate('ELIMINO_DIRECCION'));
+				ToastCommons.mensaje(us.translate('ELIMINO_DIRECCION'));
 				loadDirecciones();
 			}
 
@@ -71,7 +71,7 @@
 			function doOk(response) {
 				$log.debug("respuesta guardar domicilio ", response);
 
-				ToastCommons.mensaje(utilsService.translate('AGREGO_DIRECCION'));
+				ToastCommons.mensaje(us.translate('AGREGO_DIRECCION'));
 
 				loadDirecciones();
 			}
@@ -82,7 +82,7 @@
 			perfilService.nuevaDireccion(vm.domicilio).then(doOk);
 		}
 
-		vm.me = utilsService.translate('PREDETERMINADO');
+		vm.me = us.translate('PREDETERMINADO');
 
 		var callUpdateDireccion = function() {
 			$log.debug("update domicilio", vm.domicilio);
@@ -90,7 +90,7 @@
 			function doOk(response) {
 				$log.debug("respuesta update domicilio ", response);
 
-				ToastCommons.mensaje(utilsService.translate('ACTUALIZO_DIRECCION'));
+				ToastCommons.mensaje(us.translate('ACTUALIZO_DIRECCION'));
 
 				loadDirecciones();
 

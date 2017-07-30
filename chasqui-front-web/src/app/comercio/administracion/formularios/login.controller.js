@@ -5,7 +5,7 @@
 
 	/** @ngInject */
 	function LogInController($log, $state, StateCommons,
-		ToastCommons, $rootScope, dialogCommons, perfilService, utilsService, $stateParams, contextoCompraService) {
+		ToastCommons, $rootScope, dialogCommons, perfilService, us, $stateParams, contextoCompraService) {
 
 		$log.debug('controler log in ..... debe volver a ', $stateParams.toPage);
 
@@ -43,8 +43,8 @@
 				ToastCommons.mensaje("Bienvenido !");
 				$rootScope.$broadcast('resetHeader', "");
 
-				if (utilsService.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
-					if (utilsService.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage == '') {
+				if (us.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
+					if (us.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage == '') {
 						$state.go("principal");
 					} else {
 						$state.go($stateParams.toPage);

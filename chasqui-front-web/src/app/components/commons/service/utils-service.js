@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('chasqui').service('utilsService', utilsService);
+	angular.module('chasqui').service('us', us);
 
-	function utilsService(i18nService) {
+	function us(i18nService) {
 		var vm = this;
 
 		vm.isUndefinedOrNull = function(val) {

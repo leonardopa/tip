@@ -8,7 +8,7 @@
 	/**
 	 *  FAB Button de contexto de compra.
 	 */
-	function ContextoPedidoController($rootScope, $log, CTE_REST, StateCommons, gccService, utilsService, productoService, $timeout, contextoCompraService) {
+	function ContextoPedidoController($rootScope, $log, CTE_REST, StateCommons, gccService, us, productoService, $timeout, contextoCompraService) {
 
 		$log.debug("ContextoPedidoController .....");
 

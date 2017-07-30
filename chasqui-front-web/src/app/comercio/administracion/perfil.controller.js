@@ -6,7 +6,7 @@
 	/** @ngInject . Pantalla de perfil de usuario */
 	function PerfilController($log, $scope,
 		StateCommons, $mdDialog, ToastCommons, $stateParams, perfilService,
-		gccService,utilsService) {
+		gccService,us) {
 		$log.debug("Init PerfilController ....");
 
 		StateCommons.ls.itemMenuSelect = 'perfil';
@@ -65,7 +65,7 @@
 				callCambiarPass();
 				$mdDialog.cancel();
 			} else {
-				ToastCommons.mensaje(utilsService.translate('PASS_INCORRECTO_MSG'));
+				ToastCommons.mensaje(us.translate('PASS_INCORRECTO_MSG'));
 			}
 		}
 
@@ -76,7 +76,7 @@
 
 		var callCambiarPass = function() {
 			function doOk(response) {
-				ToastCommons.mensaje(utilsService.translate('PASS_ACTUALIZADA'));
+				ToastCommons.mensaje(us.translate('PASS_ACTUALIZADA'));
 			}
 
 			function doNoOk(response) {
@@ -88,7 +88,7 @@
 
 		vm.marcarLeido = function(notificacion) {
 			function doOk(response) {
-				ToastCommons.mensaje(utilsService.translate('LEIDO'));
+				ToastCommons.mensaje(us.translate('LEIDO'));
 				notificacion.estado = 'Leido';
 			}
 			perfilService.marcarComoLeido(notificacion.id).then(doOk);
@@ -97,7 +97,7 @@
 
 		vm.aceptarInvitacion = function(notificacion) {
 			function doOk(response) {
-				ToastCommons.mensaje(utilsService.translate('ACEPTADO'));
+				ToastCommons.mensaje(us.translate('ACEPTADO'));
 				notificacion.estado = 'Leido';
 			}
 			var params = {};
@@ -109,7 +109,7 @@
 
 		vm.rechazarInvitacion = function(notificacion) {
 			function doOk(response) {
-				ToastCommons.mensaje(utilsService.translate('RECHAZADO'));
+				ToastCommons.mensaje(us.translate('RECHAZADO'));
 				notificacion.estado = 'Leido';
 			}
 			var params = {};

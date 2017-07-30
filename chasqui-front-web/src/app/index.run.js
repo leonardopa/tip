@@ -6,14 +6,14 @@
 		.run(runBlock);
 
 	/** @ngInject */
-	function runBlock($log, $rootScope, $state, StateCommons, utilsService) {
+	function runBlock($log, $rootScope, $state, StateCommons, us) {
 
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
 			$log.debug("is log", StateCommons.isLogued());
 			$log.debug("devbe ", toState.auth);
 
-			if (utilsService.isUndefinedOrNull(toState.auth))
+			if (us.isUndefinedOrNull(toState.auth))
 				toState.auth = false
 
 			if (toState.auth && (!StateCommons.isLogued())) {

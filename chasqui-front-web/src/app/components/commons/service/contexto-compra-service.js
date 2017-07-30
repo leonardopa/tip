@@ -3,7 +3,7 @@
 
 	angular.module('chasqui').service('contextoCompraService', contextoCompraService);
 
-	function contextoCompraService($log, utilsService, StateCommons, $localStorage, productoService, gccService, $q, $timeout, $rootScope) {
+	function contextoCompraService($log, us, StateCommons, $localStorage, productoService, gccService, $q, $timeout, $rootScope) {
 		var vm = this;
 		//alert("contextoCompraService")
 		vm.ls = $localStorage;
@@ -72,7 +72,7 @@
 		vm.tienePedidoInividual = function() {
 
 			angular.forEach(vm.ls.pedidos, function(pedido, key) {
-				if (utilsService.isUndefinedOrNull(pedido.aliasGrupo))
+				if (us.isUndefinedOrNull(pedido.aliasGrupo))
 					return true;
 			});
 
@@ -119,7 +119,7 @@
 		}
 
 		vm.isGrupoIndividualSelected = function() {
-			return utilsService.isUndefinedOrNull(vm.ls.grupoSelected) || vm.ls.grupoSelected.alias == 'Personal';
+			return us.isUndefinedOrNull(vm.ls.grupoSelected) || vm.ls.grupoSelected.alias == 'Personal';
 		}
 
 		vm.isPedidoInividualSelected = function() {
@@ -167,7 +167,7 @@
 			// si es indivudual
 			if (grupo.alias == 'Personal') {
 				angular.forEach(vm.ls.pedidos, function(pedido, key) {
-					if (utilsService.isUndefinedOrNull(pedido.idGrupo))
+					if (us.isUndefinedOrNull(pedido.idGrupo))
 						pedidoCurrent = pedido;
 				});
 			}
@@ -180,12 +180,12 @@
 		/*
 			    function initContexto(){
 					
-					if (! utilsService.isUndefinedOrNull(StateCommons.ls.pedidoSelected)
-				       && utilsService.isUndefinedOrNull(StateCommons.ls.grupoSelected)){
+					if (! us.isUndefinedOrNull(StateCommons.ls.pedidoSelected)
+				       && us.isUndefinedOrNull(StateCommons.ls.grupoSelected)){
 						// viene de la pantalla de pedido con uno seleccionado
 						vm.grupoSelected=getGrupoByPedido(StateCommons.ls.pedidoSelected);
 						StateCommons.ls.grupoSelected=vm.grupoSelected;
-					} else if (utilsService.isUndefinedOrNull(StateCommons.ls.grupoSelected)){
+					} else if (us.isUndefinedOrNull(StateCommons.ls.grupoSelected)){
 						vm.grupoSelected=gIndividualFicticio;
 						} else{
 						vm.grupoSelected=StateCommons.ls.grupoSelected;
@@ -201,7 +201,7 @@
 
 				function setSelected(){
 					//console.log(StateCommons.ls.grupoSelected.idPedidoIndividual)
-					if (! utilsService.isUndefinedOrNull(StateCommons.ls.grupoSelected)){
+					if (! us.isUndefinedOrNull(StateCommons.ls.grupoSelected)){
 						angular.forEach(vm.pedidos, function(pedido) {
 			 				if (StateCommons.ls.grupoSelected.idPedidoIndividual == pedido.id){			
 			     				vm.pedidoSelected=StateCommons.ls.pedidoSelected;  		
