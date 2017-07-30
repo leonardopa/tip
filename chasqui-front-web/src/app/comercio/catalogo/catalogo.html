@@ -18,10 +18,11 @@
 						</div>
 					</div>
 				</div>
+
 				<div flex="80">
 					<div layout=row layout-align="center center">
 						<md-input-container>
-							<input ng-model="catalogoCtrl.queryText" type="text" placeholder="Buscar">
+							<input ng-model="catalogoCtrl.queryText" type="text" placeholder="{{'BUSCAR' | translate}}">
 						</md-input-container>
 						<md-button ng-click="catalogoCtrl.filtroQuery()">
 							<md-icon md-svg-src="app/components/image/ic_search_black_24px.svg">

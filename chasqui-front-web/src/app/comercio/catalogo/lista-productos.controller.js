@@ -102,7 +102,7 @@
 			if (StateCommons.isLogued()) {
 				agregarProducto(variante);
 			} else {
-				ToastCommons.mensaje("Te invitamos a ingresar !");
+				ToastCommons.mensaje(us.translate('INVITARMOS_INGRESAR'));
 				$log.log('not logued" ', variante);
 				contextoCompraService.ls.varianteSelected = variante;
 				$state.go('login');
@@ -211,7 +211,7 @@
 				// crear pedido y dialog
 				function doNoOK(response) {
 					if (us.contieneCadena(response.data.error, CTE_REST.ERROR_YA_TIENE_PEDIDO)) {
-						ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
+						ToastCommons.mensaje(us.translate('AGREAR_EN_PEDIDO_EXISTENTE'));
 						agregarProductoDialog(variante);
 					}
 				}
@@ -264,7 +264,7 @@
 			var doOk = function(response) {
 				$log.log('Agregar producto Response ', response);
 
-				ToastCommons.mensaje("Producto agregado !");
+				ToastCommons.mensaje(us.translate('PRODUCTO_AGREGADO'));
 				$rootScope.$emit('lista-producto-agrego-producto');
 
 			}

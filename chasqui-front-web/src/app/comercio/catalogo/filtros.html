@@ -2,12 +2,12 @@
 <div layout="column">
 	<md-card>
 		<md-card-title>
-			</br> Buscar por </br>
+			</br> {{'BUSCAR_POR' | translate}}</br>
 		</md-card-title>
 		<md-card-content>
 			<div>
 				<md-input-container class="md-block" flex-gt-sm>
-					<label>Categoria</label>
+					<label>{{'CATEGORIA' | translate}}</label>
 					<md-select ng-change="catalogoCtrl.filtroPor('CATEGORIA')" ng-model="catalogoCtrl.categoriaSelect">
 						<md-option ng-repeat="categoria in catalogoCtrl.categorias" value="{{categoria.idCategoria}}"> {{categoria.nombre}} </md-option>
 					</md-select>
@@ -15,7 +15,7 @@
 			</div>
 			<div flex>
 				<md-input-container class="md-block" flex-gt-sm>
-					<label>Productor</label>
+					<label>{{'PRODUCTOR' | translate}}</label>
 					<md-select ng-change="catalogoCtrl.filtroPor('PRODUCTOR')" ng-model="catalogoCtrl.productorSelect">
 						<md-option ng-repeat="productor in catalogoCtrl.productores" value="{{productor.idProductor}}"> {{productor.nombreProductor}} </md-option>
 					</md-select>
@@ -23,7 +23,7 @@
 			</div>
 			<div flex>
 				<md-input-container class="md-block" flex-gt-sm>
-					<label>Medalla</label>
+					<label>{{'MEDALLA' | translate}}</label>
 					<md-select ng-change="catalogoCtrl.filtroPor('MEDALLA')" ng-model="catalogoCtrl.medallaSelect">
 						<md-option ng-repeat="medalla in catalogoCtrl.medallas" value="{{medalla.idMedalla}}">
 							<div layout="row" layout-align="start center">

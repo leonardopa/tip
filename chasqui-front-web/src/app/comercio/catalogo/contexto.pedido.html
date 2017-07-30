@@ -6,7 +6,7 @@
     </md-toolbar>
     <div ng-show="contextoPedidoCtrl.pedidoSelected != undefined && contextoPedidoCtrl.pedidoSelected.productosResponse.length > 0">
       <md-list class="md-dense" flex>
-        <md-subheader class="md-no-sticky">Pructos en pedido {{contextoPedidoCtrl.checkAlias()}}
+        <md-subheader class="md-no-sticky"> {{'PROD_EN_PEDIDO' | translate}} {{contextoPedidoCtrl.checkAlias()}}
         </md-subheader>
         <md-list-item class="md-3-line" ng-repeat="item in contextoPedidoCtrl.pedidoSelected.productosResponse">
           <img ng-src="{{contextoPedidoCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
@@ -18,14 +18,15 @@
         <md-divider></md-divider>
       </md-list>
       <div>
-        Total <strong> $ {{contextoPedidoCtrl.pedidoSelected.montoActual}}</strong>
+        {{'TOTAL' | translate}}
+        <strong> $ {{contextoPedidoCtrl.pedidoSelected.montoActual}}</strong>
       </div>
     </div>
     <div ng-show="contextoPedidoCtrl.pedidoSelected == undefined ">
-      <p>No hay productos en el pedido</p>
+      <p> {{'SIN_PROD_PEDIDO' | translate}}</p>
     </div>
     <md-button ng-click="catalogoCtrl.toggleLeft()" class="md-accent">
-      cerrar
+      {{'CERRAR' | translate}}
     </md-button>
   </md-sidenav>
 </div>

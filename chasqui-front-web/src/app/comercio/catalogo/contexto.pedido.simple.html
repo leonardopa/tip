@@ -1,10 +1,11 @@
 <md-card ng-controller="ContextoPedidoController as contextoPedidoCtrl">
   <div ng-show="contextoPedidoCtrl.pedidoSelected != undefined && contextoPedidoCtrl.pedidoSelected.productosResponse.length > 0">
     <md-list class="md-dense" flex>
-      <md-subheader class="md-no-sticky">Productos en pedido {{contextoPedidoCtrl.checkAlias()}}
+      <md-subheader class="md-no-sticky">{{'PROD_EN_PEDIDO' | translate}}  {{contextoPedidoCtrl.checkAlias()}}
       </md-subheader>
       <md-subheader>
-        Total <strong> $ {{contextoPedidoCtrl.pedidoSelected.montoActual}}</strong>
+         {{'TOTAL' | translate}}
+          <strong> $ {{contextoPedidoCtrl.pedidoSelected.montoActual}}</strong>
       </md-subheader>
       <md-list-item class="md-3-line" ng-repeat="item in contextoPedidoCtrl.pedidoSelected.productosResponse">
         <img ng-src="{{contextoPedidoCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
@@ -18,6 +19,6 @@
   </div>
   <md-subheader ng-show="contextoPedidoCtrl.pedidoSelected == undefined 
         || contextoPedidoCtrl.pedidoSelected.productosResponse.length == 0">
-    <p> {{contextoPedidoCtrl.checkAlias()}} sin productos</p>
+    <p> {{contextoPedidoCtrl.checkAlias()}} {{'SIN_PROD_PEDIDO' | translate}} </p>
   </md-subheader>
 </md-card>

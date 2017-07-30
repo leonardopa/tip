@@ -231,9 +231,7 @@
                          */
                 //////////////////////////////////////////////////////////
                 //////////////// OTRAS CONSTANTES 
-                ///// mensajes al usuario 
-
-                AGREAR_EN_PEDIDO_EXISTENTE: "el producto se agregara el pedido existente",
+          
                 ///// contantes de mensajes de errores conocidos
                 ERROR_YA_TIENE_PEDIDO: "ya posee un pedido vigente"
             }

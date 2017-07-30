@@ -53,7 +53,8 @@
             'common.json',
             'forms.json',
             'administracion.json',
-            'carrito.json'
+            'carrito.json',
+            'catalogo.json'
         ];
 
         angular.forEach(files, function(file) {
