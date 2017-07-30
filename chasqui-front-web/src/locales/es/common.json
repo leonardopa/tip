@@ -2,5 +2,10 @@
   "INFO": "Información",
   "GENERIC_ERROR": " ups ! , estamos trabajando para usted",
   "TRANS_EXA" : "esto es un ejemplo de una texto traducido",
-  "GUARDAR" : "Guardar"
+  "GUARDAR" : "Guardar",
+  "NOMBRE" : "Nombre",
+  "APELLIDO" : "Apellido",
+  "APODO" : "Apodo",
+  "EMAIL" : "Correo"
+  
 }

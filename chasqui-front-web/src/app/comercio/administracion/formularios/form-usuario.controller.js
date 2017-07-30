@@ -8,7 +8,8 @@
 	 * @ngInject Formulario para crear un grupo
 	 */
 	function FormUsuarioController($log, $state,
-		ToastCommons, StateCommons, $scope, $timeout, perfilService) {
+		ToastCommons, StateCommons, $scope, $timeout, perfilService,
+		utilsService) {
 		$log.debug("controler FormUsuarioController", $scope.perfil);
 
 		var vm = this;
@@ -26,20 +27,19 @@
 		function mostrarMensajesDeBienvenida() {
 
 			$timeout(function() {
-				ToastCommons.mensaje('Bienvenido !');
+				ToastCommons.mensaje(utilsService.tratranslate('BIENVENIDO'));
 			}, 3000);
 
 			$timeout(function() {
-				ToastCommons.mensaje('Ahora podes ingresar a CHASQUI !');
+				ToastCommons.mensaje(utilsService.tratranslate('INGRESA_MSG'));
 			}, 10000);
 
 			$timeout(function() {
-				ToastCommons.mensaje('Reciviras un mensaje de ' +
-					'bienvenida por correo !');
+				ToastCommons.mensaje(utilsService.tratranslate('CORREO_MSG'));
 			}, 15000);
 
 			$timeout(function() {
-				ToastCommons.mensaje('Podes seguir completando tu perfil !');
+				ToastCommons.mensaje(utilsService.tratranslate('COMPL_PERFIL_MSG'));
 			}, 30000);
 		}
 
@@ -90,11 +90,11 @@
 		vm.callActualizarUsuario = function() {
 
 			function doOk(response) {
-				ToastCommons.mensaje('Se actualizo con exito');
+				ToastCommons.mensaje(utilsService.tratranslate('ACTUALIZO_PERFIL_MSG'));
 			}
 			delete vm.user['direccion'];
 			delete vm.user['email'];
-			$log.debug("***************", vm.user);
+		
 			// TODO : manejar error
 			// ToastCommons.mensaje('Falla actulizar. Ver Trello');
 
@@ -128,7 +128,7 @@
 			} else {
 				$log.error("las contrasenas no coinciden");
 				// TODO: enviar mensaje
-				ToastCommons.mensaje('Las contrasenias no coinciden')
+				ToastCommons.mensaje(utilsService.tratranslate('PASS_INCORRECTO_MSG'))
 			}
 		}
 
