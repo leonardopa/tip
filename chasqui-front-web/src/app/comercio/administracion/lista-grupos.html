@@ -1,13 +1,13 @@
 <!-- Tabs de grupos con el panel de info y botones de acciones -->
 <div class="row ch-content">
     <div layout="row" layout-align="space-between center">
-        <div><span class="md-headline">Mis grupos de compras</span></div>
+        <div><span class="md-headline"
+            translate>MIS_GRUPOS</span></div>
         <div>
-            <md-button ng-click="listaGruposCtrl.crearGrupo($event)" class="btn-agregar">
-                Crear Grupo
+            <md-button ng-click="listaGruposCtrl.crearGrupo($event)" class="btn-agregar"> <label translate="CREAR_GRUPO"></label>    
                 <md-icon style="color:white"> group </md-icon>
                 <md-tooltip md-direction="left">
-                    puedes crear un grupo nuevo
+                    <label translate="CREAR_GRUPO_MSG"></label>                    
                 </md-tooltip>
             </md-button>
         </div>
@@ -15,8 +15,8 @@
     <div layout="column" ng-cloak>
         <md-card ng-show="listaGruposCtrl.groups.length==0">
             <md-content flex layout-padding>
-                <p>
-                    Aún no hay grupos
+                <p translate>
+                    SIN_GRUPO
                 </p>
             </md-content>
         </md-card>

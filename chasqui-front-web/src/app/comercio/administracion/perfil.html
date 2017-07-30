@@ -3,42 +3,15 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<span class="md-headline">Mi Perfil</span>
+			<span class="md-headline" translate>MI_PERFIL</span>
 			<div ng-cloak>
 				<md-content>
 					<md-tabs md-dynamic-height md-border-bottom md-selected="perfilCtrl.selectedIndexPerfil">
 						<md-tab label="Datos Personales">
 							<md-content class="md-padding">
 								<div ng-include="'app/comercio/administracion/formularios/form-usuario.html'" ng-init="perfil = true" />
-								<md-card>
-									<md-card-title>
-										<md-card-title-text>
-											<div layout=row layout-align="space-between end">
-												<div>
-													<span class="md-headline">Direcciones </span>
-												</div>
-												<div>
-													<md-button ng-click="perfilCtrl.addDireccion()" class="btn-agregar">
-														Nueva
-														<md-icon style="color:white"> add_circle_outline </md-icon>
-														<md-tooltip md-direction="left">
-															agregar una dirección
-														</md-tooltip>
-													</md-button>
-												</div>
-											</div>
-										</md-card-title-text>
-									</md-card-title>
-									<md-card-content>
-										<md-tabs md-dynamic-height md-border-bottom md-selected="perfilCtrl.selectedIndexDireccion">
-											<md-tab ng-repeat="tab in perfilCtrl.direcciones" label="{{tab.idDireccion==undefined ? 'Nuevo' : tab.alias}}">
-												<md-content class="md-padding">
-													<div ng-include="'app/comercio/administracion/formularios/form-direccion.html'" ng-init="direccionParam = tab"></div>
-												</md-content>
-											</md-tab>
-										</md-tabs>
-									</md-card-content>
-								</md-card>
+								
+								<div ng-include="'app/comercio/administracion/perfil-direccion.html'" />
 							</md-content>
 						</md-tab>
 						<md-tab label="Notificaciones">

@@ -61,18 +61,18 @@
 			// Esto es un resabio de la forma de cargar miembros que pronto va a ser modificado. 
 
 			if (vm.isLoggedMember(miembro)) {
-				var pregunta = "de salir del grupo";
-				var confirmacion = 'salir';
+				var pregunta = utilsService.translate('SALIR_GRUPO');
+				var confirmacion = utilsService.translate('SALIR');
 				var fallo = 'No pudo salir del grupo de compra';
 			} else {
-				var pregunta = 'quitar a ' + nombre;
-				var confirmacion = 'quitarlo';
+				var pregunta = utilsService.translate('QUITAR_A') + nombre;
+				var confirmacion = utilsService.translate('QUITARLO');
 				var fallo = 'No se pudo quitar a ' + nombre + ' del grupo de compra';
 			}
 
-			dialogCommons.confirm('Salir del grupo',
-				'¿Estas seguro de ' + pregunta + '?',
-				'Si, quiero ' + confirmacion, 'No',
+			dialogCommons.confirm(utilsService.translate('SALIR_GRUPO_TITULO'),
+				utilsService.translate('ESTAS_SEGURO_DE') + pregunta + '?',
+				utilsService.translate('SI_QUIERO') + confirmacion, utilsService.translate('NO'),
 				function() {
 					vm.callQuitarMiembro(miembro);
 				},
@@ -100,7 +100,7 @@
 
 		vm.callQuitarMiembro = function(miembro) {
 			function doOk(response) {
-				ToastCommons.mensaje('Se quito miembro del grupo')
+				ToastCommons.mensaje(utilsService.translate('SE_QUITO_MIEMBRO'));
 				$scope.$emit("quito-miembro-grupo");
 				vm.grupo.miembros.splice(vm.grupo.miembros.indexOf(miembro), 1);
 			}
@@ -132,7 +132,7 @@
 					if (integrante.isEnGrupo) {
 						vm.grupo.miembros.push(integrante);
 					}
-				});
+				})
 			}
 
 			gccService.integrantesGrupo(vm.idGrupo, {}).then(doOk)
@@ -141,12 +141,12 @@
 
 		vm.selfPara = function(miembro) {
 			if (utilsService.isUndefinedOrNull(miembro.nickname)) return "";
-			return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, "Administrador") +
-				tagSelf(vm.isLoggedMember(miembro), "Tú");
+			return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, utilsService.translate('ADMIN')) +
+				tagSelf(vm.isLoggedMember(miembro),utilsService.translate('TU'));
 		}
 
 		function tagSelf(condicion, tag) {
-			return (condicion) ? "(" + tag + ")" : "";
+			return (condicion) ? " (" + tag + ")" : "";
 		}
 
 		vm.isLoggedMember = function(miembro) {

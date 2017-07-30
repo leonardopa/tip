@@ -7,7 +7,7 @@
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
 	function ListaGruposController($log, $scope, $state,
 		StateCommons, dialogCommons, ToastCommons, perfilService, gccService, CTE_REST, contextoCompraService) {
-			
+
 		$log.debug("controler ListaGruposController");
 		StateCommons.ls.itemMenuSelect = 'lista-grupos';
 		var vm = this;
@@ -41,7 +41,6 @@
 			angular.forEach(vm.groups, function(tab) {
 				$log.debug("setTabSeleccionado", tab.idGrupo + " " + tab.alias);
 				if ((grupo != undefined) && (tab.idGrupo == grupo.idGrupo)) {
-					$log.debug("****** " + tab.idGrupo);
 					indexSelect = i;
 					existe = true;
 				}
@@ -80,16 +79,16 @@
 			};
 
 
-			dialogCommons.prompt('Invitar miembro al Grupo',
-				'Ingrese una direccion de correo electrónico', 'correo@correo.com',
-				'Invitar', 'Cancelar', doOk, doNoOk);
+			dialogCommons.prompt(utilsService.translate('INV_MIEMBRO'),
+				utilsService.translate('INGRESAR_CORREO'), 'correo@correo.com',
+				utilsService.translate('INVITAR'), utilsService.translate('CANCELAR'), doOk, doNoOk);
 
 		}
 
 		/** Salir del grupo. Manejo del popUP */
 		vm.salir = function(tab) {
-			dialogCommons.confirm('Salir', 'Seguro quieres salir del grupo ' +
-				vm.selected.alias, 'Si, me voy', 'Cancelar',
+			dialogCommons.confirm(utilsService.translate('SALIR'), utilsService.translate('SEGURO_SALIR') +
+				vm.selected.alias, utilsService.translate('SI_MEVOY'), utilsService.translate('CANCELAR'),
 				function(
 					result) {
 					callQuitarMiembro(tab);
@@ -117,7 +116,7 @@
 		function callCrearPedidoGrupal(grupo) {
 			function doOk(response) {
 				$log.debug('Crear pedido en el grupo');
-				ToastCommons.mensaje("Se ha creado un pedido en el grupo");
+				ToastCommons.mensaje(utilsService.translate('NUEVO_PEDIDO'));
 			}
 
 			var params = {};
@@ -133,14 +132,14 @@
 
 			var doOk = function(response) {
 				$log.log('Se enviará un email a la direcciónn ', response);
-				ToastCommons.mensaje("Se enviará un mail a la dirección");
+				ToastCommons.mensaje(utilsService.translate('ENVIARA_MAIL'));
 				callLoadGrupos();
 			}
 
 			var params = {
 				idGrupo: grupo.idGrupo,
 				emailInvitado: emailClienteInvitado
-			};
+			}
 			gccService.invitarUsuarioAGrupo(params).then(doOk);
 		}
 
@@ -167,7 +166,7 @@
 			$log.debug("quitar", miembro)
 
 			function doOk(response) {
-				ToastCommons.mensaje('Te fuiste del grupo')
+				ToastCommons.mensaje(utilsService.translate('TE_FUISTE_GRUPO'))
 				callLoadGrupos();
 			}
 			var params = {};

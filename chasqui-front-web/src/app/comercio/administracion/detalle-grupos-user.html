@@ -1,3 +1,4 @@
+<h1>detalle grupo user BORRAR ? </h1>
 <div ng-controller="DetalleGruposController as detalleGrupoCtrl" layout="column" ng-cloak>
 	<md-card flex="100" layout="row">
 		<div ng-if="detalleGrupoCtrl.contacts.length !=0">
@@ -12,23 +13,25 @@
 						<div ng-if="contact.invitacion == 'NOTIFICACION_ACEPTADA'">
 							<md-icon> done </md-icon>
 							<md-tooltip md-direction="right">
-								Invitación aceptada
+								<label translate="INV_ACEP_MSG"></label>
 							</md-tooltip>
 						</div>
 						<div ng-if="contact.invitacion == 'NOTIFICACION_NO_LEIDA'">
 							<md-icon> restore </md-icon>
 							<md-tooltip md-direction="right">
-								Invitación en espera
+								<label translate="INV_ESP_MSG"></label>
 							</md-tooltip>
 						</div>
 						<!-- MODIFICADO FAVIO -->
-						<span>Estado del pedido: {{contact.estadoPedido}}</span>
+						<span translate>ESTADO_PEDIDO</span> 
+						<span>{{contact.estadoPedido}}</span>
 						<!-- MODIFICADO FAVIO -->
 						<div ng-if="detalleGrupoCtrl.isAdmin">
 							<md-button ng-click="detalleGrupoCtrl.quitarMiembro(contact)">
 								<ng-md-icon icon="remove_circle_outline" style="fill: red"></ng-md-icon>
 								<md-tooltip md-direction="right">
-									Quitar del Grupo </md-tooltip>
+									<label translate="QUITAR_GRUPO_MSG"></label>
+								</md-tooltip>
 							</md-button>
 						</div>
 						<!--</div> -->

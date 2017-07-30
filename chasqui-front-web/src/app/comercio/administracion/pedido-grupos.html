@@ -6,7 +6,8 @@
                     <md-list class="md-dense" flex>
                         <md-subheader>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</md-subheader>
                         <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
-                            Todavia no agregó productos </p>
+                            <label translate="MIEMBRO_SIN_PROD"></label>
+                        </p>
                         <md-list-item class="md-3-line" ng-repeat="item in miembro.pedido.productosResponse">
                             <img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
                             <div class="md-list-item-text" layout="column">

@@ -6,6 +6,14 @@
   "NOMBRE" : "Nombre",
   "APELLIDO" : "Apellido",
   "APODO" : "Apodo",
-  "EMAIL" : "Correo"
-  
+  "EMAIL" : "Correo",
+  "SI" : "Sí",
+  "NO" : "No",
+  "TU" : "Tú",
+  "DESCRIPCION" : "Descripción",
+  "CONTACTO" : "Contacto",
+  "DOMICILIO" : "DOMICILIO",
+  "CANCELAR" : "Cancelar",
+  "CONFIRMAR" : "Confirmar",
+  "ENTIENDO" : "Entiendo"
 }
