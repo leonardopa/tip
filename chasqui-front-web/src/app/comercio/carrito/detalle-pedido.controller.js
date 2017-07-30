@@ -6,7 +6,7 @@
 
 	/** @ngInject */
 	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog, dialogCommons, productoService, perfilService, gccService, StateCommons,
-		contextoCompraService) {
+		contextoCompraService,us) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
 
 		var vm = this;
@@ -29,7 +29,7 @@
 
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ", response.data);
-				ToastCommons.mensaje("Eliminado !");
+				ToastCommons.mensaje(us.translate('QUITO_PRODUCTO'));
 				contextoCompraService.refreshPedido();
 				$state.reload();
 			}
@@ -45,10 +45,10 @@
 		vm.eliminar = function(item) {
 			vm.productoEliminar = item;
 
-			dialogCommons.confirm('Quitar producto del Changuito',
-				'Esta seguro queres sacar el producto del changuito ?',
-				'SI',
-				'no',
+			dialogCommons.confirm(us.translate('QUITAR_PRODUCTO_TIT'),
+				us.translate('QUITAR_PRODUCTO_MSG'),
+				us.translate('SI'),
+				us.translate('NO'),
 				doEliminar,
 				function() {}
 			);
@@ -59,7 +59,7 @@
 
 			function doOk(response) {
 				$log.debug("--- cancelar pedido response ", response.data);
-				ToastCommons.mensaje("Cancelado !");
+				ToastCommons.mensaje(us.translate('CANCELADO'));
 				contextoCompraService.refreshPedidos().then(
 					function() {
 						$scope.$emit('modifico-pedido');
@@ -72,7 +72,7 @@
 		/// confirmacion individual de GCC
 		vm.confirmarPedidoIndividualGcc = function() {
 			function doOk(response) {
-				ToastCommons.mensaje("Pedido Confirmado !");
+				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
 				$state.reload();
 			}
 
@@ -88,7 +88,7 @@
 
 			function doOk(response) {
 				$log.debug("--- confirmar pedido response ", response.data);
-				ToastCommons.mensaje("Pedido Confirmado !");
+				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
 				$state.reload();
 			}
 

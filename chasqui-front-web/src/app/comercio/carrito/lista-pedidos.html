@@ -1,8 +1,16 @@
 <div class="ch-content">
     <md-card>
         <md-content flex layout-padding ng-show="listaPedidoCtrl.tabs.length==0" style="min-height: 100px">
-            <p> Aún no tienes pedidos , podes empezar a agregar productos a tu pedido personar
-                <a class="md-accent" href="/#/catalogo"> desde el catálogo</a> , o armar tu <a class="md-accent" href="/#/lista-grupos"> grupo de compras  </a></p>
+            <p>
+                <label translate="SIN_PEDIDO_MSG_1"/>
+                <a class="md-accent" href="/#/catalogo">
+                    <label translate="SIN_PEDIDO_MSG_2"/>
+                </a>
+                <label translate="SIN_PEDIDO_MSG_3"/>
+                    <a class="md-accent" href="/#/lista-grupos">
+                        <label translate="SIN_PEDIDO_MSG_4"/>
+                    </a>
+            </p>
         </md-content>
     </md-card>
     <!-- entiendo que no es necesario crear el pedido manualmente 

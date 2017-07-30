@@ -2,14 +2,16 @@
 	<script type="text/ng-template" id="dialog-direccion.html">
 		<md-dialog aria-label="options dialog">
 			<md-dialog-content layout-padding>
-				<h2 class="md-title">Elige un Domicilio</h2>
+				<h2 class="md-title" translate>ELIGE_DOMICILIO</h2>
 				<md-select placeholder="Domicilio" ng-model="detallePedidoCtrl.direccionSelected" md-on-open="detallePedidoCtrl.callDirecciones()" style="min-width: 200px;">
 					<md-option ng-value="dire" ng-repeat="dire in detallePedidoCtrl.direcciones">{{dire.alias}}</md-option>
 				</md-select>
 			</md-dialog-content>
 			<md-dialog-actions>
 				<span flex></span>
-				<md-button class="md-primary" ng-click="detallePedidoCtrl.confirmarDomicilio()">Confirmar</md-button>
+				<md-button class="md-primary" ng-click="detallePedidoCtrl.confirmarDomicilio()">
+					<label translate="CONFIRMAR"></label>
+				</md-button>
 			</md-dialog-actions>
 		</md-dialog>
 	</script>
@@ -41,11 +43,17 @@
 			ng-show="{{detallePedidoCtrl.pedido.estado=='ABIERTO'}}"> -->
 				<md-card-actions layout="row" layout-align="end center">
 					<md-button ng-click="detallePedidoCtrl.cancelar()" style="color:red">
-						Cancelar </md-button>
+						<label translate="CANCELAR"></label>
+					</md-button>
 					<md-button ng-click="detallePedidoCtrl.confirmar()" ng-show="{{! detallePedidoCtrl.isIndividual && detallePedidoCtrl.isAdmin}}" class="md-primary">
-						Cerrar </md-button>
-					<md-button ng-click="detallePedidoCtrl.confirmar()" ng-show="{{detallePedidoCtrl.isIndividual}}" class="md-primary"> Confirmar </md-button>
-					<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" class="md-primary" ng-show="{{! detallePedidoCtrl.isIndividual}}"> Confirmar</md-button>
+						<label translate="CERRAR"></label>
+					</md-button>
+					<md-button ng-click="detallePedidoCtrl.confirmar()" ng-show="{{detallePedidoCtrl.isIndividual}}" class="md-primary">
+						<label translate="CONFIRMAR"></label>
+					</md-button>
+					<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" class="md-primary" ng-show="{{! detallePedidoCtrl.isIndividual}}">
+						<label translate="CONFIRMAR"></label>
+					</md-button>
 				</md-card-actions>
 			</md-card>
 			<md-card>
@@ -53,11 +61,11 @@
 					<md-button ng-click="detallePedidoCtrl.comprar($event)">
 						<i style="font-size: 48px;color:#468385" class="material-icons">add_shopping_cart</i>
 						<md-tooltip md-direction="left">
-							ir a catalogo
+							<label translate="IR_CATALOGO"></label>
 						</md-tooltip>
 					</md-button>
 					<md-subheader>
-						Podes seguir agregando productos al chango
+						<label translate="SEGUIR_AGREGENDO"></label>
 					</md-subheader>
 				</div>
 			</md-card>
@@ -69,7 +77,9 @@
 	</section>
  -->
 		<div>
-			<md-subheader> Productos en el carro </md-subheader>
+			<md-subheader>
+				<label translate="PRODUCTOS_CARRO_TIT"></label>
+			</md-subheader>
 			<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" style="width: 100%" ng-cloak>
 				<div layout="row" layout-align="space-between center">
 					<div>
@@ -86,7 +96,8 @@
 							<md-button ng-click="detallePedidoCtrl.eliminar(item)">
 								<md-icon style="color: #f00;"> remove_circle_outline</md-icon>
 								<md-tooltip md-direction="left">
-									Quitar producto del carro </md-tooltip>
+									<label translate="QUITAR_PRODUCTO_TIT">
+								</md-tooltip>
 							</md-button>
 						</div>
 					</div>

@@ -14,6 +14,8 @@
   "CONTACTO" : "Contacto",
   "DOMICILIO" : "DOMICILIO",
   "CANCELAR" : "Cancelar",
+  "CANCELADO" : "Cancelado",
   "CONFIRMAR" : "Confirmar",
-  "ENTIENDO" : "Entiendo"
+  "ENTIENDO" : "Entiendo",
+  "CERRAR" : "Cerrar"
 }

@@ -52,7 +52,8 @@
         var files = [
             'common.json',
             'forms.json',
-            'administracion.json'
+            'administracion.json',
+            'carrito.json'
         ];
 
         angular.forEach(files, function(file) {

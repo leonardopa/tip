@@ -5,7 +5,8 @@
 		ListaPedidosController);
 
 	/** @ngInject */
-	function ListaPedidosController($log, $state, $scope, StateCommons, productoService, ToastCommons, gccService, contextoCompraService) {
+	function ListaPedidosController($log, $state, $scope, StateCommons, 
+		productoService, ToastCommons, gccService, contextoCompraService,us) {
 		$log.debug('ListaPedidosController ..... ');
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
 		var vm = this;
@@ -98,7 +99,7 @@
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ", response.data);
 
-				ToastCommons.mensaje("Pedido creado !");
+				ToastCommons.mensaje(us.translate('PEDIDO_CREADO'));
 				callPedidoIndividual();
 			}
 			var json = {};
