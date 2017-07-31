@@ -7,7 +7,7 @@
 
 	/** @ngInject */
 	function MenuController($scope, $log, $state, StateCommons, CTE_REST, $interval, ToastCommons,
-		perfilService, contextoCompraService) {
+		perfilService, contextoCompraService,us) {
 		$log.debug("MenuController ..... ");
 		$log.debug(StateCommons.ls.usuario);
 
@@ -40,7 +40,7 @@
 			vm.callNotificaciones = true;
 			vm.icon = 'notifications';
 			vm.fill = 'red';
-			ToastCommons.mensaje("Tenes una nueva notificacion")
+			ToastCommons.mensaje(us.translate('LLEGO_NOTIFICACION'))
 		}
 
 		$scope.$on('resetHeader', function(event, msg) {
