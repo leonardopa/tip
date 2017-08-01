@@ -24,13 +24,13 @@
 			"listaGruposCtrl.selected.canAddIntegrante",
 			function handleFooChange(
 				newValue, oldValue) {
-				console.log("watch ", newValue);
+
 				vm.canAddIntegrante = newValue
 			});
 		// // componente Chips
 
-		var pendingSearch, cancelSearch = angular.noop;
-		var cachedQuery, lastSearch;
+	//	var pendingSearch, cancelSearch = angular.noop;
+	//	var cachedQuery, lastSearch;
 
 		vm.allContacts;
 		//	loadContacts();
@@ -52,22 +52,22 @@
 			return function filterFn(contact) {
 				$log.debug(contact._lowername);
 				$log.debug(lowercaseQuery);
-				return (contact._lowername.indexOf(lowercaseQuery) != -1);;
-			};
+				return (contact._lowername.indexOf(lowercaseQuery) != -1);
+			}
 		}
 
 		vm.quitarMiembro = function(miembro) {
 			var nombre = miembro.nickname == null ? miembro.email : miembro.nickname;
 			// Esto es un resabio de la forma de cargar miembros que pronto va a ser modificado. 
-
+			var pregunta,confirmacion,fallo;
 			if (vm.isLoggedMember(miembro)) {
-				var pregunta = us.translate('SALIR_GRUPO');
-				var confirmacion = us.translate('SALIR');
-				var fallo = 'No pudo salir del grupo de compra';
+				pregunta = us.translate('SALIR_GRUPO');
+				confirmacion = us.translate('SALIR');
+				fallo = 'No pudo salir del grupo de compra';
 			} else {
-				var pregunta = us.translate('QUITAR_A') + nombre;
-				var confirmacion = us.translate('QUITARLO');
-				var fallo = 'No se pudo quitar a ' + nombre + ' del grupo de compra';
+				pregunta = us.translate('QUITAR_A') + nombre;
+				confirmacion = us.translate('QUITARLO');
+				fallo = 'No se pudo quitar a ' + nombre + ' del grupo de compra';
 			}
 
 			dialogCommons.confirm(us.translate('SALIR_GRUPO_TITULO'),
@@ -99,7 +99,7 @@
 		}
 
 		vm.callQuitarMiembro = function(miembro) {
-			function doOk(response) {
+			function doOk() {
 				ToastCommons.mensaje(us.translate('SE_QUITO_MIEMBRO'));
 				$scope.$emit("quito-miembro-grupo");
 				vm.grupo.miembros.splice(vm.grupo.miembros.indexOf(miembro), 1);
@@ -120,7 +120,7 @@
 		// al grupo por mail.
 		// 
 		// ----------- DESCOMENTADOS Y DESMOCKEADOS EN index.constants.js por FAVIO 13-6
-
+/*
 		function loadContacts() {
 
 			function doOk(response) {
@@ -138,11 +138,11 @@
 			gccService.integrantesGrupo(vm.idGrupo, {}).then(doOk)
 
 		}
-
+*/
 		vm.selfPara = function(miembro) {
 			if (us.isUndefinedOrNull(miembro.nickname)) return "";
 			return miembro.nickname + tagSelf(miembro.email == vm.grupo.emailAdministrador, us.translate('ADMIN')) +
-				tagSelf(vm.isLoggedMember(miembro),us.translate('TU'));
+				tagSelf(vm.isLoggedMember(miembro), us.translate('TU'));
 		}
 
 		function tagSelf(condicion, tag) {

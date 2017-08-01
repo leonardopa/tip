@@ -102,7 +102,8 @@
       .state('detalle-pedido', {
         url: '/detalle-pedido',
         templateUrl: 'app/comercio/carrito/detalle-pedido.html',
-        controller: 'DetallePedidoController'
+        controller: 'DetallePedidoController',
+        controllerAs : 'detallePedidoCtrl'
       })
       .state('catalogo', {
         url: '/catalogo',

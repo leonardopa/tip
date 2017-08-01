@@ -39,8 +39,6 @@
     vm.respuestaRest = "??????????";
 
     function sendName() {
-      console.log("-----------");
-
       $http.get("http://localhost:8081/chasqui-mock/ejemplo/api/producto/" + vm.nombre)
         .then(getContributorsComplete)
 
