@@ -6,7 +6,7 @@
 
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
 	function ListaGruposController($log, $scope, $state,
-		StateCommons, dialogCommons, ToastCommons, perfilService, gccService, CTE_REST, contextoCompraService) {
+		StateCommons, dialogCommons, ToastCommons, perfilService, gccService, CTE_REST, contextoCompraService, us) {
 
 		$log.debug("controler ListaGruposController");
 		StateCommons.ls.itemMenuSelect = 'lista-grupos';
