@@ -42,6 +42,13 @@ $colorConfirmar: #43a047;
     min-height: 440px !important;
 }
 
+
+
+.hoverable:hover{
+box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+
 .btn-confirmar{
 	background: $colorConfirmar !important;
 	color:white;	
@@ -81,6 +88,7 @@ md-tabs.md-default-theme .md-ink-bar, md-tabs md-ink-bar {
 	padding: 1rem 2rem;
 }
 
+
 .chq-color-toolbar{
 	background-color: $colorDos;
 	color: $colorUno;
@@ -94,5 +102,5 @@ md-tabs.md-default-theme .md-ink-bar, md-tabs md-ink-bar {
     width: 100%;
 }
 
-// =============== Agregado por favio 13-7 ==========================
+// =======================================
 

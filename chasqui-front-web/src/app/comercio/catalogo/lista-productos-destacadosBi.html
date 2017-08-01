@@ -1,0 +1,21 @@
+<div ng-controller="ListaProductosDestacadosController as ctrl" >
+
+	<md-card>
+		<md-card-title>
+			<h3 style="text-align:center;"> Productos destacados </h3>
+		</md-card-title>
+			<md-card-content layout="row">
+				<div ng-repeat="variante in ctrl.variantes">
+				
+					<img src="{{ctrl.urlbase}}{{variante.imagenPrincipal}}"  alt="">
+			</div>
+				</md-card-content>
+        </md-card>
+	</md-card>
+</div>
+<style>
+	.red{
+		background-color: red;
+		width: 50%;
+	}
+</style>
