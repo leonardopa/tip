@@ -27,27 +27,27 @@
 		}
 
 		vm.getProductosByCategoria = function(params) {
-			$log.debug(" service getProductosSinFiltro ");
+			$log.debug(" service getProductosByCategoria ");
 			return promiseService.doPostPublic(CTE_REST.productosByCategoria, params);
 		}
 
 		vm.getProductosByProductor = function(params) {
-			$log.debug(" service getProductosSinFiltro ");
+			$log.debug(" service getProductosByProductor ");
 			return promiseService.doPostPublic(CTE_REST.productosByProductor, params);
 		}
 
 		vm.getProductosByMedalla = function(params) {
-			$log.debug(" service getProductosSinFiltro ");
+			$log.debug(" service getProductosByMedalla ");
 			return promiseService.doPostPublic(CTE_REST.productosByMedalla, params);
 		}
 
 		vm.getProductosByMedallaProductor = function(params) {
-			$log.debug(" service getProductosSinFiltro ");
+			$log.debug(" service getProductosByMedallaProductor ");
 			return promiseService.doPostPublic(CTE_REST.productosByMedallaProductor, params);
 		}
 
 		vm.getProductosByQuery = function(params) {
-			$log.debug(" service getProductosSinFiltro ");
+			$log.debug(" service getProductosByQuery ");
 			return promiseService.doPostPublic(CTE_REST.productosByQuery, params);
 		}
 

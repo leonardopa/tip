@@ -304,6 +304,7 @@
 
 			function doOk(response) {
 				$log.log('findProductos Response ', response);
+				
 				vm.productos = response.data.productos;
 
 				vm.paging.total = Math.ceil(response.data.total / CANT_ITEMS);
