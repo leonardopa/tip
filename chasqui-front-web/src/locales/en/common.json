@@ -1,5 +1,21 @@
 {
-  "INFO": "Information",
-  "GENERIC_ERROR": "Unexpected error occurred. Please try again or contact support.",
-  "TRANS_EXA" : "This is an example of a translated text"
+  "INFO": "Información",
+  "GENERIC_ERROR": " ups ! , estamos trabajando para usted",
+  "TRANS_EXA" : "esto es un ejemplo de una texto traducido",
+  "GUARDAR" : "Guardar",
+  "NOMBRE" : "Nombre",
+  "APELLIDO" : "Apellido",
+  "APODO" : "Apodo",
+  "EMAIL" : "Correo",
+  "SI" : "Sí",
+  "NO" : "No",
+  "TU" : "Tú",
+  "DESCRIPCION" : "Descripción",
+  "CONTACTO" : "Contacto",
+  "DOMICILIO" : "DOMICILIO",
+  "CANCELAR" : "Cancelar",
+  "CANCELADO" : "Cancelado",
+  "CONFIRMAR" : "Confirmar",
+  "ENTIENDO" : "Entiendo",
+  "CERRAR" : "Cerrar"
 }

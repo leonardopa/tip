@@ -11,7 +11,7 @@
       restrict: 'E',
       templateUrl: 'app/comercio/demo/demo.tmpl.html',
       scope: {
-          numero: '='
+        numero: '='
       },
       controller: DemoDirectiveController,
       controllerAs: 'vm',
@@ -23,7 +23,7 @@
     /** @ngInject */
     function DemoDirectiveController($log) {
       var vm = this;
-  
+
       vm.numeroMasUno = parseInt(vm.numero) + 1;
     }
   }

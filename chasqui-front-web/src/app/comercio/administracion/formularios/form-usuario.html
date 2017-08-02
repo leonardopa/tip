@@ -1,9 +1,9 @@
- <div ng-controller="FormUsuarioController as ctrl" layout="column" ng-cloak class="md-inline-form">
+<div ng-controller="FormUsuarioController as ctrl" layout="column" ng-cloak class="md-inline-form">
 	<form name="usuarioForm">
 		<md-card>
 			<md-card-title>
 				<md-card-title-text>
-					<span ng-show="ctrl.isAlta" class="md-headline"> Registrate </span>
+					<span ng-show="ctrl.isAlta" class="md-headline"> Registrate </span> {{ctrl.me}}
 					<!-- 
 			<span  ng-show="! ctrl.isAlta"  class="md-headline"> Actualizar usuario </span> 
 			 -->
@@ -15,39 +15,37 @@
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 								<!-- ng-readonly="ctrl.readOnly" -->
-								<label>Nombre</label> <input ng-model="ctrl.user.nombre" ng-readonly="ctrl.readOnly" required> </md-input-container>
-
+								<label translate>NOMBRE</label>
+								<input ng-model="ctrl.user.nombre" ng-readonly="ctrl.readOnly" required> </md-input-container>
 							<md-input-container class="md-block" flex-gt-sm>
-								<label>Apellido</label> <input ng-model="ctrl.user.apellido" ng-readonly="ctrl.readOnly" required>
+								<label translate>APELLIDO</label>
+								<input ng-model="ctrl.user.apellido" ng-readonly="ctrl.readOnly" required>
 							</md-input-container>
-
 							<md-input-container class="md-block" flex-gt-sm>
-								<label>Apodo</label> <input ng-model="ctrl.user.nickName" ng-readonly="ctrl.readOnly" required>
+								<label translate>APODO</label>
+								<input ng-model="ctrl.user.nickName" ng-readonly="ctrl.readOnly" required>
 							</md-input-container>
-
 						</div>
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
-								<label>Email</label> <input type="email" ng-model="ctrl.user.email" ng-readonly="ctrl.readOnly" required> </md-input-container>
-
+								<label translate>EMAIL</label>
+								<input type="email" ng-model="ctrl.user.email" ng-readonly="ctrl.readOnly" required> </md-input-container>
 							<md-input-container class="md-block" flex-gt-sm>
-								<label>Telefono Movil</label> <input ng-model="ctrl.user.telefonoMovil" ng-readonly="ctrl.readOnly" required> </md-input-container>
-
+								<label translate>TEL_CEL</label>
+								<input ng-model="ctrl.user.telefonoMovil" ng-readonly="ctrl.readOnly" required> </md-input-container>
 							<md-input-container class="md-block" flex-gt-sm>
-								<label>Telefono fijo</label> <input ng-model="ctrl.user.telefonoFijo" ng-readonly="ctrl.readOnly" required> </md-input-container>
-
+								<label translate>TEL_FIJO</label>
+								<input ng-model="ctrl.user.telefonoFijo" ng-readonly="ctrl.readOnly" required> </md-input-container>
 						</div>
-
 						<div layout-gt-sm="row" ng-show="ctrl.isAlta">
 							<md-input-container class="md-block" flex-gt-sm>
-								<label>Contraseña</label> <input type="password" ng-model="ctrl.user.password" ng-readonly="ctrl.readOnly" required>
+								<label translate>PASS</label>
+								<input type="password" ng-model="ctrl.user.password" ng-readonly="ctrl.readOnly" required>
 							</md-input-container>
-
 							<md-input-container class="md-block" flex-gt-sm>
-								<label>Repetir Contraseña</label> <input type="password" ng-model="ctrl.passVerificacion" ng-readonly="ctrl.readOnly"
-								 required>
+								<label translate>REP_PASS</label>
+								<input type="password" ng-model="ctrl.passVerificacion" ng-readonly="ctrl.readOnly" required>
 							</md-input-container>
-
 						</div>
 					</div>
 				</md-content>
@@ -55,26 +53,24 @@
 			<md-card-actions layout="row" layout-align="end center">
 				<md-button class="btn-confirmar" ng-click="ctrl.actualizar()" ng-show="! ctrl.isAlta && ctrl.isModoEdit">
 					<md-icon style="color:white"> done </md-icon>
-					<md-tooltip md-direction="left">
-						aceptar cambios de datos de usuario
+					<md-tooltip md-direction="left" >
+						<label translate="ACEP_CAMB_USR_MSG"></label>
 					</md-tooltip>
 				</md-button>
 				<md-button ng-click="ctrl.noActualizar()" ng-show="! ctrl.isAlta && ctrl.isModoEdit">
 					<md-icon> undo </md-icon>
 					<md-tooltip md-direction="left">
-						dejar como estaba
+						<label translate="NO_MOD_MSG"></label>				
 					</md-tooltip>
 				</md-button>
 				<md-button ng-click="ctrl.edit()" ng-show="! ctrl.isAlta && !ctrl.isModoEdit">
 					<md-icon> mode_edit </md-icon>
-					<md-tooltip md-direction="left">
-						puedes editar tus datos personales
+					<md-tooltip md-direction="left" >
+						<label translate="PUEDES_EDITAR_MSG"></label>
 					</md-tooltip>
 				</md-button>
-
-				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ctrl.isAlta" ng-click="ctrl.guardar()"> Registrarme </md-button>
-
-				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ! ctrl.isAlta" ng-click="ctrl.actualizar()"> Actualizar </md-button>
+				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ctrl.isAlta" ng-click="ctrl.guardar()" translate="REG">  </md-button>
+				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ! ctrl.isAlta" ng-click="ctrl.actualizar()"  translate="ACT">  </md-button>
 			</md-card-actions>
 		</md-card>
 	</form>
