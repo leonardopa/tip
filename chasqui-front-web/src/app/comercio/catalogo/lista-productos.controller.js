@@ -248,14 +248,8 @@
 			function doNoOk() {
 				$log.debug("Cancelo Agregar")
 			}
-
-<<<<<<< HEAD
-			dialogCommons.prompt('Agregar al changuito', 'Cuantos '+variante.nombreProducto + ' necesitas ?',
-					'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
-=======
 			dialogCommons.prompt('Agregar al changuito', 'Cuantos ' + variante.nombreProducto + ' mecesitas ?',
 				'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
->>>>>>> 266968e1acb571d9b22f247b50edb06fc28be56b
 		}
 
 
@@ -269,11 +263,7 @@
 			var doOk = function(response) {
 				$log.log('Agregar producto Response ', response);
 
-<<<<<<< HEAD
-				ToastCommons.mensaje("¡Producto agregado!");
-=======
 				ToastCommons.mensaje(us.translate('PRODUCTO_AGREGADO'));
->>>>>>> 266968e1acb571d9b22f247b50edb06fc28be56b
 				$rootScope.$emit('lista-producto-agrego-producto');
 
 			}
@@ -404,13 +394,8 @@
 		}
 
 		// findProductos();
-<<<<<<< HEAD
-		if (! utilsService.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)){
-			$log.debug("tiene una variante seleccionada" ,contextoCompraService.ls.varianteSelected )
-=======
 		if (!us.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
 			$log.debug("tiene una variante seleccionda", contextoCompraService.ls.varianteSelected)
->>>>>>> 266968e1acb571d9b22f247b50edb06fc28be56b
 			vm.agregar(contextoCompraService.ls.varianteSelected)
 			contextoCompraService.ls.varianteSelected = undefined;
 		}
