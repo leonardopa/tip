@@ -1,35 +1,25 @@
 <header class="nav-header nav-header-sticky">
-	<div ng-controller="MenuController as menuCtrl"  >
-
+	<div ng-controller="MenuController as menuCtrl">
 		<md-toolbar class="md-medium-tall bg-white">
 			<div class="md-toolbar-tools">
 				<a ui-sref="principal"> 					
 					<img ng-src="app/components/image/logo_ch.png" style="padding-top: 50px;"> </a>
 				<span flex></span>
-
 				<md-button ng-show="menuCtrl.isLogued" ng-click="menuCtrl.verNotificaciones()">
 					<ng-md-icon options="{{menuCtrl.options}}" id="icon" icon="{{menuCtrl.icon}}" style="fill: {{menuCtrl.fill}}" />
-
 					<md-tooltip style="color:#fff" md-direction="left">
-						Notificaciones sin leer {{menuCtrl.notificacionesSinLeer}} </md-tooltip>
-
+						 {{'SIN_LEER' | translate}} {{menuCtrl.notificacionesSinLeer}} </md-tooltip>
 				</md-button>
-
 				<h2 class="md-title" style="color:white ;" ng-show="menuCtrl.isLogued">{{menuCtrl.usuario.nickname}}</h2>
-
-				<md-button class="md-raised" ng-click="menuCtrl.ir('login')" ng-show="! menuCtrl.isLogued"> Ingresa </md-button>
-
+				<md-button class="md-raised" ng-click="menuCtrl.ir('login')" ng-show="! menuCtrl.isLogued">  {{'INGRESA' | translate}}   </md-button>
 				<md-button class="md-secondary" ng-click="menuCtrl.logOut()" ng-show="menuCtrl.isLogued">
 					<md-icon style="color:white"> exit_to_app </md-icon>
 				</md-button>
-
 			</div>
 		</md-toolbar>
-
 		<div class="menu" layout="row" layout-align="center center">
-
 			<md-button class="{{menuCtrl.classFor('bienvenido')}}" ng-click="menuCtrl.ir('bienvenido')">
-				<b>Bienvenido</b> </md-button>
+				<b> {{'MENU_BIENVENIDO' | translate}}</b> </md-button>
 			<span>|</span>
 			<!-- <md-button class="{{menuCtrl.classFor('emprendedores')}}" ng-click="menuCtrl.ir('emprendedores')">
 				productores </md-button> -->
@@ -38,26 +28,21 @@
 				C&oacutemo comprar </md-button>
 			<span>|</span> -->
 			<md-button class="{{menuCtrl.classFor('catalogo')}}" ng-click="menuCtrl.ir('catalogo')">
-				<b>catalogo</b> </md-button>
-            <div ng-show="menuCtrl.isLogued">
-                <span>|</span>
-                
-                <md-button class="{{menuCtrl.classFor('lista-pedidos')}}" ng-click="menuCtrl.ir('lista-pedidos')">
-                    <b>Mis pedidos</b> 
-                </md-button>
-                
-                <span>|</span>
-                
-                <md-button class="{{menuCtrl.classFor('lista-grupos')}}" ng-click="menuCtrl.ir('lista-grupos')">
-                    <b>Mis Grupos</b>
-                </md-button>
-                
-                <span>|</span>
-                
-                <md-button class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')">
-                    <b>Perfil</b>
-                </md-button>            
-            </div>
+				<b>{{'MENU_CATALOGO' | translate}}</b> </md-button>
+			<div ng-show="menuCtrl.isLogued">
+				<span>|</span>
+				<md-button class="{{menuCtrl.classFor('lista-pedidos')}}" ng-click="menuCtrl.ir('lista-pedidos')">
+					<b>{{'MENU_PEDIDO' | translate}} </b>
+				</md-button>
+				<span>|</span>
+				<md-button class="{{menuCtrl.classFor('lista-grupos')}}" ng-click="menuCtrl.ir('lista-grupos')">
+					<b>{{'MENU_GRUPO' | translate}}</b>
+				</md-button>
+				<span>|</span>
+				<md-button class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')">
+					<b> {{'MENU_PERFIL' | translate}} </b>
+				</md-button>
+			</div>
 		</div>
 		<md-divider></md-divider>
 	</div>

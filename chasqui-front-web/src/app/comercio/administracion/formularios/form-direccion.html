@@ -8,9 +8,7 @@
 							<label translate>ALIAS</label>
 							<input ng-model="ctrl.domicilio.alias">
 						</md-input-container>
-						
 					</div>
-
 					<div layout-gt-sm="row">
 						<md-input-container class="md-block" flex="40">
 							<label translate>CALLE</label>
@@ -29,52 +27,42 @@
 							<input ng-model="ctrl.domicilio.localidad" placeholder="localidad">
 						</md-input-container>
 					</div>
-
 					<div layout-gt-sm="row">
 						<md-input-container class="md-block" flex-gt-sm>
 							<label translate>CP</label>
 							<input ng-model="ctrl.domicilio.codigoPostal">
-							<md-button ng-href="http://www.nexo.com.ar/codigosPostales.asp"
-							target="_blank" translate="NO_SE_CP"></md-button>
+							<md-button ng-href="http://www.nexo.com.ar/codigosPostales.asp" target="_blank" translate="NO_SE_CP"></md-button>
 						</md-input-container>
 						<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> -->
 						<md-input-container class="md-block" flex-gt-sm>
 							<label translate>LOG</label>
 							<input ng-model="ctrl.domicilio.longitud">
 						</md-input-container>
-
 						<md-input-container class="md-block" flex-gt-sm>
 							<label translate>LAT</label>
 							<input ng-model="ctrl.domicilio.latitud">
 						</md-input-container>
 					</div>
-
 					<code ng-show='{{ctrl.domicilio.predeterminada}}' translate>
 					DOM_PRED</code>
-
 				</form>
 			</div>
 		</md-content>
-
 		<md-card-actions layout="row" layout-align="end center">
 			<md-button ng-click="ctrl.eliminar()">
 				<md-icon> remove_circle_outline </md-icon>
 				<md-tooltip md-direction="left"> eliminar domicilo </md-tooltip>
 			</md-button>
-
 			<md-button ng-click="ctrl.marcarPredeterminado()">
 				<md-icon> compare_arrows </md-icon>
 				<md-tooltip md-direction="left"> marcar como domicilo principal </md-tooltip>
 			</md-button>
-
 			<!--  
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
 				-->
-
 			<md-button ng-disabled=isDisabled() class="btn-confirmar" ng-click="ctrl.guardar()">
 				Confirmar
 			</md-button>
-
 		</md-card-actions>
 	</md-card>
 </div>

@@ -29,8 +29,8 @@
 	<section>
 		<md-subheader class="md-accent">
 			<md-icon> message </md-icon>
-			Notificaciones  </md-subheader>
-			
+			<label translate="NOTIFICACIONES"></label>
+		</md-subheader>
 		<md-list>
 			<md-list-item class="md-3-line" ng-repeat="item in perfilCtrl.notificaciones">
 				<div class="md-list-item-text">
@@ -43,7 +43,8 @@
 				 ng-click="perfilCtrl.marcarLeido(item)">
 					<md-icon> done </md-icon>
 					<md-tooltip md-direction="left">
-						Entiendo </md-tooltip>
+						<label translate="ENTIENDO"></label>
+					</md-tooltip>
 				</md-button>
 
 				<md-button  ng-show="item.mensaje == 'Te han invitado a un grupo de compras colectivas' && item.estado == 'NOTIFICACION_NO_LEIDA'" class="md-secondary" 

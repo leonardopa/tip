@@ -2,13 +2,14 @@
 	'use strict';
 
 	angular.module('chasqui').controller('FormUsuarioController',
-			FormUsuarioController);
+		FormUsuarioController);
 
 	/**
 	 * @ngInject Formulario para crear un grupo
 	 */
 	function FormUsuarioController($log, $state,
-			ToastCommons, StateCommons, $scope, $timeout, perfilService) {
+		ToastCommons, StateCommons, $scope, $timeout, perfilService,
+		us) {
 		$log.debug("controler FormUsuarioController", $scope.perfil);
 
 		var vm = this;
@@ -17,30 +18,28 @@
 		vm.passVerificacion;
 
 		vm.isAlta = $scope.perfil != true; // si crea un usuario nuevo o es un
-											// update. Si viene de perfil es
-											// UPDATE
+		// update. Si viene de perfil es
+		// UPDATE
 		vm.readOnly = !vm.isAlta; // si es alta siempre false, sino depende el
-									// modo.
+		// modo.
 		vm.isModoEdit = false;
 
 		function mostrarMensajesDeBienvenida() {
 
 			$timeout(function() {
-				ToastCommons.mensaje('Bienvenido !');
+				ToastCommons.mensaje(us.translate('BIENVENIDO'));
 			}, 3000);
 
 			$timeout(function() {
-				ToastCommons.mensaje('Ahora podes ingresar a CHASQUI !');
+				ToastCommons.mensaje(us.translate('INGRESA_MSG'));
 			}, 10000);
 
-			$timeout(
-					function() {
-						ToastCommons
-								.mensaje('Reciviras un mensaje de bienvenida por correo !');
-					}, 15000);
+			$timeout(function() {
+				ToastCommons.mensaje(us.translate('CORREO_MSG'));
+			}, 15000);
 
 			$timeout(function() {
-				ToastCommons.mensaje('Podes seguir completando tu perfil !');
+				ToastCommons.mensaje(us.translate('COMPL_PERFIL_MSG'));
 			}, 30000);
 		}
 
@@ -79,7 +78,7 @@
 		// ///////// llamadas
 
 		vm.callVerUsuario = function() {
-		
+
 			function doOk(response) {
 				$log.debug("callVerUsuario", response);
 				vm.user = response.data;
@@ -91,11 +90,11 @@
 		vm.callActualizarUsuario = function() {
 
 			function doOk(response) {
-				ToastCommons.mensaje('Se actualizo con exito');
+				ToastCommons.mensaje(us.translate('ACTUALIZO_PERFIL_MSG'));
 			}
 			delete vm.user['direccion'];
 			delete vm.user['email'];
-			$log.debug("***************", vm.user);
+		
 			// TODO : manejar error
 			// ToastCommons.mensaje('Falla actulizar. Ver Trello');
 
@@ -119,17 +118,17 @@
 					// $rootScope.$broadcast("creo-usuario-nuevo", { user:
 					// response.data });
 					$scope.$emit("creo-usuario-nuevo", {
-						user : response.data
+						user: response.data
 					});
 
-				}				
-				
+				}
+
 				perfilService.singUp(vm.user).then(doOk)
-				
+
 			} else {
 				$log.error("las contrasenas no coinciden");
 				// TODO: enviar mensaje
-				ToastCommons.mensaje('Las contrasenias no coinciden')
+				ToastCommons.mensaje(us.translate('PASS_INCORRECTO_MSG'))
 			}
 		}
 

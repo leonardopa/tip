@@ -21,11 +21,11 @@
 		}
 
 		findProductos();
-        
-        vm.mostrarDecimales = function(parteDecimal){
-            var res = Number(parteDecimal).toFixed(0).toString();      
-            if(res.length == 1) res+= "0";
-            return res;
-        }
+
+		vm.mostrarDecimales = function(parteDecimal) {
+			var res = Number(parteDecimal).toFixed(0).toString();
+			if (res.length == 1) res += "0";
+			return res;
+		}
 	}
 })();
