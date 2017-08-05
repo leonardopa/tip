@@ -248,7 +248,6 @@
 			function doNoOk() {
 				$log.debug("Cancelo Agregar")
 			}
-
 			dialogCommons.prompt('Agregar al changuito', 'Cuantos ' + variante.nombreProducto + ' mecesitas ?',
 				'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
 		}

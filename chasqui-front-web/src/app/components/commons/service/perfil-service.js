@@ -90,6 +90,11 @@
 			$log.debug(" service editUsuario ");
 			return promiseService.doPut(CTE_REST.editUsuario, user);
 		}
+        
+        vm.editAvatar = function(avatar){
+            $log.debug(" service editAvatar ");
+			return promiseService.doPost(CTE_REST.editAvatar, avatar);
+		}
 
 		vm.singUp = function(user) {
 			$log.debug(" service singUp ");
