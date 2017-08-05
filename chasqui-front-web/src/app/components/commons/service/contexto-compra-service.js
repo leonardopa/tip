@@ -2,13 +2,22 @@
 	'use strict';
 
 	angular.module('chasqui').service('contextoCompraService', contextoCompraService);
-
+	/** Orquesta grupos y pedidos
+		- Utils con Logica que podria estar en backend
+		- Cache para evitar llamadas continuas
+		- La cache limpia automaticamente 
+				- a los N segundos
+				- ante un F5 del browser
+				- cuando llega una notificacion (supone algun cambio)
+		- La cache se puede limpiar manualmente cuando se llama un servicio que se 
+		sabe impacta en datos, por ejemplo borrar miembro.
+		 */
 	function contextoCompraService($log, us, StateCommons, $localStorage, productoService, gccService, $q, $timeout, $rootScope) {
 		var vm = this;
 		//alert("contextoCompraService")
 		vm.ls = $localStorage;
 
-		// Representa el conepto de grupo indivial para el caso de que no tiene un pedido abierto
+		// Representa el concepto de grupo indivial para el caso de que no tiene un pedido abierto
 		var gIndividualFicticio = {}
 		gIndividualFicticio.alias = "Personal";
 		gIndividualFicticio.esAdministrador = false;
@@ -19,9 +28,10 @@
 		vm.ls.varianteSelected;
 		vm.ls.pedidos = undefined;
 		vm.ls.grupos = undefined;
-		var tieneEnChache = false;
+		//var tieneEnChache = false;
 
-
+		window.getGrupos= 0;
+		window.getPedidos=0;
 
 		vm.getGrupos = function() {
 			var defered = $q.defer();
@@ -31,8 +41,9 @@
 				$log.debug("tiene grupos en cache", vm.ls.grupos)
 				defered.resolve(vm.ls.grupos);
 			} else {
-				function doOK(response) {
-					$log.debug("NO tiene grupos en cache, fue a buscar", response.data)
+				$log.debug("NO tiene grupos en cache")
+				function doOK(response) {					
+					window.getGrupos++;
 					vm.ls.grupos = [gIndividualFicticio];
 					vm.ls.grupos = vm.ls.grupos.concat(response.data);
 					defered.resolve(vm.ls.grupos);
@@ -51,9 +62,9 @@
 				$log.debug("tiene pedidos en cache", vm.ls.pedidos)
 				defered.resolve(vm.ls.pedidos);
 			} else {
-
-				function doOkPedido(response) {
-					$log.debug("NO tiene pedidos en cache, fue a buscar", response.data)
+				$log.debug("NO tiene pedidos en cache, fue a buscar")
+				function doOkPedido(response) {					
+					window.getPedidos++;
 					vm.ls.pedidos = response.data;
 					vm.setContextoByGrupo(vm.ls.grupoSelected);
 					//$rootScope.$emit('contexto.pedido.actualizar');
@@ -80,12 +91,13 @@
 		}
 
 		vm.reset = function() {
+			$log.debug("reset contexto");
 			vm.ls.grupoSelected = gIndividualFicticio;
 			vm.ls.pedidoSelected = undefined;
 			vm.ls.varianteSelected = undefined;
 			vm.ls.pedidos = undefined;
 			vm.ls.grupos = undefined;
-			tieneEnChache = false;
+			//tieneEnChache = false;
 		}
 
 		vm.refresh = function() {
@@ -94,11 +106,13 @@
 		}
 
 		vm.refreshPedidos = function() {
+			$log.debug("refreshPedidos");
 			vm.ls.pedidos = undefined;
 			return vm.getPedidos();
 		}
 
 		vm.refreshGrupos = function() {
+			$log.debug("refreshGrupos");
 			vm.ls.grupos = undefined;
 			return vm.getGrupos();
 		}
@@ -110,11 +124,11 @@
 		}
 
 		vm.setContextoByGrupo = function(grupo) {
-			console.log("setContextoByGrupo")
+			$log.debug("setContextoByGrupo",grupo)
 			vm.ls.grupoSelected = grupo;
 			// TODO y setear el pedido
 			vm.ls.pedidoSelected = getPedidoByGrupo(grupo);
-
+			$log.debug("pedidoSelected es ",vm.ls.pedidoSelected);
 			$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
 		}
 
@@ -243,7 +257,11 @@
 
 		////////////////////
 		////////// INIT 
-		if (StateCommons.isLogued()) vm.refresh();
-
+		//if (StateCommons.isLogued()) vm.refresh();
+		$(window).unload(function() {
+			$log.debug("reset por F5");
+			vm.ls.pedidos = undefined;
+			vm.ls.grupos = undefined;
+		});
 	} // function
 })(); // anonimo

@@ -170,6 +170,6 @@
 
 		initHeader();
 
-		if (vm.isLogued) contextoCompraService.refresh();
+	///	if (vm.isLogued) contextoCompraService.refresh();
 	}
 })();

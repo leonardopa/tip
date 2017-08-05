@@ -158,8 +158,9 @@
 
 			}
 
-			// gccService.gruposByusuario().then(doOk)
-			contextoCompraService.refreshGrupos().then(doOk);
+			// gccService.gruposByusuario().then(doOk)			
+			//contextoCompraService.refreshGrupos().then(doOk);
+			contextoCompraService.getGrupos().then(doOk);
 		}
 
 		function callQuitarMiembro(miembro) {
