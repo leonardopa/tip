@@ -1,43 +1,31 @@
-  
-<div class="wrapper">
-		
-			
-			<span class="md-headline">Mis pedidos en progreso </span>
-				<md-button ng-click="listaPedidoCtrl.crearPedidoIndividual()">
-				<i style="font-size: 48px;" class="material-icons">add_circle_outline</i>				 
-					<md-tooltip md-direction="left">
-						Nuevo pedido
-					</md-tooltip>
-				</md-button>		
-			 
-				
-				<div 
-					class="sample" layout="column" ng-cloak>
-					<md-content>
-					<md-content class="md-padding"> 
-						<md-tabs md-selected="listaPedidoCtrl.selectedIndex" 
-							 md-dynamic-height md-border-bottom>
-							<md-tab ng-repeat="tab in listaPedidoCtrl.tabs"
-								ng-disabled="tab.disabled" label="{{tab.nombre}}">
-				
-								 <md-content class="md-padding">
-									
-									 <div ng-include="'app/comercio/carrito/detalle-pedido.html'" 
-									 ng-init="pedido = tab"/>	
-									 						
-								 </md-content>
-						 
-							</md-tab> 						 
-						</md-tabs>
-						
-					</md-content>
-					</md-content>
-				</div>
-				
-		 
-
-		</div>
-		
-		
-
-</div>	
+<div class="ch-content">
+    <md-card>
+        <md-content flex layout-padding ng-show="listaPedidoCtrl.tabs.length==0" style="min-height: 100px">
+            <p>
+                <label translate="SIN_PEDIDO_MSG_1"/>
+                <a class="md-accent" href="/#/catalogo">
+                    <label translate="SIN_PEDIDO_MSG_2"/>
+                </a>
+                <label translate="SIN_PEDIDO_MSG_3"/>
+                    <a class="md-accent" href="/#/lista-grupos">
+                        <label translate="SIN_PEDIDO_MSG_4"/>
+                    </a>
+            </p>
+        </md-content>
+    </md-card>
+    <!-- entiendo que no es necesario crear el pedido manualmente 
+    <md-button ng-click="listaPedidoCtrl.crearPedidoIndividual()">
+        <i style="font-size: 48px;" class="material-icons">add_circle_outline</i>
+        <md-tooltip md-direction="left">
+            Nuevo pedido
+        </md-tooltip>
+    </md-button>
+-->
+    <md-tabs md-selected="listaPedidoCtrl.selectedIndex" md-dynamic-height md-border-bottom>
+        <md-tab ng-repeat="tab in listaPedidoCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.aliasGrupo == null ? 'Individual' : tab.aliasGrupo }}">
+            <md-content class="md-padding">
+                <div ng-include="'app/comercio/carrito/detalle-pedido.html'" ng-init="pedido = tab" />
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>

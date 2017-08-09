@@ -1,47 +1,100 @@
-.md-toolbar-tools {
-	background: #32373F !important;
-	height: 40em !important;
-	padding: 2.5em 0 !important;
+$colorUno: #462342;
+$colorDos: #468385;
+$colorConfirmar: #43a047;
+// https://www.materialpalette.com/colors
+.body {
+	//background: linear-gradient(#F7F7F7,#D7D7D7) !important;
+	//background-color: #462342 !important;
 }
 
-.menu  {
-  background: #bdcbcd !important;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, .3);
-  color-font: #ffffff !important;
-}
-//.md-button{
-// 	color: #fff !important;
-// 	font-size: 1.1em !important;
-//}
-.md-button:hover{
-	color: #fff !important;
-	text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+.menu {
+	//background: linear-gradient(#F7F7F7, #D7D7D7) !important;
+	background-color: $colorUno;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, .3);
+	color: #ffffff !important;
 }
 
-.menu .md-accent{
-	color: #fff !important;
-	text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+.titulo-pagina {
+	//font-size: 50px;
 }
 
-.md-title {
-  color-font: #ffffff !important;
+.bg-white {
+	/*background: #C7C7CC !important;*/
+	//background: linear-gradient(#462342,#D7D7D7) !important;
+	background-color: $colorUno !important;
 }
 
-.md-raised {
-  color-font: #ffffff !important;
+.btn-compra {
+	background: $colorConfirmar !important;
+	color: white;
+	p {
+		padding: 0;
+		margin: 0;
+	}
 }
 
-.medallas{
-	margin: 1.3em !important;
+.btn-agregar {
+	background: $colorDos !important;
+	color: white;
 }
 
-.pchasqui{
-	text-align: justify;
+.alt-catalogo {
+	min-height: 440px !important;
 }
 
-.wrapper{
-	margin: 4em auto;
-	max-width: 1024px;
+.btn-confirmar {
+	background: $colorConfirmar !important;
+	color: white;
+}
+
+.md-accent {
+	color: $colorDos !important;
+}
+
+.md-active {
+	color: $colorDos !important;
+}
+
+.md-ink-bar {
+	color: $colorUno !important;
+	background: $colorDos !important;
+}
+
+md-tabs.md-default-theme .md-ink-bar,
+md-tabs md-ink-bar {
+	color: $colorUno !important;
+	background-color: $colorDos !important;
+}
+
+.btn-compra {
+	padding: 0 0.5em !important;
+}
+
+.md-theme-indigo {
+	h1 {
+		color: $colorUno !important;
+	}
+	color: $colorUno !important;
+	background-color: $colorDos !important;
 }
 
 
+.footer {
+	background-color: #2F3539 !important;
+	padding: 1rem 2rem;
+}
+
+.chq-color-toolbar {
+	background-color: $colorDos;
+	color: $colorUno;
+}
+
+.chq-paginador {
+	padding-top: 6rem !important;
+}
+
+.img {
+	width: 100%;
+}
+
+// =============== Agregado por favio 13-7 ==========================

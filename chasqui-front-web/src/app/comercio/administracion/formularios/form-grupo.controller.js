@@ -1,38 +1,70 @@
 (function() {
-	'use strict';
+  'use strict';
 
-	angular.module('chasqui').controller('FormGrupoController',
-			FormGrupoController);
+  angular.module('chasqui').controller('FormGrupoController',
+    FormGrupoController);
 
-	/** @ngInject
-	 * Formulario para crear un grupo */
-	function FormGrupoController($http, $log, $scope, $mdDialog, $mdMedia,$state,restProxy, CTE_REST) {
-		$log.debug("controler FormGrupoController");
-		var vm = this;
+  /**
+   * @ngInject Formulario para crear un grupo
+   */
+  function FormGrupoController($log, $scope, $state, gccService, StateCommons, us, contextoCompraService) {
+    $log.debug("controler FormGrupoController", $state.params);
+    var vm = this;
 
-		vm.grupo;
-		// la direccion del grupo es la misma que la del usuairio que lo administra
-		vm.isDireccionUsuario = true;
+    vm.grupo;
+    vm.user = StateCommons.ls.usuario;
+    // la direccion del grupo es la misma que la del usuairio que lo
+    // administra
+    vm.isDireccionUsuario = true;
 
-		vm.guardar = function() {
-			$log.debug("guardar grupo", vm.grupo);
- 
-			function doOk(response) {
-				$log.debug("respuesta guardar grupo ", response);
-				
-				// TODO: guardar el id del grupo creado
-				
-				if (vm.isDireccionUsuario){
-					$state.go("lista-grupos");
-				}else{
-					$state.go("form-domicilio");
-				}
-				
-			};
-			// TODO : SACAR USUARIO HARCODEADO
-			restProxy.post(CTE_REST.gruposByusuario(1), vm.grupo ,doOk);
 
-		}
-	}
+    if (us.isUndefinedOrNull($state.params.grupo)) {
+      vm.isEdit = false;
+    } else {
+      vm.isEdit = true;
+      vm.grupo = $state.params.grupo;
+    }
+
+    vm.guardar = function() {
+      if (vm.isEdit) {
+        callEditarGrupo();
+      } else {
+        callGuardarGrupo();
+      }
+    }
+
+    var callGuardarGrupo = function() {
+      $log.debug("guardar grupo", vm.grupo);
+
+      function doOk(response) {
+        $log.debug("respuesta guardar grupo ", response);
+        contextoCompraService.refresh();
+        // TODO: guardar el id del grupo creado
+
+        if (vm.isDireccionUsuario) {
+          $state.go("lista-grupos");
+        } else {
+          $state.go("form-domicilio");
+        }
+
+      }
+
+      gccService.nuevoGrupo(vm.grupo).then(doOk)
+    }
+
+    var callEditarGrupo = function() {
+      $log.debug("editar grupo", vm.grupo);
+
+      function doOk(response) {
+        contextoCompraService.refresh();
+        $state.go("lista-grupos");
+      }
+      //alias, idDomicilio, telefono, calle, numero, codigoPostal, localidad, provincia , token 
+      var params = {}
+      params.alias = vm.grupo.alias
+      params.descripcion = vm.grupo.descripcion
+      gccService.editarGrupo(vm.grupo.idGrupo, params).then(doOk)
+    }
+  }
 
 })();

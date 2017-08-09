@@ -1,67 +1,59 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('chasqui')
-    .controller('EmprenController',EmprenController);
+	angular
+		.module('chasqui')
+		.controller('EmprenController', EmprenController);
 
-  /** @ngInject */
-  function EmprenController( $log,$stateParams,restProxy, CTE_REST,$state,StateCommons) {
-	  $log.debug('EmprenController ..... ',$stateParams.id); 
-	  StateCommons.ls.itemMenuSelect = 'emprendedores'; 
-	   var vm = this
-	   
-	   vm.urlBase=CTE_REST.url_base;
-	   vm.idEmprendedor = $stateParams.id;
-	   vm.isCollapsed = true;
-	   
-	   vm.emprendedor;
-	   vm.emprendedores;
-	   vm.isVistaUnica=false;
-	   
-	   ///////////////// Eventos
-	   
-	   vm.verMas=function (item){
-		   $log.debug("---ver mas ---",item);
-		   
-		   vm.emprendedor= item;
-		   vm.medallas=[item.medalla];
-		   vm.isVistaUnica=true;
-	   }
-	   
-	   /////////////////
-	   
-	  
-	   
-	   function callEmprendedores() {
+	/** @ngInject */
+	function EmprenController($log, $stateParams, CTE_REST, $state, StateCommons, productorService, ToastCommons, us) {
+		$log.debug('EmprenController ..... ', $stateParams.id);
+		StateCommons.ls.itemMenuSelect = 'emprendedores';
+		var vm = this
+
+		vm.urlBase = CTE_REST.url_base;
+		vm.idEmprendedor = $stateParams.id;
+		vm.isCollapsed = true;
+
+		vm.emprendedor;
+		vm.emprendedores;
+		vm.isVistaUnica = false;
+
+		// /////////////// Eventos
+
+		vm.verDetalle = function(item) {
+			vm.emprendedor = item;
+			console.log(item.medalla)
+			console.log(angular.isUndefined(item.medalla))
+			if (!us.isUndefinedOrNull(item.medalla)) {
+				vm.medallas = [item.medalla]; // Por alguna razon mandan una sola
+				// medalla
+			}
+			vm.isVistaUnica = true;
+		}
+
+
+		vm.verMas = function() {
+			$log.debug("---ver mas ---");
+
+			vm.emprendedor = undefined;
+			vm.medallas = [];
+			vm.isVistaUnica = false;
+		}
+
+		// ///////////////
+
+
+
+		function callEmprendedores() {
 			$log.debug("---callEmprendedor ---");
 
-			function doOk(response) {
-				$log.debug("---callEmprendedor ---",response.data);
-				//vm.categorias = response.data;
-				
-				vm.emprendedores= response.data;
-			}
-            restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
-	   }
-	   
-	   
-	   
-	   ///// TODO: en realidad deberia venir dentro del productor
-	   function callMedallas() {
-			$log.debug("---callMedallas ---");
+			productorService.getProductores()
+				.then(function(data) { vm.emprendedores = data.data; })
+		}
 
-			function doOk(response) {				 
-				vm.medallas = response.data;
-		//		vm.productorSelect =vm.productores[0]; 
-			}
-			
-			// TODO: hacer el ID de VENDEDOR dinamico
-			restProxy.get(CTE_REST.medallas,{},doOk);		    
-	  }
-	   
 
-	   callEmprendedores();
-  
-  }
+		callEmprendedores();
+
+	}
 })();

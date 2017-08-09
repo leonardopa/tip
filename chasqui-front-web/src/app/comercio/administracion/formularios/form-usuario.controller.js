@@ -2,45 +2,49 @@
 	'use strict';
 
 	angular.module('chasqui').controller('FormUsuarioController',
-			FormUsuarioController);
+		FormUsuarioController);
 
 	/**
 	 * @ngInject Formulario para crear un grupo
 	 */
-	function FormUsuarioController($log, $state, restProxy, CTE_REST,ToastCommons,StateCommons,$scope,$timeout) {
-		$log.debug("controler FormUsuarioController",$scope.perfil);
-		 
+	function FormUsuarioController($log, $state,
+		ToastCommons, StateCommons, $scope, $timeout, perfilService,
+		us) {
+		$log.debug("controler FormUsuarioController", $scope.perfil);
+
 		var vm = this;
 
 		vm.user = {};
 		vm.passVerificacion;
-		
-		vm.isAlta=$scope.perfil != true;    // si crea un usuario nuevo o es un update. Si viene de perfil es UPDATE 
-		vm.readOnly=! vm.isAlta; // si es alta siempre false, sino depende el modo.
-		vm.isModoEdit = false; 
-		
-		function mostrarMensajesDeBienvenida(){
-			
-			$timeout(function(){
-				ToastCommons.mensaje('Bienvenido !');
-			 }, 3000);
-			
-			$timeout(function(){
-				ToastCommons.mensaje('Ahora podes ingresar a CHASQUI !');
-			 }, 10000);
-								
-			$timeout(function(){
-				 ToastCommons.mensaje('Reciviras un mensaje de bienvenida por correo !');
-			 }, 15000);
-			
-			$timeout(function(){
-				 ToastCommons.mensaje('Podes seguir completando tu perfil !');
-			 }, 30000);
+
+		vm.isAlta = $scope.perfil != true; // si crea un usuario nuevo o es un
+		// update. Si viene de perfil es
+		// UPDATE
+		vm.readOnly = !vm.isAlta; // si es alta siempre false, sino depende el
+		// modo.
+		vm.isModoEdit = false;
+
+		function mostrarMensajesDeBienvenida() {
+
+			$timeout(function() {
+				ToastCommons.mensaje(us.translate('BIENVENIDO'));
+			}, 3000);
+
+			$timeout(function() {
+				ToastCommons.mensaje(us.translate('INGRESA_MSG'));
+			}, 10000);
+
+			$timeout(function() {
+				ToastCommons.mensaje(us.translate('CORREO_MSG'));
+			}, 15000);
+
+			$timeout(function() {
+				ToastCommons.mensaje(us.translate('COMPL_PERFIL_MSG'));
+			}, 30000);
 		}
-				
-		
-		vm.init = function (){
-			if (! vm.isAlta){
+
+		vm.init = function() {
+			if (!vm.isAlta) {
 				vm.callVerUsuario();
 			}
 		}
@@ -48,56 +52,55 @@
 		vm.guardar = function() {
 			vm.callGuardar();
 		}
-		
-		vm.actualizar=function(){
+
+		vm.actualizar = function() {
 			$log.debug("Actualizar usuario", vm.user);
-			
+
 			vm.callActualizarUsuario();
-			
+
 			vm.readOnly = true;
 			vm.isModoEdit = false;
 		}
-		
-		vm.edit = function (){
+
+		vm.edit = function() {
 			$log.debug("click edit usuarrio");
 			vm.readOnly = false;
 			vm.isModoEdit = true;
 		}
-		
-		vm.noActualizar=function (){
+
+		vm.noActualizar = function() {
 			$log.debug("click NO edit usuarrio");
 			vm.readOnly = true;
 			vm.isModoEdit = false;
-		
+
 			vm.callVerUsuario();
 		}
-		/////////// llamadas
-		
-		vm.callVerUsuario = function(){
-			
+		// ///////// llamadas
+
+		vm.callVerUsuario = function() {
+
 			function doOk(response) {
-				$log.debug("callVerUsuario",response);
+				$log.debug("callVerUsuario", response);
 				vm.user = response.data;
 			}
-		 
-			
-			// TODO : manejar error
-			restProxy.getPrivate(CTE_REST.verUsuario, {}, doOk);
+			perfilService.verUsuario().then(doOk);
+
 		}
-		
-		vm.callActualizarUsuario = function(){
-			
-			function doOk(response) {				 
-				ToastCommons.mensaje('Se actualizo con exito');
+
+		vm.callActualizarUsuario = function() {
+
+			function doOk(response) {
+				ToastCommons.mensaje(us.translate('ACTUALIZO_PERFIL_MSG'));
 			}
-		 	delete vm.user['direccion'];
+			delete vm.user['direccion'];
 			delete vm.user['email'];
-			$log.debug("***************",vm.user);
-			// TODO : manejar error
-	//		ToastCommons.mensaje('Falla actulizar. Ver Trello');
-			restProxy.put(CTE_REST.editUsuario, vm.user, doOk);
-		}
 		
+			// TODO : manejar error
+			// ToastCommons.mensaje('Falla actulizar. Ver Trello');
+
+			perfilService.editUsuario(vm.user).then(doOk)
+		}
+
 		// usuaruo nuevo
 		vm.callGuardar = function() {
 			$log.debug("guardar usuario", vm.user);
@@ -106,36 +109,94 @@
 
 				function doOk(response) {
 					$log.debug("guardo usuario", response.data);
-					
+
 					mostrarMensajesDeBienvenida();
-					
+
 					StateCommons.ls.token = response.data.token;
-					
-					//$state.go("registro",{ "isPasoDomicilio" : true});
-					//$rootScope.$broadcast("creo-usuario-nuevo", { user: response.data });
-					$scope.$emit("creo-usuario-nuevo", { user: response.data });
-					
+
+					// $state.go("registro",{ "isPasoDomicilio" : true});
+					// $rootScope.$broadcast("creo-usuario-nuevo", { user:
+					// response.data });
+					$scope.$emit("creo-usuario-nuevo", {
+						user: response.data
+					});
+
 				}
-				function doNoOk(response) {
-					$log.debug("error al guardar usuario", response.data);
-					
-					if (response.status == 409 ){
-						ToastCommons.mensaje(response.data.error);
-					}else{
-						ToastCommons.mensaje('error inesperado, intente nuevamente');
-					}
-					
-				}
-				// TODO : manejar error
-				restProxy.postPublic(CTE_REST.singUp, vm.user, doOk,doNoOk);
-			}else{
+
+				perfilService.singUp(vm.user).then(doOk)
+
+			} else {
 				$log.error("las contrasenas no coinciden");
-				//TODO: enviar mensaje
-				ToastCommons.mensaje('Las contrasenias no coinciden')
+				// TODO: enviar mensaje
+				ToastCommons.mensaje(us.translate('PASS_INCORRECTO_MSG'))
 			}
 		}
-		
+
 		vm.init();
+        
+        /// Avatar
+        
+        vm.avatar = {};
+        
+        function resizeAvatar(id, img, maxWidth, maxHeight){
+            
+            var img_avatar = new Image();
+            img_avatar.onload = function() {
+                var canvas_resize = document.createElement("canvas");
+                var width, height, sourceX, sourceY = 0;
+                
+                width = this.width;
+                height = this.height;
+                console.log("onload: ", "Width: ", width, ", Heigth: ", height);
+                console.log("Avatar url: ", this.src);
+
+                if(width/maxWidth > height/maxHeight){
+                    console.log("max width, ", width * maxHeight / height);
+                    width = Math.ceil(width * maxHeight / height);
+                    height = maxHeight;
+                    sourceX = Math.ceil((width - maxWidth) / 2);
+                }else{
+                    console.log("max height, ", height * maxWidth / width);
+                    height = Math.ceil(height * maxWidth / width);  
+                    width = maxWidth;
+                    sourceY = Math.ceil((height - maxHeight) / 2);
+                }
+
+                canvas_resize.width = width;
+                canvas_resize.height = height;
+                var ctx_resize = canvas_resize.getContext("2d");
+                ctx_resize.drawImage(this, 0,       0,       width,    height);
+                
+                var img_avatar_resize = new Image();
+                
+                img_avatar_resize.onload = function() {
+                    var canvas_crop = document.createElement("canvas");
+                    canvas_crop.width = maxWidth;
+                    canvas_crop.height = maxHeight;
+                    var ctx_crop = canvas_crop.getContext("2d");
+                    
+                    //ctx_crop.drawImage(this, 0, 0, width, height); 
+                    ctx_crop.drawImage(this, sourceX, sourceY, maxWidth, maxHeight, 
+                                         0,       0,       maxWidth, maxHeight);
+                    
+                    document.getElementById(id).src = canvas_crop.toDataURL();    
+                    console.log("cropted w: ", canvas_crop.width, "cropted h: ", canvas_crop.height, " img cropted:", document.getElementById(id)); 
+                }
+                console.log("resized w: ", canvas_resize.width, "resized h: ", canvas_resize.height, " img resized:", canvas_resize.toDataURL());
+                img_avatar_resize.src = canvas_resize.toDataURL();
+                
+            };
+            img_avatar.src = URL.createObjectURL(img);
+        }
+        
+        
+        $scope.guardarAvatar = function(element){
+            $scope.$apply(function(scope) {
+                console.log("Avatar: ", element.files[0]);
+                resizeAvatar("avatar", element.files[0], 150, 150);
+                
+             });
+        }
 	}
 
 })();

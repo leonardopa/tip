@@ -5,6 +5,9 @@
     <title>Chasqui</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -26,7 +29,9 @@
     
     <div ng-cloak>
 		<section ng-include="'app/comercio/principal/menu.html'"></section>  
-	    <div ui-view ></div>
+
+	    <div ui-view  style="min-height: 80vh;"></div>
+
 		<section ng-include="'app/comercio/varios/footer.html'"></section>
 	</div>
     <!-- build:js(src) scripts/vendor.js -->

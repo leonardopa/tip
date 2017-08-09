@@ -1,234 +1,166 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('chasqui')
-    .controller('CatalogoController',CatalogoController);
+	angular
+		.module('chasqui')
+		.controller('CatalogoController', CatalogoController);
 
-  /** @ngInject */
-  function CatalogoController( $scope,$log,restProxy, CTE_REST, $timeout,StateCommons) {
-	  $log.debug("CatalogoController ..... ",StateCommons.ls.pedidoSeleccionado);
-	  StateCommons.ls.itemMenuSelect = 'catalogo';
-	  var vm = this;
- 
+	/**
+	 * Pagina donde se muestran los productos. Contiene los filtros y el
+	 * contexto de compra , pero NO la lista de productos la cual se incluye
+	 */
+	function CatalogoController($scope, $log, CTE_REST, $timeout, StateCommons, productorService,
+		productoService, ToastCommons, gccService, us, $mdSidenav, $state) {
+		$log.debug("CatalogoController ..... grupoSelected", StateCommons.ls.grupoSelected);
 
-	  /////////// Para el selector de Grupos de compra
-	  vm.topDirections = ['left', 'up'];
-	  vm.bottomDirections = ['down', 'right'];
-	  vm.isOpen = false;
-	  vm.availableModes = ['md-fling', 'md-scale'];
-	  vm.selectedMode = 'md-fling'; ///md-scale
-	  vm.availableDirections = ['up', 'down', 'left', 'right'];
-	  vm.selectedDirection = 'up';
-	  
-//	  vm.categorias = ['categorias 1', 'categorias 2 ', 'categorias 3', 'categorias 4'];
-	  vm.categorias =[];	 
-	  vm.productores = [];
-	  vm.medallas = [];
-	  vm.query=''; 
-	  vm.productosSinFiltro= [];
-	  
-	  vm.pedidos={};
-	  vm.carrito=StateCommons.ls.pedidoSeleccionado;
-	  vm.size=24;
-	  vm.icon='shopping_cart';
-	  vm.options={'rotation': 'circ-in' , 'duration': 1000 };
-	  
-	  vm.paginaProducto;	  
-	  vm.tipoFiltro='CATEGORIA';// PRODUCTOR / MEDALLA / QUERY
-	  vm.queryText;
-	  vm.categoriaSelect;
-	  vm.productorSelect;
-	  vm.medallaSelect;
-	  vm.sinFiltroSelect;
-	  
-	  vm.urlBase=CTE_REST.url_base;
- 
-	  vm.filtroPor = function(filtroPor){
-		  $log.debug("filtro por ",filtroPor);
-		  
-		  vm.tipoFiltro = filtroPor;
-		 /// eliminar los otros selects
-		  switch (filtroPor) {
-	          case 'PRODUCTOR':
-	        	  vm.queryText=null;
-	        	  vm.categoriaSelect=null;        	  
-	        	  vm.medallaSelect=null;
-	              break;
-	          case 'MEDALLA':
-	        	  vm.queryText=null;
-	        	  vm.categoriaSelect=null;
-	        	  vm.productorSelect=null;
-	              break;
-	          case 'CATEGORIA':
-	        	  vm.queryText=null;
-	        	  vm.productorSelect=null;
-	        	  vm.medallaSelect=null;
-	              break;
-	          default:
-	          vm.sinFiltroSelect=null;
-		  }
-		  
-		  vm.filtrar();
-	  }
-	  
-	  vm.filtroQuery = function(){
-		  vm.tipoFiltro = 'QUERY';
-		  
-		  vm.categoriaSelect=null;
-		  vm.productorSelect=null;
-		  vm.medallaSelect=null;
-		  vm.sinFiltroSelect=null;	
-		  doFiltrar(vm.queryText);
-	  }
-	  
-	  vm.filtrar = function (){	  	  
-		  switch (vm.tipoFiltro) {
-	          case 'PRODUCTOR':
-	        	  doFiltrar(vm.productorSelect);
-	              break;
-	          case 'MEDALLA':
-	        	  doFiltrar(vm.medallaSelect);
-	              break;
-	          case 'CATEGORIA':
-	        	  doFiltrar(vm.categoriaSelect);
-	              break;
-	          case 'QUERY':
-	        	  doFiltrar(vm.queryText);
-	              break;
-	          default:
-	          //Agregado 16/12
-	          	  doFiltrar(vm.sinFiltroSelect);
-	          	  break;
-		  }
-	 
-	  }
-	  
+		StateCommons.ls.itemMenuSelect = 'catalogo';
+		var vm = this;
 
-	  
-	  vm.cambiarContexto = function (pedido){
-		  $log.debug("cambia contexo de carrito ",pedido);
-		  
-		  vm.carrito=pedido;
-		  StateCommons.ls.pedidoSeleccionado = vm.carrito;
-		  
-		  vm.icon=pedido.icon;
-			//  vm.icon='shopping_cart';			  
-			  $timeout(function() {
-				  vm.icon='shopping_cart';
-				  ///vm.icon=pedido.icon;
-			  }, 1500);
+		vm.toggleLeft = buildToggler('left');
+		vm.toggleRight = buildToggler('right');
 
-	  }
-	  
-	  var doFiltrar = function (valor){
-		  var filtro = {};
-		  filtro.tipo = vm.tipoFiltro;
-		  filtro.valor = valor;			 
-		  $scope.$broadcast('filterEvent', filtro);	// llama al evento del list-producto-controller	 
-	  }
+		function buildToggler(componentId) {
+			return function() {
+				$mdSidenav(componentId).toggle();
+			};
+		}
+
+		vm.isLogued = StateCommons.isLogued();
+
+		// vm.categorias = ['categorias 1', 'categorias 2 ', 'categorias 3', 'categorias
+		// 4'];
+		vm.categorias = [];
+		vm.productores = [];
+		vm.medallas = [];
+		vm.query = '';
 
 
-			
-	  
-	  /// CALL REST 
-	  
-	  //TODO: cache , para no sobrecargar con grupos
-	  function callLoadGrupos() {
-			$log.debug("--- find  pedidos abiertos ---");
+		vm.paginaProducto;
+		vm.tipoFiltro = 'CATEGORIA'; // PRODUCTOR / MEDALLA / QUERY
+		vm.queryText;
+		vm.categoriaSelect;
+		vm.productorSelect;
+		vm.medallaSelect;
+		vm.sinFiltroSelect;
 
-			function doOk(response) {
-				 
-				vm.pedidos = response.data;
-				
+		vm.urlBase = CTE_REST.url_base;
 
-				angular.forEach(vm.pedidos, function(pedido) {
-					$log.debug(pedido.tipo );
-					pedido.icon = 'people';
-					pedido.icon = pedido.tipo == 'INDIVIDUAL' ? 'person' : pedido.icon ;
-					pedido.icon = pedido.tipo == 'NODOS' ? 'people_outline' : pedido.icon ;
-					
-				});
+		vm.filtroPor = function(filtroPor) {
+			$log.debug("filtro por ", filtroPor);
 
-				if (vm.carrito !=null){
-					//vm.carrito = vm.pedidos[0];
-					vm.carrito = StateCommons.ls.pedidoSeleccionado;					
-				}else{
-					vm.carrito = vm.pedidos[0];
-				}
-			}
-			
-	//		restProxy.get(CTE_REST.productosPedidoByUser(StateCommons.vendedor().id),{},doOk);		    
-
-	 }
-	 
-	  
-	  function callCategorias() {
-			$log.debug("---callCategorias ---");
-
-			function doOk(response) {
-				 
-				vm.categorias = response.data;
-				vm.categoriaSelect =vm.categorias[0]; 
+			vm.tipoFiltro = filtroPor;
+			// / eliminar los otros selects
+			switch (filtroPor) {
+				case 'PRODUCTOR':
+					vm.queryText = null;
+					vm.categoriaSelect = null;
+					vm.medallaSelect = null;
+					break;
+				case 'MEDALLA':
+					vm.queryText = null;
+					vm.categoriaSelect = null;
+					vm.productorSelect = null;
+					break;
+				case 'CATEGORIA':
+					vm.queryText = null;
+					vm.productorSelect = null;
+					vm.medallaSelect = null;
+					break;
+				default:
+					vm.sinFiltroSelect = null;
 			}
 
-			restProxy.get(CTE_REST.categorias(StateCommons.vendedor().id),{},doOk);		    		    
-	 }
-	  
-	  function callProductores() {
-			$log.debug("---callProductores ---");
+			vm.filtrar();
+		}
 
-			function doOk(response) {				 
-				vm.productores = response.data;
-		//		vm.productorSelect =vm.productores[0]; 
+		vm.filtrar = function() {
+			switch (vm.tipoFiltro) {
+				case 'PRODUCTOR':
+					doFiltrar(vm.productorSelect);
+					break;
+				case 'MEDALLA':
+					doFiltrar(vm.medallaSelect);
+					break;
+				case 'CATEGORIA':
+					doFiltrar(vm.categoriaSelect);
+					break;
+				case 'QUERY':
+					doFiltrar(vm.queryText);
+					break;
+				default:
+					// Agregado 16/12
+					doFiltrar(vm.sinFiltroSelect);
+					break;
 			}
-			
-		 	restProxy.get(CTE_REST.productores(StateCommons.vendedor().id),{},doOk);		    
 
+		}
 
-	 }
-	  
-	  function callMedallas() {
-			$log.debug("---callMedallas de producto ---");
-
-			function doOk(response) {				 
-				vm.medallas = response.data;
+		vm.filtroQuery = function() {
+			vm.tipoFiltro = 'QUERY';
+			if (us.isEmpty(vm.queryText)) {
+				vm.tipoFiltro = undefined;
+				vm.filtroPor(undefined);
 			}
-		
-			restProxy.get(CTE_REST.medallasProducto,{},doOk);		    
-	 }
 
-//Agregado 16/12
-	 function callProductosSinFiltro() {
-			$log.debug("---Deberia mostrar productos sin filtros ---");
+			vm.categoriaSelect = null;
+			vm.productorSelect = null;
+			vm.medallaSelect = null;
+			vm.sinFiltroSelect = null;
+			doFiltrar(vm.queryText);
+		}
 
-			var json = {
-                    pagina: 1,
-                    cantItems: 5,
-                    precio: 'Down',
-                    idVendedor: StateCommons.vendedor().id,
-                   
-            }
+		var doFiltrar = function(valor) {
+			var filtro = {};
+			filtro.tipo = vm.tipoFiltro;
+			filtro.valor = valor;
+			$scope.$broadcast('filterEvent', filtro); // llama al evento del
+			// list-producto-controller
+		}
 
-			function doOk(response) {				 
-				vm.productosSinFiltro = response.data;
 
-			}
-		
-			restProxy.postPublic(CTE_REST.productosSinFiltro(StateCommons.vendedor().id),json,doOk);		    
-	 }
+		// / CALL REST
 
 
 
-	  
-	 
-	 
-	 callLoadGrupos();
-	 callCategorias();
-	 callProductores();
-	 callMedallas(); 
-	 callProductosSinFiltro();
-	    
-	
-  }
+		function callCategorias() {
+			productoService.getCategorias()
+				.then(function(response) {
+					vm.categorias = response.data;
+					vm.categoriaSelect = vm.categorias[0];
+				})
+
+		}
+
+		function callProductores() {
+			productorService.getProductores()
+				.then(function(response) {
+					vm.productores = response.data;
+				})
+		}
+
+		function callMedallas() {
+			productoService.getMedallas()
+				.then(function(response) {
+					vm.medallas = vm.medallas.concat(response.data);
+				})
+		}
+
+		function callMedallasProductores() {
+			productorService.getMedallas()
+				.then(function(response) {
+					vm.medallasProductores = response.data;
+					angular.forEach(response.data, function(medalla, key) {
+						//para que no repita ID con la de producto, ademas para diferenciarlas despes
+						medalla.idMedalla = medalla.idMedalla + 10000;
+						vm.medallas.push(medalla);
+					});
+				})
+		}
+
+		callCategorias();
+		callProductores();
+		callMedallas();
+		callMedallasProductores();
+
+	}
 })();

@@ -4,84 +4,67 @@
 	angular.module('chasqui').controller('LogInController', LogInController);
 
 	/** @ngInject */
-	function LogInController($scope, $http, $log, CTE_REST, restProxy,$mdDialog,$state
-			,StateCommons,ToastCommons,$rootScope) {
-		$log.debug('controler log in ..... ');
+	function LogInController($log, $state, StateCommons,
+		ToastCommons, $rootScope, dialogCommons, perfilService, us, $stateParams, contextoCompraService) {
+
+		$log.debug('controler log in ..... debe volver a ', $stateParams.toPage);
 
 		var vm = this
 		vm.user = {};
 
-		
 		vm.nuevo = function() {
 			$log.debug('Log In nuevo user');
-	
+
 			$state.go("registro");
-		
+
 		}
-		
-		
 		vm.recuperar = function(ev) {
-		    // Appending dialog to document.body to cover sidenav in docs app
-		    var confirm = $mdDialog.prompt()
-		      .title('Recuperar contrasenia')
-		      .textContent('Enviaremos instrucciones a tu correo')
-		      .placeholder('correo')
-		      //.ariaLabel('Dog name')
-		      //.initialValue('Buddy')
-		      //.targetEvent(ev)
-		      .ok('Enviar')
-		      .cancel('Cancelar');
-		    $mdDialog.show(confirm).then(function(result) {
-		    	$log.debug('Ingreso Correo ' + result + '.');
-		    	vm.callReset(result);
-		      
-		    }, function() {
-		    	$log.debug('Cancelo correo');
-		    });
-		  };
-		  
-		  
-		  /////// REST
-		  
-		  vm.login = function() {
-				$log.debug('Log In ', vm.user);
-				// TODO NO OK , que vuelva a donde vino
-				function doOk(response,headers) {
-					$log.debug('response login ', response);
-					
-					StateCommons.ls.usuario = response.data;
-					
-					ToastCommons.mensaje("Bienvenido !");
-					$rootScope.$broadcast('resetHeader', "");
-					$state.go("principal");
-					
-				}
-				
-				function doNoOk(response,headers) {
-					ToastCommons.mensaje("Fallo la autenticación, <br>verifique los datos");
-				}
-				
+			dialogCommons.prompt('Recuperar contraseña',
+				'Enviaremos instrucciones a tu correo',
+				'correo@correo.com', 'Enviar', 'Cancelar',
+				function(result) {
+					vm.callReset(result)
+				},
+				function() {
+					$log.debug('Cancelo correo')
+				});
+		};
 
-				restProxy.postPublic(CTE_REST.login, vm.user, doOk,doNoOk);
+		// ///// REST
 
-		 }
-		  
-		  vm.callReset = function(email) {
-				
-				
-				function doOk(response) {					
-					ToastCommons.mensaje("Revisa tu correo !");	
-				}
-				
-				function doNoOk(response) {				
-					$log.debug('response reset pass ', response);
-					ToastCommons.mensaje("Error , el mail es correcto ?");	
-				}
-				
-			 	restProxy.get(CTE_REST.resetPass(email),{} , doOk,doNoOk);
+		vm.login = function() {
+			$log.debug('Log In ', vm.user);
+			// TODO NO OK , que vuelva a donde vino
+			function doOk(response, headers) {
+				$log.debug('response login ', response);
 
-		 }
-		  
-		  
+				StateCommons.ls.usuario = response.data;
+
+				ToastCommons.mensaje("Bienvenido !");
+				$rootScope.$broadcast('resetHeader', "");
+
+				if (us.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
+					if (us.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage == '') {
+						$state.go("principal");
+					} else {
+						$state.go($stateParams.toPage);
+					}
+				} else {
+					$state.go("catalogo");
+				}
+			}
+
+			perfilService.login(vm.user).then(doOk)
+		}
+
+		vm.callReset = function(email) {
+
+			function doOk(response) {
+				ToastCommons.mensaje("Revisa tu correo !");
+			}
+
+			perfilService.resetPass(email).then(doOk)
+		}
+
 	}
 })();

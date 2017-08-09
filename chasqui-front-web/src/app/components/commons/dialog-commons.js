@@ -1,16 +1,31 @@
 (function() {
 	'use strict';
 
-	angular.module('chasqui').service('ToastCommons', ToastCommons);
-	function ToastCommons($mdToast) {
+	angular.module('chasqui').service('dialogCommons', dialogCommons);
+
+	function dialogCommons($mdDialog) {
 		var vm = this;
 
-		
-		vm.mensaje = function(mensaje) {
-			
-			$mdToast.show($mdToast.simple().textContent(mensaje)
-					.hideDelay(3000));
+		/** Dialogo con un input text y confirmacion */
+		vm.prompt = function(titulo, texto, placeholder, textOk, textCancel,
+			doOk, doNoOk) {
+
+			var confirm = $mdDialog.prompt().title(titulo).textContent(texto)
+				.placeholder(placeholder).ok(textOk).cancel(textCancel);
+
+			$mdDialog.show(confirm).then(doOk, doNoOk);
+
 		}
 
-	}// function
-})();// anonimo
+		/** Dialogo confirmacion */
+		vm.confirm = function(titulo, texto, textOk, textCancel, doOk, doNoOk) {
+
+			var confirm = $mdDialog.confirm().title(titulo).textContent(texto)
+				.ok(textOk).cancel(textCancel);
+
+			$mdDialog.show(confirm).then(doOk, doNoOk);
+
+		}
+
+	} // function
+})(); // anonimo

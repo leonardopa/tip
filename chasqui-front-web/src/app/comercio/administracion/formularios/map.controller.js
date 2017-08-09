@@ -17,7 +17,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		$rootScope.global_marker;
 		$rootScope.vmGlobal;
 		var posicionMapaPredeterminado = [-34.7739,-58.5520];
-		
+
     	var blueIcon = L.icon({
     	    iconUrl: 'assets/images/map-marker-40-alter.png',
 
@@ -176,7 +176,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 	 	
 	 	function formValidoParaGuardar(){
 	 		return (!$scope.calleValida || !$scope.localidadValida || !$scope.alturaValida || !$scope.aliasValido || $scope.isDisabled);
-	 	}
+	 	};
 	 	
 		$scope.formIsValidForSave = function() {
 		      return formValidoParaGuardar();
@@ -228,7 +228,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
 		 * Funciones del mapa
 		 */
 		
-        leafletData.getMap().then(function(map) {
+        leafletData.getMap("mapaDirecciones").then(function(map) {
           /*
            * Variables en contexto del mapa
            */
@@ -482,7 +482,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
         		});        		
         	}
         
-
+            setTimeout(function(){ vmap.invalidateSize()}, 500);
         	$scope.buscar = function(ev){     
 
         		bloquearBotones();

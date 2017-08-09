@@ -1,0 +1,23 @@
+<div ng-controller="PedidoGruposController as pedidoGrupoCtrl" ng-cloak>
+    <md-card ng-show="pedidoGrupoCtrl.grupo.miembros">
+        <md-card-content>
+            <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+                <md-tab ng-repeat="miembro in pedidoGrupoCtrl.miembrosActivosDelGrupo()" label="{{pedidoGrupoCtrl.selfPara(miembro)}}">
+                    <md-list class="md-dense" flex>
+                        <md-subheader>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</md-subheader>
+                        <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
+                            <label translate="MIEMBRO_SIN_PROD"></label>
+                        </p>
+                        <md-list-item class="md-3-line" ng-repeat="item in miembro.pedido.productosResponse">
+                            <img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
+                            <div class="md-list-item-text" layout="column">
+                                <h4>{{ item.nombre }}</h4>
+                                <p>{{item.cantidad}} X $ {{ item.precio }} = ${{item.cantidad * item.precio }} </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                    <br>
+                </md-tab>
+            </md-tabs>
+        </md-card-content>
+    </md-card>

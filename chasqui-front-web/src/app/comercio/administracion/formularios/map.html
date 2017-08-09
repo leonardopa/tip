@@ -7,7 +7,7 @@
       			<md-toolbar class="md-primary" style="min-height:30px" layout="row" layout-align="center center" ng-show="mostrarBotonesMarcaManual()"> Coloque la marca en su domicilio</md-toolbar>
                 <!--   Area de se dibuja el mapa  -->
       		 	<md-dialog-content>
-        				<leaflet width="850px" height="350px"></leaflet>
+        				<leaflet id="mapaDirecciones" width="850px" height="350px"></leaflet>
         		</md-dialog-content>
         		
                 <!--    Area de Botones segun el tipo de accion requerida -->
@@ -19,7 +19,7 @@
 							<md-icon md-font-set="material-icons"> check_circle </md-icon>
        						Es Correcta
       					</md-button>      				
-      					<md-button  ng-click="direccionIncorrecta()" class="md-raised md-accent">
+      					<md-button ng-click="direccionIncorrecta()" class="md-raised md-primary ">
       						<md-icon md-font-set="material-icons"> highlight_off</md-icon>
        						Es Incorrecta
       					</md-button>
@@ -37,7 +37,7 @@
       						<md-icon md-font-set="material-icons"> check_circle </md-icon>
        						Aceptar
       					</md-button>      				
-      					<md-button  ng-click="direccionIncorrecta()" class="md-raised md-accent">
+      					<md-button  ng-click="direccionIncorrecta()" class="md-raised md-primary">
       					<md-icon md-font-set="material-icons"> highlight_off</md-icon>
        						Cancelar
       					</md-button>

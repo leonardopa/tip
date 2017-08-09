@@ -2,140 +2,185 @@
 	'use strict';
 
 	angular.module('chasqui').controller('ListaGruposController',
-			ListaGruposController);
+		ListaGruposController);
 
-	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones*/
-	function ListaGruposController($http, $log, $scope, $q, $timeout,$mdDialog, $mdMedia,$state,restProxy, CTE_REST
-			,StateCommons) {
+	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
+	function ListaGruposController($log, $scope, $state,
+		StateCommons, dialogCommons, ToastCommons, perfilService, gccService, CTE_REST, contextoCompraService) {
+
 		$log.debug("controler ListaGruposController");
-		 StateCommons.ls.itemMenuSelect = 'lista-grupos'; 
+		StateCommons.ls.itemMenuSelect = 'lista-grupos';
 		var vm = this;
 		vm.habilita = false;
 		vm.count = 0;
-		vm.tabs = [];
+		vm.groups = [];
 		vm.selected = null, vm.previous = null;
 		vm.selectedIndex = 1;
+		vm.urlBase = CTE_REST.url_base;
 
-		/**Control de cambio de tabs */ 
+		/** Control de cambio de tabs */
 		$scope.$watch('selectedIndex', function(current, old) {
 			vm.previous = vm.selected;
-			vm.selected = vm.tabs[current];
-			
+			vm.selected = vm.groups[current];
+
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
-					$log.debug('Goodbye ' + vm.previous.nombre + '!');
+					$log.debug('Goodbye ' + vm.previous.alias + '!');
 				}
 			if (current + 1)
 				if (!angular.isUndefined(vm.selected)) {
-					$log.debug('Hello ' + vm.selected.nombre + '!');
+					$log.debug('Hello ' + vm.selected.alias + '!');
 				}
 		});
 
-		/**Editar datos del grupo */
-		//TODO: IMPLEMENTAR
-		vm.edit = function() {
-			angular.forEach(vm.tabs, function(grupo) {
-				$log.debug(grupo.canAddIntegrante);
+		function setTabSeleccionado(grupo) {
+			var i = 0
+			var indexSelect = 0;
+			var existe = false;
+			$log.debug("Tabs: ", vm.groups);
+			angular.forEach(vm.groups, function(tab) {
+				$log.debug("setTabSeleccionado", tab.idGrupo + " " + tab.alias);
+				if ((grupo != undefined) && (tab.idGrupo == grupo.idGrupo)) {
+					indexSelect = i;
+					existe = true;
+				}
+
+				i++;
 			});
-			$log.debug(vm.habilita);
-			vm.count++;
+
+			if (existe) {
+				vm.selected = vm.groups[indexSelect];
+				vm.selectedIndex = indexSelect;
+			}
+
+		}
+
+		$scope.$on('quito-miembro-grupo',
+			function(event) {
+				callLoadGrupos();
+			});
+
+		vm.edit = function(grupo) {
+			$state.go("form-grupo", { "grupo": grupo });
 		}
 
 		/** habilita el panel para agregar integrantes. */
-		vm.habilitar = function() {
-					
-			$log.debug("Agregar Miembro al grupo ");
+		vm.invitarUsuario = function(grupo) {
+			$log.debug("Invitar miembro al grupo");
 
-			var confirm = $mdDialog.prompt().title(
-					'Agregar Miembro al Grupo').textContent(
-					'ingrese una direccion de correo').placeholder(
-					'ejemplo@ejemplo.com')
-			// .ariaLabel('Dog name')
-			// .initialValue('Buddy')
-			// .targetEvent(ev)
-			.ok('Agregar').cancel('Cancelar');
+			function doOk(response) {
+				$log.debug("Se seleccionó Invitar a usuario con mail", response);
+				callInvitarUsuario(response, grupo);
 
-			$mdDialog.show(confirm).then(function(result) {
-				$log.debug("agregar OK", result);
+			};
 
-				//TODO: LLAMAR al servicio
+			function doNoOk() {
+				$log.debug("Se seleccionó Cancelar");
+			};
 
-			}, function() {
 
-				$log.debug("Cancelo Agregar Grupo");
-			});
+			dialogCommons.prompt(us.translate('INV_MIEMBRO'),
+				us.translate('INGRESAR_CORREO'), 'correo@correo.com',
+				us.translate('INVITAR'), us.translate('CANCELAR'), doOk, doNoOk);
 
-			
 		}
 
 		/** Salir del grupo. Manejo del popUP */
-		vm.salir = function(ev) {
-			$log.debug(ev);
-			//TODO: externalizar
-			var confirm = $mdDialog.confirm().title(
-					'Seguro quieres salir del grupo '+vm.selected.nombre + ' ?').textContent(
-					'Mala onda, tus amigos van a pagar todo mas caro !')
-					.ariaLabel('Lucky day').targetEvent(ev)
-					.ok('Si, me voy')
-					.cancel('bueno, me quedo');
-			$mdDialog.show(confirm).then(function() {
-				callSalirGrupo();
-			}, function() {
-				$log.debug("se quedo");
-			});
-
+		vm.salir = function(tab) {
+			dialogCommons.confirm(us.translate('SALIR'), us.translate('SEGURO_SALIR') +
+				vm.selected.alias, us.translate('SI_MEVOY'), us.translate('CANCELAR'),
+				function(
+					result) {
+					callQuitarMiembro(tab);
+				},
+				function() {
+					$log.debug("se quedo");
+				});
 		}
-		
+
 		/** Redirecciona al formulario crear grupo */
-		vm.crearGrupo = function(ev) {		
+		vm.crearGrupo = function(ev) {
 			$state.go('form-grupo');
 		};
-		 
-		/////////////
-		/////// REST
-		
-		function callLoadGrupos() {
-			$log.debug("--- find grupos--------");
 
-			function doOk(response) {
-				$log.debug("--- find grupos respuesta", response.data);
-				vm.tabs = response.data;
-				vm.disabled = false;
 
-				angular.forEach(vm.tabs, function(grupo) {
-					grupo.canAddIntegrante = false;
-				});
-
-				vm.selected = vm.tabs[0];
-			}
-			
-			// TODO: hacer el ID de usuario dinamico
-			restProxy.get(CTE_REST.gruposByusuario(StateCommons.vendedor().id),{},doOk);
-
+		vm.crearPedidoGrupal = function(grupo) {
+			$log.debug("--- Crear pedido grupal----", grupo);
+			callCrearPedidoGrupal(grupo);
 		}
-		
-		function callSalirGrupo(){
-			$log.debug("--- call salir del grupo --------" , vm.selected.nombre);
 
-			// TODO: hacer el ID de usuario dinamico
-			$http.get("http://localhost:8081/chasqui-mock/usuarios/4/grupos/"+vm.selected.id+"/salir")
-					.then(doOk)
 
+		// ///////////
+		// ///// REST
+
+		function callCrearPedidoGrupal(grupo) {
 			function doOk(response) {
-				$log.debug("--- call salir del grupo respuesta", response.data);
-				 				
+				$log.debug('Crear pedido en el grupo');
+				ToastCommons.mensaje(us.translate('NUEVO_PEDIDO'));
+			}
+
+			var params = {};
+			params.idGrupo = grupo.idGrupo;
+			params.idVendedor = StateCommons.vendedor().id;
+
+			gccService.crearPedidoGrupal(params).then(doOk);
+		}
+
+		function callInvitarUsuario(emailClienteInvitado, grupo) {
+			$log.debug('callInvitarUsuario con email: ', emailClienteInvitado);
+
+
+			var doOk = function(response) {
+				$log.log('Se enviará un email a la direcciónn ', response);
+				ToastCommons.mensaje(us.translate('ENVIARA_MAIL'));
 				callLoadGrupos();
 			}
 
-			// TODO: hacer el ID de usuario dinamico
-		    restProxy.get(CTE_REST.salirGrupo(4,vm.selected.id),{},doOk);
+			var params = {
+				idGrupo: grupo.idGrupo,
+				emailInvitado: emailClienteInvitado
+			}
+			gccService.invitarUsuarioAGrupo(params).then(doOk);
 		}
-		
-		
-		//// INIT
+
+		function callLoadGrupos() {
+			$log.debug("--- find grupos--------");
+
+			function doOk(data) {
+				$log.debug("--- find grupos respuesta", data);
+				vm.groups = [];
+				angular.forEach(data, function(grupo) {
+					grupo.canAddIntegrante = false;
+					if (grupo.alias != 'Personal') vm.groups.push(grupo);
+				});
+
+				setTabSeleccionado(contextoCompraService.ls.grupoSelected)
+
+			}
+
+			// gccService.gruposByusuario().then(doOk)
+			contextoCompraService.refreshGrupos().then(doOk);
+		}
+
+		function callQuitarMiembro(miembro) {
+			$log.debug("quitar", miembro)
+
+			function doOk(response) {
+				ToastCommons.mensaje(us.translate('TE_FUISTE_GRUPO'))
+				callLoadGrupos();
+			}
+			var params = {};
+			params.idGrupo = miembro.idGrupo;
+			params.emailCliente = StateCommons.ls.usuario.email;
+
+			gccService.quitarMiembro(params).then(doOk)
+
+		}
+
+
+		// // INIT
 		callLoadGrupos();
-		
-		
+
 	}
 
 })();

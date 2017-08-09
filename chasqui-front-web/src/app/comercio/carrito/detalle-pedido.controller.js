@@ -2,117 +2,139 @@
 	'use strict';
 
 	angular.module('chasqui').controller('DetallePedidoController',
-			DetallePedidoController);
+		DetallePedidoController);
 
 	/** @ngInject */
-	function DetallePedidoController($http, $log,$state,$scope,restProxy, CTE_REST,ToastCommons,$mdDialog  ) {
+	function DetallePedidoController($log, $state, $scope, CTE_REST, ToastCommons, $mdDialog, dialogCommons, productoService, perfilService, gccService, StateCommons,
+		contextoCompraService,us) {
 		$log.debug('DetallePedidoController ..... ', $scope.pedido);
-		
+
 		var vm = this;
 		vm.pedido = $scope.pedido;
-		vm.urlBase=CTE_REST.url_base;
+		vm.urlBase = CTE_REST.url_base;
 		vm.direcciones;
 		vm.direccionSelected;
-		
-		vm.comprar = function (event){
-			$log.debug('DetallePedidoController , modo comprar ', $scope.pedido);
+		vm.productoEliminar;
+		vm.isIndividual = vm.pedido.idGrupo == null;
+		vm.isAdmin = contextoCompraService.isAdmin(vm.pedido);
+
+		vm.comprar = function(event) {
+			contextoCompraService.setContextoByPedido($scope.pedido);
 			$state.go('catalogo')
 		}
-		  
-		vm.eliminar = function (item){			
-			$log.debug('DetallePedidoController , eliminar '
-					, item);
+
+
+		function doEliminar() {
+			$log.debug('DetallePedidoController , eliminar ', vm.productoEliminar);
 
 			function doOk(response) {
-				$log.debug("--- eliminar pedido response ",response.data);
-				 
-				ToastCommons.mensaje("Eliminado !");
+				$log.debug("--- eliminar pedido response ", response.data);
+				ToastCommons.mensaje(us.translate('QUITO_PRODUCTO'));
+				contextoCompraService.refreshPedido();
+				$state.reload();
 			}
-			
-			function doNoOk(response) {
-				$log.debug("--- eliminar pedido response ",response.data);
-				 
-				ToastCommons.mensaje("error");
-			}
+
 			var params = {};
 			params.idPedido = vm.pedido.id;
-			params.idVariante = item.idVariante;
-			params.cantidad = item.cantidad;
-			 
-			restProxy.put(CTE_REST.quitarProductoIndividual,params,doOk,doNoOk);
+			params.idVariante = vm.productoEliminar.idVariante;
+			params.cantidad = vm.productoEliminar.cantidad;
+
+			productoService.quitarProductoIndividual(params).then(doOk)
 		}
-		
-		vm.cancelar = function (event){
+
+		vm.eliminar = function(item) {
+			vm.productoEliminar = item;
+
+			dialogCommons.confirm(us.translate('QUITAR_PRODUCTO_TIT'),
+				us.translate('QUITAR_PRODUCTO_MSG'),
+				us.translate('SI'),
+				us.translate('NO'),
+				doEliminar,
+				function() {}
+			);
+		}
+
+		vm.cancelar = function(event) {
 			$log.debug('DetallePedidoController , cancelar', $scope.pedido);
+
 			function doOk(response) {
-				$log.debug("--- cancelar pedido response ",response.data);
-				 
-				ToastCommons.mensaje("Cancelado !");
+				$log.debug("--- cancelar pedido response ", response.data);
+				ToastCommons.mensaje(us.translate('CANCELADO'));
+				contextoCompraService.refreshPedidos().then(
+					function() {
+						$scope.$emit('modifico-pedido');
+					});
+
 			}
-			
-			function doNoOk(response) {
-				$log.debug("--- cancelar pedido response ",response.data);
-				 
-				ToastCommons.mensaje("error");
-			}
-			
-			restProxy.delete(CTE_REST.cancelarPedidoIndividual(vm.pedido.id),{},doOk,doNoOk);
+
+			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk);
 		}
-		
-		 function callConfirmar(){
-			$log.debug('callConfirmar   ', $scope.pedido);		
+		/// confirmacion individual de GCC
+		vm.confirmarPedidoIndividualGcc = function() {
 			function doOk(response) {
-				$log.debug("--- confirmar pedido response ",response.data);
-				 
-				ToastCommons.mensaje("Pedido Confirmado !");
+				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
+				$state.reload();
 			}
-			
-			function doNoOk(response) {
-				$log.debug("--- confirmar pedido response ",response.data);
-				 
-				ToastCommons.mensaje("error");
+
+			if (vm.pedido.idGrupo == null) {
+				ToastCommons.mensaje("funcionalidad para GCC !");
+			} else {
+				gccService.confirmarPedidoIndividualGcc(vm.pedido.id).then(doOk)
 			}
-			
-			var params={};
-			params.idPedido=vm.pedido.id;
-			params.idDireccion = vm.direccionSelected.idDireccion;
-	
-			restProxy.post(CTE_REST.confirmarPedidoIndividual,params,doOk,doNoOk);
-	
 		}
- 
+
+		function callConfirmar() {
+			$log.debug('callConfirmar   ', $scope.pedido);
+
+			function doOk(response) {
+				$log.debug("--- confirmar pedido response ", response.data);
+				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
+				$state.reload();
+			}
+
+			if (vm.pedido.idGrupo == null) {
+				var params = {};
+				params.idPedido = vm.pedido.id;
+				params.idDireccion = vm.direccionSelected.idDireccion;
+				// logica por si es pedido grupañ
+				productoService.confirmarPedidoIndividual(params).then(doOk)
+			} else {
+				gccService.confirmarPedidoColectivo(vm.pedido.idGrupo).then(doOk)
+			}
+
+		}
+
 		vm.confirmarDomicilio = function() {
-			 $log.debug('close');
-			 $mdDialog.hide();
-			 callConfirmar();
+			$log.debug('close');
+			$mdDialog.hide();
+			callConfirmar();
 		};
-		 
+
 		vm.confirmar = function(ev) {
-			popUpElegirDireccion(ev);			
+			popUpElegirDireccion(ev);
 		};
-		  
-		vm.callDirecciones = function () {
-				$log.debug('call direcciones ');
-			 
-				function doOk(response) {
-					$log.debug('call direcciones response ',response);
-					vm.direcciones = response.data;
-					//abre pop
-				}
 
-				restProxy.getPrivate(CTE_REST.verDirecciones, {}, doOk);
+		vm.callDirecciones = function() {
+			$log.debug('call direcciones ');
 
-		 }
-		 
-		 function popUpElegirDireccion(ev){
-			 $log.debug('confirmarDomicilioOpenDialog');
-			    $mdDialog.show({
-			        templateUrl: 'dialog-direccion.html',
-			        scope: $scope,
-			        preserveScope: true,
-			        targetEvent: ev
-			      });
-		 }
+			function doOk(response) {
+				$log.debug('call direcciones response ', response);
+				vm.direcciones = response.data;
+				// abre pop
+			}
+
+			perfilService.verDirecciones().then(doOk);
+		}
+
+		function popUpElegirDireccion(ev) {
+			$log.debug('confirmarDomicilioOpenDialog');
+			$mdDialog.show({
+				templateUrl: 'dialog-direccion.html',
+				scope: $scope,
+				preserveScope: true,
+				targetEvent: ev
+			});
+		}
 	}
 
 })();
