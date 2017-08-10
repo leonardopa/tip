@@ -2,24 +2,27 @@
 	'use strict';
 
 	angular.module('chasqui').controller('FormDireccionController',
-		FormDireccionController);
+			FormDireccionController);
 
-	/**
-	 * @ngInject Formulario para direccion
-	 */
-	function FormDireccionController($log, $state, $scope, ToastCommons, perfilService, us) {
-
-		$log.debug("FormDireccionController", $scope.direccionParam);
-
+	/** @ngInject 
+	 *  Formulario para direccion */
+	function FormDireccionController( $log,$state,$scope,restProxy, ToastCommons, $mdDialog, perfilService, us) {
+		
+		$log.debug("FormDireccionController",$scope.direccionParam);
+		
 		var vm = this;
 		var isNew = angular.equals({}, $scope.direccionParam);
-		vm.domicilio = $scope.direccionParam;
-		vm.isEdit = false;
-
-		function loadDirecciones() {
-			$scope.$emit("load-direcciones", {}); // recarga las direcciones
-			// que estan el el
-			// conteoller de perfil
+		vm.domicilio =  $scope.direccionParam;
+		vm.isEdit=false;
+		$scope.aliasValido = false;
+		$scope.calleValida= false;
+		$scope.alturaValida=false;
+		$scope.localidadValida=false;
+		$scope.latitudValida = false;
+		$scope.longitudValida= false;
+		
+		function loadDirecciones(){
+			$scope.$emit("load-direcciones", {});//recarga las direcciones que estan el el controller de perfil
 		}
 
 		// TODO: hacerlo flexible para grupo usuario vendedor ETC
@@ -30,9 +33,9 @@
 				callNuevaDireccion();
 			} else {
 				callUpdateDireccion();
-				// ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de
-				// direccion');
-			}
+			//	ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de direccion');
+			}			
+			
 		}
 
 		vm.marcarPredeterminado = function() {
@@ -99,6 +102,32 @@
 			perfilService.actualizarDireccion(vm.domicilio).then(doOk);
 
 		}
+		
+		//Muestra un alert simple, puede cambiarse para levantar
+		//mensaje mas complejo y amigable definiendo una pagina HTML.
+		function showAlert(ev, mensaje) {
+		    $mdDialog.show(
+		      $mdDialog.alert()
+		        .parent(angular.element(document.querySelector('#mappopupContainer')))
+		        .clickOutsideToClose(true)
+		        .title( 'Ayuda' )
+		        .htmlContent(mensaje)
+		        .ok('OK')
+		        .targetEvent(ev)
+		    );
+		  };
+		  
+		  $scope.mostrarAyuda = function(ev){
+			  var mensaje = '<br>'+
+			  '<div align="center">Requisitos para Guardar una dirección</div>'+
+			  '<br>'+
+			  '<li> Se debe almenos Buscar o Marcar la dirección. </li>'+
+			  '<li> Se debe confirmar la posición en alguna de las opciones previamente mencionadas. </li>'+
+			  '<li> Todos los campos con " * " deben ser completados. </li>';	
+			  showAlert(ev,mensaje);
+		  };
+	}
+	
 
 
 		// ///// TODO: ver cuando este para asociar a una grupo
@@ -116,6 +145,5 @@
 
 			perfilService.direccionGrupo(1, vm.domicilio).then(doOk);
 		}*/
-	}
-
+	
 })();

@@ -1,68 +1,119 @@
-<div ng-controller="FormDireccionController as ctrl" layout="column" ng-cloak class="md-inline-form">
-	<md-card>
-		<md-content layout-padding>
-			<div>
-				<form name="direccionForm">
-					<div layout-gt-sm="row">
-						<md-input-container class="md-block" flex-gt-sm>
-							<label translate>ALIAS</label>
-							<input ng-model="ctrl.domicilio.alias">
-						</md-input-container>
-					</div>
-					<div layout-gt-sm="row">
-						<md-input-container class="md-block" flex="40">
-							<label translate>CALLE</label>
-							<input ng-model="ctrl.domicilio.calle">
-						</md-input-container>
-						<md-input-container class="md-block" flex="10">
-							<label translate>ALTURA</label>
-							<input ng-model="ctrl.domicilio.altura">
-						</md-input-container>
-						<md-input-container class="md-block" flex="10">
-							<label translate>PISO_DTPO</label>
-							<input ng-model="ctrl.domicilio.departamento">
-						</md-input-container>
-						<md-input-container md-no-float class="md-block" flex="40">
-							<label translate>LOCALIDAD </label>
-							<input ng-model="ctrl.domicilio.localidad" placeholder="localidad">
-						</md-input-container>
-					</div>
-					<div layout-gt-sm="row">
-						<md-input-container class="md-block" flex-gt-sm>
-							<label translate>CP</label>
-							<input ng-model="ctrl.domicilio.codigoPostal">
-							<md-button ng-href="http://www.nexo.com.ar/codigosPostales.asp" target="_blank" translate="NO_SE_CP"></md-button>
-						</md-input-container>
-						<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> -->
-						<md-input-container class="md-block" flex-gt-sm>
-							<label translate>LOG</label>
-							<input ng-model="ctrl.domicilio.longitud">
-						</md-input-container>
-						<md-input-container class="md-block" flex-gt-sm>
-							<label translate>LAT</label>
-							<input ng-model="ctrl.domicilio.latitud">
-						</md-input-container>
-					</div>
-					<code ng-show='{{ctrl.domicilio.predeterminada}}' translate>
-					DOM_PRED</code>
-				</form>
-			</div>
-		</md-content>
-		<md-card-actions layout="row" layout-align="end center">
-			<md-button ng-click="ctrl.eliminar()">
-				<md-icon> remove_circle_outline </md-icon>
-				<md-tooltip md-direction="left"> eliminar domicilo </md-tooltip>
-			</md-button>
-			<md-button ng-click="ctrl.marcarPredeterminado()">
-				<md-icon> compare_arrows </md-icon>
-				<md-tooltip md-direction="left"> marcar como domicilo principal </md-tooltip>
-			</md-button>
-			<!--  
+
+<div ng-controller="FormDireccionController as ctrl"
+	layout="column" ng-cloak class="md-inline-form">
+	
+	<md-card> 		
+			<md-content layout-padding>
+					 
+					 
+					<div>
+						<form name="direccionForm">
+							<div layout-gt-sm="row">							
+								<md-input-container class="md-block" flex-gt-sm> 
+									<label>Alias</label> 							
+									<input type="text" name="alias" ng-model="ctrl.domicilio.alias" required>
+									        <div ng-messages="direccionForm.alias.$error" >
+          										<div ng-message="required">Campo obligatorio. </div>
+          										<span style="display:none" >{{ aliasValido = direccionForm.alias.$valid}}</span>          										
+        									</div>
+								</md-input-container> 
+								<md-input-container class="md-block" flex-gt-sm >							
+									<label>Calle</label> 
+									<input type="text" name="calle" ng-model="ctrl.domicilio.calle" required>
+											<div ng-messages="direccionForm.calle.$error">
+          										<div ng-message="required">Campo obligatorio.</div> 
+          										<span style="display:none" >{{ calleValida = direccionForm.calle.$valid}}</span>         										
+        									</div>
+								</md-input-container>
+							</div>
+														
+							<div layout-gt-sm="row">
+							
+								<md-input-container class="md-block" >
+									<label>Altura</label>
+									<input type="number" name="altura" ng-model="ctrl.domicilio.altura" required>
+											<div ng-messages="direccionForm.altura.$error">
+          										<div ng-message="required">Campo obligatorio.</div>
+          										<span style="display:none" >{{ alturaValida = direccionForm.altura.$valid}}</span>          										
+        									</div> 
+								</md-input-container> 
+								<md-input-container class="md-block"> 
+									<label>Piso / Departamento</label> 
+									<input ng-model="ctrl.domicilio.departamento"> 
+								</md-input-container> 
+							
+								<md-input-container md-no-float class="md-block"> 
+									<label>Localidad </label> 
+									<input  type="text" name="localidad" ng-model="ctrl.domicilio.localidad" placeholder="localidad" required> 
+											<div ng-messages="direccionForm.localidad.$error">
+          										<div ng-message="required">Campo obligatorio.</div>
+          										<span style="display:none" >{{ localidadValida = direccionForm.localidad.$valid}}</span>          										
+        									</div>
+									</md-input-container>
+								</div>
+								
+								<div layout-gt-sm="row">
+									<md-input-container class="md-block" flex-gt-sm> 
+										<label>Codigo Postal</label> 
+										<input ng-model="ctrl.domicilio.codigoPostal"> 
+									</md-input-container> 
+									<!-- <md-input-container class="md-block" flex-gt-sm> <label>Codigo CPA</label> <input ng-model="ctrl.domicilio.cpa"> </md-input-container> --> 
+									<md-input-container class="md-block" flex-gt-sm> 
+										<label ng-hide="true">Loguitud</label> 
+										<input ng-hide="true"  ng-model="ctrl.domicilio.longitud" name="longitud" md-no-asterisk disabled required> 
+										<span style="display:none" >{{ longitudValida = direccionForm.longitud.$valid}}</span> 
+									</md-input-container> 
+									
+									<md-input-container class="md-block" type="hidden" flex-gt-sm> 
+										<label ng-hide="true">Latitud</label> 
+										<input ng-hide="true" type="hidden" ng-model="ctrl.domicilio.latitud" name="latitud" md-no-asterisk disabled required>
+										<span style="display:none" >{{ latitudValida = direccionForm.latitud.$valid}}</span> 
+									</md-input-container>
+								</div>
+							 	<md-button class="md-icon-button md-primary" ng-click="mostrarAyuda()">
+									<md-icon> help_outline </md-icon> 
+								</md-button>
+								<code ng-show='{{ctrl.domicilio.predeterminada}}' > <md-icon> beenhere</md-icon> Domicilio predeterminado</code>
+					
+							</form>
+						</div>
+
+			</md-content>
+
+			<md-card-actions ng-controller="MapGeocoderController" layout="row" layout-align="end center"> 
+				<md-button ng-click="ctrl.eliminar()"> <md-icon> delete_forever </md-icon> 
+					<md-tooltip md-direction="left"> eliminar domicilo </md-tooltip> </md-button> 
+				
+				<md-button ng-click="ctrl.marcarPredeterminado()"> <md-icon> beenhere	 </md-icon> 
+					<md-tooltip md-direction="left"> marcar como domicilo principal </md-tooltip> </md-button> 
+				
+				<!--  
 				<md-button ng-click="ctrl.guardar()">Confirmar</md-button>
 				-->
-			<md-button ng-disabled=isDisabled() class="btn-confirmar" ng-click="ctrl.guardar()">
-				Confirmar
-			</md-button>
-		</md-card-actions>
-	</md-card>
+				 
+					<md-button ng-disabled=formIsValidForSearch() class="md-raised md-primary" ng-click="buscar($event)">
+						<md-icon md-font-set="material-icons"> gps_fixed </md-icon>
+					   <md-tooltip md-direction="top"> Ubica su posicion geografica basada en la direccion ingresada </md-tooltip>
+                  		{{buscar_direccion}}
+               		</md-button>
+               		<md-button ng-disabled=isSearching() class="md-raised md-primary" ng-click="localizar()">
+               		   <md-icon md-font-set="material-icons"> room </md-icon>
+               		   <md-tooltip md-direction="top"> Permite marcar su posicion geografica manualmente en el mapa</md-tooltip>         
+                  		{{auto_localizar}}
+                  	</md-button>
+					<md-button ng-disabled=formIsValidForSave() class="md-raised md-primary" ng-click="ctrl.guardar()">
+						<md-icon md-font-set="material-icons"> save </md-icon>
+						Guardar
+					</md-button> 
+					<md-button ng-disabled=isSearching() class="md-primary md-raised" ng-click="mostrarMapaGeneral($event)"   >
+						<md-icon md-font-set="material-icons"> explore </md-icon>
+						<md-tooltip md-direction="top"> Muestra el mapa con las direcciones </md-tooltip>
+      					Mapa
+    				</md-button>
+
+			</md-card-actions>
+			
+
+				
+</md-card>
 </div>
