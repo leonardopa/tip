@@ -158,40 +158,7 @@
 				}
 			}
 		}
-		/** Tiene la loginca de crear el pedido sino lo tien */
-		/*
-		function agregarProductoIndividual(variante){
-				function setPedidoYagregarProducto(){
-					function doOkPedido(response){
-						$log.debug("setPedidoYagregarProducto", response);
-						contextoCompraService.setContextoByPedido(response.data);					
-						contextoCompraService.refreshPedidos();
-						
-					}
-
-					productoService.verPedidoIndividual().then(doOkPedido);
-
-					agregarProductoDialog(variante)				
-				}
-
-				function doNoOK(response){			
-					if(us.contieneCadena(response.data.error,CTE_REST.ERROR_YA_TIENE_PEDIDO)){
-						ToastCommons.mensaje(CTE_REST.AGREAR_EN_PEDIDO_EXISTENTE);
-						setPedidoYagregarProducto();
-					}
-				}
-
-				function doOk(){
-					setPedidoYagregarProducto();
-				}
-
-				var json = {};
-				json.idVendedor = StateCommons.vendedor().id;
-				
-				//si falla es poque ya tiene un pedido abierto TODO mejorar
-				productoService.crearPedidoIndividual(json,doNoOK).then(doOk)
-		}*/
-		/** v2 sin ir al servicio*/
+		/** Si no tiene un pedido individual lo crea */
 		function agregarProductoIndividual(variante) {
 
 			function actualizarPedidoIndividual() {
@@ -216,15 +183,11 @@
 					}
 				}
 
-				function doOk(response) {
-					actualizarPedidoIndividual();
-				}
-
 				var json = {};
 				json.idVendedor = StateCommons.vendedor().id;
 
 				//si falla es poque ya tiene un pedido abierto TODO mejorar
-				productoService.crearPedidoIndividual(json, doNoOK).then(doOk)
+				productoService.crearPedidoIndividual(json, doNoOK).then(actualizarPedidoIndividual)
 
 			}
 
@@ -248,6 +211,7 @@
 			function doNoOk() {
 				$log.debug("Cancelo Agregar")
 			}
+			
 			dialogCommons.prompt('Agregar al changuito', 'Cuantos ' + variante.nombreProducto + ' mecesitas ?',
 				'Cantidad', 'Agregar', 'Cancelar', doOk, doNoOk);
 		}
@@ -371,11 +335,11 @@
 			}
 
 			function doNoOK(response) {
-
-				if (response.data.error.includes("existe un pedido vigent")) {
+				$log.debug("error crear gcc individual ",response);
+		//		if (response.data.error.includes("existe un pedido vigent")) {
 					$log.debug("ya tenia un pedido vigente");
 					agregarProductoDialog(variante)
-				}
+		//		}
 
 			}
 

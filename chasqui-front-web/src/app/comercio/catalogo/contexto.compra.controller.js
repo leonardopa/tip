@@ -54,7 +54,7 @@
 
 			vm.grupoSelected = grupo;
 			contextoCompraService.setContextoByGrupo(grupo);
-
+			$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
 			vm.icon = 'person';
 			// vm.icon='shopping_cart';
 			$timeout(function() {

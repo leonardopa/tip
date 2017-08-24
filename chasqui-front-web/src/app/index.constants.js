@@ -15,7 +15,7 @@
             var URL_BASE_MOCK = "";
             var URL_BASE = "";
 
-            switch (4) {
+            switch (3) {
 
                 //    Servidor LOCAL
                 case 0:
@@ -57,6 +57,8 @@
                 PRODUCTOS_X_PAG: 10,
 
                 INTERVALO_NOTIFICACION_MIN: 10*60000,
+
+                TIEMPO_MAX_CACHE : 1 * 60,
 
                 defaultLogo: "imagenes/logo_ch_login.png",
 

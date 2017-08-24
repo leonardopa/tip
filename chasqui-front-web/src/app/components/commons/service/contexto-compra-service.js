@@ -12,7 +12,8 @@
 		- La cache se puede limpiar manualmente cuando se llama un servicio que se 
 		sabe impacta en datos, por ejemplo borrar miembro.
 		 */
-	function contextoCompraService($log, us, StateCommons, $localStorage, productoService, gccService, $q, $timeout, $rootScope) {
+	function contextoCompraService($log, us, StateCommons, $localStorage, 
+		productoService, gccService, $q, $timeout, $rootScope,moment,CTE_REST) {
 		var vm = this;
 		//alert("contextoCompraService")
 		vm.ls = $localStorage;
@@ -28,22 +29,27 @@
 		vm.ls.varianteSelected;
 		vm.ls.pedidos = undefined;
 		vm.ls.grupos = undefined;
+
+		vm.ls.lastUpdate=moment();		
 		//var tieneEnChache = false;
 
 		window.getGrupos= 0;
 		window.getPedidos=0;
-
+			 
 		vm.getGrupos = function() {
 			var defered = $q.defer();
 			var promise = defered.promise;
 
-			if (vm.ls.grupos) {
+			if (vencioTiempoChache()) $log.debug("cache grupo vencida");
+
+			if (vm.ls.grupos && !vencioTiempoChache()) {
 				$log.debug("tiene grupos en cache", vm.ls.grupos)
 				defered.resolve(vm.ls.grupos);
 			} else {
 				$log.debug("NO tiene grupos en cache")
 				function doOK(response) {					
 					window.getGrupos++;
+					vm.ls.lastUpdate=moment();	
 					vm.ls.grupos = [gIndividualFicticio];
 					vm.ls.grupos = vm.ls.grupos.concat(response.data);
 					defered.resolve(vm.ls.grupos);
@@ -58,13 +64,16 @@
 			var defered = $q.defer();
 			var promise = defered.promise;
 
-			if (vm.ls.pedidos) {
+			if (vencioTiempoChache()) $log.debug("cache pedido vencida");
+
+			if (vm.ls.pedidos && !vencioTiempoChache()) {
 				$log.debug("tiene pedidos en cache", vm.ls.pedidos)
 				defered.resolve(vm.ls.pedidos);
 			} else {
 				$log.debug("NO tiene pedidos en cache, fue a buscar")
 				function doOkPedido(response) {					
 					window.getPedidos++;
+					vm.ls.lastUpdate=moment();	
 					vm.ls.pedidos = response.data;
 					vm.setContextoByGrupo(vm.ls.grupoSelected);
 					//$rootScope.$emit('contexto.pedido.actualizar');
@@ -81,7 +90,6 @@
 
 
 		vm.tienePedidoInividual = function() {
-
 			angular.forEach(vm.ls.pedidos, function(pedido, key) {
 				if (us.isUndefinedOrNull(pedido.aliasGrupo))
 					return true;
@@ -129,7 +137,7 @@
 			// TODO y setear el pedido
 			vm.ls.pedidoSelected = getPedidoByGrupo(grupo);
 			$log.debug("pedidoSelected es ",vm.ls.pedidoSelected);
-			$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
+			//$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
 		}
 
 		vm.isGrupoIndividualSelected = function() {
@@ -190,6 +198,9 @@
 
 		}
 
+		function vencioTiempoChache(){
+			return parseInt(moment().diff(vm.ls.lastUpdate))/1000 > CTE_REST.TIEMPO_MAX_CACHE;
+		}
 		////////
 		/*
 			    function initContexto(){

@@ -30,8 +30,12 @@
 			function doOk(response) {
 				$log.debug("--- eliminar pedido response ", response.data);
 				ToastCommons.mensaje(us.translate('QUITO_PRODUCTO'));
-				contextoCompraService.refreshPedido();
-				$state.reload();
+			//	contextoCompraService.refreshPedido();
+				contextoCompraService.refreshPedidos().then(
+			        function(pedidos) {
+			          $state.reload();			          
+			        });
+				//$state.reload();
 			}
 
 			var params = {};
@@ -89,7 +93,10 @@
 			function doOk(response) {
 				$log.debug("--- confirmar pedido response ", response.data);
 				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
-				$state.reload();
+				contextoCompraService.refreshPedidos().then(
+			        function(pedidos) {
+			          $state.reload();			          
+			        });
 			}
 
 			if (vm.pedido.idGrupo == null) {
