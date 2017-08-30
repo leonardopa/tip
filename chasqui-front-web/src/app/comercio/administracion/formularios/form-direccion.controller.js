@@ -1,121 +1,149 @@
 (function() {
-	'use strict';
+  'use strict';
 
-	angular.module('chasqui').controller('FormDireccionController',
-		FormDireccionController);
+  angular.module('chasqui').controller('FormDireccionController',
+    FormDireccionController);
 
-	/**
-	 * @ngInject Formulario para direccion
-	 */
-	function FormDireccionController($log, $state, $scope, ToastCommons, perfilService, us) {
+  /** @ngInject 
+   *  Formulario para direccion */
+  function FormDireccionController($log, $state, $scope, restProxy, ToastCommons, $mdDialog, perfilService, us) {
 
-		$log.debug("FormDireccionController", $scope.direccionParam);
+    $log.debug("FormDireccionController", $scope.direccionParam);
 
-		var vm = this;
-		var isNew = angular.equals({}, $scope.direccionParam);
-		vm.domicilio = $scope.direccionParam;
-		vm.isEdit = false;
+    var vm = this;
+    var isNew = angular.equals({}, $scope.direccionParam);
+    vm.domicilio = $scope.direccionParam;
+    vm.isEdit = false;
+    $scope.aliasValido = false;
+    $scope.calleValida = false;
+    $scope.alturaValida = false;
+    $scope.localidadValida = false;
+    $scope.latitudValida = false;
+    $scope.longitudValida = false;
 
-		function loadDirecciones() {
-			$scope.$emit("load-direcciones", {}); // recarga las direcciones
-			// que estan el el
-			// conteoller de perfil
-		}
+    function loadDirecciones() {
+      $scope.$emit("load-direcciones", {}); //recarga las direcciones que estan el el controller de perfil
+    }
 
-		// TODO: hacerlo flexible para grupo usuario vendedor ETC
-		// ahora esta para grupo
-		vm.guardar = function() {
-			$log.debug("Guardar Domicilio , nuevo? ", isNew);
-			if (isNew) {
-				callNuevaDireccion();
-			} else {
-				callUpdateDireccion();
-				// ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de
-				// direccion');
-			}
-		}
+    // TODO: hacerlo flexible para grupo usuario vendedor ETC
+    // ahora esta para grupo
+    vm.guardar = function() {
+      $log.debug("Guardar Domicilio , nuevo? ", isNew);
+      if (isNew) {
+        callNuevaDireccion();
+      } else {
+        callUpdateDireccion();
+        //	ToastCommons.mensaje('TODO : UPDATE cuando se tenga el id de direccion');
+      }
 
-		vm.marcarPredeterminado = function() {
-			$log.debug("marcar como predeterminado");
+    }
 
-			function doOk(response) {
-				$log.debug("respuesta marcar como predeterminado ", response);
-				vm.domicilio.predeterminada = true;
-				ToastCommons.mensaje(us.translate('PREDETERMINADO'));
-			}
+    vm.marcarPredeterminado = function() {
+      $log.debug("marcar como predeterminado");
 
-			vm.domicilioParam = vm.domicilio;
-			vm.domicilioParam.predeterminada = true;
-			perfilService.actualizarDireccion(vm.domicilioParam).then(doOk);
+      function doOk(response) {
+        $log.debug("respuesta marcar como predeterminado ", response);
+        vm.domicilio.predeterminada = true;
+        ToastCommons.mensaje(us.translate('PREDETERMINADO'));
+      }
 
-		}
+      vm.domicilioParam = vm.domicilio;
+      vm.domicilioParam.predeterminada = true;
+      perfilService.actualizarDireccion(vm.domicilioParam).then(doOk);
 
-		vm.eliminar = function() {
-			$log.debug("eliminar direccion");
+    }
 
-			function doOk(response) {
-				$log.debug("respuesta eliminar direccion ", response);
+    vm.eliminar = function() {
+      $log.debug("eliminar direccion");
 
-				ToastCommons.mensaje(us.translate('ELIMINO_DIRECCION'));
-				loadDirecciones();
-			}
+      function doOk(response) {
+        $log.debug("respuesta eliminar direccion ", response);
 
-			perfilService.eliminarDireccion(vm.domicilio.idDireccion).then(doOk);
-		}
+        ToastCommons.mensaje(us.translate('ELIMINO_DIRECCION'));
+        loadDirecciones();
+      }
 
-		// ////////////////////
+      perfilService.eliminarDireccion(vm.domicilio.idDireccion).then(doOk);
+    }
 
-		var callNuevaDireccion = function() {
-			$log.debug("guardar domicilio", vm.domicilio);
+    // ////////////////////
 
-			function doOk(response) {
-				$log.debug("respuesta guardar domicilio ", response);
+    var callNuevaDireccion = function() {
+      $log.debug("guardar domicilio", vm.domicilio);
 
-				ToastCommons.mensaje(us.translate('AGREGO_DIRECCION'));
+      function doOk(response) {
+        $log.debug("respuesta guardar domicilio ", response);
 
-				loadDirecciones();
-			}
+        ToastCommons.mensaje(us.translate('AGREGO_DIRECCION'));
 
-			vm.domicilio.predeterminada = true; // TODO : si es el primero
-			// deberia ser TRUE si no no
+        loadDirecciones();
+      }
 
-			perfilService.nuevaDireccion(vm.domicilio).then(doOk);
-		}
+      vm.domicilio.predeterminada = true; // TODO : si es el primero
+      // deberia ser TRUE si no no
 
-		vm.me = us.translate('PREDETERMINADO');
+      perfilService.nuevaDireccion(vm.domicilio).then(doOk);
+    }
 
-		var callUpdateDireccion = function() {
-			$log.debug("update domicilio", vm.domicilio);
+    vm.me = us.translate('PREDETERMINADO');
 
-			function doOk(response) {
-				$log.debug("respuesta update domicilio ", response);
+    var callUpdateDireccion = function() {
+      $log.debug("update domicilio", vm.domicilio);
 
-				ToastCommons.mensaje(us.translate('ACTUALIZO_DIRECCION'));
+      function doOk(response) {
+        $log.debug("respuesta update domicilio ", response);
 
-				loadDirecciones();
+        ToastCommons.mensaje(us.translate('ACTUALIZO_DIRECCION'));
 
-			}
-			vm.domicilio.predeterminada = false;
-			perfilService.actualizarDireccion(vm.domicilio).then(doOk);
+        loadDirecciones();
 
-		}
+      }
+      vm.domicilio.predeterminada = false;
+      perfilService.actualizarDireccion(vm.domicilio).then(doOk);
+
+    }
+
+    //Muestra un alert simple, puede cambiarse para levantar
+    //mensaje mas complejo y amigable definiendo una pagina HTML.
+    function showAlert(ev, mensaje) {
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#mappopupContainer')))
+        .clickOutsideToClose(true)
+        .title('Ayuda')
+        .htmlContent(mensaje)
+        .ok('OK')
+        .targetEvent(ev)
+      );
+    };
+
+    $scope.mostrarAyuda = function(ev) {
+      var mensaje = '<br>' +
+        '<div align="center">Requisitos para Guardar una dirección</div>' +
+        '<br>' +
+        '<li> Se debe almenos Buscar o Marcar la dirección. </li>' +
+        '<li> Se debe confirmar la posición en alguna de las opciones previamente mencionadas. </li>' +
+        '<li> Todos los campos con " * " deben ser completados. </li>';
+      showAlert(ev, mensaje);
+    };
+  }
 
 
-		// ///// TODO: ver cuando este para asociar a una grupo
-		/*
-		var guardarDireccionGrupo = function() {
-			$log.debug("guardar domicilio al grupo", vm.domicilio);
+
+  // ///// TODO: ver cuando este para asociar a una grupo
+  /*
+  var guardarDireccionGrupo = function() {
+  	$log.debug("guardar domicilio al grupo", vm.domicilio);
 
 
-			function doOk(response) {
-				$log.debug("respuesta guardar domicilio ", response);
+  	function doOk(response) {
+  		$log.debug("respuesta guardar domicilio ", response);
 
-				// TODO: en realidad la navegacion depende de donde vino
-				$state.go("lista-grupos");
-			}
+  		// TODO: en realidad la navegacion depende de donde vino
+  		$state.go("lista-grupos");
+  	}
 
-			perfilService.direccionGrupo(1, vm.domicilio).then(doOk);
-		}*/
-	}
+  	perfilService.direccionGrupo(1, vm.domicilio).then(doOk);
+  }*/
 
 })();
