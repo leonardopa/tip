@@ -2,44 +2,42 @@ $colorUno: #462342;
 $colorDos: #468385;
 $colorConfirmar: #43a047;
 // https://www.materialpalette.com/colors
-.body{
-		//background: linear-gradient(#F7F7F7,#D7D7D7) !important;
-		//background-color: #462342 !important;
-}
-.menu  {
-  //background: linear-gradient(#F7F7F7, #D7D7D7) !important;
-  background-color: $colorUno;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, .3);
-  color: #ffffff !important;
-  
+.body {
+	/*background: linear-gradient(#F7F7F7,#D7D7D7) !important;
+	//background-color: #462342 !important;*/
 }
 
-.titulo-pagina{
+.menu {
+	//background: linear-gradient(#F7F7F7, #D7D7D7) !important;
+	background-color: $colorUno;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, .3);
+	color: #ffffff !important;
+}
+
+.titulo-pagina {
 	//font-size: 50px;
 }
 
-.bg-white{
-	/*background: #C7C7CC !important;*/
-	//background: linear-gradient(#462342,#D7D7D7) !important;
+.bg-white {
 	background-color: $colorUno !important;
 }
 
-.btn-compra{
+.btn-compra {
 	background: $colorConfirmar !important;
-	color:white;
-    p{
-        padding: 0;
-        margin: 0;
-    }
+	color: white;
+	p {
+		padding: 0;
+		margin: 0;
+	}
 }
 
-.btn-agregar{
+.btn-agregar {
 	background: $colorDos !important;
-	color:white;	
+	color: white;
 }
 
-.alt-catalogo{
-    min-height: 440px !important;
+.alt-catalogo {
+	min-height: 440px !important;
 }
 
 
@@ -51,39 +49,42 @@ box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.
 
 .btn-confirmar{
 	background: $colorConfirmar !important;
-	color:white;	
+	color: white;
 }
 
-.md-accent{
+.md-accent {
 	color: $colorDos !important;
 }
 
-.md-active{
+.md-active {
 	color: $colorDos !important;
 }
 
-.md-ink-bar{
+.md-ink-bar {
 	color: $colorUno !important;
 	background: $colorDos !important;
 }
-md-tabs.md-default-theme .md-ink-bar, md-tabs md-ink-bar {
-    color: $colorUno !important;
-    background-color: $colorDos !important;
+
+md-tabs.md-default-theme .md-ink-bar,
+md-tabs md-ink-bar {
+	color: $colorUno !important;
+	background-color: $colorDos !important;
 }
-.btn-compra{
+
+.btn-compra {
 	padding: 0 0.5em !important;
 }
 
-.md-theme-indigo{
-	h1{
+.md-theme-indigo {
+	h1 {
 		color: $colorUno !important;
 	}
 	color: $colorUno !important;
-    background-color: $colorDos !important;
+	background-color: $colorDos !important;
 }
 
 
-.footer{
+.footer {
 	background-color: #2F3539 !important;
 	padding: 1rem 2rem;
 }
@@ -94,13 +95,11 @@ md-tabs.md-default-theme .md-ink-bar, md-tabs md-ink-bar {
 	color: $colorUno;
 }
 
-.chq-paginador{
+.chq-paginador {
 	padding-top: 6rem !important;
 }
 
-.img{
-    width: 100%;
+.img {
+	width: 100%;
 }
-
-// =======================================
 

@@ -1,0 +1,22 @@
+{
+	"PREDETERMINADO":"Se marco como predeterminada",
+	"ELIMINO_DIRECCION": "Se elimino direccion",
+	"AGREGO_DIRECCION" : "Se agrego dirección !",
+	"ACTUALIZO_DIRECCION" : "Se Actualizo dirección !",
+	"ALIAS": "alias",
+	"CALLE" : "Calle",
+	"ALTURA" : "Altura",
+	"PISO_DTPO" : "Piso / Departamento",
+	"LOCALIDAD" : "Localidad",
+	"CP" : "Codigo Postal",
+	"NO_SE_CP" : " no se mi codigo ",
+	"LOG" : "Longitud",
+	"LAT" : "Latitud",
+	"DOM_PRED" : "Domicilio predeterminado",
+	"NUEVO_GRUPO" : "Nuevo Grupo",
+	"MOD_GRUPO" : "Modificar Grupo ",
+	"DESC" : "Descripción",
+	"PEDIDO_A_CASA" : "Quiero que el pedido del grupo llegue a mi domicilio",
+	"OTRO_DOM" : "Quiero elegir otro domicilio"
+
+}

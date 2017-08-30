@@ -7,7 +7,7 @@
 
 	/** @ngInject */
 	function MenuController($scope, $log, $state, StateCommons, CTE_REST, $interval, ToastCommons,
-			perfilService,contextoCompraService) {
+		perfilService, contextoCompraService,us) {
 		$log.debug("MenuController ..... ");
 		$log.debug(StateCommons.ls.usuario);
 
@@ -27,7 +27,7 @@
 
 			initRefreshNotification();
 			resetNotificacion();
-		    contextoCompraService.reset();
+			contextoCompraService.reset();
 		}
 
 		function resetNotificacion() {
@@ -40,7 +40,7 @@
 			vm.callNotificaciones = true;
 			vm.icon = 'notifications';
 			vm.fill = 'red';
-			ToastCommons.mensaje("Tenes una nueva notificacion")
+			ToastCommons.mensaje(us.translate('LLEGO_NOTIFICACION'))
 		}
 
 		$scope.$on('resetHeader', function(event, msg) {
@@ -48,9 +48,9 @@
 		});
 
 		$scope.$on('logout', function(event, msg) {
-			vm.logOut();			
+			vm.logOut();
 		});
-		
+
 
 		vm.ir = function(page) {
 			$log.debug("ir a ..... ", page);
@@ -105,7 +105,7 @@
 
 		vm.logOut = function() {
 			$log.debug("Log Out ..... ");
-			
+
 			StateCommons.logOut();
 			contextoCompraService.reset();
 
@@ -130,13 +130,13 @@
 		function initRefreshNotification() {
 			if (StateCommons.isLogued() && !StateCommons.ls.notificacionActiva) {
 				$log.debug("interval notifications");
-				
+
 				llamadoPeriodico = $interval(function() {
 					$log.debug("call notificaciones nuevas?");
 					callNotificacionesNoLeidas();
 				}, CTE_REST.INTERVALO_NOTIFICACION_MIN);
-				
-				StateCommons.ls.notificacionActiva=true;
+
+				StateCommons.ls.notificacionActiva = true;
 			}
 		}
 
@@ -145,13 +145,13 @@
 			function doOk(response) {
 				$log.debug('callObtenerNotificaciones', response);
 
-				vm.notificacionesSinLeer = 0 ; 
+				vm.notificacionesSinLeer = 0;
 				// TODO : filtro en el front , deberia ser por BE
-				angular.forEach(response.data, function(value, key){				  
-				  console.log(value.estado)
-			      if(value.estado == "NOTIFICACION_NO_LEIDA")
-			         vm.notificacionesSinLeer = vm.notificacionesSinLeer+1 ; 
-			   });
+				angular.forEach(response.data, function(value, key) {
+					console.log(value.estado)
+					if (value.estado == "NOTIFICACION_NO_LEIDA")
+						vm.notificacionesSinLeer = vm.notificacionesSinLeer + 1;
+				});
 
 				if (vm.notificacionesSinLeer > 0) {
 					$log.debug('hay nuevas notificaciones !');
@@ -163,7 +163,7 @@
 
 			}
 			//TODO : DEBERIAN SER solo las NO LEIDAS
-			perfilService.notificacionesLeidas(1).then(doOk);	
+			perfilService.notificacionesLeidas(1).then(doOk);
 			//perfilService.notificacionesNoLeidas().then(doOk);	
 		}
 

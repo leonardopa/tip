@@ -1,0 +1,18 @@
+{
+	"BUSCAR": "Buscar",
+	"CAMBIAR_CHANGO": "Cambiar de Changuito",
+	"TOTAL": "Total",
+	"PROD_EN_PEDIDO": "Productos en pedido ",
+	"SIN_PROD_PEDIDO": "No hay productos en el pedido",
+	"BUSCAR_POR": "Buscar por",
+	"CATEGORIA": "Categoria",
+	"PRODUCTOR": "Productor",
+	"MEDALLA": "Medalla",
+	"PROD_DESTACADOS": "Productos destacados",
+	"INVITARMOS_INGRESAR": "Te invitamos a ingresar !",
+	"AGREAR_EN_PEDIDO_EXISTENTE": "el producto se agregara el pedido existente",
+	"PRODUCTO_AGREGADO": "Producto agregado !",
+	"SIN_PRODUCTOS": "Resultado de la búsqueda Sin Productos",
+	"AGREGAR_BTN": "Agregar",
+	"AGREGAR_BTN_TT": "Agregar al Changuito"
+}

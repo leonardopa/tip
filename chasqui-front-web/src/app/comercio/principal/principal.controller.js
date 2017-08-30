@@ -3,13 +3,13 @@
 
   angular
     .module('chasqui')
-    .controller('PrincipalController',PrincipalController);
+    .controller('PrincipalController', PrincipalController);
 
   /** @ngInject */
-  function PrincipalController( $scope,$log,StateCommons) {
-	  $log.debug("PrincipalController ..... ");
-	  StateCommons.ls.itemMenuSelect = 'bienvenido'; 
-	  var vm = this;
-    
+  function PrincipalController($scope, $log, StateCommons) {
+    $log.debug("PrincipalController ..... ");
+    StateCommons.ls.itemMenuSelect = 'bienvenido';
+    var vm = this;
+
   }
 })();

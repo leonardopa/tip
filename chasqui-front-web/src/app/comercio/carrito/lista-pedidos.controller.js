@@ -5,8 +5,8 @@
 		ListaPedidosController);
 
 	/** @ngInject */
-	function ListaPedidosController($log, $state, $scope, StateCommons 
-			,productoService,ToastCommons,gccService,contextoCompraService) {
+	function ListaPedidosController($log, $state, $scope, StateCommons, 
+		productoService, ToastCommons, gccService, contextoCompraService,us) {
 		$log.debug('ListaPedidosController ..... ');
 		StateCommons.ls.itemMenuSelect = 'lista-pedidos';
 		var vm = this;
@@ -23,7 +23,7 @@
 
 			$log.debug('cambio tab ..... ', vm.selected);
 
-		//	contextoCompraService.ls.pedidoSelected = vm.selected;
+			//	contextoCompraService.ls.pedidoSelected = vm.selected;
 
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
@@ -40,9 +40,9 @@
 			$log.debug("--- Crear pedido individual----");
 			callCrearPedidoIndividual();
 		}
-		
 
-		function setTabSeleccionado(pedido){
+
+		function setTabSeleccionado(pedido) {
 			$log.debug("setTabSeleccionado 1");
 			var i = 0
 			var indexSelect = 0;
@@ -55,51 +55,51 @@
 
 				i++;
 			});
-			
+
 			vm.selected = vm.tabs[indexSelect];
 			vm.selectedIndex = indexSelect;
 		}
 		///////////////// REST
-/*
-		var callLoadPedidos = function() {
-			$log.debug("--- find pedidos --------");
+		/*
+				var callLoadPedidos = function() {
+					$log.debug("--- find pedidos --------");
 
-			function doOk(response) {
-				$log.debug("--- find pedidos resultado --------", response.data);
-				vm.tabs = response.data;
+					function doOk(response) {
+						$log.debug("--- find pedidos resultado --------", response.data);
+						vm.tabs = response.data;
 
-				var i = 0
-				var indexSelect = 0;
+						var i = 0
+						var indexSelect = 0;
 
-				// me fijo en que tab estaba la ultima vez que vino , o si vino de la 
-				// pantalla principal
-				angular.forEach(vm.tabs, function(tab) {
+						// me fijo en que tab estaba la ultima vez que vino , o si vino de la 
+						// pantalla principal
+						angular.forEach(vm.tabs, function(tab) {
 
-					$log.debug(tab.id + " " + tab.nombre);
-					// 	$log.debug(tab.id + "   " + vm.pedidoDelContexto.id);
+							$log.debug(tab.id + " " + tab.nombre);
+							// 	$log.debug(tab.id + "   " + vm.pedidoDelContexto.id);
 
-					if ((vm.pedidoDelContexto != undefined) && (tab.id == vm.pedidoDelContexto.id)) {
-						$log.debug("****** " + tab.id);
-						indexSelect = i;
+							if ((vm.pedidoDelContexto != undefined) && (tab.id == vm.pedidoDelContexto.id)) {
+								$log.debug("****** " + tab.id);
+								indexSelect = i;
+							}
+
+							i++;
+						});
+
+						vm.selected = vm.tabs[indexSelect];
+						vm.selectedIndex = indexSelect;
 					}
 
-					i++;
-				});
+					//TODO ESTO ES MOCK
+					productoService.productosPedidoByUser().then(doOk);
 
-				vm.selected = vm.tabs[indexSelect];
-				vm.selectedIndex = indexSelect;
-			}
-
-			//TODO ESTO ES MOCK
-			productoService.productosPedidoByUser().then(doOk);
-
-		}*/
+				}*/
 
 		function callCrearPedidoIndividual() {
 			function doOk(response) {
 				$log.debug("--- crear pedido individual response ", response.data);
 
-				ToastCommons.mensaje("Pedido creado !");
+				ToastCommons.mensaje(us.translate('PEDIDO_CREADO'));
 				callPedidoIndividual();
 			}
 			var json = {};
@@ -107,18 +107,19 @@
 
 			productoService.crearPedidoIndividual(json).then(doOk)
 		}
-		
-		$scope.$on('modifico-pedido', 
-			function(event, arg) {			
+
+		$scope.$on('modifico-pedido',
+			function(event, arg) {
 				load();
 			});
 
-		function load(){
-			contextoCompraService.getPedidos().then(function(data){
-			vm.tabs=data
-			setTabSeleccionado(contextoCompraService.ls.pedidoSelected);});
+		function load() {
+			contextoCompraService.getPedidos().then(function(data) {
+				vm.tabs = data
+				setTabSeleccionado(contextoCompraService.ls.pedidoSelected);
+			});
 		}
-				
+
 		load();
 	}
 
