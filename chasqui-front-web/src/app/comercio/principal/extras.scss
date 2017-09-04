@@ -3,8 +3,8 @@ $colorDos: #468385;
 $colorConfirmar: #43a047;
 // https://www.materialpalette.com/colors
 .body {
-	//background: linear-gradient(#F7F7F7,#D7D7D7) !important;
-	//background-color: #462342 !important;
+	/*background: linear-gradient(#F7F7F7,#D7D7D7) !important;
+	//background-color: #462342 !important;*/
 }
 
 .menu {
@@ -19,8 +19,6 @@ $colorConfirmar: #43a047;
 }
 
 .bg-white {
-	/*background: #C7C7CC !important;*/
-	//background: linear-gradient(#462342,#D7D7D7) !important;
 	background-color: $colorUno !important;
 }
 
@@ -42,7 +40,14 @@ $colorConfirmar: #43a047;
 	min-height: 440px !important;
 }
 
-.btn-confirmar {
+
+
+.hoverable:hover{
+box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+
+.btn-confirmar{
 	background: $colorConfirmar !important;
 	color: white;
 }
@@ -84,7 +89,8 @@ md-tabs md-ink-bar {
 	padding: 1rem 2rem;
 }
 
-.chq-color-toolbar {
+
+.chq-color-toolbar{
 	background-color: $colorDos;
 	color: $colorUno;
 }
@@ -97,4 +103,3 @@ md-tabs md-ink-bar {
 	width: 100%;
 }
 
-// =============== Agregado por favio 13-7 ==========================
