@@ -6,5 +6,6 @@
 	"MENU_CATALOGO" : "Catalogo",
 	"MENU_PEDIDO" : "Mis pedidos",
 	"MENU_GRUPO" : "Mis Grupos",
-	"MENU_PERFIL" : "Perfil"
+	"MENU_PERFIL" : "Perfil",
+	"CERRAR_GRUPAL" : "Cerrar pedido grupal"
 }
