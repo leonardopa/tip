@@ -193,6 +193,41 @@
 
 		}
 
+		function callCrearPedidoGrupal(variante) {
+			function doOK(response) {
+				$log.debug("callCrearPedidoGrupal", response);
+				contextoCompraService.refreshPedidos().then(
+					function(pedido) {
+						//contextoCompraService.ls.pedidoSelected = response.data;		
+						//vm.pedidoSelected = response.data;		
+						//vm.pedidoSelected = contextoCompraService.ls.pedidoSelected;
+						//vm.pedidoSelected = pedido;
+						//contextoCompraService.
+						agregarProductoDialog(variante)
+					}
+				)
+
+
+			}
+
+			function doNoOK(response) {
+				$log.debug("error crear gcc individual, seguramente ya tenia pedido",response);
+		 		contextoCompraService.refreshPedidos().then(
+					function(pedido) {
+						agregarProductoDialog(variante)
+					}
+				)
+
+			}
+
+
+			var params = {}
+			params.idGrupo = contextoCompraService.ls.grupoSelected.idGrupo;
+			params.idVendedor = StateCommons.vendedor().id;
+
+			gccService.crearPedidoGrupal(params, doNoOK).then(doOK);
+		}
+
 		function agregarProductoDialog(variante) {
 			$log.debug("agregarProductoDialog ", variante)
 
@@ -318,38 +353,7 @@
 
 		}
 
-		function callCrearPedidoGrupal(variante) {
 
-			function doOK(response) {
-				$log.debug("callCrearPedidoGrupal", response);
-				contextoCompraService.refreshPedidos().then(
-					function(pedido) {
-						//contextoCompraService.ls.pedidoSelected = response.data;		
-						//vm.pedidoSelected = response.data;		
-						vm.pedidoSelected = contextoCompraService.ls.pedidoSelected;
-						agregarProductoDialog(variante)
-					}
-				)
-
-
-			}
-
-			function doNoOK(response) {
-				$log.debug("error crear gcc individual ",response);
-		//		if (response.data.error.includes("existe un pedido vigent")) {
-					$log.debug("ya tenia un pedido vigente");
-					agregarProductoDialog(variante)
-		//		}
-
-			}
-
-
-			var params = {}
-			params.idGrupo = contextoCompraService.ls.grupoSelected.idGrupo;
-			params.idVendedor = StateCommons.vendedor().id;
-
-			gccService.crearPedidoGrupal(params, doNoOK).then(doOK);
-		}
 
 		function callEmprendedores() {
 			$log.debug("---callEmprendedor ---");

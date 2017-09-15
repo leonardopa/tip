@@ -38,7 +38,7 @@
 
       function doOk(response) {
         $log.debug("respuesta guardar grupo ", response);
-        alert("callGuardarGrupo")
+       
         contextoCompraService.refresh();
         // TODO: guardar el id del grupo creado
 
@@ -56,8 +56,7 @@
     var callEditarGrupo = function() {
       $log.debug("editar grupo", vm.grupo);
 
-      function doOk(response) {
-        alert("callEditarGrupo")
+      function doOk(response) {       
         contextoCompraService.refresh();
         $state.go("lista-grupos");
       }

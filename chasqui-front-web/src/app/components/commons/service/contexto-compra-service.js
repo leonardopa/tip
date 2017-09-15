@@ -32,7 +32,7 @@
 
 		vm.ls.lastUpdate=moment();		
 		//var tieneEnChache = false;
-
+		//TODO : SACAR ESTAS PRUEBAS
 		window.getGrupos= 0;
 		window.getPedidos=0;
 			 
@@ -127,14 +127,12 @@
 
 		vm.setContextoByPedido = function(pedido) {
 			vm.ls.pedidoSelected = pedido;
-			// TODO : y setear el grupo
 			vm.ls.grupoSelected = getGrupoByPedido(pedido);
 		}
 
 		vm.setContextoByGrupo = function(grupo) {
 			$log.debug("setContextoByGrupo",grupo)
 			vm.ls.grupoSelected = grupo;
-			// TODO y setear el pedido
 			vm.ls.pedidoSelected = getPedidoByGrupo(grupo);
 			$log.debug("pedidoSelected es ",vm.ls.pedidoSelected);
 			//$rootScope.$emit('contexto.compra.cambia.grupo', grupo);
@@ -183,7 +181,8 @@
 			var pedidoCurrent = undefined; // o no tiene pedido
 
 			angular.forEach(vm.ls.pedidos, function(pedido, key) {
-				if (pedido.id === grupo.idPedidoIndividual)
+			//	if (pedido.id === grupo.idPedidoIndividual)
+				if (pedido.idGrupo === grupo.idGrupo)
 					pedidoCurrent = pedido;
 			});
 			// si es indivudual
