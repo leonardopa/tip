@@ -35,10 +35,10 @@
 								<input type="email" ng-model="ctrl.user.email" ng-readonly="ctrl.readOnly" required> </md-input-container>
 							<md-input-container class="md-block" flex-gt-sm>
 								<label translate>TEL_CEL</label>
-								<input ng-model="ctrl.user.telefonoMovil" ng-readonly="ctrl.readOnly" required> </md-input-container>
+								<input ng-model="ctrl.user.telefonoMovil" ng-readonly="ctrl.readOnly" ng-required="!ctrl.user.telefonoFijo"> </md-input-container>
 							<md-input-container class="md-block" flex-gt-sm>
 								<label translate>TEL_FIJO</label>
-								<input ng-model="ctrl.user.telefonoFijo" ng-readonly="ctrl.readOnly" required> </md-input-container>
+								<input ng-model="ctrl.user.telefonoFijo" ng-readonly="ctrl.readOnly" ng-required="!ctrl.user.telefonoMovil"> </md-input-container>
 						</div>
 						<div layout-gt-sm="row" ng-show="ctrl.isAlta">
 							<md-input-container class="md-block" flex-gt-sm>

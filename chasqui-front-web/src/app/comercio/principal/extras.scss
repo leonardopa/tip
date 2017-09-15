@@ -95,9 +95,51 @@ md-tabs md-ink-bar {
 	color: $colorUno;
 }
 
+/* Paginacion */
 .chq-paginador {
 	padding-top: 6rem !important;
+	button.md-icon-button:nth-child(1){
+		background-color: $colorDos;
+		color: $colorUno;
+	}
+	button.md-icon-button:nth-child(10){
+		background-color: $colorDos;
+		color: $colorUno;
+	}
+	button.md-icon-button:nth-child(3){
+		background-color: $colorUno;
+		color: $colorDos;
+	}
+	.md-button.md-warn.md-raised:hover:not([disabled]){
+		background-color: $colorUno;
+		color: $colorDos;
+		box-shadow: 0px 2px 3px rgba(0, 0, 0, .9);
+	}
+	.md-button.md-primary.md-raised:hover:not([disabled]){
+		background-color: $colorDos;
+		color: $colorUno;
+		box-shadow: 0px 2px 3px rgba(0, 0, 0, .9);
+	}
 }
+
+/* Mapa de direccion */
+
+.md-button.md-primary.md-raised{
+	background-color: $colorDos;
+	color: $colorUno;
+}
+
+.md-button.md-primary.md-raised:hover:not([disabled]){
+	background-color: $colorUno;
+	color: $colorDos;
+	transition: all 0.4s;
+}
+.chq-resaltado{
+	color: #fff !important;
+	background-color: gray !important;
+}
+
+
 
 .img {
 	width: 100%;

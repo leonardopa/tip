@@ -24,6 +24,9 @@
 		// modo.
 		vm.isModoEdit = false;
 
+		vm.user.telefonoFijo = "";
+		vm.user.telefonoFijo = "";
+
 		function mostrarMensajesDeBienvenida() {
 
 			$timeout(function() {
@@ -49,6 +52,8 @@
 			}
 		}
 
+		vm.user.telefonoFijo = "",
+		vm.user.telefonoFijo = ""
 		vm.guardar = function() {
 			vm.callGuardar();
 		}
@@ -98,8 +103,10 @@
 		
 			// TODO : manejar error
 			// ToastCommons.mensaje('Falla actulizar. Ver Trello');
-
-			perfilService.editUsuario(vm.user).then(doOk)
+			if (vm.user['telefonoMovil'] !== null || vm.user['telefonoFijo'] !== null) {
+				perfilService.editUsuario(vm.user).then(doOk)
+			}
+			
 		}
         
         vm.callActualizarAvatar = function(){            
