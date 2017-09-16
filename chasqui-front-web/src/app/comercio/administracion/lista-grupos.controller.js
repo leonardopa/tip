@@ -6,7 +6,8 @@
 
 	/** @ngInject . Tabs de grupos con el panel de info y botones de acciones */
 	function ListaGruposController($log, $scope, $state,
-		StateCommons, dialogCommons, ToastCommons, perfilService, gccService, CTE_REST, contextoCompraService, us) {
+		StateCommons, dialogCommons, ToastCommons, perfilService, gccService, CTE_REST, 
+		contextoCompraService, us) {
 
 		$log.debug("controler ListaGruposController");
 		StateCommons.ls.itemMenuSelect = 'lista-grupos';
@@ -15,14 +16,20 @@
 		vm.count = 0;
 		vm.groups = [];
 		vm.selected = null, vm.previous = null;
-		vm.selectedIndex = 1;
+		vm.selectedIndexGrupo = 0;
 		vm.urlBase = CTE_REST.url_base;
 
 		/** Control de cambio de tabs */
-		$scope.$watch('selectedIndex', function(current, old) {
+ 		$scope.$watch('listaGruposCtrl.selectedIndexGrupo', function(current, old) {
+ 			$log.debug("selectedIndexGrupo");
 			vm.previous = vm.selected;
-			vm.selected = vm.groups[current];
-
+			vm.selected = vm.groups[current];	
+			
+			if (! us.isUndefinedOrNull(vm.selected)){
+				contextoCompraService.setContextoByGrupo(vm.selected);
+			}
+			
+			/*
 			if (old + 1 && (old != current))
 				if (!angular.isUndefined(vm.previous)) {
 					$log.debug('Goodbye ' + vm.previous.alias + '!');
@@ -30,7 +37,7 @@
 			if (current + 1)
 				if (!angular.isUndefined(vm.selected)) {
 					$log.debug('Hello ' + vm.selected.alias + '!');
-				}
+				}*/
 		});
 
 		function setTabSeleccionado(grupo) {
@@ -50,16 +57,17 @@
 
 			if (existe) {
 				vm.selected = vm.groups[indexSelect];
-				vm.selectedIndex = indexSelect;
+				vm.selectedIndexGrupo = indexSelect;
+				vm.selectedIndexGrupo = indexSelect;
 			}
 
 		}
-
+		/*
 		$scope.$on('quito-miembro-grupo',
 			function(event) {
 				callLoadGrupos();
 			});
-
+		*/
 		vm.edit = function(grupo) {
 			$state.go("form-grupo", { "grupo": grupo });
 		}
@@ -100,7 +108,7 @@
 
 		/** Redirecciona al formulario crear grupo */
 		vm.crearGrupo = function(ev) {
-			$state.go('form-grupo');
+			$state.go('form-grupo');			
 		};
 
 
@@ -133,7 +141,9 @@
 			var doOk = function(response) {
 				$log.log('Se enviará un email a la direcciónn ', response);
 				ToastCommons.mensaje(us.translate('ENVIARA_MAIL'));
-				callLoadGrupos();
+				//callLoadGrupos();
+				var recienInvitado = {avatar: null, nickname: null, email: emailClienteInvitado, invitacion: "NOTIFICACION_NO_LEIDA", estadoPedido: "INEXISTENTE",pedido:null};
+				grupo.miembros.push(recienInvitado);
 			}
 
 			var params = {
@@ -150,7 +160,6 @@
 				$log.debug("--- find grupos respuesta", data);
 				vm.groups = [];
 				angular.forEach(data, function(grupo) {
-					grupo.canAddIntegrante = false;
 					if (grupo.alias != 'Personal') vm.groups.push(grupo);
 				});
 
@@ -159,8 +168,8 @@
 			}
 
 			// gccService.gruposByusuario().then(doOk)			
-			//contextoCompraService.refreshGrupos().then(doOk);
-			contextoCompraService.getGrupos().then(doOk);
+			contextoCompraService.refreshGrupos().then(doOk);
+			//contextoCompraService.getGrupos().then(doOk);
 		}
 
 		function callQuitarMiembro(miembro) {

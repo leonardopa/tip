@@ -16,21 +16,6 @@
 
 		vm.grupo = $scope.grupo;
 		vm.isAdmin = $scope.grupo.esAdministrador;
-		vm.canAddIntegrante = true;
-
-		/** Detacta si apretaron el boton addIntegrante en el pane de info */
-		$scope.$watch(
-			// "listaGruposCtrl.tabs["+vm.idGrupo+"].canAddIntegrante",
-			"listaGruposCtrl.selected.canAddIntegrante",
-			function handleFooChange(
-				newValue, oldValue) {
-
-				vm.canAddIntegrante = newValue
-			});
-		// // componente Chips
-
-	//	var pendingSearch, cancelSearch = angular.noop;
-	//	var cachedQuery, lastSearch;
 
 		vm.allContacts;
 		//	loadContacts();
@@ -90,8 +75,6 @@
 
 			function doOk(response) {
 				$log.debug("respuesta guardar grupos ", response);
-
-				vm.canAddIntegrante = !vm.canAddIntegrante;
 			}
 
 			gccService.integrantesGrupo(vm.idGrupo, vm.grupo.miembros).then(doOk)
@@ -101,7 +84,7 @@
 		vm.callQuitarMiembro = function(miembro) {
 			function doOk() {
 				ToastCommons.mensaje(us.translate('SE_QUITO_MIEMBRO'));
-				$scope.$emit("quito-miembro-grupo");
+				//$scope.$emit("quito-miembro-grupo");
 				vm.grupo.miembros.splice(vm.grupo.miembros.indexOf(miembro), 1);
 			}
 			var params = {};

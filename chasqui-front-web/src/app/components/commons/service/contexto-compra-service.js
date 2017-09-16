@@ -75,7 +75,7 @@
 					window.getPedidos++;
 					vm.ls.lastUpdate=moment();	
 					vm.ls.pedidos = response.data;
-					vm.setContextoByGrupo(vm.ls.grupoSelected);
+					//vm.setContextoByGrupo(vm.ls.grupoSelected);
 					//$rootScope.$emit('contexto.pedido.actualizar');
 					defered.resolve(vm.ls.pedidos);
 				}
@@ -180,19 +180,21 @@
 			// es algun gcc
 			var pedidoCurrent = undefined; // o no tiene pedido
 
-			angular.forEach(vm.ls.pedidos, function(pedido, key) {
-			//	if (pedido.id === grupo.idPedidoIndividual)
-				if (pedido.idGrupo === grupo.idGrupo)
-					pedidoCurrent = pedido;
-			});
-			// si es indivudual
-			if (grupo.alias == 'Personal') {
+			if (!us.isUndefinedOrNull(grupo)){
 				angular.forEach(vm.ls.pedidos, function(pedido, key) {
-					if (us.isUndefinedOrNull(pedido.idGrupo))
-						pedidoCurrent = pedido;
+				//	if (pedido.id === grupo.idPedidoIndividual)
+					if (pedido.idGrupo === grupo.idGrupo)
+							pedidoCurrent = pedido;
 				});
+				// si es indivudual
+				if (grupo.alias == 'Personal') {
+					angular.forEach(vm.ls.pedidos, function(pedido, key) {
+						if (us.isUndefinedOrNull(pedido.idGrupo))
+							pedidoCurrent = pedido;
+					});
+				}
 			}
-
+			
 			return pedidoCurrent;
 
 		}
