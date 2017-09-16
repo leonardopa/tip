@@ -39,8 +39,6 @@
         function(pedidos) {
           vm.pedidos = pedidos;
           vm.pedidoSelected = contextoCompraService.ls.pedidoSelected;
-          $log.debug("lista-producto-agrego-producto", vm.pedidoSelected);
-          $log.debug("lista-producto-agrego-producto", vm.pedidos);
         });
     }
 

@@ -75,6 +75,7 @@
 					window.getPedidos++;
 					vm.ls.lastUpdate=moment();	
 					vm.ls.pedidos = response.data;
+					actualizarPedidoSelected();
 					//vm.setContextoByGrupo(vm.ls.grupoSelected);
 					//$rootScope.$emit('contexto.pedido.actualizar');
 					defered.resolve(vm.ls.pedidos);
@@ -163,6 +164,12 @@
 
 		////////////
 		/// privados 
+		function actualizarPedidoSelected(){
+			angular.forEach(vm.ls.pedidos, function(pedido, key) {
+					if (!us.isUndefinedOrNull(vm.ls.pedidoSelected) && pedido.id === vm.ls.pedidoSelected.id)
+							vm.ls.pedidoSelected = pedido;
+				});
+		}
 
 		function getGrupoByPedido(pedido) {
 			var grupoCurrent = gIndividualFicticio;
