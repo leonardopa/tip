@@ -12,7 +12,7 @@
 		var vm = this;
 		vm.pedido = $scope.pedido;
 		vm.urlBase = CTE_REST.url_base;
-		vm.direcciones;
+		vm.direcciones ;
 		vm.direccionSelected;
 		vm.productoEliminar;
 		vm.isIndividual = vm.pedido.idGrupo == null;
@@ -118,7 +118,8 @@
 		};
 
 		vm.confirmar = function(ev) {
-			popUpElegirDireccion(ev);
+			//popUpElegirDireccion(ev);
+			vm.callDirecciones();
 		};
 
 		vm.callDirecciones = function() {
@@ -127,7 +128,12 @@
 			function doOk(response) {
 				$log.debug('call direcciones response ', response);
 				vm.direcciones = response.data;
-				// abre pop
+
+				if (vm.direcciones.length == 0){
+					ToastCommons.mensaje(us.translate('PEDIR_DOMICILIO'));					
+				}else{
+					popUpElegirDireccion();
+				}
 			}
 
 			perfilService.verDirecciones().then(doOk);
@@ -138,8 +144,8 @@
 			$mdDialog.show({
 				templateUrl: 'dialog-direccion.html',
 				scope: $scope,
-				preserveScope: true,
-				targetEvent: ev
+				preserveScope: true
+				//targetEvent: ev
 			});
 		}
 	}

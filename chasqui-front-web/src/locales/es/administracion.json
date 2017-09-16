@@ -37,6 +37,6 @@
 	"ACEPTADO" : "Aceptado",
 	"RECHAZADO" : "Rechazado",
 	"MI_PERFIL" : "Mi Perfil",
-	"REGISTRO_USER" : "Registro de usuario"
-
+	"REGISTRO_USER" : "Registro de usuario",
+	"PEDIR_DOMICILIO" : "Es necesario configurar un domicilo en la sección PERFIL"
 }
