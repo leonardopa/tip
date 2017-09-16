@@ -8,7 +8,8 @@
    * @ngInject Contenido del tab de grupo. Recibe por parametro el id del
    *           grupo
    */
-  function PedidoGruposController($scope, StateCommons, $log, perfilService, $mdDialog, gccService, us,ToastCommons) {
+  function PedidoGruposController($scope, StateCommons, $log, perfilService, $mdDialog, 
+    gccService, us,ToastCommons,contextoCompraService,$state) {
     $log.debug('PedidoGruposController', $scope.grupo);
 
     var vm = this;

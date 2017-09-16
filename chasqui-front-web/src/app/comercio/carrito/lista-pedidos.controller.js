@@ -48,8 +48,7 @@
 			var indexSelect = 0;
 			angular.forEach(vm.tabs, function(tab) {
 				$log.debug("setTabSeleccionado", tab.id + " " + tab.aliasGrupo);
-				if ((pedido != undefined) && (tab.id == pedido.id)) {
-					$log.debug("****** " + tab.id);
+				if ((pedido != undefined) && (tab.id == pedido.id)) {					
 					indexSelect = i;
 				}
 
