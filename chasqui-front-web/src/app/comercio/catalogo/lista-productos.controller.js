@@ -196,13 +196,10 @@
 		function callCrearPedidoGrupal(variante) {
 			function doOK(response) {
 				$log.debug("callCrearPedidoGrupal", response);
+
 				contextoCompraService.refreshPedidos().then(
 					function(pedido) {
-						//contextoCompraService.ls.pedidoSelected = response.data;		
-						//vm.pedidoSelected = response.data;		
-						//vm.pedidoSelected = contextoCompraService.ls.pedidoSelected;
-						//vm.pedidoSelected = pedido;
-						//contextoCompraService.
+						contextoCompraService.setContextoByGrupo(vm.grupoSelected);
 						agregarProductoDialog(variante)
 					}
 				)

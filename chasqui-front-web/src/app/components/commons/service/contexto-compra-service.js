@@ -29,12 +29,7 @@
 		vm.ls.varianteSelected;
 		vm.ls.pedidos = undefined;
 		vm.ls.grupos = undefined;
-
 		vm.ls.lastUpdate=moment();		
-		//var tieneEnChache = false;
-		//TODO : SACAR ESTAS PRUEBAS
-		window.getGrupos= 0;
-		window.getPedidos=0;
 			 
 		vm.getGrupos = function() {
 			var defered = $q.defer();
@@ -48,7 +43,6 @@
 			} else {
 				$log.debug("NO tiene grupos en cache")
 				function doOK(response) {					
-					window.getGrupos++;
 					vm.ls.lastUpdate=moment();	
 					vm.ls.grupos = [gIndividualFicticio];
 					vm.ls.grupos = vm.ls.grupos.concat(response.data);
