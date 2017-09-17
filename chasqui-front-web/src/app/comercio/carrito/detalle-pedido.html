@@ -45,15 +45,10 @@
 					<md-button ng-click="detallePedidoCtrl.cancelar()" style="color:red">
 						<label translate="CANCELAR"></label>
 					</md-button>
-					<md-button ng-click="detallePedidoCtrl.confirmar()" ng-show="{{! detallePedidoCtrl.isIndividual && detallePedidoCtrl.isAdmin}}" class="md-primary">
-						<label translate="CERRAR"></label>
-					</md-button>
-					<md-button ng-click="detallePedidoCtrl.confirmar()" ng-show="{{detallePedidoCtrl.isIndividual}}" class="md-primary">
+					<md-button ng-click="detallePedidoCtrl.confirmarClick()" 
+					class="md-primary">
 						<label translate="CONFIRMAR"></label>
-					</md-button>
-					<md-button ng-click="detallePedidoCtrl.confirmarPedidoIndividualGcc()" class="md-primary" ng-show="{{! detallePedidoCtrl.isIndividual}}">
-						<label translate="CONFIRMAR"></label>
-					</md-button>
+					</md-button>					
 				</md-card-actions>
 			</md-card>
 			<md-card>

@@ -18,11 +18,75 @@
 		vm.isIndividual = vm.pedido.idGrupo == null;
 		vm.isAdmin = contextoCompraService.isAdmin(vm.pedido);
 
-		vm.comprar = function(event) {
-			contextoCompraService.setContextoByPedido($scope.pedido);
-			$state.go('catalogo')
+		/*
+		vm.confirmar = function(ev) {
+			//popUpElegirDireccion(ev);
+			vm.callDirecciones();
+		};*/
+
+		function callDirecciones() {
+			$log.debug('call direcciones ');
+
+			function doOk(response) {
+				$log.debug('call direcciones response ', response);
+				vm.direcciones = response.data;
+
+				if (vm.direcciones.length == 0){
+					ToastCommons.mensaje(us.translate('PEDIR_DOMICILIO'));					
+				}else{
+					popUpElegirDireccion();
+				}
+			}
+
+			perfilService.verDirecciones().then(doOk);
 		}
 
+		function popUpElegirDireccion(ev) {
+			$log.debug('confirmarDomicilioOpenDialog');
+			$mdDialog.show({
+				templateUrl: 'dialog-direccion.html',
+				scope: $scope,
+				preserveScope: true
+				//targetEvent: ev
+			});
+		}
+
+		/// confirmacion individual de GCC
+		function confirmarPedidoIndividualGcc() {
+			function doOk(response) {
+				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
+				contextoCompraService.refreshPedidos().then(
+					function() {						
+						$state.reload();
+					});				
+			}
+
+			if (vm.pedido.idGrupo == null) {
+				ToastCommons.mensaje("funcionalidad para GCC !");
+			} else {
+				gccService.confirmarPedidoIndividualGcc(vm.pedido.id).then(doOk)
+			}
+		}
+
+		function callConfirmar() {
+			$log.debug('callConfirmar   ',vm.pedido);
+
+			function doOk(response) {
+				$log.debug("--- confirmar pedido response ", response.data);
+				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
+				contextoCompraService.refreshPedidos().then(
+			        function(pedidos) {
+			          $state.reload();			          
+			        });
+			}
+
+			var params = {};
+			params.idPedido = vm.pedido.id;
+			params.idDireccion = vm.direccionSelected.idDireccion;
+		
+			productoService.confirmarPedidoIndividual(params).then(doOk)
+		
+		}
 
 		function doEliminar() {
 			$log.debug('DetallePedidoController , eliminar ', vm.productoEliminar);
@@ -44,6 +108,11 @@
 			params.cantidad = vm.productoEliminar.cantidad;
 
 			productoService.quitarProductoIndividual(params).then(doOk)
+		}
+
+		vm.comprar = function(event) {
+			contextoCompraService.setContextoByPedido($scope.pedido);
+			$state.go('catalogo')
 		}
 
 		vm.eliminar = function(item) {
@@ -73,45 +142,13 @@
 
 			productoService.cancelarPedidoIndividual(vm.pedido.id).then(doOk);
 		}
-		/// confirmacion individual de GCC
-		vm.confirmarPedidoIndividualGcc = function() {
-			function doOk(response) {
-				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
-				contextoCompraService.refreshPedidos().then(
-					function() {						
-						$state.reload();
-					});				
+
+		vm.confirmarClick = function(){
+			if (vm.isIndividual){
+				callDirecciones();
+			}else{
+				confirmarPedidoIndividualGcc();
 			}
-
-			if (vm.pedido.idGrupo == null) {
-				ToastCommons.mensaje("funcionalidad para GCC !");
-			} else {
-				gccService.confirmarPedidoIndividualGcc(vm.pedido.id).then(doOk)
-			}
-		}
-
-		function callConfirmar() {
-			$log.debug('callConfirmar   ',vm.pedido);
-
-			function doOk(response) {
-				$log.debug("--- confirmar pedido response ", response.data);
-				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
-				contextoCompraService.refreshPedidos().then(
-			        function(pedidos) {
-			          $state.reload();			          
-			        });
-			}
-
-			if (vm.pedido.idGrupo == null) {
-				var params = {};
-				params.idPedido = vm.pedido.id;
-				params.idDireccion = vm.direccionSelected.idDireccion;
-				// logica por si es pedido grupañ
-				productoService.confirmarPedidoIndividual(params).then(doOk)
-			} else {
-				gccService.confirmarPedidoColectivo(vm.pedido.idGrupo).then(doOk)
-			}
-
 		}
 
 		vm.confirmarDomicilio = function() {
@@ -119,38 +156,7 @@
 			$mdDialog.hide();
 			callConfirmar();
 		};
-
-		vm.confirmar = function(ev) {
-			//popUpElegirDireccion(ev);
-			vm.callDirecciones();
-		};
-
-		vm.callDirecciones = function() {
-			$log.debug('call direcciones ');
-
-			function doOk(response) {
-				$log.debug('call direcciones response ', response);
-				vm.direcciones = response.data;
-
-				if (vm.direcciones.length == 0){
-					ToastCommons.mensaje(us.translate('PEDIR_DOMICILIO'));					
-				}else{
-					popUpElegirDireccion();
-				}
-			}
-
-			perfilService.verDirecciones().then(doOk);
-		}
-
-		function popUpElegirDireccion(ev) {
-			$log.debug('confirmarDomicilioOpenDialog');
-			$mdDialog.show({
-				templateUrl: 'dialog-direccion.html',
-				scope: $scope,
-				preserveScope: true
-				//targetEvent: ev
-			});
-		}
+		
 	}
 
 })();
