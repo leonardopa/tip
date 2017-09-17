@@ -107,10 +107,6 @@
 			productoService.crearPedidoIndividual(json).then(doOk)
 		}
 
-		$scope.$on('modifico-pedido',
-			function(event, arg) {
-				load();
-			});
 
 		function load() {
 			contextoCompraService.getPedidos().then(function(data) {

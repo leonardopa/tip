@@ -66,7 +66,7 @@
 				ToastCommons.mensaje(us.translate('CANCELADO'));
 				contextoCompraService.refreshPedidos().then(
 					function() {
-						$scope.$emit('modifico-pedido');
+						$state.reload();
 					});
 
 			}
@@ -77,7 +77,10 @@
 		vm.confirmarPedidoIndividualGcc = function() {
 			function doOk(response) {
 				ToastCommons.mensaje(us.translate('PEDIDO_CONFIRMADO_MSG'));
-				$state.reload();
+				contextoCompraService.refreshPedidos().then(
+					function() {						
+						$state.reload();
+					});				
 			}
 
 			if (vm.pedido.idGrupo == null) {
@@ -88,7 +91,7 @@
 		}
 
 		function callConfirmar() {
-			$log.debug('callConfirmar   ', $scope.pedido);
+			$log.debug('callConfirmar   ',vm.pedido);
 
 			function doOk(response) {
 				$log.debug("--- confirmar pedido response ", response.data);
