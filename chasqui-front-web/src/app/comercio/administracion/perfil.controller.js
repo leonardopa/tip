@@ -6,7 +6,7 @@
 	/** @ngInject . Pantalla de perfil de usuario */
 	function PerfilController($log, $scope,
 		StateCommons, $mdDialog, ToastCommons, $stateParams, perfilService,
-		gccService,us) {
+		gccService,us,contextoCompraService) {
 		$log.debug("Init PerfilController ....");
 
 		StateCommons.ls.itemMenuSelect = 'perfil';
@@ -99,6 +99,7 @@
 			function doOk(response) {
 				ToastCommons.mensaje(us.translate('ACEPTADO'));
 				notificacion.estado = 'Leido';
+				contextoCompraService.refreshGrupos()
 			}
 			var params = {};
 			params.idInvitacion = notificacion.id;
@@ -143,6 +144,10 @@
 			vm.count++;
 			$log.debug('ver mas', vm.count);
 			callNotificaciones();
+		}
+
+		vm.isCompraColectiva=function(notificacion){			
+			return us.contieneCadena(notificacion.mensaje ,'ha invitado al grupo de compras colectivas');
 		}
 
 		vm.callDirecciones();
