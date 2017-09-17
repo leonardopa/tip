@@ -16,7 +16,7 @@
     <md-card ng-show="pedidoGrupoCtrl.grupo.miembros">
         <md-card-content>
             <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
-                <md-tab ng-repeat="miembro in pedidoGrupoCtrl.miembrosActivosDelGrupo()" label="{{pedidoGrupoCtrl.selfPara(miembro)}}">                  
+                <md-tab ng-repeat="miembro in pedidoGrupoCtrl.miembrosActivosDelGrupo()" label="{{::pedidoGrupoCtrl.selfPara(miembro)}}">                  
                         <p>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</p>                        
                         <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
                             <label translate="MIEMBRO_SIN_PROD"></label>

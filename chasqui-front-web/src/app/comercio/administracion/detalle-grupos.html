@@ -6,7 +6,7 @@
 				<md-list-item class="md-2-line contact-item selected" ng-repeat="member in detalleGrupoCtrl.miembrosVisiblesParaUsuarioLogeado()">
 					<img ng-src="http://lorempixel.com/150/150/people/" class="md-avatar" alt="{{member.nickname}}" />
 					<div class="md-list-item-text compact">
-						<h4>{{detalleGrupoCtrl.selfPara(member)}}</h4>
+						<h4>{{::detalleGrupoCtrl.selfPara(member)}}</h4>
 						<p>{{member.email}}</p>
 					</div>
 					<div layout="row" layout-align="end center">
