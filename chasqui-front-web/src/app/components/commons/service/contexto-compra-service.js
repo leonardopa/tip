@@ -26,7 +26,7 @@
 
 		vm.ls.grupoSelected = gIndividualFicticio;
 		vm.ls.pedidoSelected;
-		vm.ls.varianteSelected;
+		vm.ls.varianteSelected = undefined;
 		vm.ls.pedidos = undefined;
 		vm.ls.grupos = undefined;
 		vm.ls.lastUpdate=moment();		

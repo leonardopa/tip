@@ -41,7 +41,10 @@
 				StateCommons.ls.usuario = response.data;
 
 				ToastCommons.mensaje("Bienvenido !");
+
+				var tmp = contextoCompraService.ls.varianteSelected;
 				$rootScope.$broadcast('resetHeader', "");
+				contextoCompraService.ls.varianteSelected=tmp;
 
 				if (us.isUndefinedOrNull(contextoCompraService.ls.varianteSelected)) {
 					if (us.isUndefinedOrNull($stateParams.toPage) || $stateParams.toPage == '') {
