@@ -68,7 +68,7 @@
 				function doOkPedido(response) {					
 					window.getPedidos++;
 					vm.ls.lastUpdate=moment();	
-					vm.ls.pedidos = response.data;
+					vm.ls.pedidos = response.data.filter(filtrarConfirmados());					
 					actualizarPedidoSelected();
 					//vm.setContextoByGrupo(vm.ls.grupoSelected);
 					//$rootScope.$emit('contexto.pedido.actualizar');
@@ -203,6 +203,12 @@
 		function vencioTiempoChache(){
 			return parseInt(moment().diff(vm.ls.lastUpdate))/1000 > CTE_REST.TIEMPO_MAX_CACHE;
 		}
+
+		function filtrarConfirmados(){
+			return function(pedido){				
+				return pedido.estado === 'ABIERTO';
+			}
+		}
 		////////
 		/*
 			    function initContexto(){
@@ -249,7 +255,7 @@
 
 					productoService.verPedidoIndividual().then(doOkPedido);
 				}
-		*/
+		
 		function callGccPedidos() {
 			function doOkPedido(response) {
 				vm.ls.pedidos = vm.ls.pedidos.concat(response.data);
@@ -265,7 +271,7 @@
 			}
 
 			gccService.gruposByusuario().then(doOK);
-		}
+		}*/
 
 
 		////////////////////
