@@ -5,6 +5,38 @@
 				<a ui-sref="principal"> 					
 					<img ng-src="app/components/image/logo_ch.png" style="padding-top: 50px;"> </a>
 				<span flex></span>
+
+
+			 
+					<md-button class="{{menuCtrl.classFor('bienvenido')}}" ng-click="menuCtrl.ir('bienvenido')">
+						<b> {{'MENU_BIENVENIDO' | translate}}</b> </md-button>
+					<span>|</span>
+					<!-- <md-button class="{{menuCtrl.classFor('emprendedores')}}" ng-click="menuCtrl.ir('emprendedores')">
+						productores </md-button> -->
+					<!-- <span>|</span>
+					<md-button class="{{menuCtrl.classFor('como-comprar')}}" ng-click="menuCtrl.ir('como-comprar')">
+						C&oacutemo comprar </md-button>
+					<span>|</span> -->
+					<md-button class="{{menuCtrl.classFor('catalogo')}}" ng-click="menuCtrl.ir('catalogo')">
+						<b>{{'MENU_CATALOGO' | translate}}</b> </md-button>
+					<div ng-show="menuCtrl.isLogued">
+						<span>|</span>
+						<md-button class="{{menuCtrl.classFor('lista-pedidos')}}" ng-click="menuCtrl.ir('lista-pedidos')">
+							<b>{{'MENU_PEDIDO' | translate}} </b>
+						</md-button>
+						<span>|</span>
+						<md-button class="{{menuCtrl.classFor('lista-grupos')}}" ng-click="menuCtrl.ir('lista-grupos')">
+							<b>{{'MENU_GRUPO' | translate}}</b>
+						</md-button>
+						<span>|</span>
+						<md-button class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')">
+							<b> {{'MENU_PERFIL' | translate}} </b>
+						</md-button>
+					</div>
+				 
+
+				<span flex></span>
+
 				<md-button ng-show="menuCtrl.isLogued" ng-click="menuCtrl.verNotificaciones()">
 					<ng-md-icon options="{{menuCtrl.options}}" id="icon" icon="{{menuCtrl.icon}}" style="fill: {{menuCtrl.fill}}" />
 					<md-tooltip style="color:#fff" md-direction="left">
@@ -17,33 +49,7 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<div class="menu" layout="row" layout-align="center center">
-			<md-button class="{{menuCtrl.classFor('bienvenido')}}" ng-click="menuCtrl.ir('bienvenido')">
-				<b> {{'MENU_BIENVENIDO' | translate}}</b> </md-button>
-			<span>|</span>
-			<!-- <md-button class="{{menuCtrl.classFor('emprendedores')}}" ng-click="menuCtrl.ir('emprendedores')">
-				productores </md-button> -->
-			<!-- <span>|</span>
-			<md-button class="{{menuCtrl.classFor('como-comprar')}}" ng-click="menuCtrl.ir('como-comprar')">
-				C&oacutemo comprar </md-button>
-			<span>|</span> -->
-			<md-button class="{{menuCtrl.classFor('catalogo')}}" ng-click="menuCtrl.ir('catalogo')">
-				<b>{{'MENU_CATALOGO' | translate}}</b> </md-button>
-			<div ng-show="menuCtrl.isLogued">
-				<span>|</span>
-				<md-button class="{{menuCtrl.classFor('lista-pedidos')}}" ng-click="menuCtrl.ir('lista-pedidos')">
-					<b>{{'MENU_PEDIDO' | translate}} </b>
-				</md-button>
-				<span>|</span>
-				<md-button class="{{menuCtrl.classFor('lista-grupos')}}" ng-click="menuCtrl.ir('lista-grupos')">
-					<b>{{'MENU_GRUPO' | translate}}</b>
-				</md-button>
-				<span>|</span>
-				<md-button class="{{menuCtrl.classFor('perfil')}}" ng-click="menuCtrl.ir('perfil')">
-					<b> {{'MENU_PERFIL' | translate}} </b>
-				</md-button>
-			</div>
-		</div>
-		<md-divider></md-divider>
+		
+		 
 	</div>
 </header>
