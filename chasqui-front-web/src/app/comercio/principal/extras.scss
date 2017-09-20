@@ -1,10 +1,13 @@
 $colorUno: #462342;
 $colorDos: #468385;
 $colorConfirmar: #43a047;
-// https://www.materialpalette.com/colors
+/* https://www.materialpalette.com/colors*/
+
 .body {
-	/*background: linear-gradient(#F7F7F7,#D7D7D7) !important;
-	//background-color: #462342 !important;*/
+	/*background: linear-gradient(#F7F7F7,#D7D7D7) !important;*/
+/*	background-color: #462342 !important;*/
+	font-family: Roboto;
+	color: red !important;
 }
 
 .menu {
@@ -23,8 +26,8 @@ $colorConfirmar: #43a047;
 }
 
 .btn-compra {
-	background: $colorConfirmar !important;
-	color: white;
+	background: #009688 !important;  /*TEAL */
+	color: white !important;;
 	p {
 		padding: 0;
 		margin: 0;
@@ -35,11 +38,11 @@ $colorConfirmar: #43a047;
 	background: $colorDos !important;
 	color: white;
 }
-
+/*
 .alt-catalogo {
 	min-height: 440px !important;
 }
-
+*/
 
 
 .hoverable:hover{
@@ -145,3 +148,20 @@ md-tabs md-ink-bar {
 	width: 100%;
 }
 
+/** CARD de Producto */ 
+.card-div{	
+    white-space: nowrap; 
+    width: 100%; 
+    overflow: hidden;
+    text-overflow: ellipsis;        
+}
+
+.card-medalla-img {
+	width :  35px;
+	height : 35px;
+}
+
+
+.card-precio-decimal{
+	font-size: 50%;		
+}

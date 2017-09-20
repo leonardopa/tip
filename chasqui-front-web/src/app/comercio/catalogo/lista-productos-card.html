@@ -1,0 +1,49 @@
+<md-card class="alt-catalogo" >
+  <div class="hover01">
+    <div>
+      <figure><img src="{{listaProductosCtrl.urlBase}}{{producto.imagenPrincipal}}" ng-click="listaProductosCtrl.verProducto(producto)" style="width:100%;">
+      </figure>
+    </div>
+  </div>
+  <md-card-content>
+    <div layout="column">
+      <div layout="column">
+        <div layout="column" layout-align="space-between">
+          <div class="card-div md-title">
+            {{producto.nombreProducto}}
+          </div>
+          <div class="card-div md-subhead">
+            {{producto.nombreVariedad}}
+          </div>
+          <div class="card-div md-subhead">
+            <span ng-click="listaProductosCtrl.showPrerenderedDialogProductor(producto.idFabricante)">{{producto.nombreFabricante}}</span>
+          </div>
+        </div>
+        <div layout="row" layout-align="space-between center">
+          <div class="md-display-1">
+            $ {{producto.precioParteEntera}} <sup class="card-precio-decimal">{{listaProductosCtrl.mostrarDecimales(producto.precioParteDecimal)}}</sup>
+          </div>
+          <md-button class="md-raised btn-compra" ng-click="listaProductosCtrl.agregar(producto)">
+            <p> {{'AGREGAR_BTN' | translate}} </p>
+            <md-tooltip md-direction="left">
+              {{'AGREGAR_BTN_TT' | translate}} </md-tooltip>
+          </md-button>
+        </div>
+      </div>
+    </div>
+    <div layout="row" layout-align="start center">
+      <div ng-repeat="medalla in producto.medallasProducto">
+        <img ng-click="listaProductosCtrl.showPrerenderedDialog(medalla)" ng-src="{{listaProductosCtrl.urlBase}}{{medalla.pathImagen}}" class="card-medalla-img">
+        <md-tooltip md-direction="up">
+          {{medalla.nombre}}
+        </md-tooltip>
+      </div>
+      <div ng-repeat="medalla in producto.medallasProductor">
+        <img ng-click="listaProductosCtrl.showPrerenderedDialog(medalla)" ng-src="{{listaProductosCtrl.urlBase}}{{medalla.pathImagen}}" class="card-medalla-img">
+        <md-tooltip md-direction="up">
+          {{medalla.nombre}}
+        </md-tooltip>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
