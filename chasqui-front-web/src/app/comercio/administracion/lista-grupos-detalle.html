@@ -1,7 +1,7 @@
 <md-card>
   <md-card-title>
     <md-card-title-text>
-      <span class="md-headline">{{group.alias}}</span>
+      <span class="md-title">{{group.alias}}</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-content>
@@ -20,37 +20,4 @@
                 <img ng-src="{{group.urlImagen}}" class="md-card-image" alt="Washed Out">
             </div>
         </md-card-title-media>-->
-</md-card>
-
-<md-card>
-  <md-subheader class="md-accent" ng-if="group.esAdministrador">
-    <label translate="GRUPO_ADMIN"></label>
-  </md-subheader>
-  <md-card-actions layout="row" layout-align="center center" ng-if="group.esAdministrador">
-    <!--
-            <md-button ng-click="listaGruposCtrl.crearPedidoGrupal(group)">
-                <md-icon> add_circle_outline </md-icon>
-                <md-tooltip md-direction="left">
-                    Nuevo pedido grupal
-                </md-tooltip>
-            </md-button>-->
-    <md-button ng-click="listaGruposCtrl.invitarUsuario(group)">
-      <md-icon> group add </md-icon>
-      <md-tooltip md-direction="left">
-        <label translate="AGREGAR_GRUPO"></label>
-      </md-tooltip>
-    </md-button>
-    <md-button ng-click="listaGruposCtrl.edit(group)">
-      <md-icon> edit </md-icon>
-      <md-tooltip md-direction="left">
-        <label translate="EDITAR_GRUPO"></label>
-      </md-tooltip>
-    </md-button>
-    <md-button ng-if="!group.esAdministrador" ng-click="listaGruposCtrl.salir(group)">
-      <md-icon style="color: #f00;"> remove_circle_outline</md-icon>
-      <md-tooltip md-direction="left">
-        <label translate="SALIR_GRUPO"></label>
-      </md-tooltip>
-    </md-button>
-  </md-card-actions>
 </md-card>

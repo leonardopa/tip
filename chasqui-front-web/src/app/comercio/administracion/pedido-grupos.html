@@ -1,42 +1,51 @@
 <div ng-controller="PedidoGruposController as pedidoGrupoCtrl" ng-cloak>
-    <div> 
-        <md-button class="btn-confirmar" 
-            ng-click="pedidoGrupoCtrl.cerrarPedidoGccClick()"
-            ng-show="pedidoGrupoCtrl.grupo.esAdministrador"
-            ng-disabled="!pedidoGrupoCtrl.puedeCerrarPedidoGCC">
-            Cerrar
-            <md-icon ng-show="pedidoGrupoCtrl.puedeCerrarPedidoGCC"
-                style="color:white"> done </md-icon>            
-        </md-button>
-        <md-tooltip md-direction="left" >
-            {{pedidoGrupoCtrl.cerrarToolTipMsg()}}
-        </md-tooltip>
-    </div>
- 
-    <md-card ng-show="pedidoGrupoCtrl.grupo.miembros">
-        <md-card-content>
-            <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
-                <md-tab ng-repeat="miembro in pedidoGrupoCtrl.miembrosActivosDelGrupo()" label="{{::pedidoGrupoCtrl.selfPara(miembro)}}">                  
-                        <p>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</p>                        
-                        <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
-                            <label translate="MIEMBRO_SIN_PROD"></label>
-                        </p>
-                        
-                        <p  ng-show="miembro.pedido != null || miembro.pedido.productosResponse.lenght > 0 "> 
-                            Estado : {{miembro.pedido.estado}}</p>
-                        
-                    <md-list class="md-dense" flex>
-                        <md-list-item class="md-3-line" ng-repeat="item in miembro.pedido.productosResponse">
-                            <img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
-                            <div class="md-list-item-text" layout="column">
-                                <h4>{{ item.nombre }}</h4>
-                                <p>{{item.cantidad}} X $ {{ item.precio }} = ${{item.cantidad * item.precio }} </p>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                    <br>
-                </md-tab>
-            </md-tabs>
-        </md-card-content>
-    </md-card>
+  <md-card ng-show="pedidoGrupoCtrl.grupo.miembros">
+    <md-card-content>
+      <div layout=row>
+        <div flex="80">
+           <div class="md-title">
+               Productos en el Grupo
+           </div>
+        </div>
+        <div flex="20">
+          <div>
+            <md-button class="btn-confirmar" ng-click="pedidoGrupoCtrl.cerrarPedidoGccClick()" ng-show="pedidoGrupoCtrl.grupo.esAdministrador" ng-disabled="!pedidoGrupoCtrl.puedeCerrarPedidoGCC">
+              Cerrar
+              <md-icon ng-show="pedidoGrupoCtrl.puedeCerrarPedidoGCC" style="color:white"> done </md-icon>
+            </md-button>
+            <md-tooltip md-direction="left">
+              {{pedidoGrupoCtrl.cerrarToolTipMsg()}}
+            </md-tooltip>
+          </div>
+        </div>
+      </div>
+      <div ng-show="pedidoGrupoCtrl.grupo.miembros">
+        <div>
+          <md-tabs md-selected="selectedIndex" >
+            <md-tab ng-repeat="miembro in pedidoGrupoCtrl.miembrosActivosDelGrupo()" 
+                label="{{::pedidoGrupoCtrl.selfPara(miembro)}}">
+                <md-content class="md-padding">
+              <p>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</p>
+              <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
+                <label translate="MIEMBRO_SIN_PROD"></label>
+              </p>
+              <p ng-show="miembro.pedido != null || miembro.pedido.productosResponse.lenght > 0 ">
+                Estado : {{miembro.pedido.estado}}</p>
+                </md-content>
+              <md-list class="md-dense" flex>
+                <md-list-item class="md-3-line" ng-repeat="item in miembro.pedido.productosResponse">
+                  <img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />
+                  <div class="md-list-item-text" layout="column">
+                    <h4>{{ item.nombre }}</h4>
+                    <p>{{item.cantidad}} X $ {{ item.precio }} = ${{item.cantidad * item.precio }} </p>
+                  </div>
+                </md-list-item>
+              </md-list>
+              <br>
+            </md-tab>
+        </div>
+      </div>
+      </md-tabs>
+    </md-card-content>
+  </md-card>
 </div>
