@@ -6,7 +6,8 @@
 					<span class="md-headline">Direcciones </span>
 				</div>
 				<div>
-					<md-button ng-click="perfilCtrl.addDireccion()" class="btn-agregar">
+					<md-button ng-click="perfilCtrl.addDireccion()" 
+						class="md-raised  md-accent md-hue-3">
 						Nueva
 						<md-icon style="color:white"> add_circle_outline </md-icon>
 						<md-tooltip md-direction="left">
@@ -20,9 +21,9 @@
 	<md-card-content>
 		<md-tabs md-dynamic-height md-border-bottom md-selected="perfilCtrl.selectedIndexDireccion">
 			<md-tab ng-repeat="tab in perfilCtrl.direcciones" label="{{tab.idDireccion==undefined ? 'Nuevo' : tab.alias}}">
-				<md-content class="md-padding">
+				 
 					<div ng-include="'app/comercio/administracion/formularios/form-direccion.html'" ng-init="direccionParam = tab"></div>
-				</md-content>
+			 
 			</md-tab>
 		</md-tabs>
 	</md-card-content>

@@ -4,7 +4,8 @@
         <div><span class="md-title"
             translate>MIS_GRUPOS</span></div>
         <div>
-            <md-button ng-click="listaGruposCtrl.crearGrupo($event)" class="btn-agregar"> <label translate="CREAR_GRUPO"></label>    
+            <md-button ng-click="listaGruposCtrl.crearGrupo($event)" 
+                class="md-raised md-primary"> <label translate="CREAR_GRUPO"></label>    
                 <md-icon style="color:white"> group </md-icon>
                 <md-tooltip md-direction="left">
                     <label translate="CREAR_GRUPO_MSG"></label>                    
@@ -23,7 +24,7 @@
         <div>
             <md-tabs md-selected="listaGruposCtrl.selectedIndexGrupo" md-dynamic-height md-border-bottom>
                 <md-tab ng-repeat="group in listaGruposCtrl.groups" ng-disabled="group.disabled" label="{{group.alias}}">
-                    <md-content class="md-padding">
+                    <md-content class="md-padding fondo">
                         <div layout=row>
                             <div flex="50" layout=column>
                                 <div ng-include="'app/comercio/administracion/lista-grupos-detalle.html'"></div>

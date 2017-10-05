@@ -1,4 +1,28 @@
 <div class="ch-content">
+  <div md-theme="{{theme}}" md-theme-watch="true">
+    Theme
+    <md-button md-no-ink class="md-primary" ng-click="demoCtrl.onoff()">Change theme</md-button>
+    https://codepen.io/davidwolsey/pen/Qbrqoe
+    <div class="thing">
+      Current theme is {{theme}}.
+    </div>
+    <div>
+      <md-button href="#" class="md-primary md-raised">
+        Primary
+      </md-button>
+      <md-button href="#" class="md-raised md-accent">
+        Accent
+      </md-button>
+      <md-button href="#" class="md-raised md-warn">
+        Warn
+      </md-button>
+    </div>
+  </div>
+  TONOS
+  <md-button class="md-primary">Click me</md-button>
+  <md-button class="md-primary md-hue-1">Click me</md-button>
+  <md-button class="md-primary md-hue-2">Click me</md-button>
+  <md-button class="md-primary md-hue-3">Click me</md-button>
   <h1>{{demoCtrl.texto}}</h1>
   <md-card>
     <md-card-title>

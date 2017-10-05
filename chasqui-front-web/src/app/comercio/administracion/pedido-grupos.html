@@ -9,7 +9,7 @@
         </div>
         <div flex="20">
           <div>
-            <md-button class="btn-confirmar" ng-click="pedidoGrupoCtrl.cerrarPedidoGccClick()" ng-show="pedidoGrupoCtrl.grupo.esAdministrador" ng-disabled="!pedidoGrupoCtrl.puedeCerrarPedidoGCC">
+            <md-button class="md-accent md-raised" ng-click="pedidoGrupoCtrl.cerrarPedidoGccClick()" ng-show="pedidoGrupoCtrl.grupo.esAdministrador" ng-disabled="!pedidoGrupoCtrl.puedeCerrarPedidoGCC">
               Cerrar
               <md-icon ng-show="pedidoGrupoCtrl.puedeCerrarPedidoGCC" style="color:white"> done </md-icon>
             </md-button>
@@ -24,14 +24,17 @@
           <md-tabs md-selected="selectedIndex" >
             <md-tab ng-repeat="miembro in pedidoGrupoCtrl.miembrosActivosDelGrupo()" 
                 label="{{::pedidoGrupoCtrl.selfPara(miembro)}}">
-                <md-content class="md-padding">
-              <p>Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</p>
-              <p ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
+                
+              <div class="md-subhead">Productos {{pedidoGrupoCtrl.vocativoPara(miembro)}}</div>
+
+              <div class="md-subhead" ng-show="miembro.pedido == null || miembro.pedido.productosResponse.lenght == 0 ">
                 <label translate="MIEMBRO_SIN_PROD"></label>
-              </p>
-              <p ng-show="miembro.pedido != null || miembro.pedido.productosResponse.lenght > 0 ">
-                Estado : {{miembro.pedido.estado}}</p>
-                </md-content>
+              </div>
+
+              <div class="md-subhead" ng-show="miembro.pedido != null || miembro.pedido.productosResponse.lenght > 0 ">
+               <md-subheader class="md-primary">  {{miembro.pedido.estado}} </md-subheader>
+              </div>
+                 
               <md-list class="md-dense" flex>
                 <md-list-item class="md-3-line" ng-repeat="item in miembro.pedido.productosResponse">
                   <img ng-src="{{listaGruposCtrl.urlBase}}{{item.imagen}}" class="md-avatar" alt="{{item.nombre}}" />

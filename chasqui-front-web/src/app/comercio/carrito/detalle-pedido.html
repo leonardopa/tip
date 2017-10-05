@@ -42,7 +42,7 @@
 			<md-card-actions layout="row" layout-align="end center"
 			ng-show="{{detallePedidoCtrl.pedido.estado=='ABIERTO'}}"> -->
 				<md-card-actions layout="row" layout-align="end center">
-					<md-button ng-click="detallePedidoCtrl.cancelar()" style="color:red">
+					<md-button ng-click="detallePedidoCtrl.cancelar()" class="md-warn">
 						<label translate="CANCELAR"></label>
 					</md-button>
 					<md-button ng-click="detallePedidoCtrl.confirmarClick()" 
@@ -72,9 +72,9 @@
 	</section>
  -->
 		<div>
-			<md-subheader>
-				<label translate="PRODUCTOS_CARRO_TIT"></label>
-			</md-subheader>
+			 
+			<label class="md-title" translate="PRODUCTOS_CARRO_TIT"></label>
+			 
 			<md-card ng-repeat="item in detallePedidoCtrl.pedido.productosResponse" style="width: 100%" ng-cloak>
 				<div layout="row" layout-align="space-between center">
 					<div>

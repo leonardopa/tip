@@ -23,7 +23,7 @@
 -->
     <md-tabs md-selected="listaPedidoCtrl.selectedIndex" md-dynamic-height md-border-bottom>
         <md-tab ng-repeat="tab in listaPedidoCtrl.tabs" ng-disabled="tab.disabled" label="{{tab.aliasGrupo == null ? 'Individual' : tab.aliasGrupo }}">
-            <md-content class="md-padding">
+            <md-content class="md-padding fondo">
                 <div ng-include="'app/comercio/carrito/detalle-pedido.html'" ng-init="pedido = tab" />
             </md-content>
         </md-tab>

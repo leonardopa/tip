@@ -1,29 +1,30 @@
 <!-- Pantalla de perfil de usuario -->
 <div class="container-fluid ch-content" class="md-padding" id="popupContainer" ng-cloak>
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<span class="md-headline" translate>MI_PERFIL</span>
-			<div ng-cloak>
-				<md-content>
-					<md-tabs md-dynamic-height md-border-bottom md-selected="perfilCtrl.selectedIndexPerfil">
-						<md-tab label="Datos Personales">
-							<md-content class="md-padding">
-								<div ng-include="'app/comercio/administracion/formularios/form-usuario.html'" ng-init="perfil = true" />
-								
-								<div ng-include="'app/comercio/administracion/perfil-direccion.html'" />
-							</md-content>
-						</md-tab>
-						<md-tab label="Notificaciones">
-							<div ng-include="'app/comercio/administracion/notificaciones.html'"></div>
-						</md-tab>
-						<md-tab label="Acciones">
-							<div ng-include="'app/comercio/administracion/perfil.acciones.html'"></div>
-					</md-tabs>
-				</md-content>
-				<div ng-include="'app/comercio/administracion/formularios/map.html'"/> 
-			</div>
-		</div>
-		<div class="col-md-2"></div>
-	</div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <span class="md-headline" translate>MI_PERFIL</span>
+      <div ng-cloak>
+        <md-tabs md-dynamic-height md-border-bottom md-selected="perfilCtrl.selectedIndexPerfil">
+          <md-tab label="Datos Personales">
+            <md-content class="md-padding fondo">
+              <div ng-include="'app/comercio/administracion/formularios/form-usuario.html'" ng-init="perfil = true" />
+              <div ng-include="'app/comercio/administracion/perfil-direccion.html'"></div>
+            </md-content>
+          </md-tab>
+          <md-tab label="Notificaciones">
+            <md-content class="md-padding fondo">
+              <div ng-include="'app/comercio/administracion/notificaciones.html'"></div>
+            </md-content>
+          </md-tab>
+          <md-tab label="Acciones">
+            <md-content class="md-padding fondo">
+              <div ng-include="'app/comercio/administracion/perfil.acciones.html'"></div>
+            </md-content>
+        </md-tabs>
+        <div ng-include="'app/comercio/administracion/formularios/map.html'"></div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
 </div>

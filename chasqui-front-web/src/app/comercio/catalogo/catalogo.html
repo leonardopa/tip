@@ -21,7 +21,7 @@
 
 				<div flex="80">
 					<div layout=row layout-align="center center">
-						<md-input-container ng-keyup="$event.keyCode == 13 && catalogoCtrl.filtroQuery()">
+						<md-input-container class="container-over" ng-keyup="$event.keyCode == 13 && catalogoCtrl.filtroQuery()" flex="50">
 							<input ng-model="catalogoCtrl.queryText" type="text" placeholder="{{'BUSCAR' | translate}}">
 						</md-input-container>
 						<md-button ng-click="catalogoCtrl.filtroQuery()">

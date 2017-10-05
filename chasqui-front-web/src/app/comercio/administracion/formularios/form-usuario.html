@@ -50,71 +50,33 @@
 								<input type="password" ng-model="ctrl.passVerificacion" ng-readonly="ctrl.readOnly" required>
 							</md-input-container>
 						</div>
-                        <div style="position: relative;
-                                width: 128px;">
-
-                            <img id="avatar" src="{{avatar}}">
-
-                            <input type="file" oninput="angular.element(this).scope().cargarAvatar(this)"
-                                   accept="image/*"
-                                               style="position: absolute;
-                                                      top: 75%;
-                                                      width: 64px;
-                                                      height: 32px;
-                                                      min-width: 32px;
-                                                      min-height: 32px;
-                                                      margin: 0px;
-                                                      left: 0px;
-                                                      opacity:0;
-                                                      z-index: 100">
-                            <md-button class="md-secondary" ng-click="menuCtrl.ir('catalogo')"
-                                       style="  position: absolute;
-                                                top: 75%;
-                                                width: 64px;
-                                                height: 32px;
-                                                min-width: 32px;
-                                                min-height: 32px;
-                                                margin: 0px;
-                                                left: 0px;">
-                                <md-icon style="color: grey" > photo_camera </md-icon> 
-                            </md-button>
-
-                            <md-button class="md-secondary" ng-click="menuCtrl.ir('perfil')"
-                                       style="  position: absolute;
-                                                top: 75%;
-                                                width: 64px;
-                                                height: 32px;
-                                                min-width: 32px;
-                                                min-height: 32px;
-                                                margin: 0px;
-                                                right: 0px;">
-                                <md-icon style="color: grey" > mode_edit </md-icon> 
-                            </md-button>
-                        </div>
+                         
 					</div>
 				</md-content>
 			</md-card-content>
 			<md-card-actions layout="row" layout-align="end center">
-				<md-button class="btn-confirmar" ng-click="ctrl.actualizar()" ng-show="! ctrl.isAlta && ctrl.isModoEdit">
-					<md-icon style="color:white"> done </md-icon>
+				<md-button class="md-warn" ng-click="ctrl.actualizar()"
+				ng-show="! ctrl.isAlta && ctrl.isModoEdit">
+					<md-icon > done </md-icon>
 					<md-tooltip md-direction="left" >
 						<label translate="ACEP_CAMB_USR_MSG"></label>
 					</md-tooltip>
 				</md-button>
-				<md-button ng-click="ctrl.noActualizar()" ng-show="! ctrl.isAlta && ctrl.isModoEdit">
+				<md-button class="md-primary md-hue-3" ng-click="ctrl.noActualizar()" 
+				ng-show="! ctrl.isAlta && ctrl.isModoEdit">
 					<md-icon> undo </md-icon>
 					<md-tooltip md-direction="left">
 						<label translate="NO_MOD_MSG"></label>				
 					</md-tooltip>
 				</md-button>
-				<md-button ng-click="ctrl.edit()" ng-show="! ctrl.isAlta && !ctrl.isModoEdit">
+				<md-button class="md-primary" ng-click="ctrl.edit()" ng-show="! ctrl.isAlta && !ctrl.isModoEdit">
 					<md-icon> mode_edit </md-icon>
 					<md-tooltip md-direction="left" >
 						<label translate="PUEDES_EDITAR_MSG"></label>
 					</md-tooltip>
 				</md-button>
-				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ctrl.isAlta" ng-click="ctrl.guardar()" translate="REG">  </md-button>
-				<md-button class="btn-confirmar" ng-show="! usuarioForm.$invalid && ! ctrl.isAlta" ng-click="ctrl.actualizar()"  translate="ACT">  </md-button>
+				<md-button class="md-primary" ng-show="! usuarioForm.$invalid && ctrl.isAlta" ng-click="ctrl.guardar()" translate="REG">  </md-button>
+				<md-button class="md-primary" ng-show="! usuarioForm.$invalid && ! ctrl.isAlta" ng-click="ctrl.actualizar()"  translate="ACT">  </md-button>
 			</md-card-actions>
 		</md-card>
 	</form>
