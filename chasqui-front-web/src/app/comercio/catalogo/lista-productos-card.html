@@ -15,13 +15,13 @@
           <div class="card-div md-subhead">
             {{producto.nombreVariedad}}
           </div>
-          <div class="card-div md-subhead">
-            <span ng-click="listaProductosCtrl.showPrerenderedDialogProductor(producto.idFabricante)">{{producto.nombreFabricante}}</span>
+          <div class="card-fabricate-text card-div">
+            <md-button  class="md-primary"  ng-click="listaProductosCtrl.showPrerenderedDialogProductor(producto.idFabricante)">{{producto.nombreFabricante}}</md-button>
           </div>
         </div>
         <div layout="row" layout-align="space-between center">
           <div class="md-display-1">
-            $ {{producto.precioParteEntera}} <sup class="card-precio-decimal">{{listaProductosCtrl.mostrarDecimales(producto.precioParteDecimal)}}</sup>
+            $ {{producto.precioParteEntera}} 
           </div>
           <md-button class="md-raised btn-compra" ng-click="listaProductosCtrl.agregar(producto)">
             <p> {{'AGREGAR_BTN' | translate}} </p>

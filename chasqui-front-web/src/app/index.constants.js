@@ -15,7 +15,7 @@
             var URL_BASE_MOCK = "";
             var URL_BASE = "";
 
-            switch (3) {
+            switch (4) {
 
                 //    Servidor LOCAL
                 case 0:
@@ -33,7 +33,7 @@
                     URL_BASE = "http://proyectochasqui.com:8080/chasqui-dev-testing/";
                     break;
                 case 4:
-                    URL_BASE = "http://172.32.200.167:8019/chasqui/";
+                    URL_BASE = "http://69.61.93.156/panel-chasqui/";
                     break;
 
             }
