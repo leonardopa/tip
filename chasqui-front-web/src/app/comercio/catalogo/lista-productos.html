@@ -39,10 +39,26 @@
                         <div ng-click="listaProductosCtrl.cerrarDialogoMedalla(1)">
                             <i style="font-size: 36px;" class="material-icons">close</i>
                         </div>
-                    </div>
+                    </div>                                                        
+
                     <div layout="column" layout-align="center center">
                         <img ng-src="{{listaProductosCtrl.urlBase}}{{listaProductosCtrl.emprendedorSelect.pathImagen}}" width="200" height="200">
+<!--
+                        <div>
+                            <img ng-src="{{listaProductosCtrl.urlBase}}{{listaProductosCtrl.emprendedorSelect.medalla.pathImagen}}" class="medalla-img">
+                            <md-tooltip md-direction="up">
+                              {{listaProductosCtrl.emprendedorSelect.medalla.nombre}}
+                            </md-tooltip>
+                        </div>    
+-->
                         <div ng-bind-html="listaProductosCtrl.emprendedorSelect.descripcionCorta" />
+
+                         <div>
+                            <img ng-src="{{listaProductosCtrl.urlBase}}{{listaProductosCtrl.emprendedorSelect.medalla.pathImagen}}" class="medalla-img">
+                            <md-tooltip md-direction="up">
+                              {{listaProductosCtrl.emprendedorSelect.medalla.nombre}}
+                            </md-tooltip>
+                        </div>   
                     </div>
                 </md-dialog>
             </div>
