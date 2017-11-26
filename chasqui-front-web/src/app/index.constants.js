@@ -15,14 +15,17 @@
             var URL_BASE_MOCK = "";
             var URL_BASE = "";
 
-            switch (1) {
+            switch (11) {
 
                 //    Servidor LOCAL
                 case 0:
-                    URL_BASE_MOCK = "http://localhost:8081/chasqui-mock/rest/";
+                    URL_BASE_MOCK = "http://localhost:8081/chasqui/rest/";
                     break;
                 case 1:
                     URL_BASE = "http://proyectochasqui.org:8080/chasqui/";
+                    break;
+                case 11:
+                    URL_BASE = "http://localhost:8080/chasqui/";
                     break;
 
                     //    Servidores REMOTOS

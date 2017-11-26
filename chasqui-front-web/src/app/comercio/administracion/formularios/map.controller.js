@@ -175,7 +175,7 @@ angular.module('chasqui').controller('MapGeocoderController', ['$scope', '$rootS
     };
 
     $scope.formIsValidForSave = function() {
-      return formValidoParaGuardar();
+      return false;// formValidoParaGuardar();
     };
 
     $scope.isSearching = function() {

@@ -54,9 +54,7 @@
 			return promiseService.doPost(CTE_REST.quitarMiembro, params);
 		}
 
-		vm.confirmarPedidoColectivo = function(idGrupo) {
-			var params = {};
-			params.idGrupo = idGrupo;
+		vm.confirmarPedidoColectivo = function(params) {
 			return promiseService.doPost(CTE_REST.confirmarPedidoColectivo, params);
 		}
 

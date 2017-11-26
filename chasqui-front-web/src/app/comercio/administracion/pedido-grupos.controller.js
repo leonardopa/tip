@@ -42,7 +42,8 @@
 
     vm.cerrarPedidoGccClick = function(ev) {
       $log.debug('cerrarPedidoGccClick');
-      callConfirmar();
+      //callConfirmar();
+      callDirecciones();
     }
 
     /****************/
@@ -71,10 +72,30 @@
           });
       }
 
+      var params = {};
+      params.idGrupo = vm.grupo.idGrupo;
+      params.idDireccion = vm.direccionSelected.idDireccion;
+      gccService.confirmarPedidoColectivo(params).then(doOk)
 
-      gccService.confirmarPedidoColectivo(vm.grupo.idGrupo).then(doOk)
 
+    }
 
+    function callDirecciones() {
+      $log.debug('call direcciones ');
+
+      function doOk(response) {
+        $log.debug('call direcciones response ', response);
+        vm.direcciones = response.data;
+
+        if (vm.direcciones.length == 0){
+          ToastCommons.mensaje(us.translate('PEDIR_DOMICILIO'));          
+        }else{
+          vm.direccionSelected = vm.direcciones[0];
+          callConfirmar();
+        }
+      }
+
+      perfilService.verDirecciones().then(doOk);
     }
   }
 })();
