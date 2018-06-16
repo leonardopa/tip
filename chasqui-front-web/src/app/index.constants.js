@@ -15,14 +15,14 @@
             var URL_BASE_MOCK = "";
             var URL_BASE = "";
 
-            switch (11) {
+            switch (1) {
 
                 //    Servidor LOCAL
                 case 0:
-                    URL_BASE_MOCK = "http://localhost:8081/chasqui/rest/";
+                    URL_BASE_MOCK = "http://localhost:8080/chasqui/rest/";
                     break;
                 case 1:
-                    URL_BASE = "http://proyectochasqui.org:8080/chasqui/";
+                    URL_BASE = "http://localhost:8080/chasqui/";
                     break;
                 case 11:
                     URL_BASE = "http://localhost:8080/chasqui/";
@@ -57,7 +57,7 @@
 
 
             return {
-                PRODUCTOS_X_PAG: 10,
+                PRODUCTOS_X_PAG: 12,
 
                 INTERVALO_NOTIFICACION_MIN: 10*60000,
 

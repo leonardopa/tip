@@ -17,6 +17,10 @@
           										<span style="display:none" >{{ aliasValido = direccionForm.alias.$valid}}</span>          										
         									</div>
 								</md-input-container> 
+								
+							</div>
+														
+							<div layout-gt-sm="row">
 								<md-input-container class="md-block" flex-gt-sm >							
 									<label>Calle</label> 
 									<input type="text" name="calle" ng-model="ctrl.domicilio.calle" required>
@@ -25,10 +29,6 @@
           										<span style="display:none" >{{ calleValida = direccionForm.calle.$valid}}</span>         										
         									</div>
 								</md-input-container>
-							</div>
-														
-							<div layout-gt-sm="row">
-							
 								<md-input-container class="md-block" >
 									<label>Altura</label>
 									<input type="number" name="altura" ng-model="ctrl.domicilio.altura" required>
@@ -42,7 +42,11 @@
 									<input ng-model="ctrl.domicilio.departamento"> 
 								</md-input-container> 
 							
-								<md-input-container md-no-float class="md-block"> 
+								
+								</div>
+								
+								<div layout-gt-sm="row">
+									<md-input-container md-no-float class="md-block"> 
 									<label>Localidad </label> 
 									<input  type="text" name="localidad" ng-model="ctrl.domicilio.localidad" placeholder="localidad" required> 
 											<div ng-messages="direccionForm.localidad.$error">
@@ -50,9 +54,7 @@
           										<span style="display:none" >{{ localidadValida = direccionForm.localidad.$valid}}</span>          										
         									</div>
 									</md-input-container>
-								</div>
-								
-								<div layout-gt-sm="row">
+									
 									<md-input-container class="md-block" flex-gt-sm> 
 										<label>Codigo Postal</label> 
 										<input ng-model="ctrl.domicilio.codigoPostal"> 

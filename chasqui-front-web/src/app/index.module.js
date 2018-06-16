@@ -11,8 +11,8 @@
     .config(function($mdThemingProvider) {
 /*
       $mdThemingProvider.theme('default')
-        .primaryPalette('deep-purple')
-        .accentPalette('amber')
+        .primaryPalette('teal')
+        .accentPalette('orange')
         .warnPalette('red');
 */
 
